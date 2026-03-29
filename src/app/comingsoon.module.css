@@ -1,0 +1,76 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0a0a23 0%, #1a1a40 100%);
+  color: #e0e0e0;
+  font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+}
+
+.logoSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.logoPlaceholder {
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 16px #00fff0cc);
+}
+
+.companyName {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #00fff0;
+  text-shadow: 0 2px 16px #00fff088;
+}
+
+.comingSoon {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #fff;
+  letter-spacing: 0.15em;
+  text-shadow: 0 2px 24px #00fff055;
+}
+
+.description {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #b0f7ff;
+}
+
+.services {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+.services li {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  color: #00fff0;
+  letter-spacing: 0.05em;
+}
+
+.profileSection {
+  background: rgba(10, 10, 35, 0.7);
+  border: 1px solid #00fff055;
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 2px 24px #00fff022;
+  margin-top: 2rem;
+  text-align: center;
+}
+.profileSection h3 {
+  color: #00fff0;
+  margin-bottom: 0.5rem;
+}
+.profileSection a {
+  color: #00fff0;
+  text-decoration: underline;
+}

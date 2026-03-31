@@ -7,8 +7,10 @@ import About from "../components/about";
 import Services from "../components/services";
 import Products from "../components/products";
 import Contact from "../components/contact";
-const SECTIONS = ["home", "about", "services", "products", "contact"];
-
+const SECTIONS = [
+  "home", "about", "services", "products", "contactd"
+];
+//fix tgus 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
 

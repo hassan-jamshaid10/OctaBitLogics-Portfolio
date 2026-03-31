@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     siteName: "OctaBitLogics",
     images: [
       {
-        url: "/og-image.jpg", // Add a 1200x630 image in your /public folder
+        url: "/octa.jpeg", // Add a 1200x630 image in your /public folder
         width: 1200,
         height: 630,
         alt: "OctaBitLogics Future Deploying",

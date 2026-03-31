@@ -1,53 +1,69 @@
-import styles from './comingsoon.module.css';
+"use client";
+
+import { useEffect, useState } from "react";
+import Navbar from "../components/Header";
+import Hero from "../components/hero";
+import About from "../components/about";
+import Services from "../components/services";
+import Products from "../components/products";
+import Contact from "../components/contact";
+const SECTIONS = ["home", "about", "services", "products", "contact"];
 
 export default function Home() {
+  const [activeSection, setActiveSection] = useState("home");
+
+  /* Track active section on scroll */
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + 120;
+      for (let i = SECTIONS.length - 1; i >= 0; i--) {
+        const el = document.getElementById(SECTIONS[i]);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSection(SECTIONS[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /* Smooth scroll helper passed down to all components */
+  const scrollTo = (href: string) => {
+    const id = href.replace("#", "");
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <main className={styles.main}>
-      {/* Animated Background Elements */}
-      <div className={styles.gridOverlay}></div>
-      <div className={styles.scanline}></div>
+    <>
+      <Navbar
+        activeSection={activeSection}
+        onNavClick={scrollTo}
+      />
 
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <div className={styles.logoWrapper}>
-            <svg width="100" height="100" viewBox="0 0 100 100" className={styles.svgLogo}>
-              <path d="M50 5 L90 25 V75 L50 95 L10 75 V25 L50 5Z" fill="none" stroke="#00FFF0" strokeWidth="2" />
-              <path d="M50 15 L80 30 V70 L50 85 L20 70 V30 L50 15Z" fill="#00FFF022" stroke="#00FFF0" strokeWidth="1" />
-              <text x="50%" y="55%" textAnchor="middle" fill="#00FFF0" fontSize="18" fontWeight="bold" className={styles.logoText}>OBL</text>
-            </svg>
-          </div>
-          <h1 className={styles.glitch} data-text="OCTABITLOGICS">OCTABITLOGICS</h1>
-        </header>
+      <main>
+        <Hero     onNavClick={scrollTo} />
+        <About    />
+        <Services />
+        <Products />
+        <Contact  />
+      </main>
 
-        <section className={styles.glassCard}>
-          <div className={styles.statusBadge}>
-            <span className={styles.pulse}></span> SYSTEM: INITIALIZING_V1.0
-          </div>
-          
-          <h2 className={styles.title}>FUTURE <span className={styles.highlight}>DEPLOYING</span></h2>
-          
-          <p className={styles.subtitle}>
-            Architecting the next generation of digital infrastructure.
-          </p>
-
-          <div className={styles.capabilities}>
-            <div className={styles.capItem}><span>01</span> SaaS</div>
-            <div className={styles.capItem}><span>02</span> AI & AUTO</div>
-            <div className={styles.capItem}><span>03</span> CLOUD</div>
-            <div className={styles.capItem}><span>04</span> APPS</div>
-          </div>
-
-          <div className={styles.contactRow}>
-            <a href="mailto:info@octabitlogics.com" className={styles.button}>
-              ESTABLISH CONNECTION
-            </a>
-          </div>
-        </section>
-
-        <footer className={styles.footer}>
-          <p>© 2026 OCTABITLOGICS // ALL RIGHTS RESERVED</p>
-        </footer>
-      </div>
-    </main>
+      {/* Footer */}
+      <footer style={{
+        textAlign: "center",
+        padding: "2rem",
+        borderTop: "1px solid rgba(59,173,176,0.15)",
+        fontFamily: "'Oxanium', monospace",
+        fontSize: "0.7rem",
+        letterSpacing: "0.08em",
+        textTransform: "uppercase",
+        color: "var(--text-muted)",
+        background: "var(--off-white)",
+      }}>
+        © {new Date().getFullYear()} Octabit Logics · Crafted with precision
+      </footer>
+    </>
   );
 }

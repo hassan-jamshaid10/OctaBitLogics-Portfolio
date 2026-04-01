@@ -3,14 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 
 const NAV_LINKS = [
-  { label: "Home",     href: "#home" },
-  { label: "About",    href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Products", href: "#products" },
-  { label: "Contact",  href: "#contact" },
+  { label: "Home",       href: "#home" },
+  { label: "About",      href: "#about" },
+  { label: "Services",   href: "#services" },
+  { label: "Tech",       href: "#technologies" },
+  { label: "Projects",   href: "#projects" },
+  { label: "Contact",    href: "#contact" },
 ];
-
-const SECTIONS = ["home", "about", "services", "products", "contact"];
 
 interface NavbarProps {
   activeSection: string;
@@ -23,24 +22,21 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [mounted,     setMounted]     = useState(false);
 
-  const indicatorRef  = useRef<HTMLDivElement>(null);
-  const navLinksRef   = useRef<(HTMLAnchorElement | null)[]>([]);
-  const pillRef       = useRef<HTMLDivElement>(null);
+  const indicatorRef = useRef<HTMLDivElement>(null);
+  const navLinksRef  = useRef<(HTMLAnchorElement | null)[]>([]);
+  const pillRef      = useRef<HTMLDivElement>(null);
 
-  /* entrance animation trigger */
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
     return () => clearTimeout(t);
   }, []);
 
-  /* scroll detection */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* gliding pill indicator */
   useEffect(() => {
     const target = hoveredLink ?? activeSection;
     const idx    = NAV_LINKS.findIndex((l) => l.href === `#${target}`);
@@ -64,7 +60,6 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
   return (
     <>
       <style>{`
-        /* ── NAVBAR ENTRANCE ── */
         .navbar {
           position: fixed;
           top: 0; left: 0; right: 0;
@@ -88,13 +83,13 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           transform: translateY(0);
         }
 
+        /* Transparent on hero, frosted glass when scrolled past */
         .navbar.scrolled {
-          background: rgba(244, 250, 251, 0.84);
+          background: linear-gradient(135deg, rgba(59,173,176,0.92) 0%, rgba(27,46,94,0.95) 100%);
           backdrop-filter: blur(22px) saturate(180%);
           -webkit-backdrop-filter: blur(22px) saturate(180%);
-          border-bottom: 1px solid var(--border);
-          box-shadow: 0 4px 40px rgba(59, 173, 176, 0.08),
-                      0 1px 0 rgba(255,255,255,0.6) inset;
+          border-bottom: 1px solid rgba(255,255,255,0.15);
+          box-shadow: 0 4px 40px rgba(0,0,0,0.2);
         }
 
         /* ── LOGO ── */
@@ -104,7 +99,6 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           gap: 0.65rem;
           cursor: pointer;
           text-decoration: none;
-          /* staggered entrance */
           animation: navItemIn 0.6s cubic-bezier(.4,0,.2,1) 0.15s both;
         }
 
@@ -114,6 +108,7 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           border-radius: 9px;
           object-fit: cover;
           transition: transform 0.3s ease;
+          border: 1.5px solid rgba(255,255,255,0.35);
         }
 
         .logo:hover .logo-img {
@@ -123,12 +118,20 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
         .logo-text {
           font-family: 'Oxanium', monospace;
           font-weight: 800;
-          font-size: 1.2rem;
-          letter-spacing: 0.1em;
-          background: linear-gradient(135deg, var(--teal) 0%, var(--navy) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          font-size: 1.1rem;
+          letter-spacing: 0.06em;
+          color: white;
+          line-height: 1;
+        }
+
+        .logo-text span {
+          display: block;
+          font-size: 0.55rem;
+          font-weight: 500;
+          letter-spacing: 0.18em;
+          color: rgba(255,255,255,0.65);
+          text-transform: uppercase;
+          margin-top: 1px;
         }
 
         /* ── NAV PILL ── */
@@ -137,11 +140,10 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           align-items: center;
           gap: 0.15rem;
           position: relative;
-          background: rgba(59, 173, 176, 0.07);
-          border: 1px solid var(--border);
+          background: rgba(255,255,255,0.12);
+          border: 1px solid rgba(255,255,255,0.22);
           border-radius: 100px;
           padding: 5px;
-          /* staggered entrance */
           animation: navItemIn 0.6s cubic-bezier(.4,0,.2,1) 0.25s both;
         }
 
@@ -150,8 +152,8 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           height: calc(100% - 10px);
           top: 5px;
           border-radius: 100px;
-          background: linear-gradient(135deg, var(--teal) 0%, var(--navy) 100%);
-          box-shadow: 0 0 20px var(--teal-glow), 0 2px 8px var(--navy-glow);
+          background: rgba(255,255,255,0.22);
+          border: 1px solid rgba(255,255,255,0.35);
           transition: left  0.35s cubic-bezier(.4,0,.2,1),
                       width 0.35s cubic-bezier(.4,0,.2,1);
           pointer-events: none;
@@ -162,20 +164,20 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           position: relative;
           z-index: 1;
           font-family: 'Oxanium', monospace;
-          font-size: 0.74rem;
+          font-size: 0.72rem;
           font-weight: 600;
           letter-spacing: 0.07em;
           text-transform: uppercase;
           text-decoration: none;
-          color: var(--navy);
-          padding: 7px 16px;
+          color: rgba(255,255,255,0.75);
+          padding: 7px 14px;
           border-radius: 100px;
           transition: color 0.22s ease;
           white-space: nowrap;
         }
 
         .nav-link.active,
-        .nav-link:hover { color: var(--white); }
+        .nav-link:hover { color: white; }
 
         /* ── CTA ── */
         .nav-cta {
@@ -184,37 +186,22 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           font-weight: 700;
           letter-spacing: 0.08em;
           text-transform: uppercase;
-          background: transparent;
-          border: 1.5px solid var(--teal);
+          background: white;
+          border: none;
           color: var(--teal);
-          padding: 8px 20px;
+          padding: 9px 22px;
           border-radius: 100px;
           cursor: pointer;
           transition: all 0.25s ease;
-          position: relative;
-          overflow: hidden;
-          /* staggered entrance */
+          box-shadow: 0 4px 16px rgba(0,0,0,0.15);
           animation: navItemIn 0.6s cubic-bezier(.4,0,.2,1) 0.35s both;
         }
 
-        .nav-cta::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, var(--teal), var(--navy));
-          transform: translateX(-101%);
-          transition: transform 0.3s cubic-bezier(.4,0,.2,1);
-          z-index: -1;
-          border-radius: 100px;
-        }
-
         .nav-cta:hover {
-          color: var(--white);
-          border-color: transparent;
-          box-shadow: 0 0 24px var(--teal-glow-strong);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+          background: rgba(255,255,255,0.92);
         }
-
-        .nav-cta:hover::before { transform: translateX(0); }
 
         /* ── HAMBURGER ── */
         .hamburger {
@@ -223,8 +210,8 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           gap: 5px;
           cursor: pointer;
           padding: 6px 8px;
-          background: rgba(59, 173, 176, 0.07);
-          border: 1px solid var(--border);
+          background: rgba(255,255,255,0.12);
+          border: 1px solid rgba(255,255,255,0.25);
           border-radius: 10px;
           animation: navItemIn 0.6s cubic-bezier(.4,0,.2,1) 0.2s both;
         }
@@ -233,7 +220,7 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           display: block;
           width: 22px;
           height: 2px;
-          background: var(--navy);
+          background: white;
           border-radius: 2px;
           transition: all 0.3s cubic-bezier(.4,0,.2,1);
         }
@@ -246,10 +233,10 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
         .mobile-menu {
           position: fixed;
           top: 72px; left: 0; right: 0;
-          background: rgba(244, 250, 251, 0.97);
+          background: linear-gradient(135deg, rgba(59,173,176,0.97) 0%, rgba(27,46,94,0.98) 100%);
           backdrop-filter: blur(24px);
           -webkit-backdrop-filter: blur(24px);
-          border-bottom: 1px solid var(--border);
+          border-bottom: 1px solid rgba(255,255,255,0.15);
           padding: 1rem;
           display: flex;
           flex-direction: column;
@@ -274,7 +261,7 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           letter-spacing: 0.07em;
           text-transform: uppercase;
           text-decoration: none;
-          color: var(--navy);
+          color: rgba(255,255,255,0.8);
           padding: 12px 18px;
           border-radius: 12px;
           border: 1px solid transparent;
@@ -288,7 +275,7 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           content: '';
           width: 5px; height: 5px;
           border-radius: 50%;
-          background: var(--teal);
+          background: rgba(255,255,255,0.5);
           opacity: 0;
           transition: opacity 0.2s ease;
           flex-shrink: 0;
@@ -296,42 +283,39 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
 
         .mobile-link.active,
         .mobile-link:hover {
-          background: linear-gradient(135deg, var(--teal), var(--navy));
-          color: var(--white);
-          box-shadow: 0 4px 16px var(--teal-glow);
+          background: rgba(255,255,255,0.15);
+          color: white;
+          border-color: rgba(255,255,255,0.2);
         }
 
         .mobile-link.active::before,
-        .mobile-link:hover::before {
-          background: white;
-          opacity: 1;
-        }
+        .mobile-link:hover::before { opacity: 1; }
 
-        /* ── ENTRANCE KEYFRAME ── */
         @keyframes navItemIn {
           from { opacity: 0; transform: translateY(-12px); }
           to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── RESPONSIVE ── */
-        @media (max-width: 820px) {
+        @media (max-width: 900px) {
           .nav-links, .nav-cta { display: none !important; }
           .hamburger { display: flex; }
           .navbar { padding: 0 1.25rem; }
         }
       `}</style>
 
-      {/* ── NAV ── */}
       <nav className={[
         "navbar",
-        scrolled  ? "scrolled" : "",
-        mounted   ? "mounted"  : "",
+        scrolled ? "scrolled" : "",
+        mounted  ? "mounted"  : "",
       ].join(" ")}>
 
         {/* Logo */}
         <div className="logo" onClick={() => onNavClick("#home")}>
-          <img src="/octa.jpeg" alt="Octa Logo" className="logo-img" />
-          <span className="logo-text">OCTABIT</span>
+          <img src="/octa.jpeg" alt="OctaBitLogics Logo" className="logo-img" />
+          <div className="logo-text">
+            OctaBitLogics
+            <span>Software Studio</span>
+          </div>
         </div>
 
         {/* Desktop pill */}

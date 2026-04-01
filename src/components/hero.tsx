@@ -36,7 +36,7 @@ export default function Hero({ onNavClick }: HeroProps) {
       <style>{`
         /* ── HERO SECTION ── */
         #home {
-          background: var(--off-white);
+          background: linear-gradient(135deg, var(--teal) 0%, var(--navy) 100%);
           overflow: hidden;
           min-height: 100vh;
           display: flex;
@@ -52,12 +52,12 @@ export default function Hero({ onNavClick }: HeroProps) {
           bottom: 0; left: -20%; right: -20%;
           height: 55%;
           background-image:
-            linear-gradient(var(--border) 1px, transparent 1px),
-            linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
           background-size: 60px 60px;
           transform: perspective(600px) rotateX(55deg);
           transform-origin: bottom center;
-          mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
+          mask-image: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 100%);
           pointer-events: none;
         }
 
@@ -68,8 +68,8 @@ export default function Hero({ onNavClick }: HeroProps) {
           transform: translateX(-50%);
           width: 700px; height: 500px;
           background: radial-gradient(ellipse at center,
-            rgba(59,173,176,0.12) 0%,
-            rgba(59,173,176,0.04) 50%,
+            rgba(255,255,255,0.1) 0%,
+            rgba(255,255,255,0.03) 50%,
             transparent 70%);
           pointer-events: none;
         }
@@ -94,8 +94,8 @@ export default function Hero({ onNavClick }: HeroProps) {
           display: inline-flex;
           align-items: center;
           gap: 0.45rem;
-          background: rgba(59,173,176,0.09);
-          border: 1px solid rgba(59,173,176,0.28);
+          background: rgba(255,255,255,0.12);
+          border: 1px solid rgba(255,255,255,0.3);
           border-radius: 100px;
           padding: 5px 14px 5px 8px;
           margin-bottom: 1.5rem;
@@ -112,7 +112,7 @@ export default function Hero({ onNavClick }: HeroProps) {
         .badge-dot {
           width: 24px; height: 24px;
           border-radius: 50%;
-          background: linear-gradient(135deg, var(--teal), var(--navy));
+          background: rgba(255,255,255,0.25);
           display: flex; align-items: center; justify-content: center;
           flex-shrink: 0;
         }
@@ -135,7 +135,7 @@ export default function Hero({ onNavClick }: HeroProps) {
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: var(--teal);
+          color: rgba(255,255,255,0.9);
         }
 
         /* Headline */
@@ -144,7 +144,7 @@ export default function Hero({ onNavClick }: HeroProps) {
           font-size: clamp(2.4rem, 4.5vw, 4rem);
           font-weight: 800;
           line-height: 1.05;
-          color: var(--navy);
+          color: white;
           margin-bottom: 1.25rem;
           opacity: 0;
           transform: translateY(20px);
@@ -154,16 +154,13 @@ export default function Hero({ onNavClick }: HeroProps) {
         .hero-h1.in { opacity: 1; transform: translateY(0); }
 
         .hero-h1 .accent {
-          background: linear-gradient(135deg, var(--teal) 0%, var(--navy) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: rgba(255,255,255,0.75);
         }
 
         .hero-p {
           font-size: 1rem;
           line-height: 1.8;
-          color: var(--text-muted);
+          color: rgba(255,255,255,0.72);
           max-width: 440px;
           margin-bottom: 2rem;
           opacity: 0;
@@ -195,19 +192,20 @@ export default function Hero({ onNavClick }: HeroProps) {
           font-weight: 700;
           letter-spacing: 0.08em;
           text-transform: uppercase;
-          background: linear-gradient(135deg, var(--teal) 0%, var(--navy) 100%);
-          color: var(--white);
+          background: white;
+          color: var(--teal);
           border: none;
           padding: 13px 28px;
           border-radius: 100px;
           cursor: pointer;
           transition: all 0.3s ease;
-          box-shadow: 0 4px 24px rgba(59,173,176,0.3);
+          box-shadow: 0 4px 24px rgba(0,0,0,0.2);
         }
 
         .cta-primary:hover {
           transform: translateY(-2px);
-          box-shadow: 0 10px 36px rgba(59,173,176,0.4);
+          box-shadow: 0 10px 36px rgba(0,0,0,0.3);
+          background: rgba(255,255,255,0.92);
         }
 
         .cta-secondary {
@@ -220,8 +218,8 @@ export default function Hero({ onNavClick }: HeroProps) {
           letter-spacing: 0.07em;
           text-transform: uppercase;
           background: transparent;
-          border: 1.5px solid var(--border-strong);
-          color: var(--navy);
+          border: 1.5px solid rgba(255,255,255,0.5);
+          color: white;
           padding: 12px 24px;
           border-radius: 100px;
           cursor: pointer;
@@ -229,9 +227,9 @@ export default function Hero({ onNavClick }: HeroProps) {
         }
 
         .cta-secondary:hover {
-          border-color: var(--teal);
-          color: var(--teal);
-          box-shadow: 0 0 20px var(--teal-glow);
+          border-color: white;
+          background: rgba(255,255,255,0.1);
+          box-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
         /* Stats row */
@@ -240,7 +238,7 @@ export default function Hero({ onNavClick }: HeroProps) {
           gap: 2rem;
           margin-top: 2.5rem;
           padding-top: 2rem;
-          border-top: 1px solid var(--border);
+          border-top: 1px solid rgba(255,255,255,0.18);
           opacity: 0;
           transform: translateY(12px);
           transition: opacity 0.7s ease 0.55s, transform 0.7s ease 0.55s;
@@ -252,16 +250,13 @@ export default function Hero({ onNavClick }: HeroProps) {
           font-family: 'Oxanium', monospace;
           font-size: 1.5rem;
           font-weight: 800;
-          background: linear-gradient(135deg, var(--teal), var(--navy));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: white;
           line-height: 1;
         }
 
         .stat-label {
           font-size: 0.75rem;
-          color: var(--text-muted);
+          color: rgba(255,255,255,0.6);
           margin-top: 3px;
           letter-spacing: 0.04em;
         }
@@ -304,34 +299,34 @@ export default function Hero({ onNavClick }: HeroProps) {
         .cube-face {
           position: absolute;
           width: 130px; height: 130px;
-          border: 1.5px solid rgba(59,173,176,0.45);
+          border: 1.5px solid rgba(255,255,255,0.3);
           display: flex; align-items: center; justify-content: center;
           backdrop-filter: blur(6px);
         }
 
-        .cube-face.front  { background: rgba(59,173,176,0.08); transform: translateZ(65px); }
-        .cube-face.back   { background: rgba(27,46,94,0.08);   transform: rotateY(180deg) translateZ(65px); }
-        .cube-face.right  { background: rgba(59,173,176,0.05); transform: rotateY(90deg)  translateZ(65px); }
-        .cube-face.left   { background: rgba(27,46,94,0.05);   transform: rotateY(-90deg) translateZ(65px); }
-        .cube-face.top    { background: rgba(59,173,176,0.06); transform: rotateX(90deg)  translateZ(65px); }
-        .cube-face.bottom { background: rgba(27,46,94,0.04);   transform: rotateX(-90deg) translateZ(65px); }
+        .cube-face.front  { background: rgba(255,255,255,0.1);  transform: translateZ(65px); }
+        .cube-face.back   { background: rgba(255,255,255,0.05); transform: rotateY(180deg) translateZ(65px); }
+        .cube-face.right  { background: rgba(255,255,255,0.07); transform: rotateY(90deg)  translateZ(65px); }
+        .cube-face.left   { background: rgba(255,255,255,0.04); transform: rotateY(-90deg) translateZ(65px); }
+        .cube-face.top    { background: rgba(255,255,255,0.08); transform: rotateX(90deg)  translateZ(65px); }
+        .cube-face.bottom { background: rgba(255,255,255,0.03); transform: rotateX(-90deg) translateZ(65px); }
 
         .cube-face-inner {
           width: 48px; height: 48px;
           border-radius: 12px;
-          background: linear-gradient(135deg, rgba(59,173,176,0.5), rgba(27,46,94,0.5));
-          border: 1px solid rgba(255,255,255,0.3);
+          background: rgba(255,255,255,0.25);
+          border: 1px solid rgba(255,255,255,0.4);
         }
 
         /* ── FLOATING INFO CARDS ── */
         .float-card {
           position: absolute;
-          background: rgba(255,255,255,0.9);
-          border: 1px solid var(--border);
+          background: rgba(255,255,255,0.15);
+          border: 1px solid rgba(255,255,255,0.25);
           border-radius: 16px;
           padding: 12px 16px;
-          backdrop-filter: blur(12px);
-          box-shadow: 0 8px 32px rgba(59,173,176,0.12), 0 2px 8px rgba(0,0,0,0.06);
+          backdrop-filter: blur(16px);
+          box-shadow: 0 8px 32px rgba(0,0,0,0.15);
           white-space: nowrap;
           transform-style: preserve-3d;
         }
@@ -342,7 +337,7 @@ export default function Hero({ onNavClick }: HeroProps) {
           font-weight: 600;
           letter-spacing: 0.08em;
           text-transform: uppercase;
-          color: var(--text-muted);
+          color: rgba(255,255,255,0.65);
           margin-bottom: 2px;
         }
 
@@ -350,15 +345,12 @@ export default function Hero({ onNavClick }: HeroProps) {
           font-family: 'Oxanium', monospace;
           font-size: 1.1rem;
           font-weight: 800;
-          background: linear-gradient(135deg, var(--teal), var(--navy));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: white;
         }
 
         .float-card-dot {
           width: 6px; height: 6px;
-          background: var(--teal);
+          background: rgba(255,255,255,0.8);
           border-radius: 50%;
           display: inline-block;
           margin-right: 5px;
@@ -426,7 +418,7 @@ export default function Hero({ onNavClick }: HeroProps) {
           width: 240px; height: 240px;
           margin-top: -120px; margin-left: -120px;
           border-radius: 50%;
-          border: 1px dashed rgba(59,173,176,0.3);
+          border: 1px dashed rgba(255,255,255,0.25);
           transform-style: preserve-3d;
           animation: orbitSpin 18s linear infinite;
         }
@@ -442,8 +434,8 @@ export default function Hero({ onNavClick }: HeroProps) {
           width: 10px; height: 10px;
           margin-left: -5px;
           border-radius: 50%;
-          background: linear-gradient(135deg, var(--teal), var(--navy));
-          box-shadow: 0 0 12px var(--teal-glow-strong);
+          background: white;
+          box-shadow: 0 0 12px rgba(255,255,255,0.8);
         }
 
         /* Second orbit ring */
@@ -453,7 +445,7 @@ export default function Hero({ onNavClick }: HeroProps) {
           width: 320px; height: 320px;
           margin-top: -160px; margin-left: -160px;
           border-radius: 50%;
-          border: 1px solid rgba(27,46,94,0.12);
+          border: 1px solid rgba(255,255,255,0.12);
           transform-style: preserve-3d;
           animation: orbitSpin2 26s linear infinite;
         }
@@ -469,8 +461,7 @@ export default function Hero({ onNavClick }: HeroProps) {
           width: 8px; height: 8px;
           margin-left: -4px;
           border-radius: 50%;
-          background: var(--navy);
-          opacity: 0.5;
+          background: rgba(255,255,255,0.5);
         }
 
         /* ── CORNER ACCENT DOTS ── */
@@ -484,14 +475,14 @@ export default function Hero({ onNavClick }: HeroProps) {
         .ca1 {
           top: 10%; right: 5%;
           width: 180px; height: 180px;
-          background: rgba(59,173,176,0.12);
+          background: rgba(255,255,255,0.08);
           animation: pulseBg 4s ease-in-out infinite;
         }
 
         .ca2 {
           bottom: 15%; left: 5%;
           width: 120px; height: 120px;
-          background: rgba(27,46,94,0.08);
+          background: rgba(0,0,0,0.15);
           animation: pulseBg 5s ease-in-out infinite 1s;
         }
 
@@ -532,33 +523,33 @@ export default function Hero({ onNavClick }: HeroProps) {
             <div className="badge-dot">
               <div className="badge-dot-inner" />
             </div>
-            <span className="badge-label">Next-Gen Platform</span>
+            <span className="badge-label">Just Getting Started</span>
           </div>
 
           <h1 className={`hero-h1${mounted ? " in" : ""}`}>
-            We Build<br />
-            <span className="accent">Digital Products</span><br />
-            That Matter
+            Fresh Ideas.<br />
+            <span className="accent">Real Ambition.</span><br />
+            Day One Energy.
           </h1>
 
           <p className={`hero-p${mounted ? " in" : ""}`}>
-            A forward-thinking software agency crafting intelligent platforms, sleek interfaces, and scalable systems — built for teams that refuse to settle.
+            We're a brand-new software studio with big dreams and zero bureaucracy. We bring sharp thinking, modern tech, and genuine passion to every project we take on — starting now.
           </p>
 
           <div className={`hero-ctas${mounted ? " in" : ""}`}>
             <button className="cta-primary" onClick={() => onNavClick("#services")}>
-              Our Services →
+              What We Do →
             </button>
             <button className="cta-secondary" onClick={() => onNavClick("#about")}>
-              Learn More
+              Our Story
             </button>
           </div>
 
           <div className={`hero-stats${mounted ? " in" : ""}`}>
             {[
-              { num: "50+",  label: "Projects Shipped" },
-              { num: "98%",  label: "Client Satisfaction" },
-              { num: "5yrs", label: "Industry Experience" },
+              { num: "Day 1",  label: "Founded" },
+              { num: "100%",   label: "Commitment" },
+              { num: "∞",      label: "Potential" },
             ].map((s) => (
               <div key={s.label}>
                 <div className="stat-num">{s.num}</div>
@@ -597,30 +588,30 @@ export default function Hero({ onNavClick }: HeroProps) {
             {/* Floating info cards */}
             <div className="float-card fc1">
               <div className="float-card-label">
-                <span className="float-card-dot" />Projects
+                <span className="float-card-dot" />Founded
               </div>
-              <div className="float-card-value">50+</div>
+              <div className="float-card-value">2025</div>
             </div>
 
             <div className="float-card fc2">
               <div className="float-card-label">
-                <span className="float-card-dot" />Uptime
+                <span className="float-card-dot" />Focus
               </div>
-              <div className="float-card-value">99.9%</div>
+              <div className="float-card-value">Quality</div>
             </div>
 
             <div className="float-card fc3">
               <div className="float-card-label">
-                <span className="float-card-dot" />Response
+                <span className="float-card-dot" />Stack
               </div>
-              <div className="float-card-value">&lt; 200ms</div>
+              <div className="float-card-value">Modern</div>
             </div>
 
             <div className="float-card fc4">
               <div className="float-card-label">
-                <span className="float-card-dot" />Clients
+                <span className="float-card-dot" />Spirit
               </div>
-              <div className="float-card-value">30+</div>
+              <div className="float-card-value">Hungry</div>
             </div>
 
           </div>

@@ -1,191 +1,275 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-
 const PILLARS = [
-  {
-    icon: "◈",
-    title: "Precision Engineering",
-    desc: "Every line of code is deliberate. We architect systems that are robust, maintainable, and built to grow with your business.",
-  },
-  {
-    icon: "◉",
-    title: "Design-Led Thinking",
-    desc: "We lead with aesthetics and user experience, ensuring every interface is as intuitive as it is visually striking.",
-  },
-  {
-    icon: "◎",
-    title: "Agile & Transparent",
-    desc: "Fast iterations with clear communication at every step. You're never in the dark about where your project stands.",
-  },
+  "Precision Engineering",
+  "Technology Partner",
+  "Built to Scale",
+  "Agile & Transparent",
 ];
 
-export default function About() {
-  const [visible, setVisible] = useState(false);
-  const ref = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold: 0.2 }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-
+export default function AboutSplit() {
   return (
-    <section id="about" ref={ref}>
+    <section id="about-split">
       <style>{`
-        #about {
-          background: linear-gradient(160deg, rgba(59,173,176,0.04) 0%, var(--off-white) 100%);
+        #about-split {
+          background: #ffffff;
+          padding: 6rem 2rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          overflow: hidden;
         }
 
-        .about-grid {
+        /* dot-grid ambient bg */
+        #about-split::before {
+          content: '';
+          position: absolute; inset: 0;
+          background-image: radial-gradient(circle, rgba(59,173,176,0.12) 1px, transparent 1px);
+          background-size: 32px 32px;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .as-wrap {
+          position: relative; z-index: 1;
+          width: 100%; max-width: 1100px;
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 4rem;
-          align-items: center;
-          max-width: 1000px;
-          width: 100%;
-          padding: 0 1rem;
+          border-radius: 4px;
+          overflow: hidden;
+          box-shadow: 0 30px 80px rgba(27,46,94,0.10), 0 8px 24px rgba(59,173,176,0.08);
         }
 
-        /* Left column */
-        .about-left .section-tag,
-        .about-left h2,
-        .about-left .about-p {
-          opacity: 0;
-          transform: translateX(-24px);
-          transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .about-left.in .section-tag { opacity:1; transform:none; transition-delay:0.05s; }
-        .about-left.in h2            { opacity:1; transform:none; transition-delay:0.15s; }
-        .about-left.in .about-p      { opacity:1; transform:none; transition-delay:0.25s; }
-
-        .about-p {
-          font-size: 0.98rem;
-          line-height: 1.8;
-          color: var(--text-muted);
-          margin-top: 1rem;
-        }
-
-        .about-highlight {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          margin-top: 1.75rem;
-          font-family: 'Oxanium', monospace;
-          font-size: 0.72rem;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: var(--teal);
-          border: 1px solid var(--border-strong);
-          padding: 8px 16px;
-          border-radius: 100px;
-          width: fit-content;
-          opacity: 0;
-          transform: translateX(-16px);
-          transition: opacity 0.6s ease 0.35s, transform 0.6s ease 0.35s;
-        }
-
-        .about-left.in .about-highlight { opacity:1; transform:none; }
-
-        .about-highlight-dot {
-          width: 7px; height: 7px;
-          border-radius: 50%;
-          background: var(--teal);
-          animation: blip 1.6s ease infinite;
-        }
-
-        /* Right column — pillar cards */
-        .about-pillars {
+        /* ── LEFT PANEL ── */
+        .as-left {
+          background: linear-gradient(145deg,
+            rgba(59,173,176,0.09) 0%,
+            rgba(27,46,94,0.06) 100%
+          );
+          border: 1px solid rgba(59,173,176,0.18);
+          border-right: none;
+          padding: 4rem 3.25rem;
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          justify-content: space-between;
+          position: relative;
+          overflow: hidden;
+          min-height: 520px;
         }
 
-        .pillar-card {
+        /* corner glow */
+        .as-left::after {
+          content: '';
+          position: absolute; top: -80px; right: -80px;
+          width: 260px; height: 260px; border-radius: 50%;
+          background: radial-gradient(circle, rgba(59,173,176,0.14) 0%, transparent 70%);
+          pointer-events: none;
+        }
+
+        .as-est {
+          font-family: 'Oxanium', monospace;
+          font-size: 0.62rem; font-weight: 700;
+          letter-spacing: 0.2em; text-transform: uppercase;
+          color: #3BADB0;
+          display: flex; align-items: center; gap: 0.5rem;
+          margin-bottom: 1.6rem;
+        }
+        .as-est::before {
+          content: '';
+          display: inline-block; width: 18px; height: 1px;
+          background: #3BADB0;
+        }
+
+        .as-left h2 {
+          font-family: 'Oxanium', monospace;
+          font-size: clamp(1.6rem, 2.5vw, 2.25rem);
+          font-weight: 800; line-height: 1.1;
+          color: #1B2E5E;
+        }
+        .as-left h2 span {
+          background: linear-gradient(135deg, #3BADB0 0%, #1B2E5E 100%);
+          -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .as-left-body {
+          margin-top: auto;
+          padding-top: 2.5rem;
+        }
+
+        .as-left-body p {
+          font-size: 0.875rem; line-height: 1.88; color: #4e6070;
+          border-top: 1px solid rgba(59,173,176,0.2);
+          padding-top: 1.5rem;
+          margin-bottom: 1.35rem;
+        }
+
+        .as-pills {
+          display: flex; flex-wrap: wrap; gap: 0.5rem;
+        }
+        .as-pill {
+          font-family: 'Oxanium', monospace;
+          font-size: 0.56rem; font-weight: 700;
+          letter-spacing: 0.12em; text-transform: uppercase;
+          color: #3BADB0;
+          border: 1px solid rgba(59,173,176,0.28);
+          background: rgba(59,173,176,0.06);
+          padding: 4px 11px; border-radius: 100px;
+          transition: background 0.2s ease, border-color 0.2s ease;
+        }
+        .as-pill:hover {
+          background: rgba(59,173,176,0.12);
+          border-color: rgba(59,173,176,0.45);
+        }
+
+        /* ── RIGHT PANEL ── */
+        .as-right {
+          background: linear-gradient(145deg, #3BADB0 0%, #1f4080 55%, #1B2E5E 100%);
+          padding: 4rem 3.25rem;
           display: flex;
-          gap: 1rem;
-          align-items: flex-start;
-          background: var(--white);
-          border: 1px solid var(--border);
-          border-radius: 18px;
-          padding: 1.25rem 1.5rem;
-          opacity: 0;
-          transform: translateX(24px);
-          transition: opacity 0.6s ease, transform 0.6s ease,
-                      box-shadow 0.3s ease, border-color 0.3s ease;
+          flex-direction: column;
+          justify-content: space-between;
+          position: relative;
+          overflow: hidden;
+          min-height: 520px;
         }
 
-        .pillar-card:hover {
-          box-shadow: 0 10px 36px rgba(59,173,176,0.1);
-          border-color: var(--border-strong);
-          transform: translateX(0) translateY(-2px) !important;
+        /* decorative octagon shapes */
+        .as-right::before {
+          content: '';
+          position: absolute; bottom: -60px; right: -60px;
+          width: 280px; height: 280px;
+          background: rgba(255,255,255,0.04);
+          clip-path: polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);
+          pointer-events: none;
+        }
+        .as-right::after {
+          content: '';
+          position: absolute; top: -40px; left: -40px;
+          width: 180px; height: 180px;
+          background: rgba(255,255,255,0.03);
+          clip-path: polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);
+          pointer-events: none;
         }
 
-        .about-pillars.in .pillar-card:nth-child(1) { opacity:1; transform:none; transition-delay:0.1s; }
-        .about-pillars.in .pillar-card:nth-child(2) { opacity:1; transform:none; transition-delay:0.22s; }
-        .about-pillars.in .pillar-card:nth-child(3) { opacity:1; transform:none; transition-delay:0.34s; }
-
-        .pillar-icon {
+        .as-mission-tag {
           font-family: 'Oxanium', monospace;
-          font-size: 1.4rem;
-          color: var(--teal);
-          flex-shrink: 0;
-          margin-top: 2px;
-          line-height: 1;
+          font-size: 0.62rem; font-weight: 700;
+          letter-spacing: 0.2em; text-transform: uppercase;
+          color: rgba(255,255,255,0.5);
+          display: flex; align-items: center; gap: 0.5rem;
+          margin-bottom: 1.6rem;
+        }
+        .as-mission-tag::before {
+          content: '';
+          display: inline-block; width: 18px; height: 1px;
+          background: rgba(255,255,255,0.4);
         }
 
-        .pillar-title {
+        .as-right h2 {
           font-family: 'Oxanium', monospace;
-          font-size: 0.9rem;
-          font-weight: 700;
-          color: var(--navy);
-          margin-bottom: 0.35rem;
+          font-size: clamp(1.6rem, 2.5vw, 2.25rem);
+          font-weight: 800; line-height: 1.1;
+          color: #ffffff;
+        }
+        .as-right h2 em {
+          font-style: normal;
+          color: rgba(255,255,255,0.55);
         }
 
-        .pillar-desc {
-          font-size: 0.83rem;
-          color: var(--text-muted);
-          line-height: 1.65;
+        .as-right-body {
+          margin-top: auto;
+          padding-top: 2.5rem;
         }
 
-        @media (max-width: 780px) {
-          .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-          .about-highlight { margin-top: 1.25rem; }
+        .as-right-body p {
+          font-size: 0.875rem; line-height: 1.88;
+          color: rgba(255,255,255,0.7);
+          border-top: 1px solid rgba(255,255,255,0.15);
+          padding-top: 1.5rem;
+          margin-bottom: 1.35rem;
+        }
+
+        .as-loc {
+          display: inline-flex; align-items: center; gap: 0.45rem;
+          font-family: 'Oxanium', monospace;
+          font-size: 0.6rem; font-weight: 700;
+          letter-spacing: 0.13em; text-transform: uppercase;
+          color: rgba(255,255,255,0.6);
+          border: 1px solid rgba(255,255,255,0.18);
+          background: rgba(255,255,255,0.06);
+          padding: 5px 13px; border-radius: 100px;
+        }
+        .as-loc-dot {
+          width: 5px; height: 5px; border-radius: 50%;
+          background: #3BADB0;
+          animation: asBlip 1.8s ease infinite;
+        }
+        @keyframes asBlip {
+          0%,100% { opacity:1; transform:scale(1); }
+          50% { opacity:.3; transform:scale(.5); }
+        }
+
+        /* responsive */
+        @media (max-width: 860px) {
+          .as-wrap { grid-template-columns: 1fr; }
+          .as-left { border-right: 1px solid rgba(59,173,176,0.18); border-bottom: none; }
+          .as-left, .as-right { min-height: auto; padding: 3rem 2.25rem; }
+        }
+        @media (max-width: 480px) {
+          #about-split { padding: 4rem 1.25rem; }
         }
       `}</style>
 
-      <div className="about-grid">
-        {/* Left */}
-        <div className={`about-left${visible ? " in" : ""}`}>
-          <div className="section-tag">About Us</div>
-          <h2>We Build With<br />Purpose & Craft</h2>
-          <p className="about-p">
-            Octabit Logics is a software product studio obsessed with quality.
-            We partner with startups and enterprises to design, build, and launch
-            digital experiences that stand out — and stand the test of time.
-          </p>
-          <div className="about-highlight">
-            <span className="about-highlight-dot" />
-            Based in Lahore · Working Globally
+      <div className="as-wrap">
+        {/* LEFT */}
+        <div className="as-left">
+          <div>
+            <div className="as-est">Est. 2025</div>
+            <h2>
+              OctaBitLogics was built to{" "}
+              <span>bridge the gap</span>{" "}
+              between great ideas and great execution.
+            </h2>
+          </div>
+
+          <div className="as-left-body">
+            <p>
+              As digital systems grew more complex and interconnected, businesses needed more than
+              individual solutions. They needed a technology partner who gets into the trenches —
+              from idea to launch and beyond.
+            </p>
+            <div className="as-pills">
+              {PILLARS.map((p) => (
+                <span key={p} className="as-pill">{p}</span>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Right */}
-        <div className={`about-pillars${visible ? " in" : ""}`}>
-          {PILLARS.map((p) => (
-            <div className="pillar-card" key={p.title}>
-              <div className="pillar-icon">{p.icon}</div>
-              <div>
-                <div className="pillar-title">{p.title}</div>
-                <div className="pillar-desc">{p.desc}</div>
-              </div>
+        {/* RIGHT */}
+        <div className="as-right">
+          <div>
+            <div className="as-mission-tag">Our Mission</div>
+            <h2>
+              We're here to help leaders build systems{" "}
+              <em>that last.</em>
+            </h2>
+          </div>
+
+          <div className="as-right-body">
+            <p>
+              To make powerful, enterprise-grade technology accessible to businesses at every stage —
+              through pragmatic engineering, honest collaboration, and a relentless focus on outcomes
+              that matter. We combine sharp engineering, modern architecture, and a deep understanding
+              of emerging tech to deliver solutions that scale for the future.
+            </p>
+            <div className="as-loc">
+              <span className="as-loc-dot" />
+              Based in Lahore · Working Globally
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

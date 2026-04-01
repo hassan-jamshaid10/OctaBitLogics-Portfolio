@@ -9,6 +9,10 @@ import Products from "../components/products";
 import Contact from "../components/contact";
 import TaglineBar from "../components/TaglineBar";
 import PartnersBar from "../components/partnerbar";
+import TechPartnersBar from "../components/TechPartnersBar";
+import StatementBanner from "../components/statementBanner";
+import ExpertiseDomains from "../components/ExpertiseDomains";
+import TechStack from "../components/Techstack";
 const SECTIONS = [
   "home", "about", "services", "products", "contactd"
 ];
@@ -50,10 +54,15 @@ export default function Home() {
         <Hero     onNavClick={scrollTo} />
         <TaglineBar/>
         <About    />
+        <StatementBanner/>
+        <TechPartnersBar/>
         <PartnersBar/>
         <Services />
+        {/* <ExpertiseDomains/> */}
+      <TechStack/>
         <Products />
         <Contact  />
+       
       </main>
 
       {/* Footer */}

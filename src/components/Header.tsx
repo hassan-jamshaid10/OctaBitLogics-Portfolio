@@ -85,7 +85,7 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
 
         /* Transparent on hero, frosted glass when scrolled past */
         .navbar.scrolled {
-          background: linear-gradient(135deg, rgba(59,173,176,0.92) 0%, rgba(27,46,94,0.95) 100%);
+background: linear-gradient(135deg, #3BADB0 0%, #1f4080 48%, #1B2E5E 100%);
           backdrop-filter: blur(22px) saturate(180%);
           -webkit-backdrop-filter: blur(22px) saturate(180%);
           border-bottom: 1px solid rgba(255,255,255,0.15);
@@ -103,8 +103,8 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
         }
 
         .logo-img {
-          width: 38px;
-          height: 38px;
+          width: 45px;
+          height: 45px;
           border-radius: 9px;
           object-fit: cover;
           transition: transform 0.3s ease;
@@ -311,7 +311,7 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
 
         {/* Logo */}
         <div className="logo" onClick={() => onNavClick("#home")}>
-          <img src="/octa.jpeg" alt="OctaBitLogics Logo" className="logo-img" />
+          <img src="/octa.png" alt="OctaBitLogics Logo" className="logo-img" />
           <div className="logo-text">
             OctaBitLogics
             <span>Software Studio</span>

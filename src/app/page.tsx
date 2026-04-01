@@ -7,6 +7,8 @@ import About from "../components/about";
 import Services from "../components/services";
 import Products from "../components/products";
 import Contact from "../components/contact";
+import TaglineBar from "../components/TaglineBar";
+import PartnersBar from "../components/partnerbar";
 const SECTIONS = [
   "home", "about", "services", "products", "contactd"
 ];
@@ -46,7 +48,9 @@ export default function Home() {
 
       <main>
         <Hero     onNavClick={scrollTo} />
+        <TaglineBar/>
         <About    />
+        <PartnersBar/>
         <Services />
         <Products />
         <Contact  />

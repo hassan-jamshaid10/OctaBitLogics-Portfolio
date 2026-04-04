@@ -1,16 +1,180 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
+// ── Exact Cloudinary video URLs ───────────────────────────────────────────────
+const VIDEOS = [
+  "https://res.cloudinary.com/ddcblcups/video/upload/v1775331186/v1.mp4",
+  "https://res.cloudinary.com/ddcblcups/video/upload/v1775330949/v2.mp4",
+  "https://res.cloudinary.com/ddcblcups/video/upload/v1775330956/v3.mp4",
+];
+
+// ── Slide content — synced 1:1 with VIDEOS array ─────────────────────────────
+const SLIDES = [
+  {
+    badge: "Just Getting Started",
+    words: [
+      { text: "Fresh", cls: "w1" },
+      { text: "Ideas.", cls: "w2" },
+      { text: "Real", cls: "w3" },
+      { text: "Ambition.", cls: "w4" },
+      { text: "Day", cls: "w5" },
+      { text: "One", cls: "w6" },
+      { text: "Energy.", cls: "w7" },
+    ],
+    body: "We are a team of bold, creative minds with deep professional experience. We bring an unstoppable love for modern tech, vibrant innovation, and rigorous execution to every project we take on.",
+    cta1: { label: "What We Do →", href: "#services" },
+    cta2: { label: "Our Story", href: "#about" },
+  },
+  {
+    badge: "AI-Powered Solutions",
+    words: [
+      { text: "Intelligent", cls: "w3" },
+      { text: "Systems.", cls: "w2" },
+      { text: "Built", cls: "w1" },
+      { text: "For", cls: "w4" },
+      { text: "The", cls: "w6" },
+      { text: "Future.", cls: "w5" },
+    ],
+    body: "We architect AI-driven automation, LLM-powered pipelines and smart infrastructure that puts your business years ahead of the curve — ready to scale on day one.",
+    cta1: { label: "Explore AI →", href: "#services" },
+    cta2: { label: "See Our Work", href: "#projects" },
+  },
+  {
+    badge: "Cloud & DevOps Excellence",
+    words: [
+      { text: "Scalable", cls: "w5" },
+      { text: "Cloud.", cls: "w1" },
+      { text: "Reliable", cls: "w2" },
+      { text: "DevOps.", cls: "w3" },
+      { text: "Infinite", cls: "w7" },
+      { text: "Scale.", cls: "w4" },
+    ],
+    body: "Modern cloud infrastructure and CI/CD pipelines engineered for zero-downtime deployments, auto-scaling resilience, and the developer velocity your team deserves.",
+    cta1: { label: "Cloud Solutions →", href: "#services" },
+    cta2: { label: "Get In Touch", href: "#contact" },
+  },
+] as const;
+
+const SLIDE_DURATION = 15_000; // ms
+
+// ── Framer Motion variants ────────────────────────────────────────────────────
+const textFade = {
+  hidden: { opacity: 0, y: 18, filter: "blur(8px)" },
+  show: {
+    opacity: 1, y: 0, filter: "blur(0px)",
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
+  },
+  exit: {
+    opacity: 0, y: -14, filter: "blur(5px)",
+    transition: { duration: 0.35, ease: [0.4, 0, 1, 1] as [number, number, number, number] }
+  },
+};
+
+const wordFade = {
+  hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
+  show: (i: number) => ({
+    opacity: 1, y: 0, filter: "blur(0px)",
+    transition: {
+      duration: 0.6, delay: i * 0.07,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number]
+    },
+  }),
+  exit: { opacity: 0, transition: { duration: 0.25 } },
+};
+
+// ── Component ─────────────────────────────────────────────────────────────────
 interface HeroProps {
   onNavClick: (href: string) => void;
 }
 
 export default function Hero({ onNavClick }: HeroProps) {
+  const [index, setIndex] = useState(0);
+  const [progress, setProgress] = useState(0);   // 0–100
+  const [videoOk, setVideoOk] = useState(true); // hide video on error
+  const [fading, setFading] = useState(false);
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const progRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const fadeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // ── Switch to a new slide ──
+  const goTo = useCallback((next: number) => {
+    if (next === index) return;
+
+    // 1. Brief fade-out of video
+    setFading(true);
+    if (fadeTimeout.current) clearTimeout(fadeTimeout.current);
+
+    fadeTimeout.current = setTimeout(() => {
+      setIndex(next);
+      setProgress(0);
+      setFading(false);
+
+      // 2. Swap src & reload
+      const vid = videoRef.current;
+      if (vid) {
+        vid.src = VIDEOS[next];
+        vid.load();
+        vid.play().catch(() => { });
+      }
+    }, 600); // matches CSS transition duration
+  }, [index]);
+
+  // ── 15-second auto-advance ──
+  useEffect(() => {
+    const advance = () => {
+      setIndex((prev) => {
+        const next = (prev + 1) % SLIDES.length;
+        setFading(true);
+        setProgress(0);
+
+        if (fadeTimeout.current) clearTimeout(fadeTimeout.current);
+        fadeTimeout.current = setTimeout(() => {
+          setIndex(next);
+          setFading(false);
+          const vid = videoRef.current;
+          if (vid) { vid.src = VIDEOS[next]; vid.load(); vid.play().catch(() => { }); }
+        }, 600);
+
+        return prev; // no-op; real update inside timeout
+      });
+    };
+
+    timerRef.current = setInterval(advance, SLIDE_DURATION);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+      if (fadeTimeout.current) clearTimeout(fadeTimeout.current);
+    };
+  }, []);
+
+  // ── Progress tick ──
+  useEffect(() => {
+    if (progRef.current) clearInterval(progRef.current);
+    setProgress(0);
+    progRef.current = setInterval(() => {
+      setProgress((p) => Math.min(p + (150 / SLIDE_DURATION) * 100, 100));
+    }, 150);
+    return () => { if (progRef.current) clearInterval(progRef.current); };
+  }, [index]);
+
+  // ── Play the first video on mount ──
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    vid.src = VIDEOS[0];
+    vid.load();
+    vid.play().catch(() => { });
+  }, []);
+
+  const slide = SLIDES[index];
+
   return (
     <section id="home" className="hero">
       <style>{`
+        /* ── Section ── */
         #home.hero {
           position: relative;
           min-height: 100vh;
@@ -19,63 +183,54 @@ export default function Hero({ onNavClick }: HeroProps) {
           align-items: center;
           justify-content: center;
           padding-top: 80px;
-          background: #0b1224;
+          background: #060e1f;
           isolation: isolate;
         }
 
+        /* ── Single video element ── */
         .hero-video {
           position: absolute;
           inset: 0;
-          width: 100%;
-          height: 100%;
+          width: 100%; height: 100%;
           object-fit: cover;
           z-index: 0;
           filter: saturate(1.1) contrast(1.05);
+          transition: opacity 0.6s ease;
         }
 
-        /* less color overlay to show video clearly */
+        /* ── Color + vignette overlays ── */
         .hero-overlay {
-          position: absolute;
-          inset: 0;
-          z-index: 1;
+          position: absolute; inset: 0; z-index: 1;
           background: linear-gradient(
             135deg,
-            rgba(59,173,176,0.35) 0%,
-            rgba(31,64,128,0.35) 48%,
-            rgba(27,46,94,0.4) 100%
+            rgba(59,173,176,0.32) 0%,
+            rgba(31,64,128,0.32) 48%,
+            rgba(27,46,94,0.42) 100%
           );
         }
-
-        /* ✅ lighter vignette (was darker) */
         .hero-vignette {
-          position: absolute;
-          inset: 0;
-          z-index: 2;
+          position: absolute; inset: 0; z-index: 2;
           background: radial-gradient(
             ellipse at center,
-            rgba(0,0,0,0.10) 0%,
-            rgba(0,0,0,0.28) 70%,
-            rgba(0,0,0,0.38) 100%
+            rgba(0,0,0,0.08) 0%,
+            rgba(0,0,0,0.28) 68%,
+            rgba(0,0,0,0.45) 100%
           );
           pointer-events: none;
         }
 
+        /* ── Content wrapper ── */
         .hero-inner {
-          position: relative;
-          z-index: 3;
-          width: 100%;
-          max-width: 1100px;
+          position: relative; z-index: 3;
+          width: 100%; max-width: 1100px;
           padding: 0 2rem;
           text-align: center;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+          display: flex; flex-direction: column; align-items: center;
         }
 
+        /* ── Badge ── */
         .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.45rem;
+          display: inline-flex; align-items: center; gap: 0.45rem;
           background: rgba(255,255,255,0.12);
           border: 1px solid rgba(255,255,255,0.26);
           border-radius: 100px;
@@ -83,212 +238,199 @@ export default function Hero({ onNavClick }: HeroProps) {
           margin-bottom: 1.25rem;
           backdrop-filter: blur(10px);
         }
-
         .badge-dot {
-          width: 22px; height: 22px;
-          border-radius: 50%;
-          background: rgba(255,255,255,0.20);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
+          width: 22px; height: 22px; border-radius: 50%;
+          background: rgba(255,255,255,0.18);
+          display: flex; align-items: center; justify-content: center;
         }
-
         .badge-dot-inner {
-          width: 8px; height: 8px;
-          border-radius: 50%;
-          background: #ffffff;
+          width: 8px; height: 8px; border-radius: 50%;
+          background: #3BADB0;
+          box-shadow: 0 0 8px rgba(59,173,176,0.9);
+          animation: pulseDot 1.8s ease infinite;
         }
-
+        @keyframes pulseDot {
+          0%,100% { transform: scale(1); opacity: 1; }
+          50%      { transform: scale(1.35); opacity: 0.65; }
+        }
         .badge-label {
           font-family: 'Oxanium', monospace;
-          font-size: 0.68rem;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.92);
-          white-space: nowrap;
+          font-size: 0.68rem; font-weight: 700;
+          letter-spacing: 0.12em; text-transform: uppercase;
+          color: rgba(255,255,255,0.92); white-space: nowrap;
         }
 
+        /* ── Heading ── */
         .hero-h1 {
           font-family: 'Oxanium', monospace;
           font-size: clamp(2.2rem, 4.6vw, 4rem);
-          font-weight: 900;
-          line-height: 1.05;
-          margin: 0 0 1rem;
-          color: #ffffff;
-          letter-spacing: -0.02em;
+          font-weight: 900; line-height: 1.05;
+          margin: 0 0 1rem; color: #fff; letter-spacing: -0.02em;
         }
-
-        .w1, .w2, .w3, .w4, .w5, .w6, .w7 {
+        .w1,.w2,.w3,.w4,.w5,.w6,.w7 {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          background-clip: text;
-          color: transparent;
-          filter: drop-shadow(0 4px 12px rgba(0,0,0,0.45));
+          background-clip: text; color: transparent;
+          filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
         }
-
-        /* Bright, high-contrast gradients */
         .w1 { background-image: linear-gradient(135deg, #3BADB0 0%, #a7fff9 100%); }
-        .w2 { background-image: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.9) 100%); }
+        .w2 { background-image: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.88) 100%); }
         .w3 { background-image: linear-gradient(135deg, #a7fff9 0%, #3BADB0 100%); }
         .w4 { background-image: linear-gradient(135deg, #ffffff 0%, #a7fff9 100%); }
         .w5 { background-image: linear-gradient(135deg, #e0f2fe 0%, #3BADB0 100%); }
         .w6 { background-image: linear-gradient(135deg, #c7d2fe 0%, #ffffff 100%); }
         .w7 { background-image: linear-gradient(135deg, #ffffff 0%, #a7fff9 100%); }
 
+        /* ── Body ── */
         .hero-p {
-          font-size: 1.02rem;
-          line-height: 1.85;
-          color: rgba(255,255,255,0.95);
-          text-shadow: 0 4px 16px rgba(0,0,0,0.6);
-          max-width: 720px;
-          margin: 0 auto 1.75rem;
+          font-size: 1.02rem; line-height: 1.85;
+          color: rgba(255,255,255,0.93);
+          text-shadow: 0 4px 16px rgba(0,0,0,0.55);
+          max-width: 700px; margin: 0 auto 1.75rem;
         }
 
+        /* ── CTAs ── */
         .hero-ctas {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 1rem;
-          flex-wrap: wrap;
-          margin-top: 0.25rem;
+          display: flex; align-items: center; justify-content: center;
+          gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;
         }
-
         .cta-primary {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.4rem;
-          font-family: 'Oxanium', monospace;
-          font-size: 0.78rem;
-          font-weight: 800;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          background: #ffffff;
-          color: #3BADB0;
-          border: none;
-          padding: 13px 28px;
-          border-radius: 100px;
-          cursor: pointer;
-          transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-          box-shadow: 0 8px 30px rgba(0,0,0,0.22);
+          display: inline-flex; align-items: center; gap: 0.4rem;
+          font-family: 'Oxanium', monospace; font-size: 0.78rem;
+          font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+          background: #fff; color: #1B2E5E; border: none;
+          padding: 13px 28px; border-radius: 100px; cursor: pointer;
+          transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+          box-shadow: 0 8px 28px rgba(0,0,0,0.25);
         }
-
-        .cta-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 14px 44px rgba(0,0,0,0.28);
-          background: rgba(255,255,255,0.94);
-        }
-
+        .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0,0,0,0.3); background: rgba(255,255,255,0.93); }
         .cta-secondary {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.4rem;
-          font-family: 'Oxanium', monospace;
-          font-size: 0.78rem;
-          font-weight: 700;
-          letter-spacing: 0.07em;
-          text-transform: uppercase;
-          background: rgba(255,255,255,0.05);
-          border: 1.5px solid rgba(255,255,255,0.42);
-          color: #ffffff;
-          padding: 12px 24px;
-          border-radius: 100px;
-          cursor: pointer;
-          transition: background 0.2s ease, border-color 0.2s ease;
+          display: inline-flex; align-items: center; gap: 0.4rem;
+          font-family: 'Oxanium', monospace; font-size: 0.78rem;
+          font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+          background: rgba(255,255,255,0.06);
+          border: 1.5px solid rgba(255,255,255,0.4); color: #fff;
+          padding: 12px 24px; border-radius: 100px; cursor: pointer;
+          transition: background 0.2s, border-color 0.2s;
           backdrop-filter: blur(10px);
         }
+        .cta-secondary:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.11); }
 
-        .cta-secondary:hover {
-          border-color: rgba(255,255,255,0.70);
-          background: rgba(255,255,255,0.10);
+        /* ── Slide dots ── */
+        .hero-dots {
+          display: flex; align-items: center; gap: 0.7rem;
+        }
+        .hero-dot-btn {
+          width: 36px; height: 4px; border-radius: 2px;
+          background: rgba(255,255,255,0.22);
+          border: none; padding: 0; cursor: pointer;
+          position: relative; overflow: hidden;
+          transition: background 0.3s;
+        }
+        .hero-dot-btn.active { background: rgba(255,255,255,0.28); }
+        .hero-dot-fill {
+          position: absolute; top: 0; left: 0; height: 100%;
+          background: #3BADB0; border-radius: 2px;
+          transition: width 0.15s linear;
         }
 
+        /* ── Bottom sweep progress bar ── */
+        .hero-progress {
+          position: absolute; bottom: 0; left: 0;
+          height: 3px; z-index: 5;
+          background: linear-gradient(90deg, #3BADB0, #a7fff9);
+          transition: width 0.15s linear;
+        }
+
+        /* ── Responsive ── */
         @media (max-width: 600px) {
           #home.hero { padding-top: 72px; }
           .hero-inner { padding: 0 1.25rem; }
-          .hero-h1 { font-size: clamp(2rem, 9vw, 2.6rem); }
-          .hero-p { font-size: 0.95rem; line-height: 1.75; }
-          .hero-ctas { width: 100%; }
+          .hero-h1 { font-size: clamp(1.9rem, 9vw, 2.5rem); }
+          .hero-p { font-size: 0.94rem; }
           .cta-primary, .cta-secondary { width: 100%; justify-content: center; }
+          .hero-ctas { width: 100%; }
         }
       `}</style>
 
-      <video className="hero-video" autoPlay muted loop playsInline preload="auto">
-        <source src="/v1.mp4" type="video/mp4" />
-      </video>
+      {/* ── Single video element — src swapped on transition ── */}
+      <video
+        ref={videoRef}
+        className="hero-video"
+        autoPlay
+        muted
+        playsInline
+        loop
+        style={{ opacity: fading || !videoOk ? 0 : 1 }}
+        onError={() => setVideoOk(false)}
+        onLoadedData={() => setVideoOk(true)}
+      />
 
       <div className="hero-overlay" />
       <div className="hero-vignette" />
 
+      {/* Bottom progress sweep */}
+      <div className="hero-progress" style={{ width: `${progress}%` }} />
+
+      {/* ── Content ── */}
       <div className="hero-inner">
-        <motion.div
-          className="hero-badge"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <span className="badge-dot">
-            <span className="badge-dot-inner" />
-          </span>
-          <span className="badge-label">Just Getting Started</span>
-        </motion.div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+          >
+            {/* Badge */}
+            <motion.div className="hero-badge" variants={textFade}>
+              <span className="badge-dot"><span className="badge-dot-inner" /></span>
+              <span className="badge-label">{slide.badge}</span>
+            </motion.div>
 
-        <motion.h1
-          className="hero-h1"
-          initial="hidden"
-          animate="show"
-          variants={{
-            hidden: {},
-            show: { transition: { staggerChildren: 0.06, delayChildren: 0.12 } },
-          }}
-        >
-          {[
-            { text: "Fresh", cls: "w1" },
-            { text: "Ideas.", cls: "w2" },
-            { text: "Real", cls: "w3" },
-            { text: "Ambition.", cls: "w4" },
-            { text: "Day", cls: "w5" },
-            { text: "One", cls: "w6" },
-            { text: "Energy.", cls: "w7" },
-          ].map((w, i) => (
-            <motion.span
-              key={`${w.text}-${i}`}
-              style={{ display: "inline-block", marginRight: "0.35em" }}
-              variants={{
-                hidden: { opacity: 0, y: 18, filter: "blur(6px)" },
-                show: { opacity: 1, y: 0, filter: "blur(0px)" },
-              }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className={w.cls}
+            {/* Headline */}
+            <h1 className="hero-h1">
+              {slide.words.map((w, i) => (
+                <motion.span
+                  key={`${w.text}-${i}`}
+                  style={{ display: "inline-block", marginRight: "0.35em" }}
+                  custom={i}
+                  variants={wordFade}
+                  className={w.cls}
+                >
+                  {w.text}
+                </motion.span>
+              ))}
+            </h1>
+
+            {/* Body */}
+            <motion.p className="hero-p" variants={textFade}>
+              {slide.body}
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div className="hero-ctas" variants={textFade}>
+              <button className="cta-primary" onClick={() => onNavClick(slide.cta1.href)}>{slide.cta1.label}</button>
+              <button className="cta-secondary" onClick={() => onNavClick(slide.cta2.href)}>{slide.cta2.label}</button>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Slide indicator dots */}
+        <div className="hero-dots">
+          {SLIDES.map((_, i) => (
+            <button
+              key={i}
+              className={`hero-dot-btn${i === index ? " active" : ""}`}
+              onClick={() => goTo(i)}
+              aria-label={`Slide ${i + 1}`}
             >
-              {w.text}
-            </motion.span>
+              {i === index && (
+                <div className="hero-dot-fill" style={{ width: `${progress}%` }} />
+              )}
+            </button>
           ))}
-        </motion.h1>
-
-        <motion.p
-          className="hero-p"
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.35, ease: "easeOut" }}
-        >
-          We are a team of bold, creative minds with deep professional experience. We bring an unstoppable love for modern tech, vibrant innovation, and rigorous execution to every project we take on.
-        </motion.p>
-
-        <motion.div
-          className="hero-ctas"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.48, ease: "easeOut" }}
-        >
-          <button className="cta-primary" onClick={() => onNavClick("#services")}>
-            What We Do →
-          </button>
-          <button className="cta-secondary" onClick={() => onNavClick("#about")}>
-            Our Story
-          </button>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

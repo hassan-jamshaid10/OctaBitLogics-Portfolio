@@ -1,5 +1,7 @@
 "use client";
 
+import ScrollReveal from "./ScrollReveal";
+
 const PHRASES = [
   { words: ["Creative", "Minds.", "Deep", "Experience.", "Gen-Z", "Energy."] },
   { words: ["We", "Love", "Tech", "&", "Build", "With", "Precision."] },
@@ -15,7 +17,7 @@ export default function TaglineBar() {
   const items = [...PHRASES, ...PHRASES];
 
   return (
-    <div className="tagline-bar">
+    <ScrollReveal className="tagline-bar">
       <style>{`
         .tagline-bar {
           width: 100%;
@@ -103,6 +105,6 @@ export default function TaglineBar() {
           </>
         ))}
       </div>
-    </div>
+    </ScrollReveal>
   );
 }

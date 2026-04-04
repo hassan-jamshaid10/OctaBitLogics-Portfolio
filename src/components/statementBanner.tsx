@@ -1,6 +1,7 @@
 "use client";
 
 import BackgroundNightfall from "./BackgroundNightfall";
+import ScrollReveal from "./ScrollReveal";
 
 export default function StatementBanner() {
   return (
@@ -123,34 +124,38 @@ export default function StatementBanner() {
 
       {/* LEFT */}
       <div className="sb-left">
-        <h2>
-          We&apos;re <span className="sb-hl">creatives</span>,{" "}
-          driven by professional excellence
-        </h2>
-        <button className="sb-btn">
-          Our engineering approach
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </svg>
-        </button>
+        <ScrollReveal>
+          <h2>
+            We&apos;re <span className="sb-hl">creatives</span>,{" "}
+            driven by professional excellence
+          </h2>
+          <button className="sb-btn">
+            Our engineering approach
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </button>
+        </ScrollReveal>
       </div>
 
       {/* RIGHT */}
       <div className="sb-right">
-        <p>
-          Being a young, creative team at OctaBitLogics means we look at problems differently. 
-          We bring a fresh, Gen-Z perspective paired with hard-earned industry experience, ensuring 
-          our solutions are both innovative and technically sound.
-        </p>
-        <p>
-          We embed a deep passion for technology into everything we build. Our software isn&apos;t just 
-          functional; it&apos;s beautifully crafted, fiercely modern, and engineered with the kind of 
-          professional standards that businesses trust.
-        </p>
-        <p>
-          Our role is to show you the intersection where fearless creativity meets enterprise-grade execution.
-        </p>
+        <ScrollReveal delay={0.2} style={{ position: "relative", zIndex: 10 }}>
+          <p>
+            Being a young, creative team at OctaBitLogics means we look at problems differently. 
+            We bring a fresh, Gen-Z perspective paired with hard-earned industry experience, ensuring 
+            our solutions are both innovative and technically sound.
+          </p>
+          <p>
+            We embed a deep passion for technology into everything we build. Our software isn&apos;t just 
+            functional; it&apos;s beautifully crafted, fiercely modern, and engineered with the kind of 
+            professional standards that businesses trust.
+          </p>
+          <p>
+            Our role is to show you the intersection where fearless creativity meets enterprise-grade execution.
+          </p>
+        </ScrollReveal>
       </div>
     </section>
   );

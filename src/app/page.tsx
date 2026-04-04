@@ -7,6 +7,7 @@ import About from "../components/about";
 import Services from "../components/services";
 import Products from "../components/products";
 import Contact from "../components/contact";
+import Footer from "../components/Footer";
 import TaglineBar from "../components/TaglineBar";
 import PartnersBar from "../components/partnerbar";
 import TechPartnersBar from "../components/TechPartnersBar";
@@ -51,34 +52,21 @@ export default function Home() {
       />
 
       <main>
-        <Hero     onNavClick={scrollTo} />
-        <TaglineBar/>
-        <About    />
-        <StatementBanner/>
-        <TechPartnersBar/>
-        <PartnersBar/>
+        <Hero onNavClick={scrollTo} />
+        <TaglineBar />
+        <About />
+        <StatementBanner />
+        <TechPartnersBar />
+        <PartnersBar />
         <Services />
         {/* <ExpertiseDomains/> */}
-      <TechStack/>
+        <TechStack />
         <Products />
-        <Contact  />
-       
+        <Contact />
+
       </main>
 
-      {/* Footer */}
-      <footer style={{
-        textAlign: "center",
-        padding: "2rem",
-        borderTop: "1px solid rgba(59,173,176,0.15)",
-        fontFamily: "'Oxanium', monospace",
-        fontSize: "0.7rem",
-        letterSpacing: "0.08em",
-        textTransform: "uppercase",
-        color: "var(--text-muted)",
-        background: "var(--off-white)",
-      }}>
-        © {new Date().getFullYear()} Octabit Logics · Crafted with precision
-      </footer>
+      <Footer />
     </>
   );
 }

@@ -57,7 +57,7 @@ const SLIDES = [
   },
 ] as const;
 
-const SLIDE_DURATION = 15_000; // ms
+const SLIDE_DURATION = 5_000; // ms
 
 // ── Framer Motion variants ────────────────────────────────────────────────────
 const textFade = {
@@ -91,85 +91,23 @@ interface HeroProps {
 
 export default function Hero({ onNavClick }: HeroProps) {
   const [index, setIndex] = useState(0);
-  const [progress, setProgress] = useState(0);   // 0–100
-  const [videoOk, setVideoOk] = useState(true); // hide video on error
-  const [fading, setFading] = useState(false);
+  const [textIndex, setTextIndex] = useState(0);
 
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const progRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const fadeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  // ── Switch to a new slide ──
-  const goTo = useCallback((next: number) => {
-    if (next === index) return;
-
-    // 1. Brief fade-out of video
-    setFading(true);
-    if (fadeTimeout.current) clearTimeout(fadeTimeout.current);
-
-    fadeTimeout.current = setTimeout(() => {
-      setIndex(next);
-      setProgress(0);
-      setFading(false);
-
-      // 2. Swap src & reload
-      const vid = videoRef.current;
-      if (vid) {
-        vid.src = VIDEOS[next];
-        vid.load();
-        vid.play().catch(() => { });
-      }
-    }, 600); // matches CSS transition duration
-  }, [index]);
-
-  // ── 15-second auto-advance ──
+  // ── 5-second video auto-advance ──
   useEffect(() => {
-    const advance = () => {
-      setIndex((prev) => {
-        const next = (prev + 1) % SLIDES.length;
-        setFading(true);
-        setProgress(0);
-
-        if (fadeTimeout.current) clearTimeout(fadeTimeout.current);
-        fadeTimeout.current = setTimeout(() => {
-          setIndex(next);
-          setFading(false);
-          const vid = videoRef.current;
-          if (vid) { vid.src = VIDEOS[next]; vid.load(); vid.play().catch(() => { }); }
-        }, 600);
-
-        return prev; // no-op; real update inside timeout
-      });
-    };
-
-    timerRef.current = setInterval(advance, SLIDE_DURATION);
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-      if (fadeTimeout.current) clearTimeout(fadeTimeout.current);
-    };
+    const advance = () => setIndex((prev) => (prev + 1) % VIDEOS.length);
+    const timer = setInterval(advance, SLIDE_DURATION);
+    return () => clearInterval(timer);
   }, []);
 
-  // ── Progress tick ──
+  // ── 15-second text auto-advance (1 full video cycle) ──
   useEffect(() => {
-    if (progRef.current) clearInterval(progRef.current);
-    setProgress(0);
-    progRef.current = setInterval(() => {
-      setProgress((p) => Math.min(p + (150 / SLIDE_DURATION) * 100, 100));
-    }, 150);
-    return () => { if (progRef.current) clearInterval(progRef.current); };
-  }, [index]);
-
-  // ── Play the first video on mount ──
-  useEffect(() => {
-    const vid = videoRef.current;
-    if (!vid) return;
-    vid.src = VIDEOS[0];
-    vid.load();
-    vid.play().catch(() => { });
+    const advanceText = () => setTextIndex((prev) => (prev + 1) % SLIDES.length);
+    const textTimer = setInterval(advanceText, SLIDE_DURATION * VIDEOS.length);
+    return () => clearInterval(textTimer);
   }, []);
 
-  const slide = SLIDES[index];
+  const slide = SLIDES[textIndex];
 
   return (
     <section id="home" className="hero">
@@ -187,7 +125,7 @@ export default function Hero({ onNavClick }: HeroProps) {
           isolation: isolate;
         }
 
-        /* ── Single video element ── */
+        /* ── All videos render at once for zero gap ── */
         .hero-video {
           position: absolute;
           inset: 0;
@@ -195,7 +133,12 @@ export default function Hero({ onNavClick }: HeroProps) {
           object-fit: cover;
           z-index: 0;
           filter: saturate(1.1) contrast(1.05);
-          transition: opacity 0.6s ease;
+          opacity: 0;
+          transition: opacity 0.8s ease-in-out;
+        }
+
+        .hero-video.active {
+          opacity: 1;
         }
 
         /* ── Color + vignette overlays ── */
@@ -353,30 +296,28 @@ export default function Hero({ onNavClick }: HeroProps) {
         }
       `}</style>
 
-      {/* ── Single video element — src swapped on transition ── */}
-      <video
-        ref={videoRef}
-        className="hero-video"
-        autoPlay
-        muted
-        playsInline
-        loop
-        style={{ opacity: fading || !videoOk ? 0 : 1 }}
-        onError={() => setVideoOk(false)}
-        onLoadedData={() => setVideoOk(true)}
-      />
+      {/* ── Multiple Pre-Loaded Videos ── */}
+      {VIDEOS.map((src, i) => (
+        <video
+          key={src}
+          className={`hero-video ${i === index ? "active" : ""}`}
+          autoPlay
+          muted
+          playsInline
+          loop
+        >
+          <source src={src} type="video/mp4" />
+        </video>
+      ))}
 
       <div className="hero-overlay" />
       <div className="hero-vignette" />
-
-      {/* Bottom progress sweep */}
-      <div className="hero-progress" style={{ width: `${progress}%` }} />
 
       {/* ── Content ── */}
       <div className="hero-inner">
         <AnimatePresence mode="wait">
           <motion.div
-            key={index}
+            key={textIndex}
             style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}
             initial="hidden"
             animate="show"
@@ -403,11 +344,6 @@ export default function Hero({ onNavClick }: HeroProps) {
               ))}
             </h1>
 
-            {/* Body */}
-            <motion.p className="hero-p" variants={textFade}>
-              {slide.body}
-            </motion.p>
-
             {/* CTAs */}
             <motion.div className="hero-ctas" variants={textFade}>
               <button className="cta-primary" onClick={() => onNavClick(slide.cta1.href)}>{slide.cta1.label}</button>
@@ -415,22 +351,6 @@ export default function Hero({ onNavClick }: HeroProps) {
             </motion.div>
           </motion.div>
         </AnimatePresence>
-
-        {/* Slide indicator dots */}
-        <div className="hero-dots">
-          {SLIDES.map((_, i) => (
-            <button
-              key={i}
-              className={`hero-dot-btn${i === index ? " active" : ""}`}
-              onClick={() => goTo(i)}
-              aria-label={`Slide ${i + 1}`}
-            >
-              {i === index && (
-                <div className="hero-dot-fill" style={{ width: `${progress}%` }} />
-              )}
-            </button>
-          ))}
-        </div>
       </div>
     </section>
   );

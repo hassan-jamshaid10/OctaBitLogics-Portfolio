@@ -2,6 +2,7 @@
 
 import BackgroundNightfall from "./BackgroundNightfall";
 import ScrollReveal from "./ScrollReveal";
+import LivingCharacter from "./LivingCharacter";
 
 export default function StatementBanner() {
   return (
@@ -14,7 +15,7 @@ export default function StatementBanner() {
           overflow: hidden;
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 5rem;
+          gap: 3rem;
           align-items: center;
         }
 
@@ -66,6 +67,17 @@ export default function StatementBanner() {
           text-underline-offset: 4px;
         }
 
+        .sb-divider {
+          position: absolute;
+          left: 50%;
+          top: 15%;
+          bottom: 15%;
+          width: 1px;
+          background: linear-gradient(to bottom, transparent, rgba(167, 255, 249, 0.3), rgba(59, 173, 176, 0.5), rgba(167, 255, 249, 0.3), transparent);
+          z-index: 2;
+          pointer-events: none;
+        }
+
         .sb-btn {
           display: inline-flex;
           align-items: center;
@@ -112,6 +124,7 @@ export default function StatementBanner() {
             gap: 2.5rem;
             padding: 4rem 2.5rem;
           }
+          .sb-divider { display: none; }
         }
         @media (max-width: 480px) {
           #statement-banner { padding: 3.5rem 1.5rem; }
@@ -121,6 +134,7 @@ export default function StatementBanner() {
       <BackgroundNightfall nightGradient="linear-gradient(135deg, #0f1c3f 0%, #080d1e 45%, #03060e 100%)" />
 
       <div className="sb-dots" />
+      <div className="sb-divider" />
 
       {/* LEFT */}
       <div className="sb-left">
@@ -140,21 +154,9 @@ export default function StatementBanner() {
       </div>
 
       {/* RIGHT */}
-      <div className="sb-right">
-        <ScrollReveal delay={0.2} style={{ position: "relative", zIndex: 10 }}>
-          <p>
-            Being a young, creative team at OctaBitLogics means we look at problems differently. 
-            We bring a fresh, Gen-Z perspective paired with hard-earned industry experience, ensuring 
-            our solutions are both innovative and technically sound.
-          </p>
-          <p>
-            We embed a deep passion for technology into everything we build. Our software isn&apos;t just 
-            functional; it&apos;s beautifully crafted, fiercely modern, and engineered with the kind of 
-            professional standards that businesses trust.
-          </p>
-          <p>
-            Our role is to show you the intersection where fearless creativity meets enterprise-grade execution.
-          </p>
+      <div className="sb-right" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <ScrollReveal delay={0.2} style={{ position: "relative", zIndex: 10, width: '100%' }}>
+          <LivingCharacter />
         </ScrollReveal>
       </div>
     </section>

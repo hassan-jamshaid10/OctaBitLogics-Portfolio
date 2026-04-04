@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
+import ScrollReveal from "./ScrollReveal";
+
 export default function TechPartnersBar() {
   return (
-    <div style={{
+    <ScrollReveal style={{
       background: "#fff",
       border: "1px solid rgba(59,173,176,0.15)",
       borderRadius: "4px",
@@ -31,6 +33,6 @@ export default function TechPartnersBar() {
           WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
         }}>Partners</span>
       </span>
-    </div>
+    </ScrollReveal>
   );
 }

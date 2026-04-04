@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ScrollReveal from "./ScrollReveal";
 
 const TECH_CATEGORIES = [
   {
@@ -274,7 +275,7 @@ export default function TechStack() {
         }}
       />
 
-      <div className="tech-container">
+      <ScrollReveal className="tech-container">
         <h2 className="tech-title">
           Tech Stacks <span>We Excel In</span>
         </h2>
@@ -347,7 +348,7 @@ export default function TechStack() {
             </svg>
           </button>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

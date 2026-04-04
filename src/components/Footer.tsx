@@ -81,7 +81,13 @@ const SOCIALS = [
 ];
 
 // ── Animation helpers ─────────────────────────────────────────────────────────
-const fadeUp = (delay = 0) => ({
+type FadeUpProps = {
+    initial: { opacity: number; y: number };
+    whileInView: { opacity: number; y: number };
+    viewport: { once: true };
+    transition: { duration: number; ease: "easeOut"; delay: number };
+};
+const fadeUp = (delay = 0): FadeUpProps => ({
     initial: { opacity: 0, y: 22 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },

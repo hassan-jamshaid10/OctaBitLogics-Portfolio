@@ -1,5 +1,5 @@
 "use client";
-
+//fix
 import { motion, useInView, useAnimationControls } from "framer-motion";
 import React, { useRef, useEffect } from "react";
 

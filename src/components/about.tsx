@@ -1,5 +1,5 @@
 "use client";
-
+//fix
 const PILLARS = [
   "Precision Engineering",
   "Technology Partner",

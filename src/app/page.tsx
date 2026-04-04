@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Header";
 import Hero from "../components/hero";
 import About from "../components/about";
+import CaseStudies from "../components/CaseStudies";
 import Services from "../components/services";
 import Products from "../components/products";
 import Contact from "../components/contact";
@@ -54,6 +55,7 @@ export default function Home() {
       <main>
         <Hero onNavClick={scrollTo} />
         <TaglineBar />
+        <CaseStudies />
         <About />
         <StatementBanner />
         <TechPartnersBar />

@@ -65,15 +65,13 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           top: 0; left: 0; right: 0;
           z-index: 1000;
           padding: 0 2.5rem;
-          height: 72px;
+          height: 75px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          transition: background 0.4s cubic-bezier(.4,0,.2,1),
-                      border-color 0.4s ease,
-                      box-shadow 0.4s ease,
-                      opacity 0.5s ease,
-                      transform 0.5s cubic-bezier(.4,0,.2,1);
+          background: transparent;
+          border-bottom: 1px solid transparent;
+          transition: all 0.4s cubic-bezier(.4,0,.2,1);
           opacity: 0;
           transform: translateY(-20px);
         }
@@ -83,13 +81,13 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           transform: translateY(0);
         }
 
-        /* Transparent on hero, frosted glass when scrolled past */
+        /* Scrolled state */
         .navbar.scrolled {
-background: linear-gradient(135deg, #3BADB0 0%, #1f4080 48%, #1B2E5E 100%);
-          backdrop-filter: blur(22px) saturate(180%);
-          -webkit-backdrop-filter: blur(22px) saturate(180%);
-          border-bottom: 1px solid rgba(255,255,255,0.15);
-          box-shadow: 0 4px 40px rgba(0,0,0,0.2);
+          background: rgba(11, 18, 36, 0.88);
+          backdrop-filter: blur(14px) saturate(180%);
+          -webkit-backdrop-filter: blur(14px) saturate(180%);
+          border-bottom: 1px solid rgba(59,173,176,0.15);
+          box-shadow: 0 8px 30px rgba(0,0,0,0.4);
         }
 
         /* ── LOGO ── */
@@ -134,44 +132,38 @@ background: linear-gradient(135deg, #3BADB0 0%, #1f4080 48%, #1B2E5E 100%);
           margin-top: 1px;
         }
 
-        /* ── NAV PILL ── */
+        /* ── NAV LINKS ── */
         .nav-links {
           display: flex;
           align-items: center;
-          gap: 0.15rem;
+          gap: 2rem;
           position: relative;
-          background: rgba(255,255,255,0.12);
-          border: 1px solid rgba(255,255,255,0.22);
-          border-radius: 100px;
-          padding: 5px;
           animation: navItemIn 0.6s cubic-bezier(.4,0,.2,1) 0.25s both;
         }
 
         .nav-indicator {
           position: absolute;
-          height: calc(100% - 10px);
-          top: 5px;
-          border-radius: 100px;
-          background: rgba(255,255,255,0.22);
-          border: 1px solid rgba(255,255,255,0.35);
-          transition: left  0.35s cubic-bezier(.4,0,.2,1),
+          height: 2px;
+          bottom: -6px;
+          border-radius: 2px;
+          background: #a7fff9;
+          transition: left 0.35s cubic-bezier(.4,0,.2,1),
                       width 0.35s cubic-bezier(.4,0,.2,1);
           pointer-events: none;
           z-index: 0;
+          box-shadow: 0 0 10px rgba(167, 255, 249, 0.4);
         }
 
         .nav-link {
           position: relative;
           z-index: 1;
           font-family: 'Oxanium', monospace;
-          font-size: 0.72rem;
+          font-size: 0.95rem; /* Increased from 0.76rem */
           font-weight: 600;
-          letter-spacing: 0.07em;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
           text-decoration: none;
-          color: rgba(255,255,255,0.75);
-          padding: 7px 14px;
-          border-radius: 100px;
+          color: rgba(255,255,255,0.65);
           transition: color 0.22s ease;
           white-space: nowrap;
         }
@@ -182,7 +174,7 @@ background: linear-gradient(135deg, #3BADB0 0%, #1f4080 48%, #1B2E5E 100%);
         /* ── CTA ── */
         .nav-cta {
           font-family: 'Oxanium', monospace;
-          font-size: 0.74rem;
+          font-size: 0.88rem; /* Increased from 0.74rem to balance with nav links */
           font-weight: 700;
           letter-spacing: 0.08em;
           text-transform: uppercase;

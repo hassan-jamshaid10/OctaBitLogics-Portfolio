@@ -8,6 +8,7 @@ const PILLARS = [
 ];
 
 import BackgroundNightfall from "./BackgroundNightfall";
+import ScrollReveal from "./ScrollReveal";
 
 export default function AboutSplit() {
   return (
@@ -224,7 +225,7 @@ export default function AboutSplit() {
         }
       `}</style>
 
-      <div className="as-wrap">
+      <ScrollReveal className="as-wrap">
         {/* LEFT */}
         <div className="as-left">
           <div>
@@ -271,7 +272,7 @@ export default function AboutSplit() {
             </div>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

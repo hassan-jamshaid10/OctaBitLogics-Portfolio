@@ -1,5 +1,7 @@
 "use client";
 
+import ScrollReveal from "./ScrollReveal";
+
 export default function PartnersBar() {
   return (
     <div className="partners-bar">
@@ -115,7 +117,7 @@ export default function PartnersBar() {
         }
       `}</style>
 
-      <div className="partners-inner">
+      <ScrollReveal className="partners-inner">
         <span className="partners-label">Partners</span>
 
         {/* Microsoft */}
@@ -172,7 +174,7 @@ export default function PartnersBar() {
             <div className="partner-sub">Partner</div>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
     </div>
   );
 }

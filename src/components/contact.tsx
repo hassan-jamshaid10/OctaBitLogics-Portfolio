@@ -1,20 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import ScrollReveal from "./ScrollReveal";
 
 export default function Contact() {
-  const [visible, setVisible] = useState(false);
   const [sent, setSent] = useState(false);
-  const ref = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold: 0.15 }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
 
   const handleSubmit = () => {
     setSent(true);
@@ -22,7 +12,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" ref={ref}>
+    <section id="contact">
       <style>{`
         #contact { background: var(--off-white); }
 
@@ -33,26 +23,19 @@ export default function Contact() {
           text-align: center;
         }
 
-        .contact-header {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.6s ease, transform 0.6s ease;
+        .contact-inner {
+          max-width: 640px;
+          width: 100%;
+          padding: 0 1rem;
+          text-align: center;
         }
-
-        .contact-header.in { opacity:1; transform:none; }
 
         .contact-form {
           margin-top: 2.5rem;
           display: flex;
           flex-direction: column;
           gap: 0.85rem;
-          opacity: 0;
-          transform: translateY(16px);
-          transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
         }
-
-        .contact-form.in { opacity:1; transform:none; }
-
         .form-row { display: flex; gap: 0.85rem; }
 
         .form-field {
@@ -136,11 +119,7 @@ export default function Contact() {
           justify-content: center;
           gap: 2.5rem;
           flex-wrap: wrap;
-          opacity: 0;
-          transition: opacity 0.6s ease 0.4s;
         }
-
-        .contact-info.in { opacity: 1; }
 
         .info-item {
           display: flex;
@@ -170,15 +149,15 @@ export default function Contact() {
       `}</style>
 
       <div className="contact-inner">
-        <div className={`contact-header${visible ? " in" : ""}`}>
+        <ScrollReveal className="contact-header">
           <div className="section-tag">Contact</div>
           <h2>Let's Build Together</h2>
           <p className="lead">
             Have a project in mind? Drop us a message, and we'll get back to you within 24 hours.
           </p>
-        </div>
+        </ScrollReveal>
 
-        <div className={`contact-form${visible ? " in" : ""}`}>
+        <ScrollReveal delay={0.2} className="contact-form">
           <div className="form-row">
             <div className="form-field">
               <label className="form-label">Your Name</label>
@@ -209,9 +188,9 @@ export default function Contact() {
           >
             {sent ? "✓ Message Sent!" : "Send Message →"}
           </button>
-        </div>
+        </ScrollReveal>
 
-        <div className={`contact-info${visible ? " in" : ""}`}>
+        <ScrollReveal delay={0.4} className="contact-info">
           {[
             { label: "Email",    value: "hello@octabit.io" },
             { label: "Location", value: "Lahore, Pakistan" },
@@ -222,7 +201,7 @@ export default function Contact() {
               <span className="info-value">{i.value}</span>
             </div>
           ))}
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

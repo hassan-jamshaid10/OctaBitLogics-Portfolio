@@ -33,16 +33,16 @@ export default function Hero({ onNavClick }: HeroProps) {
           filter: saturate(1.1) contrast(1.05);
         }
 
-        /* ✅ more transparent overlay (was ~0.85–0.9) */
+        /* less color overlay to show video clearly */
         .hero-overlay {
           position: absolute;
           inset: 0;
           z-index: 1;
           background: linear-gradient(
             135deg,
-            rgba(59,173,176,0.58) 0%,
-            rgba(31,64,128,0.58) 48%,
-            rgba(27,46,94,0.62) 100%
+            rgba(59,173,176,0.35) 0%,
+            rgba(31,64,128,0.35) 48%,
+            rgba(27,46,94,0.4) 100%
           );
         }
 
@@ -125,20 +125,23 @@ export default function Hero({ onNavClick }: HeroProps) {
           -webkit-text-fill-color: transparent;
           background-clip: text;
           color: transparent;
+          filter: drop-shadow(0 4px 12px rgba(0,0,0,0.45));
         }
 
+        /* Bright, high-contrast gradients */
         .w1 { background-image: linear-gradient(135deg, #3BADB0 0%, #a7fff9 100%); }
-        .w2 { background-image: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.75) 100%); }
-        .w3 { background-image: linear-gradient(135deg, #3BADB0 0%, #1f4080 60%, #1B2E5E 100%); }
-        .w4 { background-image: linear-gradient(135deg, #93c5fd 0%, #1f4080 100%); }
+        .w2 { background-image: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.9) 100%); }
+        .w3 { background-image: linear-gradient(135deg, #a7fff9 0%, #3BADB0 100%); }
+        .w4 { background-image: linear-gradient(135deg, #ffffff 0%, #a7fff9 100%); }
         .w5 { background-image: linear-gradient(135deg, #e0f2fe 0%, #3BADB0 100%); }
-        .w6 { background-image: linear-gradient(135deg, #c7d2fe 0%, #1B2E5E 100%); }
-        .w7 { background-image: linear-gradient(135deg, #ffffff 0%, #3BADB0 100%); }
+        .w6 { background-image: linear-gradient(135deg, #c7d2fe 0%, #ffffff 100%); }
+        .w7 { background-image: linear-gradient(135deg, #ffffff 0%, #a7fff9 100%); }
 
         .hero-p {
           font-size: 1.02rem;
           line-height: 1.85;
-          color: rgba(255,255,255,0.78);
+          color: rgba(255,255,255,0.95);
+          text-shadow: 0 4px 16px rgba(0,0,0,0.6);
           max-width: 720px;
           margin: 0 auto 1.75rem;
         }

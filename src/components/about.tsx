@@ -7,6 +7,8 @@ const PILLARS = [
   "Agile & Transparent",
 ];
 
+import BackgroundNightfall from "./BackgroundNightfall";
+
 export default function AboutSplit() {
   return (
     <section id="about-split">
@@ -228,17 +230,15 @@ export default function AboutSplit() {
           <div>
             <div className="as-est">Est. 2025</div>
             <h2>
-              OctaBitLogics was built to{" "}
-              <span>bridge the gap</span>{" "}
-              between great ideas and great execution.
+              OctaBitLogics is a team of{" "}
+              <span>creative minds</span>{" "}
+              bridging fresh tech with professional rigor.
             </h2>
           </div>
 
           <div className="as-left-body">
             <p>
-              As digital systems grew more complex and interconnected, businesses needed more than
-              individual solutions. They needed a technology partner who gets into the trenches —
-              from idea to launch and beyond.
+              We are a young generation of tech enthusiasts who believe in blending out-of-the-box creativity with deep experience. Our dynamic Gen-Z mindset fuels innovation, while our professional background ensures every solution is robust, scalable, and built for the long haul.
             </p>
             <div className="as-pills">
               {PILLARS.map((p) => (
@@ -250,24 +250,24 @@ export default function AboutSplit() {
 
         {/* RIGHT */}
         <div className="as-right">
-          <div>
-            <div className="as-mission-tag">Our Mission</div>
-            <h2>
-              We're here to help leaders build systems{" "}
-              <em>that last.</em>
-            </h2>
-          </div>
+          <BackgroundNightfall nightGradient="linear-gradient(135deg, #0f1c3f 0%, #080d1e 45%, #03060e 100%)" />
+          <div style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", height: "100%", justifyContent: "space-between" }}>
+            <div>
+              <div className="as-mission-tag">Our Mission</div>
+              <h2>
+                We love technology and build platforms{" "}
+                <em>that inspire.</em>
+              </h2>
+            </div>
 
-          <div className="as-right-body">
-            <p>
-              To make powerful, enterprise-grade technology accessible to businesses at every stage —
-              through pragmatic engineering, honest collaboration, and a relentless focus on outcomes
-              that matter. We combine sharp engineering, modern architecture, and a deep understanding
-              of emerging tech to deliver solutions that scale for the future.
-            </p>
-            <div className="as-loc">
-              <span className="as-loc-dot" />
-              Based in Lahore · Working Globally
+            <div className="as-right-body">
+              <p>
+                To make powerful, enterprise-grade technology accessible through true creative problem-solving and honest collaboration. We combine the fearless energy of a modern mindset with refined engineering, modern architecture, and a deep understanding of emerging tech to deliver solutions that look stunning and scale flawlessly.
+              </p>
+              <div className="as-loc">
+                <span className="as-loc-dot" />
+                Based in Lahore · Working Globally
+              </div>
             </div>
           </div>
         </div>

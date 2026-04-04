@@ -174,7 +174,7 @@ export default function Contact() {
           <div className="section-tag">Contact</div>
           <h2>Let's Build Together</h2>
           <p className="lead">
-            Have a project in mind? Drop us a message — we'll get back to you within 24 hours.
+            Have a project in mind? Drop us a message, and we'll get back to you within 24 hours.
           </p>
         </div>
 

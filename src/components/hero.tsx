@@ -270,8 +270,7 @@ export default function Hero({ onNavClick }: HeroProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.35, ease: "easeOut" }}
         >
-          We&apos;re a brand-new software studio with big dreams and zero bureaucracy. We bring sharp thinking,
-          modern tech, and genuine passion to every project we take on — starting now.
+          We are a team of bold, creative minds with deep professional experience. We bring an unstoppable love for modern tech, vibrant innovation, and rigorous execution to every project we take on.
         </motion.p>
 
         <motion.div

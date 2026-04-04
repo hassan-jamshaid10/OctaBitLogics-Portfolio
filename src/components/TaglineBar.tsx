@@ -1,10 +1,10 @@
 "use client";
 
 const PHRASES = [
-  { words: ["Fresh", "Ideas.", "Real", "Ambition.", "Day", "One", "Energy."] },
-  { words: ["We", "Build", "Digital", "Products", "That", "Matter."] },
-  { words: ["Modern", "Tech.", "Genuine", "Passion.", "Zero", "Bureaucracy."] },
-  { words: ["Clean", "Code.", "Honest", "Work.", "Hungry", "Spirit."] },
+  { words: ["Creative", "Minds.", "Deep", "Experience.", "Gen-Z", "Energy."] },
+  { words: ["We", "Love", "Tech", "&", "Build", "With", "Precision."] },
+  { words: ["Modern", "Vibe.", "Genuine", "Passion.", "Pro", "Execution."] },
+  { words: ["Fresh", "Ideas.", "Honest", "Work.", "Creative", "Spirit."] },
 ];
 
 /* Teal → navy stops — each word cycles through a different stop */

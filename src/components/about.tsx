@@ -6,7 +6,7 @@ const PILLARS = [
   "Built to Scale",
   "Agile & Transparent",
 ];
-
+//fix
 import BackgroundNightfall from "./BackgroundNightfall";
 import ScrollReveal from "./ScrollReveal";
 
@@ -16,7 +16,7 @@ export default function AboutSplit() {
       <style>{`
         #about-split {
           background: #ffffff;
-          padding: 6rem 2rem;
+          padding: 3.5rem 2rem;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -52,13 +52,13 @@ export default function AboutSplit() {
           );
           border: 1px solid rgba(59,173,176,0.18);
           border-right: none;
-          padding: 4rem 3.25rem;
+          padding: 2.5rem 3rem;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           position: relative;
           overflow: hidden;
-          min-height: 520px;
+          min-height: 380px;
         }
 
         /* corner glow */
@@ -98,14 +98,14 @@ export default function AboutSplit() {
 
         .as-left-body {
           margin-top: auto;
-          padding-top: 2.5rem;
+          padding-top: 1.5rem;
         }
 
         .as-left-body p {
           font-size: 0.875rem; line-height: 1.88; color: #4e6070;
           border-top: 1px solid rgba(59,173,176,0.2);
-          padding-top: 1.5rem;
-          margin-bottom: 1.35rem;
+          padding-top: 1rem;
+          margin-bottom: 1rem;
         }
 
         .as-pills {
@@ -129,13 +129,13 @@ export default function AboutSplit() {
         /* ── RIGHT PANEL ── */
         .as-right {
           background: linear-gradient(145deg, #3BADB0 0%, #1f4080 55%, #1B2E5E 100%);
-          padding: 4rem 3.25rem;
+          padding: 2.5rem 3rem;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           position: relative;
           overflow: hidden;
-          min-height: 520px;
+          min-height: 380px;
         }
 
         /* decorative octagon shapes */
@@ -183,15 +183,14 @@ export default function AboutSplit() {
 
         .as-right-body {
           margin-top: auto;
-          padding-top: 2.5rem;
+          padding-top: 1.5rem;
         }
 
         .as-right-body p {
           font-size: 0.875rem; line-height: 1.88;
           color: rgba(255,255,255,0.7);
-          border-top: 1px solid rgba(255,255,255,0.15);
-          padding-top: 1.5rem;
-          margin-bottom: 1.35rem;
+          padding-top: 1rem;
+          margin-bottom: 1rem;
         }
 
         .as-loc {

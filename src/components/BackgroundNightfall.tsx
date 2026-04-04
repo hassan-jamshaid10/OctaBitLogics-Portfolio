@@ -19,21 +19,21 @@ export default function BackgroundNightfall({
     const handleSync = (e: Event) => {
       const { phase } = (e as CustomEvent).detail;
       if (phase === "fast-night") {
-        overlayControls.start({ opacity: 1, transition: { duration: 1.5, ease: "easeInOut" } });
-        starsControls.start({ opacity: 1, scale: 1, y: 0, transition: { duration: 1.5, ease: "easeOut" } });
+        overlayControls.start({ opacity: 1, transition: { duration: 0.8, ease: "easeInOut" } });
+        starsControls.start({ opacity: 1, scale: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } });
       } else if (phase === "fast-day") {
-        overlayControls.start({ opacity: 0, transition: { duration: 6, ease: "easeInOut" } });
-        starsControls.start({ opacity: 0, scale: 1.05, y: -20, transition: { duration: 6, ease: "easeInOut" } });
+        overlayControls.start({ opacity: 0, transition: { duration: 3, ease: "easeInOut" } });
+        starsControls.start({ opacity: 0, scale: 1.05, y: -20, transition: { duration: 3, ease: "easeInOut" } });
       } else if (phase === "loop") {
         overlayControls.start({
           opacity: [0, 1, 0],
-          transition: { duration: 24, ease: "easeInOut", repeat: Infinity, times: [0, 0.5, 1], repeatType: "loop" }
+          transition: { duration: 16, ease: "easeInOut", repeat: Infinity, times: [0, 0.5, 1], repeatType: "loop" }
         });
         starsControls.start({
           opacity: [0, 1, 0],
           scale: [1.05, 1, 1.05],
           y: [20, 0, -20],
-          transition: { duration: 24, ease: "easeInOut", repeat: Infinity, times: [0, 0.5, 1], repeatType: "loop" }
+          transition: { duration: 16, ease: "easeInOut", repeat: Infinity, times: [0, 0.5, 1], repeatType: "loop" }
         });
       }
     };
@@ -48,14 +48,14 @@ export default function BackgroundNightfall({
       
       const runGlobalSequence = async () => {
         window.dispatchEvent(new CustomEvent("nightfall-sync", { detail: { phase: "fast-night" } }));
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        await new Promise(resolve => setTimeout(resolve, 800));
         
-        await new Promise(resolve => setTimeout(resolve, 8000));
+        await new Promise(resolve => setTimeout(resolve, 4000));
         
         window.dispatchEvent(new CustomEvent("nightfall-sync", { detail: { phase: "fast-day" } }));
-        await new Promise(resolve => setTimeout(resolve, 6000));
-        
         await new Promise(resolve => setTimeout(resolve, 3000));
+        
+        await new Promise(resolve => setTimeout(resolve, 1500));
         
         window.dispatchEvent(new CustomEvent("nightfall-sync", { detail: { phase: "loop" } }));
       };

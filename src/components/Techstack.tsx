@@ -1,313 +1,353 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const ROW_1 = [
-  { name: "MySQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" },
-  { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original-wordmark.svg" },
-  { name: "Redis", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original-wordmark.svg" },
-  { name: "PostgreSQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original-wordmark.svg" },
-  { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original-wordmark.svg" },
-  { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg" },
-  { name: "React Native", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-  { name: "Java", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg" },
-  { name: "Spring Boot", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original-wordmark.svg" },
-  { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original-wordmark.svg" },
-  { name: "TensorFlow", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original-wordmark.svg" },
+const TECH_CATEGORIES = [
+  {
+    id: "frontend",
+    label: "Frontend Development",
+    images: [
+      "/Frontend_development/Typescript_logo.png",
+      "/Frontend_development/Vue_logo.png",
+      "/Frontend_development/angular_logo.png",
+      "/Frontend_development/bootstrap_logo.png",
+      "/Frontend_development/next.js-logo.png",
+      "/Frontend_development/nuxt_logo.png",
+      "/Frontend_development/react_logo.png",
+      "/Frontend_development/svelte_logo.png",
+      "/Frontend_development/tailwindcss_logo.png",
+    ]
+  },
+  {
+    id: "backend",
+    label: "Backend & Databases",
+    images: [
+      "/backend_databases/Django-Logo.png",
+      "/backend_databases/Node.js_logo.png",
+      "/backend_databases/Redis-Logo.png",
+      "/backend_databases/Spring-Boot-Logo.png",
+      "/backend_databases/expressjs_logo.png",
+      "/backend_databases/java_logo.png",
+      "/backend_databases/mongodb_logo.png",
+      "/backend_databases/mysql_logo.png",
+      "/backend_databases/postgres_logo.png",
+    ]
+  },
+  {
+    id: "mobile",
+    label: "Mobile Applications",
+    images: [
+      "/mobile_application_development/Dart_logo.png",
+      "/mobile_application_development/Firebase_Logo.png",
+      "/mobile_application_development/Kotlin_Icon_logo.png",
+      "/mobile_application_development/Swift-Logo.png",
+      "/mobile_application_development/Xamarin-Logo.png",
+      "/mobile_application_development/flutter_logo.png",
+      "/mobile_application_development/ionic_logo.png",
+      "/mobile_application_development/objecc_logo.png",
+      "/mobile_application_development/react-native_logo.png",
+    ]
+  },
+  {
+    id: "aiml",
+    label: "AI & ML",
+    images: [
+      "/ai_machine_learning/NumPy_logo.png",
+      "/ai_machine_learning/OpenCV_Logo.png",
+      "/ai_machine_learning/Pandas_logo.png",
+      "/ai_machine_learning/Pytorch_logo.png",
+      "/ai_machine_learning/Scikit_learn_logo.png",
+      "/ai_machine_learning/TensorFlow_logo.png",
+      "/ai_machine_learning/keras_logo.png",
+      "/ai_machine_learning/python_logo.png",
+      "/ai_machine_learning/yolov8_logo.png",
+    ]
+  },
+  {
+    id: "cloud",
+    label: "Cloud & DevOps",
+    images: [
+      "/cloud_devops/GitHub-Logo.png",
+      "/cloud_devops/Google-Cloud-Logo.png",
+      "/cloud_devops/Jenkins-logo.png",
+      "/cloud_devops/Microsoft_Azure_Logo.png",
+      "/cloud_devops/aws_logo.png",
+      "/cloud_devops/docker_logo.png",
+      "/cloud_devops/git_logo.png",
+      "/cloud_devops/ibm_cloud_logo.png",
+      "/cloud_devops/kubernetes_logo.png",
+    ]
+  },
+  {
+    id: "sqa",
+    label: "SQA & Testing",
+    images: [
+      "/sqa_testing/Apache_JMeter_logo.png",
+      "/sqa_testing/JUnit_5_logo.png",
+      "/sqa_testing/Postman_logo.png",
+      "/sqa_testing/Selenium_Logo.png",
+      "/sqa_testing/appium-logo.png",
+      "/sqa_testing/browserstack_logo.png",
+      "/sqa_testing/cypress_logo.png",
+      "/sqa_testing/jest_logo.png",
+      "/sqa_testing/mocha_logo.png",
+    ]
+  }
 ];
-
-const ROW_2 = [
-  { name: "PyTorch", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original-wordmark.svg" },
-  { name: "AWS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
-  { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg" },
-  { name: "Jenkins", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" },
-  { name: "Kubernetes", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain-wordmark.svg" },
-  { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original-wordmark.svg" },
-  { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-  { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-  { name: "PostgreSQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original-wordmark.svg" },
-  { name: "Redis", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original-wordmark.svg" },
-  { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original-wordmark.svg" },
-];
-
-type Tech = { name: string; logo: string };
-
-function MarqueeRow({
-  techs,
-  reverse = false,
-  speed = 36,
-}: {
-  techs: Tech[];
-  reverse?: boolean;
-  speed?: number;
-}) {
-  const items = [...techs, ...techs];
-
-  return (
-    <div className="ts-track">
-      <div
-        className={reverse ? "ts-inner ts-reverse" : "ts-inner"}
-        style={{ ["--ts-speed" as any]: `${speed}s` }}
-      >
-        {items.map((tech, i) => (
-          <div className="ts-chip" key={`${tech.name}-${i}`}>
-            <div className="ts-logo-box">
-              <img
-                src={tech.logo}
-                alt={tech.name}
-                className="ts-logo"
-                loading="lazy"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = "none";
-                }}
-              />
-            </div>
-            <span className="ts-chip-name">{tech.name}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default function TechStack() {
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  const prevTab = () => {
+    setActiveIdx((prev) => (prev === 0 ? TECH_CATEGORIES.length - 1 : prev - 1));
+  };
+
+  const nextTab = () => {
+    setActiveIdx((prev) => (prev === TECH_CATEGORIES.length - 1 ? 0 : prev + 1));
+  };
+
   return (
-    <section className="ts-section" aria-label="Tech stack">
+    <section className="tech-stacks-section" aria-label="Tech stack">
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        .ts-section {
+        .tech-stacks-section {
           background: #ffffff;
           position: relative;
           overflow: hidden;
-
-          /* ✅ MUCH smaller top spacing */
-          padding: 16px 0 0;
-
+          padding: 80px 0;
           font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-          isolation: isolate;
         }
 
-        .ts-container {
+        .tech-container {
           width: 100%;
-          max-width: 1200px;
-          margin-inline: auto;
-          padding-inline: 24px;
+          max-width: 1100px;
+          margin: 0 auto;
+          text-align: center;
           position: relative;
           z-index: 1;
         }
 
-        /* subtle background blobs */
-        .ts-section::before {
+        /* Subtle background blob to maintain creative flair */
+        .tech-stacks-section::before {
           content: '';
           position: absolute;
-          width: 420px; height: 420px;
+          width: 600px; height: 600px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(59,173,176,0.07) 0%, transparent 70%);
-          top: -220px; left: -200px;
+          background: radial-gradient(circle, rgba(59,173,176,0.06) 0%, transparent 60%);
+          top: -200px; left: -200px;
           pointer-events: none;
           z-index: 0;
         }
 
-        /* ── Header ── */
-        .ts-header {
-          width: 100%;
-          max-width: 680px;
-          margin-inline: auto;
-          text-align: center;
-
-          /* ✅ reduced */
-          margin-bottom: 14px;
-
-          position: relative;
-          z-index: 5;
-        }
-
-        .ts-badge {
-          display: inline-block;
-          padding: 5px 16px;
-          background: linear-gradient(135deg, rgba(59,173,176,0.12) 0%, rgba(37,99,235,0.12) 100%);
-          border: 1px solid rgba(59,173,176,0.35);
-          border-radius: 99px;
-          font-size: 0.7rem;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: #3badb0;
-
-          /* ✅ reduced */
-          margin-bottom: 8px;
-        }
-
-        .ts-title {
-          font-size: clamp(1.65rem, 3.1vw, 2.25rem);
+        .tech-title {
+          font-family: 'Oxanium', monospace;
+          font-size: clamp(2rem, 4vw, 2.8rem);
           font-weight: 800;
-          color: #1e293b;
-
-          /* ✅ reduced */
-          margin: 0 0 6px;
-
+          color: #3badb0; 
+          margin-bottom: 2rem;
           letter-spacing: -0.02em;
-          line-height: 1.15;
         }
 
-        .ts-title-accent {
-          background: linear-gradient(135deg, #3badb0 0%, #1f4080 48%, #1b2e5e 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          color: transparent;
+        .tech-title span {
+          color: #1e293b; 
         }
 
-        .ts-subtitle {
-          font-size: 0.92rem;
-          color: #475569;
-          line-height: 1.6;
-          margin: 0;
-        }
-
-        /* ── Marquee ── */
-        .ts-marquee-wrap {
+        .tech-tabs {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 2rem;
+          margin-bottom: 3.5rem;
           position: relative;
-          z-index: 1;
+          padding: 0 1rem;
         }
 
-        .ts-marquee-wrap::before,
-        .ts-marquee-wrap::after {
+        .tech-tab {
+          font-family: 'Oxanium', monospace;
+          background: none;
+          border: none;
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: #94a3b8;
+          cursor: pointer;
+          position: relative;
+          padding: 0.5rem 0;
+          transition: color 0.3s ease;
+        }
+
+        .tech-tab.active {
+          color: #3badb0;
+        }
+
+        .tech-tab:hover:not(.active) {
+          color: #64748b;
+        }
+
+        .tech-tab.active::after {
           content: '';
           position: absolute;
-          top: 0; bottom: 0;
-          width: 160px;
-          z-index: 2;
-          pointer-events: none;
+          left: 0; bottom: 0;
+          width: 100%;
+          height: 3px;
+          background: #3badb0;
+          border-radius: 2px;
         }
 
-        .ts-marquee-wrap::before {
-          left: 0;
-          background: linear-gradient(to right, #ffffff 0%, transparent 100%);
-        }
-
-        .ts-marquee-wrap::after {
-          right: 0;
-          background: linear-gradient(to left, #ffffff 0%, transparent 100%);
-        }
-
-        .ts-track {
-          overflow: hidden;
-          margin-bottom: 12px;
-          padding: 4px 0;
-        }
-
-        .ts-inner {
-          display: flex;
-          gap: 14px;
-          width: max-content;
-          animation: ts-scroll-left var(--ts-speed, 36s) linear infinite;
-          will-change: transform;
-        }
-
-        .ts-inner.ts-reverse {
-          animation: ts-scroll-right var(--ts-speed, 36s) linear infinite;
-        }
-
-        @keyframes ts-scroll-left {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-
-        @keyframes ts-scroll-right {
-          0%   { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
-        }
-
-        .ts-marquee-wrap:hover .ts-inner {
-          animation-play-state: paused;
-        }
-
-        /* ── Chip ── */
-        .ts-chip {
+        .tech-content-area {
+          position: relative;
           display: flex;
           align-items: center;
-          gap: 10px;
-          padding: 11px 20px;
-          border-radius: 60px;
-          border: 1.5px solid rgba(31, 64, 128, 0.1);
-          background: #ffffff;
-          white-space: nowrap;
-          flex-shrink: 0;
-          box-shadow: 0 2px 8px rgba(31, 64, 128, 0.05);
-          transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
-          cursor: default;
-          user-select: none;
+          justify-content: space-between;
+          padding: 0 1rem;
+          min-height: 280px; /* enough space for items */
         }
 
-        .ts-chip:hover {
-          border-color: rgba(59, 173, 176, 0.5);
-          box-shadow: 0 6px 20px rgba(59, 173, 176, 0.16);
-          transform: translateY(-3px);
-        }
-
-        .ts-logo-box {
-          width: 32px;
-          height: 32px;
+        .nav-btn {
+          background: none;
+          border: none;
+          color: #3badb0;
+          font-size: 2rem;
+          cursor: pointer;
+          padding: 1rem;
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 7px;
-          background: #f8fafc;
-          flex-shrink: 0;
-          padding: 3px;
+          transition: transform 0.2s ease, opacity 0.2s ease;
+          z-index: 2;
         }
 
-        .ts-logo {
-          width: 26px;
-          height: 26px;
+        .nav-btn:hover {
+          transform: scale(1.1);
+          opacity: 0.8;
+        }
+
+        .tech-grid {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 3rem;
+          width: 100%;
+          flex: 1;
+          margin: 0 auto;
+        }
+
+        .tech-row {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 4.5rem;
+          width: 100%;
+        }
+
+        .tech-logo-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 120px;
+          height: 60px;
+          transition: transform 0.3s ease;
+        }
+
+        .tech-logo-wrapper:hover {
+          transform: translateY(-5px) scale(1.05);
+        }
+
+        .tech-logo {
+          max-width: 100%;
+          max-height: 100%;
           object-fit: contain;
-          display: block;
+          filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
         }
 
-        .ts-chip-name {
-          font-size: 0.875rem;
-          font-weight: 600;
-          color: #1e293b;
-          letter-spacing: 0.01em;
+        @media (max-width: 768px) {
+          .tech-tabs { gap: 1rem; }
+          .tech-tab { font-size: 0.95rem; }
+          .tech-content-area { flex-direction: column; gap: 2rem; }
+          .nav-btn { display: none; }
+          .tech-grid { gap: 2.2rem; }
+          .tech-row { gap: 1.5rem; }
+          .tech-logo-wrapper { width: 70px; height: 40px; }
         }
-
-        /* ── Bottom bar ── */
-        .ts-bar {
-          margin-top: 20px; /* ✅ reduced */
-          height: 5px;
-          background: linear-gradient(135deg, #3badb0 0%, #1f4080 48%, #1b2e5e 100%);
-        }
-
-        @media (max-width: 600px) {
-          .ts-section { padding-top: 12px; }
-          .ts-marquee-wrap::before,
-          .ts-marquee-wrap::after { width: 60px; }
-        }
-      `,
+      `
         }}
       />
 
-      <div className="ts-container">
-        <div className="ts-header">
-          <div className="ts-badge">Our Stack</div>
-          <h2 className="ts-title">
-            Technologies <span className="ts-title-accent">We Use</span>
-          </h2>
-          <p className="ts-subtitle">
-            Powered by a modern, battle-tested stack — from databases and cloud
-            infrastructure to AI/ML frameworks and DevOps tooling
-          </p>
+      <div className="tech-container">
+        <h2 className="tech-title">
+          Tech Stacks <span>We Excel In</span>
+        </h2>
+
+        {/* Categories Tab Selector */}
+        <div className="tech-tabs">
+          {TECH_CATEGORIES.map((cat, idx) => (
+            <button
+              key={cat.id}
+              className={`tech-tab ${idx === activeIdx ? "active" : ""}`}
+              onClick={() => setActiveIdx(idx)}
+            >
+              {cat.label}
+            </button>
+          ))}
         </div>
 
-        <div className="ts-marquee-wrap">
-          <MarqueeRow techs={ROW_1} reverse={false} speed={40} />
-          <MarqueeRow techs={ROW_2} reverse={true} speed={34} />
+        {/* Main Content Area */}
+        <div className="tech-content-area">
+          <button className="nav-btn" onClick={prevTab} aria-label="Previous tech stack">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIdx}
+              className="tech-grid"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
+              {(() => {
+                const images = TECH_CATEGORIES[activeIdx].images;
+                const rows = [
+                  images.slice(0, 4), // Row 1 (4 items)
+                  images.slice(4, 7), // Row 2 (3 items)
+                  images.slice(7, 9)  // Row 3 (2 items)
+                ];
+
+                return rows.map((row, rIdx) => (
+                  <div key={rIdx} className="tech-row">
+                    {row.map((imgSrc, i) => {
+                      const filename = imgSrc.split("/").pop()?.split(".")[0]?.replace(/_/g, " ") || "Tech Logo";
+                      const absoluteIndex = rIdx * 4 + i;
+                      
+                      return (
+                        <motion.div 
+                          key={imgSrc} 
+                          className="tech-logo-wrapper"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.4, delay: absoluteIndex * 0.05 }}
+                        >
+                          <img src={imgSrc} alt={filename} className="tech-logo" loading="lazy" />
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                ));
+              })()}
+            </motion.div>
+          </AnimatePresence>
+
+          <button className="nav-btn" onClick={nextTab} aria-label="Next tech stack">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
         </div>
       </div>
-
-      <div className="ts-bar" />
     </section>
   );
 }

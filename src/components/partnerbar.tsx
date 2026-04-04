@@ -122,7 +122,7 @@ export default function PartnersBar() {
         <div className="partner-item">
           <img
             className="partner-logo"
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg"
+            src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
             alt="Microsoft"
             loading="lazy"
             onError={(e) => {

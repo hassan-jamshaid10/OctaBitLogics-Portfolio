@@ -1,5 +1,7 @@
 "use client";
 
+import BackgroundNightfall from "./BackgroundNightfall";
+
 export default function StatementBanner() {
   return (
     <section id="statement-banner">
@@ -115,13 +117,15 @@ export default function StatementBanner() {
         }
       `}</style>
 
+      <BackgroundNightfall nightGradient="linear-gradient(135deg, #0f1c3f 0%, #080d1e 45%, #03060e 100%)" />
+
       <div className="sb-dots" />
 
       {/* LEFT */}
       <div className="sb-left">
         <h2>
-          We&apos;re <span className="sb-hl">precision-first</span>,{" "}
-          built with responsibility
+          We&apos;re <span className="sb-hl">creatives</span>,{" "}
+          driven by professional excellence
         </h2>
         <button className="sb-btn">
           Our engineering approach
@@ -135,17 +139,17 @@ export default function StatementBanner() {
       {/* RIGHT */}
       <div className="sb-right">
         <p>
-          Being precision-first at OctaBitLogics does not mean over-engineering everything.
-          It means applying sharp thinking where it improves outcomes, reduces technical debt,
-          and strengthens systems over time.
+          Being a young, creative team at OctaBitLogics means we look at problems differently. 
+          We bring a fresh, Gen-Z perspective paired with hard-earned industry experience, ensuring 
+          our solutions are both innovative and technically sound.
         </p>
         <p>
-          We embed quality into products, platforms, and operations in ways that are governed,
-          secure, and aligned to business readiness — from early architecture decisions to
-          production-grade delivery.
+          We embed a deep passion for technology into everything we build. Our software isn&apos;t just 
+          functional; it&apos;s beautifully crafted, fiercely modern, and engineered with the kind of 
+          professional standards that businesses trust.
         </p>
         <p>
-          Our role is to help organisations get the balance right between speed, quality, and scale.
+          Our role is to show you the intersection where fearless creativity meets enterprise-grade execution.
         </p>
       </div>
     </section>

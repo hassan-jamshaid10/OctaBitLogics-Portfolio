@@ -15,7 +15,7 @@ const PRODUCTS = [
     icon: "📊",
     name: "OctaDash",
     tagline: "Analytics Platform",
-    desc: "Beautiful, configurable dashboards that surface what matters most — built for non-technical stakeholders and power users alike.",
+    desc: "Beautiful, configurable dashboards that surface what matters most, built for non-technical stakeholders and power users alike.",
     color: "rgba(27,46,94,0.06)",
     border: "rgba(27,46,94,0.2)",
   },

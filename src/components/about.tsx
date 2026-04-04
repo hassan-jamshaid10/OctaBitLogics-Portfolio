@@ -6,7 +6,7 @@ const PILLARS = [
   "Built to Scale",
   "Agile & Transparent",
 ];
-
+//fix
 import BackgroundNightfall from "./BackgroundNightfall";
 import ScrollReveal from "./ScrollReveal";
 

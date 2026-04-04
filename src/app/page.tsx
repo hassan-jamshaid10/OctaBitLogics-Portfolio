@@ -5,6 +5,7 @@ import Navbar from "../components/Header";
 import Hero from "../components/hero";
 import About from "../components/about";
 import CaseStudies from "../components/CaseStudies";
+import Testimonials from "../components/Testimonials";
 import Services from "../components/services";
 import Products from "../components/products";
 import Contact from "../components/contact";
@@ -56,14 +57,17 @@ export default function Home() {
         <Hero onNavClick={scrollTo} />
         <TaglineBar />
         <CaseStudies />
+
         <About />
         <StatementBanner />
-        <TechPartnersBar />
-        <PartnersBar />
+        {/* <TechPartnersBar /> */}
+        {/* <PartnersBar /> */}
+        <Products />
         <Services />
         {/* <ExpertiseDomains/> */}
         <TechStack />
-        <Products />
+        <Testimonials />
+
         <Contact />
 
       </main>

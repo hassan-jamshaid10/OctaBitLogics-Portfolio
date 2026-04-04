@@ -247,8 +247,7 @@ export default function ExpertiseDomains() {
           <span>Expertise</span> Across Domains
         </h2>
         <p className="expertise-subtitle">
-          Navigating diverse industries with precision, our data engineering and AI expertise provides
-          customized solutions that directly address sector-specific challenges
+          Pairing Gen-Z creativity with deep industry experience, we deliver precision engineering and AI solutions tailored to overcome sector-specific challenges
         </p>
       </div>
 

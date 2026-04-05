@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import ScrollReveal from "./ScrollReveal";
 
 // ── Case studies data ─────────────────────────────────────────────────────────
 const CASES = [
@@ -341,26 +342,29 @@ export default function CaseStudies() {
 
             <div className="cs-inner">
                 {/* ── Header ── */}
-                <div className="cs-header">
-                    <h2 className="cs-heading">
-                        Spotlight on <span>Client Success Stories</span>
-                    </h2>
-                    <div className="cs-header-right">
-                        <button className="cs-all-btn">All Case Studies →</button>
-                        <button className="cs-nav-btn" onClick={prev} disabled={offset === 0} aria-label="Previous">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                                <polyline points="15 18 9 12 15 6" />
-                            </svg>
-                        </button>
-                        <button className="cs-nav-btn" onClick={next} disabled={offset >= maxOffset} aria-label="Next">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                                <polyline points="9 18 15 12 9 6" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
+                <ScrollReveal y={15} duration={0.45} delay={0}>
+                  <div className="cs-header">
+                      <h2 className="cs-heading">
+                          Spotlight on <span>Client Success Stories</span>
+                      </h2>
+                      <div className="cs-header-right">
+                          <button className="cs-all-btn">All Case Studies →</button>
+                          <button className="cs-nav-btn" onClick={prev} disabled={offset === 0} aria-label="Previous">
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                                  <polyline points="15 18 9 12 15 6" />
+                              </svg>
+                          </button>
+                          <button className="cs-nav-btn" onClick={next} disabled={offset >= maxOffset} aria-label="Next">
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                                  <polyline points="9 18 15 12 9 6" />
+                              </svg>
+                          </button>
+                      </div>
+                  </div>
+                </ScrollReveal>
 
                 {/* ── Cards ── */}
+                <ScrollReveal y={20} duration={0.5} delay={0.1}>
                 <AnimatePresence mode="popLayout">
                     <motion.div
                         key={offset}
@@ -409,6 +413,7 @@ export default function CaseStudies() {
                         ))}
                     </motion.div>
                 </AnimatePresence>
+                </ScrollReveal>
 
                 {/* Pagination dots */}
                 <div className="cs-dots">

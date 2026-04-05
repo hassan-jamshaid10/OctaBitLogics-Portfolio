@@ -3,7 +3,9 @@
 import { motion, useInView, useAnimationControls } from "framer-motion";
 import React, { useRef, useEffect } from "react";
 
-let globalFastCycleInitiated = false;
+// Generation counter: incremented on every page mount, used to cancel stale sequences
+let sequenceGeneration = 0;
+let currentPagePath: string | null = null;
 
 export default function BackgroundNightfall({
   nightGradient = "linear-gradient(145deg, #0f1c3f 0%, #080d1e 48%, #03060e 100%)"
@@ -43,20 +45,29 @@ export default function BackgroundNightfall({
   }, [overlayControls, starsControls]);
 
   useEffect(() => {
-    if (isInView && !globalFastCycleInitiated) {
-      globalFastCycleInitiated = true; // The first component to come into view orchestrates for all
+    const thisPath = typeof window !== "undefined" ? window.location.pathname : "";
+
+    if (isInView && currentPagePath !== thisPath) {
+      currentPagePath = thisPath;
+      // Bump generation so any old running sequence becomes invalid
+      sequenceGeneration++;
+      const myGeneration = sequenceGeneration;
+
+      const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
       
       const runGlobalSequence = async () => {
+        // Small delay to let all instances set up their event listeners
+        await wait(100);
+        if (myGeneration !== sequenceGeneration) return;
+
         window.dispatchEvent(new CustomEvent("nightfall-sync", { detail: { phase: "fast-night" } }));
-        await new Promise(resolve => setTimeout(resolve, 800));
-        
-        await new Promise(resolve => setTimeout(resolve, 4000));
-        
+        await wait(4800);
+        if (myGeneration !== sequenceGeneration) return;
+
         window.dispatchEvent(new CustomEvent("nightfall-sync", { detail: { phase: "fast-day" } }));
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
+        await wait(4500);
+        if (myGeneration !== sequenceGeneration) return;
+
         window.dispatchEvent(new CustomEvent("nightfall-sync", { detail: { phase: "loop" } }));
       };
       runGlobalSequence();

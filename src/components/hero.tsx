@@ -25,7 +25,7 @@ const SLIDES = [
     ],
     body: "We are a team of bold, creative minds with deep professional experience. We bring an unstoppable love for modern tech, vibrant innovation, and rigorous execution to every project we take on.",
     cta1: { label: "What We Do →", href: "#services" },
-    cta2: { label: "Our Story", href: "#about" },
+    cta2: { label: "Our Story", href: "#about-split" },
   },
   {
     badge: "AI-Powered Solutions",

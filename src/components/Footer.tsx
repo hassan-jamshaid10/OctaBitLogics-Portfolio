@@ -534,7 +534,7 @@ export default function Footer() {
                         </div>
                         <div className="ftr-contact-row">
                             <IconMail />
-                            <a href="mailto:hello@octabitlogics.com">hello@octabitlogics.com</a>
+                            <a href="mailto:info@octabitlogics.com">info@octabitlogics.com</a>
                         </div>
                     </div>
 

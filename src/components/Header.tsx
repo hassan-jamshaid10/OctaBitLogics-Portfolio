@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 const NAV_LINKS = [
-  { label: "Home",       href: "#home" },
-  { label: "About",      href: "#about-split" },
-  { label: "Services",   href: "#services" },
-  { label: "Projects",   href: "/projects" },
-  { label: "Contact",    href: "#contact" },
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about-split" },
+  { label: "Services", href: "#services" },
+  { label: "Projects", href: "/projects" },
+  { label: "Contact", href: "#contact" },
 ];
 
 interface NavbarProps {
@@ -20,14 +20,14 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
   const pathname = usePathname();
   const router = useRouter();
 
-  const [scrolled,    setScrolled]    = useState(false);
-  const [menuOpen,    setMenuOpen]    = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
-  const [mounted,     setMounted]     = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const indicatorRef = useRef<HTMLDivElement>(null);
-  const navLinksRef  = useRef<(HTMLAnchorElement | null)[]>([]);
-  const pillRef      = useRef<HTMLDivElement>(null);
+  const navLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
+  const pillRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
@@ -45,19 +45,19 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
     if (hoveredLink) {
       targetIdx = NAV_LINKS.findIndex((l) => l.href === hoveredLink);
     } else {
-      targetIdx = NAV_LINKS.findIndex((l) => 
+      targetIdx = NAV_LINKS.findIndex((l) =>
         l.href.startsWith('/') ? pathname === l.href : pathname === '/' && activeSection === l.href.slice(1)
       );
     }
 
-    const el     = navLinksRef.current[targetIdx];
-    const ind    = indicatorRef.current;
-    const pill   = pillRef.current;
+    const el = navLinksRef.current[targetIdx];
+    const ind = indicatorRef.current;
+    const pill = pillRef.current;
     if (el && ind && pill) {
       const eRect = el.getBoundingClientRect();
       const pRect = pill.getBoundingClientRect();
       ind.style.width = `${eRect.width}px`;
-      ind.style.left  = `${eRect.left - pRect.left}px`;
+      ind.style.left = `${eRect.left - pRect.left}px`;
       ind.style.opacity = '1';
     } else if (ind) {
       ind.style.opacity = '0';
@@ -139,12 +139,10 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
         }
 
         .logo-img {
-          width: 45px;
-          height: 45px;
-          border-radius: 9px;
-          object-fit: cover;
+          width: 50px;
+          height: 50px;
+          object-fit: contain;
           transition: transform 0.3s ease;
-          border: 1.5px solid rgba(255,255,255,0.35);
         }
 
         .logo:hover .logo-img {
@@ -337,7 +335,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
       <nav className={[
         "navbar",
         scrolled ? "scrolled" : "",
-        mounted  ? "mounted"  : "",
+        mounted ? "mounted" : "",
       ].join(" ")}>
 
         {/* Logo */}

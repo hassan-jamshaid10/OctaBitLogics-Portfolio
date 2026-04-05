@@ -224,54 +224,58 @@ export default function AboutSplit() {
         }
       `}</style>
 
-      <ScrollReveal className="as-wrap">
+      <div className="as-wrap">
         {/* LEFT */}
-        <div className="as-left">
-          <div>
-            <div className="as-est">Est. 2025</div>
-            <h2>
-              OctaBitLogics is a team of{" "}
-              <span>creative minds</span>{" "}
-              bridging fresh tech with professional rigor.
-            </h2>
-          </div>
-
-          <div className="as-left-body">
-            <p>
-              We are a young generation of tech enthusiasts who believe in blending out-of-the-box creativity with deep experience. Our dynamic Gen-Z mindset fuels innovation, while our professional background ensures every solution is robust, scalable, and built for the long haul.
-            </p>
-            <div className="as-pills">
-              {PILLARS.map((p) => (
-                <span key={p} className="as-pill">{p}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* RIGHT */}
-        <div className="as-right">
-          <BackgroundNightfall nightGradient="linear-gradient(135deg, #0f1c3f 0%, #080d1e 45%, #03060e 100%)" />
-          <div style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", height: "100%", justifyContent: "space-between" }}>
+        <ScrollReveal y={20} duration={0.5} delay={0}>
+          <div className="as-left">
             <div>
-              <div className="as-mission-tag">Our Mission</div>
+              <div className="as-est">Est. 2025</div>
               <h2>
-                We love technology and build platforms{" "}
-                <em>that inspire.</em>
+                OctaBitLogics is a team of{" "}
+                <span>creative minds</span>{" "}
+                bridging fresh tech with professional rigor.
               </h2>
             </div>
 
-            <div className="as-right-body">
+            <div className="as-left-body">
               <p>
-                To make powerful, enterprise-grade technology accessible through true creative problem-solving and honest collaboration. We combine the fearless energy of a modern mindset with refined engineering, modern architecture, and a deep understanding of emerging tech to deliver solutions that look stunning and scale flawlessly.
+                We are a young generation of tech enthusiasts who believe in blending out-of-the-box creativity with deep experience. Our dynamic Gen-Z mindset fuels innovation, while our professional background ensures every solution is robust, scalable, and built for the long haul.
               </p>
-              <div className="as-loc">
-                <span className="as-loc-dot" />
-                Based in Lahore · Working Globally
+              <div className="as-pills">
+                {PILLARS.map((p) => (
+                  <span key={p} className="as-pill">{p}</span>
+                ))}
               </div>
             </div>
           </div>
-        </div>
-      </ScrollReveal>
+        </ScrollReveal>
+
+        {/* RIGHT */}
+        <ScrollReveal y={20} duration={0.5} delay={0.15}>
+          <div className="as-right">
+            <BackgroundNightfall nightGradient="linear-gradient(135deg, #0f1c3f 0%, #080d1e 45%, #03060e 100%)" />
+            <div style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", height: "100%", justifyContent: "space-between" }}>
+              <div>
+                <div className="as-mission-tag">Our Mission</div>
+                <h2>
+                  We love technology and build platforms{" "}
+                  <em>that inspire.</em>
+                </h2>
+              </div>
+
+              <div className="as-right-body">
+                <p>
+                  To make powerful, enterprise-grade technology accessible through true creative problem-solving and honest collaboration. We combine the fearless energy of a modern mindset with refined engineering, modern architecture, and a deep understanding of emerging tech to deliver solutions that look stunning and scale flawlessly.
+                </p>
+                <div className="as-loc">
+                  <span className="as-loc-dot" />
+                  Based in Lahore · Working Globally
+                </div>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
     </section>
   );
 }

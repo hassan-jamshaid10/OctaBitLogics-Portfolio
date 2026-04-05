@@ -17,7 +17,7 @@ import StatementBanner from "../components/statementBanner";
 import ExpertiseDomains from "../components/ExpertiseDomains";
 import TechStack from "../components/Techstack";
 const SECTIONS = [
-  "home", "about", "services", "products", "contactd"
+  "home", "about", "services", "products", "contact"
 ];
 //fix tgus 
 export default function Home() {

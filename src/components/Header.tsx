@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 
 const NAV_LINKS = [
-  { label: "Home",       href: "#home" },
-  { label: "About",      href: "#about" },
-  { label: "Services",   href: "#services" },
-  { label: "Tech",       href: "#technologies" },
-  { label: "Projects",   href: "#projects" },
-  { label: "Contact",    href: "#contact" },
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Tech", href: "#technologies" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
 ];
 
 interface NavbarProps {
@@ -17,14 +17,14 @@ interface NavbarProps {
 }
 
 export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
-  const [scrolled,    setScrolled]    = useState(false);
-  const [menuOpen,    setMenuOpen]    = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
-  const [mounted,     setMounted]     = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const indicatorRef = useRef<HTMLDivElement>(null);
-  const navLinksRef  = useRef<(HTMLAnchorElement | null)[]>([]);
-  const pillRef      = useRef<HTMLDivElement>(null);
+  const navLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
+  const pillRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
@@ -39,15 +39,15 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
 
   useEffect(() => {
     const target = hoveredLink ?? activeSection;
-    const idx    = NAV_LINKS.findIndex((l) => l.href === `#${target}`);
-    const el     = navLinksRef.current[idx];
-    const ind    = indicatorRef.current;
-    const pill   = pillRef.current;
+    const idx = NAV_LINKS.findIndex((l) => l.href === `#${target}`);
+    const el = navLinksRef.current[idx];
+    const ind = indicatorRef.current;
+    const pill = pillRef.current;
     if (el && ind && pill) {
       const eRect = el.getBoundingClientRect();
       const pRect = pill.getBoundingClientRect();
       ind.style.width = `${eRect.width}px`;
-      ind.style.left  = `${eRect.left - pRect.left}px`;
+      ind.style.left = `${eRect.left - pRect.left}px`;
     }
   }, [hoveredLink, activeSection]);
 
@@ -101,12 +101,10 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
         }
 
         .logo-img {
-          width: 45px;
-          height: 45px;
-          border-radius: 9px;
-          object-fit: cover;
+          width: 50px;
+          height: 50px;
+          object-fit: contain;
           transition: transform 0.3s ease;
-          border: 1.5px solid rgba(255,255,255,0.35);
         }
 
         .logo:hover .logo-img {
@@ -298,7 +296,7 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
       <nav className={[
         "navbar",
         scrolled ? "scrolled" : "",
-        mounted  ? "mounted"  : "",
+        mounted ? "mounted" : "",
       ].join(" ")}>
 
         {/* Logo */}

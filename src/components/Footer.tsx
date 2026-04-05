@@ -69,7 +69,7 @@ const INDUSTRIES_LINKS = [
     "Logistics",
     "SaaS & B2B",
 ];
-const USEFUL_LINKS = ["About Us", "Contact Us", "Home"];
+const USEFUL_LINKS = ["About", "Contact", "Home"];
 const COMPANY_LINKS = ["Who We Are", "Blogs", "Contact"];
 
 const SOCIALS = [
@@ -158,11 +158,8 @@ export default function Footer() {
           margin-bottom: 1.1rem;
         }
         .ftr-logo-img {
-          width: 52px; height: 52px;
-          border-radius: 13px;
-          object-fit: cover;
-          border: 2px solid rgba(255,255,255,0.3);
-          box-shadow: 0 0 18px rgba(59,173,176,0.5);
+          width: 58px; height: 58px;
+          object-fit: contain;
         }
         .ftr-brand-block { display: flex; flex-direction: column; }
         .ftr-brand-name {

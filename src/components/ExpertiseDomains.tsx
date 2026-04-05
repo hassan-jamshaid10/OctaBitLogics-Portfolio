@@ -1,269 +1,442 @@
 "use client";
 
+import React from "react";
+import ScrollReveal from "./ScrollReveal";
+
 const domains = [
   {
     id: "ecommerce",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4H6z" />
-        <path d="M3 6h18" />
-        <path d="M16 10a4 4 0 01-8 0" />
-      </svg>
-    ),
     title: "E Commerce",
     description: "Our ecommerce expertise spans multiple projects, leveraging GA4, CRM platforms, and Excel to enhance customer insights and boost revenue",
   },
   {
     id: "logistics",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 002 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
-        <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12" />
-      </svg>
-    ),
     title: "Logistics",
     description: "Our data solutions in logistics improve operational workflows, optimizing supply chains and driving performance with actionable insights",
   },
   {
     id: "realestate",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-        <path d="M9 22V12h6v10" />
-      </svg>
-    ),
     title: "Real Estate",
     description: "Looking to streamline property assessments, forecast market trends, and enhance investment strategies? Our solutions have you covered!",
   },
   {
     id: "marketing",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-      </svg>
-    ),
     title: "Marketing",
     description: "The future of marketing is here: integrate data insights and AI to elevate your campaign strategies and enhance ROI",
   },
   {
     id: "software",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
-      </svg>
-    ),
-    title: "Software and Technology",
-    description: "Navigating complex challenges? Discover how data engineering and AI can transform your strategies and deliver game-changing insights",
+    title: "Software & Technology",
+    description: "Navigating complex challenges? Discover how data engineering and AI can transform your strategies and deliver game changing insights",
   },
   {
     id: "health",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <path d="M12 8v8M8 12h8" />
-      </svg>
-    ),
     title: "Health & Medical",
     description: "80% of healthcare providers report improved efficiency with data solutions that optimize resource allocation and track health trends",
   },
 ];
 
+function AnimatedIcon({ id }: { id: string }) {
+  if (id === "ecommerce") {
+    // Shopping bag: handle swings, price tag drops in
+    return (
+      <svg className="ind-live-ico" width="36" height="36" viewBox="0 0 36 36" fill="none">
+        <rect className="ind-bag-body" x="7" y="14" width="22" height="17" rx="3" stroke="currentColor" strokeWidth="1.6"/>
+        <path className="ind-bag-handle" d="M13 14V10a5 5 0 0110 0v3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+        <path className="ind-bag-stripe" d="M7 20h22" stroke="currentColor" strokeWidth="1" opacity="0.3"/>
+        <path className="ind-bag-tag" d="M14 24l1.5-1.5M15.5 22.5l2 2M19 24h2.5M21.5 24v2.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+      </svg>
+    );
+  }
+
+  if (id === "logistics") {
+    // 3D cube: edges draw themselves, then reset
+    return (
+      <svg className="ind-live-ico" width="36" height="36" viewBox="0 0 36 36" fill="none">
+        <path className="ind-cube-front" d="M18 4L5 11v14l13 7 13-7V11L18 4z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
+        <path className="ind-cube-mid" d="M5 11l13 7 13-7" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round"/>
+        <path className="ind-cube-vert" d="M18 18v14" stroke="currentColor" strokeWidth="1.4"/>
+      </svg>
+    );
+  }
+
+  if (id === "realestate") {
+    // House: roof draws, then a Wi-Fi signal pulses from chimney
+    return (
+      <svg className="ind-live-ico" width="36" height="36" viewBox="0 0 36 36" fill="none">
+        <path className="ind-house-body" d="M5 16l13-10 13 10v14a2 2 0 01-2 2H7a2 2 0 01-2-2V16z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
+        <rect className="ind-house-door" x="14" y="22" width="8" height="10" rx="1" stroke="currentColor" strokeWidth="1.2" opacity="0.5"/>
+        <path className="ind-house-wifi1" d="M23 8a4 4 0 014 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0"/>
+        <path className="ind-house-wifi2" d="M23 5a7 7 0 017 7" stroke="currentColor" strokeWidth="1" strokeLinecap="round" opacity="0"/>
+        <path className="ind-house-wifi3" d="M23 2a10 10 0 0110 10" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" opacity="0"/>
+      </svg>
+    );
+  }
+
+  if (id === "marketing") {
+    // Chart: line draws itself continuously
+    return (
+      <svg className="ind-live-ico" width="36" height="36" viewBox="0 0 36 36" fill="none">
+        <rect x="5" y="5" width="26" height="26" rx="4" stroke="currentColor" strokeWidth="1.2" opacity="0.25"/>
+        <path className="ind-chart-line" d="M8 28l5-7 4 4 5-12 6 5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path className="ind-chart-arrow" d="M26 14l2-2 2 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    );
+  }
+
+  if (id === "software") {
+    // Code brackets with blinking cursor
+    return (
+      <svg className="ind-live-ico" width="36" height="36" viewBox="0 0 36 36" fill="none">
+        <path className="ind-code-left" d="M12 8L4 18l8 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path className="ind-code-right" d="M24 8l8 10-8 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <line className="ind-code-cursor" x1="18" y1="12" x2="18" y2="24" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    );
+  }
+
+  // Health: shield with heartbeat line
+  return (
+    <svg className="ind-live-ico" width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <path className="ind-shield-body" d="M18 4L6 10v8c0 8.5 5.5 16.5 12 18 6.5-1.5 12-9.5 12-18v-8L18 4z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
+      <path className="ind-shield-beat" d="M10 20h3l2-5 3 10 2-5h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
 export default function ExpertiseDomains() {
   return (
-    <section className="expertise-section">
+    <section className="ind-section">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap');
-
-        .expertise-section {
-          background: #f0f4fa;
-          padding: 96px 64px 80px;
+        .ind-section {
+          background: #ffffff;
+          padding: 3.5rem 2rem;
           font-family: 'DM Sans', sans-serif;
+          position: relative;
+          overflow: hidden;
+          display: block;
+          min-height: auto;
+          align-items: initial;
+          justify-content: initial;
+        }
+        .ind-section::before {
+          content: '';
+          position: absolute; inset: 0;
+          background-image: radial-gradient(circle, rgba(59,173,176,0.08) 1px, transparent 1px);
+          background-size: 32px 32px;
+          pointer-events: none; z-index: 0;
         }
 
-        .expertise-header {
+        .ind-inner {
+          max-width: 1200px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 1;
+        }
+
+        .ind-header {
           text-align: center;
           max-width: 660px;
-          margin: 0 auto 64px;
+          margin: 0 auto 2rem;
         }
 
-        .expertise-title {
-          font-family: 'Sora', sans-serif;
-          font-size: clamp(2rem, 4vw, 2.8rem);
+        .ind-tag {
+          font-family: 'Oxanium', monospace;
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #3BADB0;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-bottom: 1rem;
+        }
+        .ind-tag::before,
+        .ind-tag::after {
+          content: '';
+          display: block;
+          width: 28px;
+          height: 1.5px;
+          background: #3BADB0;
+          border-radius: 2px;
+        }
+
+        .ind-title {
+          font-family: 'Oxanium', monospace;
+          font-size: clamp(1.5rem, 3vw, 2rem);
           font-weight: 800;
-          color: #1b2e5e;
+          color: #1B2E5E;
           line-height: 1.15;
-          margin: 0 0 16px;
-          letter-spacing: -0.02em;
+          margin: 0 0 0.5rem;
+          letter-spacing: -0.01em;
         }
+        .ind-title span { color: #3BADB0; }
 
-        .expertise-title span {
-          background: linear-gradient(135deg, #3badb0 0%, #1f4080 48%, #1b2e5e 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .expertise-subtitle {
-          font-size: 1rem;
-          color: #4a5568;
-          line-height: 1.72;
+        .ind-subtitle {
+          font-size: 0.9rem;
+          color: #6B8A8B;
+          line-height: 1.6;
           margin: 0;
         }
 
-        .expertise-grid {
+        .ind-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 24px;
-          max-width: 1200px;
-          margin: 0 auto 56px;
+          gap: 1rem;
         }
 
-        .expertise-card {
+        .ind-card {
           background: #ffffff;
-          border: 1.5px solid rgba(31, 64, 128, 0.1);
-          border-radius: 18px;
-          padding: 32px 28px 28px;
+          border: 1px solid rgba(59,173,176,0.15);
+          border-radius: 20px;
+          padding: 1.25rem 1.5rem 1.25rem;
           position: relative;
           overflow: hidden;
           cursor: default;
-          transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.32s ease, border-color 0.3s ease;
+          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
         }
-
-        .expertise-card::before {
+        .ind-card::before {
           content: '';
           position: absolute;
           inset: 0 0 auto 0;
           height: 3px;
-          background: linear-gradient(135deg, #3badb0 0%, #1f4080 48%, #1b2e5e 100%);
+          background: linear-gradient(135deg, #3BADB0 0%, #1B2E5E 100%);
           transform: scaleX(0);
           transform-origin: left;
           transition: transform 0.35s ease;
         }
-
-        .expertise-card:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 20px 48px rgba(31, 64, 128, 0.14);
-          border-color: rgba(59, 173, 176, 0.25);
+        .ind-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 16px 48px rgba(59,173,176,0.13);
+          border-color: rgba(59,173,176,0.3);
         }
-
-        .expertise-card:hover::before {
-          transform: scaleX(1);
-        }
-
-        .expertise-card:hover .card-icon-wrap {
-          background: linear-gradient(135deg, #3badb0 0%, #1f4080 48%, #1b2e5e 100%);
+        .ind-card:hover::before { transform: scaleX(1); }
+        .ind-card:hover .ind-ico-wrap {
+          background: linear-gradient(135deg, #3BADB0 0%, #1B2E5E 100%);
           color: #ffffff;
+          box-shadow: 0 8px 24px rgba(59,173,176,0.3);
         }
 
-        .card-icon-wrap {
-          width: 54px;
-          height: 54px;
+        .ind-ico-wrap {
+          width: 48px; height: 48px;
           border-radius: 14px;
-          background: linear-gradient(135deg, rgba(59,173,176,0.1) 0%, rgba(31,64,128,0.1) 100%);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 20px;
-          color: #1f4080;
-          transition: background 0.3s ease, color 0.3s ease;
+          background: rgba(59,173,176,0.06);
+          display: flex; align-items: center; justify-content: center;
+          margin-bottom: 0.75rem;
+          color: #3BADB0;
+          transition: background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
         }
 
-        .card-title {
-          font-family: 'Sora', sans-serif;
-          font-size: 1.05rem;
-          font-weight: 700;
-          color: #1b2e5e;
-          margin: 0 0 10px;
+        .ind-live-ico {
+          display: block;
         }
 
-        .card-desc {
-          font-size: 0.875rem;
-          color: #4a5568;
-          line-height: 1.68;
-          margin: 0 0 26px;
+        .ind-card-title {
+          font-family: 'Oxanium', monospace;
+          font-size: 1rem; font-weight: 700;
+          color: #1B2E5E;
+          margin: 0 0 0.3rem;
+        }
+        .ind-card-desc {
+          font-size: 0.82rem;
+          color: #6B8A8B;
+          line-height: 1.55;
+          margin: 0;
         }
 
-        .card-btn {
-          display: inline-flex;
-          align-items: center;
-          padding: 10px 22px;
-          background: linear-gradient(135deg, #3badb0 0%, #1f4080 48%, #1b2e5e 100%);
-          color: #fff;
-          border: none;
-          border-radius: 9px;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 0.875rem;
-          font-weight: 600;
-          cursor: pointer;
-          letter-spacing: 0.01em;
-          transition: opacity 0.2s, transform 0.2s;
+        /* ═══════════════════════════════════════
+           LIVING ICON ANIMATIONS
+           ═══════════════════════════════════════ */
+
+        /* ── E-Commerce: bag handle swings ── */
+        .ind-bag-handle {
+          transform-origin: 18px 10px;
+          animation: bagSwing 3s ease-in-out infinite;
+        }
+        .ind-bag-tag {
+          stroke-dasharray: 12;
+          stroke-dashoffset: 12;
+          animation: tagAppear 3s ease infinite;
+        }
+        @keyframes bagSwing {
+          0%, 100% { transform: rotate(0deg); }
+          25% { transform: rotate(4deg); }
+          75% { transform: rotate(-4deg); }
+        }
+        @keyframes tagAppear {
+          0%, 30% { stroke-dashoffset: 12; opacity: 0; }
+          50%     { stroke-dashoffset: 0; opacity: 1; }
+          80%, 100% { stroke-dashoffset: 0; opacity: 0; }
         }
 
-        .card-btn:hover {
-          opacity: 0.88;
-          transform: scale(1.03);
+        /* ── Logistics: cube rotates subtly on Y axis ── */
+        .ind-cube-front {
+          stroke-dasharray: 80;
+          stroke-dashoffset: 80;
+          animation: cubeDraw 3s ease forwards infinite;
+        }
+        .ind-cube-mid {
+          stroke-dasharray: 30;
+          stroke-dashoffset: 30;
+          animation: cubeDrawMid 3s ease 0.4s forwards infinite;
+        }
+        .ind-cube-vert {
+          stroke-dasharray: 14;
+          stroke-dashoffset: 14;
+          animation: cubeDrawVert 3s ease 0.6s forwards infinite;
+        }
+        @keyframes cubeDraw {
+          0%   { stroke-dashoffset: 80; }
+          40%  { stroke-dashoffset: 0; }
+          90%  { stroke-dashoffset: 0; }
+          100% { stroke-dashoffset: 80; }
+        }
+        @keyframes cubeDrawMid {
+          0%   { stroke-dashoffset: 30; }
+          40%  { stroke-dashoffset: 0; }
+          90%  { stroke-dashoffset: 0; }
+          100% { stroke-dashoffset: 30; }
+        }
+        @keyframes cubeDrawVert {
+          0%   { stroke-dashoffset: 14; }
+          40%  { stroke-dashoffset: 0; }
+          90%  { stroke-dashoffset: 0; }
+          100% { stroke-dashoffset: 14; }
         }
 
-        .expertise-cta {
-          text-align: center;
+        /* ── Real Estate: Wi-Fi waves pulse out ── */
+        .ind-house-body {
+          stroke-dasharray: 90;
+          stroke-dashoffset: 90;
+          animation: houseDraw 2s ease forwards;
+        }
+        @keyframes houseDraw {
+          to { stroke-dashoffset: 0; }
+        }
+        .ind-house-wifi1 {
+          animation: wifiPulse 2.5s ease-out 0.2s infinite;
+        }
+        .ind-house-wifi2 {
+          animation: wifiPulse 2.5s ease-out 0.6s infinite;
+        }
+        .ind-house-wifi3 {
+          animation: wifiPulse 2.5s ease-out 1s infinite;
+        }
+        @keyframes wifiPulse {
+          0%   { opacity: 0; stroke-dashoffset: 8; stroke-dasharray: 8; }
+          20%  { opacity: 0.7; stroke-dashoffset: 0; }
+          60%  { opacity: 0.4; }
+          100% { opacity: 0; }
         }
 
-        .cta-btn {
-          display: inline-flex;
-          align-items: center;
-          padding: 15px 48px;
-          background: linear-gradient(135deg, #3badb0 0%, #1f4080 48%, #1b2e5e 100%);
-          color: #fff;
-          border: none;
-          border-radius: 10px;
-          font-family: 'Sora', sans-serif;
-          font-size: 0.95rem;
-          font-weight: 700;
-          cursor: pointer;
-          letter-spacing: 0.03em;
-          box-shadow: 0 10px 32px rgba(31, 64, 128, 0.28);
-          transition: opacity 0.2s, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        /* ── Marketing: chart draws then arrow pops ── */
+        .ind-chart-line {
+          stroke-dasharray: 42;
+          stroke-dashoffset: 42;
+          animation: chartDraw 2.8s ease infinite;
+        }
+        .ind-chart-arrow {
+          opacity: 0;
+          animation: arrowPop 2.8s ease infinite;
+        }
+        @keyframes chartDraw {
+          0%   { stroke-dashoffset: 42; }
+          50%  { stroke-dashoffset: 0; }
+          85%  { stroke-dashoffset: 0; }
+          100% { stroke-dashoffset: -42; }
+        }
+        @keyframes arrowPop {
+          0%, 40% { opacity: 0; transform: translateY(4px); }
+          55%     { opacity: 1; transform: translateY(0); }
+          85%     { opacity: 1; transform: translateY(0); }
+          100%    { opacity: 0; transform: translateY(-4px); }
         }
 
-        .cta-btn:hover {
-          opacity: 0.9;
-          transform: translateY(-3px) scale(1.02);
+        /* ── Software: brackets breathe, cursor blinks ── */
+        .ind-code-left {
+          animation: bracketL 3s ease-in-out infinite;
+        }
+        .ind-code-right {
+          animation: bracketR 3s ease-in-out infinite;
+        }
+        .ind-code-cursor {
+          animation: cursorBlink 1s steps(2) infinite;
+        }
+        @keyframes bracketL {
+          0%, 100% { transform: translateX(0); }
+          50%      { transform: translateX(-3px); }
+        }
+        @keyframes bracketR {
+          0%, 100% { transform: translateX(0); }
+          50%      { transform: translateX(3px); }
+        }
+        @keyframes cursorBlink {
+          0%   { opacity: 0.8; }
+          49%  { opacity: 0.8; }
+          50%  { opacity: 0; }
+          100% { opacity: 0; }
+        }
+
+        /* ── Health: heartbeat traces continuously ── */
+        .ind-shield-body {
+          stroke-dasharray: 80;
+          stroke-dashoffset: 80;
+          animation: shieldDraw 1.5s ease forwards;
+        }
+        @keyframes shieldDraw {
+          to { stroke-dashoffset: 0; }
+        }
+        .ind-shield-beat {
+          stroke-dasharray: 40;
+          stroke-dashoffset: 40;
+          animation: heartTrace 2s linear infinite;
+        }
+        @keyframes heartTrace {
+          0%   { stroke-dashoffset: 40; }
+          50%  { stroke-dashoffset: 0; }
+          100% { stroke-dashoffset: -40; }
         }
 
         @media (max-width: 960px) {
-          .expertise-grid { grid-template-columns: repeat(2, 1fr); }
-          .expertise-section { padding: 72px 32px 64px; }
+          .ind-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media (max-width: 600px) {
-          .expertise-grid { grid-template-columns: 1fr; }
-          .expertise-section { padding: 56px 20px 48px; }
-          .expertise-title { font-size: 1.75rem; }
+          .ind-grid { grid-template-columns: 1fr; }
+          .ind-section { padding: 4rem 1.25rem; }
         }
       `}</style>
 
-      <div className="expertise-header">
-        <h2 className="expertise-title">
-          <span>Expertise</span> Across Domains
-        </h2>
-        <p className="expertise-subtitle">
-          Pairing Gen-Z creativity with deep industry experience, we deliver precision engineering and AI solutions tailored to overcome sector-specific challenges
-        </p>
-      </div>
+      <div className="ind-inner">
+        <div className="ind-header">
+          <ScrollReveal delay={0} y={15} duration={0.5}>
+            <div className="ind-tag">Industry Impact</div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1} y={20} duration={0.55}>
+            <h2 className="ind-title">
+              Discover Our <span>Impact</span> Across Industries
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal delay={0.2} y={15} duration={0.5}>
+            <p className="ind-subtitle">
+              Pairing Gen Z creativity with deep industry experience, we deliver precision engineering and AI solutions tailored to overcome sector specific challenges
+            </p>
+          </ScrollReveal>
+        </div>
 
-      <div className="expertise-grid">
-        {domains.map((domain) => (
-          <div className="expertise-card" key={domain.id}>
-            <div className="card-icon-wrap">{domain.icon}</div>
-            <h3 className="card-title">{domain.title}</h3>
-            <p className="card-desc">{domain.description}</p>
-            <button className="card-btn">Read More</button>
-          </div>
-        ))}
-      </div>
-
-      <div className="expertise-cta">
-        <button className="cta-btn">Get in Touch</button>
+        <div className="ind-grid">
+          {domains.map((domain, i) => (
+            <ScrollReveal key={domain.id} delay={0.08 * i} y={20} duration={0.45}>
+              <div className="ind-card">
+                <div className="ind-ico-wrap">
+                  <AnimatedIcon id={domain.id} />
+                </div>
+                <h3 className="ind-card-title">{domain.title}</h3>
+                <p className="ind-card-desc">{domain.description}</p>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
       </div>
     </section>
   );

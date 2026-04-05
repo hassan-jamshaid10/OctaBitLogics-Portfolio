@@ -1,22 +1,25 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 const NAV_LINKS = [
   { label: "Home",       href: "#home" },
-  { label: "About",      href: "#about" },
+  { label: "About",      href: "#about-split" },
   { label: "Services",   href: "#services" },
-  { label: "Tech",       href: "#technologies" },
-  { label: "Projects",   href: "#projects" },
+  { label: "Projects",   href: "/projects" },
   { label: "Contact",    href: "#contact" },
 ];
 
 interface NavbarProps {
-  activeSection: string;
-  onNavClick: (href: string) => void;
+  activeSection?: string;
+  onNavClick?: (href: string) => void;
 }
 
-export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
+export default function Navbar({ activeSection = "home", onNavClick }: NavbarProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+
   const [scrolled,    setScrolled]    = useState(false);
   const [menuOpen,    setMenuOpen]    = useState(false);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
@@ -38,9 +41,16 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
   }, []);
 
   useEffect(() => {
-    const target = hoveredLink ?? activeSection;
-    const idx    = NAV_LINKS.findIndex((l) => l.href === `#${target}`);
-    const el     = navLinksRef.current[idx];
+    let targetIdx = -1;
+    if (hoveredLink) {
+      targetIdx = NAV_LINKS.findIndex((l) => l.href === hoveredLink);
+    } else {
+      targetIdx = NAV_LINKS.findIndex((l) => 
+        l.href.startsWith('/') ? pathname === l.href : pathname === '/' && activeSection === l.href.slice(1)
+      );
+    }
+
+    const el     = navLinksRef.current[targetIdx];
     const ind    = indicatorRef.current;
     const pill   = pillRef.current;
     if (el && ind && pill) {
@@ -48,13 +58,41 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
       const pRect = pill.getBoundingClientRect();
       ind.style.width = `${eRect.width}px`;
       ind.style.left  = `${eRect.left - pRect.left}px`;
+      ind.style.opacity = '1';
+    } else if (ind) {
+      ind.style.opacity = '0';
     }
-  }, [hoveredLink, activeSection]);
+  }, [hoveredLink, activeSection, pathname]);
 
   const handleNav = (e: React.MouseEvent, href: string) => {
     e.preventDefault();
-    onNavClick(href);
     setMenuOpen(false);
+
+    if (href.startsWith('/')) {
+      router.push(href);
+    } else {
+      if (pathname !== '/') {
+        router.push('/' + href);
+      } else {
+        if (onNavClick) onNavClick(href);
+      }
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (pathname !== '/') {
+      router.push('/#home');
+    } else {
+      if (onNavClick) onNavClick('#home');
+    }
+  };
+
+  const handleCtaClick = () => {
+    if (pathname !== '/') {
+      router.push('/#contact');
+    } else {
+      if (onNavClick) onNavClick('#contact');
+    }
   };
 
   return (
@@ -148,7 +186,8 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
           border-radius: 2px;
           background: #a7fff9;
           transition: left 0.35s cubic-bezier(.4,0,.2,1),
-                      width 0.35s cubic-bezier(.4,0,.2,1);
+                      width 0.35s cubic-bezier(.4,0,.2,1),
+                      opacity 0.3s ease;
           pointer-events: none;
           z-index: 0;
           box-shadow: 0 0 10px rgba(167, 255, 249, 0.4);
@@ -302,7 +341,7 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
       ].join(" ")}>
 
         {/* Logo */}
-        <div className="logo" onClick={() => onNavClick("#home")}>
+        <div className="logo" onClick={handleLogoClick}>
           <img src="/octa.png" alt="OctaBitLogics Logo" className="logo-img" />
           <div className="logo-text">
             OctaBitLogics
@@ -313,23 +352,26 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
         {/* Desktop pill */}
         <div className="nav-links" ref={pillRef}>
           <div className="nav-indicator" ref={indicatorRef} />
-          {NAV_LINKS.map((link, i) => (
-            <a
-              key={link.href}
-              ref={(el) => { navLinksRef.current[i] = el; }}
-              href={link.href}
-              className={`nav-link${activeSection === link.href.slice(1) ? " active" : ""}`}
-              onClick={(e) => handleNav(e, link.href)}
-              onMouseEnter={() => setHoveredLink(link.href.slice(1))}
-              onMouseLeave={() => setHoveredLink(null)}
-            >
-              {link.label}
-            </a>
-          ))}
+          {NAV_LINKS.map((link, i) => {
+            const isActive = link.href.startsWith('/') ? pathname === link.href : pathname === '/' && activeSection === link.href.slice(1);
+            return (
+              <a
+                key={link.href}
+                ref={(el) => { navLinksRef.current[i] = el; }}
+                href={link.href}
+                className={`nav-link${isActive ? " active" : ""}`}
+                onClick={(e) => handleNav(e, link.href)}
+                onMouseEnter={() => setHoveredLink(link.href)}
+                onMouseLeave={() => setHoveredLink(null)}
+              >
+                {link.label}
+              </a>
+            );
+          })}
         </div>
 
         {/* CTA */}
-        <button className="nav-cta" onClick={() => onNavClick("#contact")}>
+        <button className="nav-cta" onClick={handleCtaClick}>
           Get Started
         </button>
 
@@ -345,16 +387,19 @@ export default function Navbar({ activeSection, onNavClick }: NavbarProps) {
 
       {/* Mobile drawer */}
       <div className={`mobile-menu${menuOpen ? " open" : ""}`}>
-        {NAV_LINKS.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className={`mobile-link${activeSection === link.href.slice(1) ? " active" : ""}`}
-            onClick={(e) => handleNav(e, link.href)}
-          >
-            {link.label}
-          </a>
-        ))}
+        {NAV_LINKS.map((link) => {
+          const isActive = link.href.startsWith('/') ? pathname === link.href : pathname === '/' && activeSection === link.href.slice(1);
+          return (
+            <a
+              key={link.href}
+              href={link.href}
+              className={`mobile-link${isActive ? " active" : ""}`}
+              onClick={(e) => handleNav(e, link.href)}
+            >
+              {link.label}
+            </a>
+          );
+        })}
       </div>
     </>
   );

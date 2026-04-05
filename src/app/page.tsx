@@ -7,7 +7,6 @@ import About from "../components/about";
 import CaseStudies from "../components/CaseStudies";
 import Testimonials from "../components/Testimonials";
 import Services from "../components/services";
-import Products from "../components/products";
 import Contact from "../components/contact";
 import Footer from "../components/Footer";
 import TaglineBar from "../components/TaglineBar";
@@ -16,8 +15,9 @@ import TechPartnersBar from "../components/TechPartnersBar";
 import StatementBanner from "../components/statementBanner";
 import ExpertiseDomains from "../components/ExpertiseDomains";
 import TechStack from "../components/Techstack";
+
 const SECTIONS = [
-  "home", "about", "services", "products", "contactd"
+  "home", "about-split", "services", "contactd"
 ];
 //fix tgus 
 export default function Home() {
@@ -60,11 +60,10 @@ export default function Home() {
 
         <About />
         <StatementBanner />
+        <ExpertiseDomains />
         {/* <TechPartnersBar /> */}
         {/* <PartnersBar /> */}
-        <Products />
         <Services />
-        {/* <ExpertiseDomains/> */}
         <TechStack />
         <Testimonials />
 

@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Orbitron, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 // Futuristic font for headings
@@ -82,6 +84,10 @@ export const metadata: Metadata = {
     },
   },
 
+  verification: {
+    google: 'YOUR_GOOGLE_VERIFICATION_CODE_HERE', // Paste your code from Google Search Console
+  },
+
   category: "technology",
 };
 
@@ -129,6 +135,8 @@ export default function RootLayout({
       </head>
       <body className="min-h-full bg-[#02040a] selection:bg-[#00fff0] selection:text-[#02040a]">
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

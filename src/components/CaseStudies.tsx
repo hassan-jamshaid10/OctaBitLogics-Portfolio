@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 
@@ -77,10 +77,19 @@ const VISIBLE = 3;
 
 export default function CaseStudies() {
     const [offset, setOffset] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 960);
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     const maxOffset = CASES.length - VISIBLE;
     const prev = () => setOffset((o) => Math.max(o - 1, 0));
     const next = () => setOffset((o) => Math.min(o + 1, maxOffset));
-    const visible = CASES.slice(offset, offset + VISIBLE);
+    const visible = isMobile ? CASES : CASES.slice(offset, offset + VISIBLE);
 
     return (
         <section id="case-studies">
@@ -330,13 +339,45 @@ export default function CaseStudies() {
 
         /* ── Responsive ── */
         @media (max-width: 960px) {
-          .cs-grid { grid-template-columns: repeat(2, 1fr); }
+          .cs-inner { padding: 0; }
+          .cs-header { padding: 0 1.75rem; }
+          .cs-grid { 
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-padding-left: 1.75rem;
+            gap: 1.25rem;
+            padding: 0 1.75rem 2rem 1.75rem;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            width: 100%;
+            max-width: 100vw;
+            min-width: 0;
+          }
+          .cs-grid::-webkit-scrollbar { display: none; }
+          .cs-card {
+            min-width: 85vw;
+            scroll-snap-align: start;
+          }
+          .cs-nav-btn { display: none; }
+          .cs-dots { display: none; }
         }
         @media (max-width: 600px) {
-          .cs-grid { grid-template-columns: 1fr; }
-          .cs-inner { padding: 0 1.25rem; }
           #case-studies { padding: 3.5rem 0; }
-          .cs-card { aspect-ratio: 4 / 3; }
+          .cs-card { aspect-ratio: 4 / 3; min-width: 85vw; }
+          .cs-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+            padding: 0 1.5rem;
+          }
+          .cs-heading { font-size: 1.65rem; }
+          .cs-grid { 
+            padding: 0 1.5rem 2rem 1.5rem; 
+            scroll-padding-left: 1.5rem;
+          }
         }
       `}</style>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // ── Testimonial data ──────────────────────────────────────────────────────────
@@ -109,14 +109,14 @@ export default function Testimonials() {
     const [direction, setDirection] = useState(0);
     const total = TESTIMONIALS.length;
 
-    const prev = () => {
+    const prev = useCallback(() => {
         setDirection(-1);
         setCurrent((c) => (c - 1 + total) % total);
-    };
-    const next = () => {
+    }, [total]);
+    const next = useCallback(() => {
         setDirection(1);
         setCurrent((c) => (c + 1) % total);
-    };
+    }, [total]);
 
     // Auto-slide every 7 seconds
     useEffect(() => {
@@ -124,8 +124,7 @@ export default function Testimonials() {
         return () => clearInterval(timer);
     }, []);
 
-    // Framer Motion variants
-    const slideVariants = {
+    const slideVariants = useMemo(() => ({
         enter: (dir: number) => ({
             x: dir > 0 ? 100 : -100,
             opacity: 0,
@@ -153,7 +152,7 @@ export default function Testimonials() {
                 opacity: { duration: 0.2 }
             }
         }),
-    };
+    }), []);
 
     return (
         <section id="testimonials">

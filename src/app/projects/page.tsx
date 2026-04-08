@@ -103,7 +103,7 @@ function ProductCard({
 
         <div className="prd-content-col">
           <div className="prd-number">0{index + 1}</div>
-          
+
           <div className="prd-category-tag">{product.category}</div>
 
           <h3 className="prd-name">{product.name}</h3>
@@ -128,12 +128,12 @@ function ProductCard({
               </div>
             ))}
           </div>
-          
+
           <div style={{ marginTop: "2.5rem", position: "relative", zIndex: 5 }}>
-             <Link href={`/projects/${product.id}`} className="read-case-study-btn">
-                Read Full Case Study
-                <ArrowUpRight size={16} />
-             </Link>
+            <Link href={`/projects/${product.id}`} className="read-case-study-btn">
+              Read Full Case Study
+              <ArrowUpRight size={16} />
+            </Link>
           </div>
         </div>
       </div>
@@ -145,7 +145,7 @@ export default function Projects() {
   return (
     <>
       <Navbar activeSection="projects" />
-      
+
       <main className="projects-wrapper">
         <style>{`
           .projects-wrapper {
@@ -603,7 +603,7 @@ export default function Projects() {
             .prd-number { font-size: 4.5rem; top: -2.5rem; left: 0; }
           }
         `}</style>
-        
+
         {/* ── 1. Hero Block (Dark) ── */}
         <header className="prj-hero">
           <BackgroundNightfall />
@@ -611,7 +611,7 @@ export default function Projects() {
 
             <div className="prd-badge">Curated Work</div>
             <h2 className="prd-heading">
-              Engineering <span>Excellence,</span><br/>
+              Engineering <span>Excellence,</span><br />
               Delivered <span>At Scale.</span>
             </h2>
             <p className="prj-subtitle">

@@ -1,13 +1,13 @@
 "use client";
 //fix
 import { motion, useInView, useAnimationControls } from "framer-motion";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, memo } from "react";
 
 // Generation counter: incremented on every page mount, used to cancel stale sequences
 let sequenceGeneration = 0;
 let currentPagePath: string | null = null;
 
-export default function BackgroundNightfall({
+function BackgroundNightfall({
   nightGradient = "linear-gradient(145deg, #0f1c3f 0%, #080d1e 48%, #03060e 100%)"
 }: {
   nightGradient?: string;
@@ -54,7 +54,7 @@ export default function BackgroundNightfall({
       const myGeneration = sequenceGeneration;
 
       const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-      
+
       const runGlobalSequence = async () => {
         // Small delay to let all instances set up their event listeners
         await wait(100);
@@ -121,7 +121,7 @@ export default function BackgroundNightfall({
         animate={overlayControls}
         style={{ position: "absolute", inset: 0, background: nightGradient, pointerEvents: "none" }}
       />
-      
+
       <motion.div
         className="nightfall-global-stars-wrap"
         initial={{ opacity: 0, scale: 1.05, y: 20 }}
@@ -135,7 +135,7 @@ export default function BackgroundNightfall({
             <line x1="400" y1="800" x2="200" y2="200" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
             <line x1="800" y1="200" x2="900" y2="600" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
             <line x1="400" y1="800" x2="900" y2="600" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-            
+
             <circle cx="200" cy="200" r="3" fill="#a7fff9" />
             <circle cx="600" cy="400" r="4" fill="#a7fff9" />
             <circle cx="800" cy="200" r="2" fill="#a7fff9" />
@@ -147,7 +147,7 @@ export default function BackgroundNightfall({
             <line x1="100" y1="900" x2="300" y2="700" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
             <line x1="300" y1="700" x2="700" y2="900" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
             <line x1="700" y1="900" x2="900" y2="100" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
-            
+
             <circle cx="100" cy="900" r="2" fill="#3BADB0" />
             <circle cx="300" cy="700" r="3" fill="#a7fff9" />
             <circle cx="700" cy="900" r="2" fill="#3BADB0" />
@@ -162,3 +162,4 @@ export default function BackgroundNightfall({
     </div>
   );
 }
+export default memo(BackgroundNightfall);

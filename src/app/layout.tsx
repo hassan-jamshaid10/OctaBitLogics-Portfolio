@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     siteName: "OctaBitLogics",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/octa.png",
         width: 1200,
         height: 630,
         alt: "OctaBitLogics - Pioneering the Digital Frontier",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "OctaBitLogics | AI & SaaS Solutions",
     description: "Professional, futuristic IT solutions for global businesses. AI, SaaS, and custom software.",
-    images: ["/og-image.jpg"],
+    images: ["/octa.png"],
     creator: "@octabitlogics",
   },
 
@@ -82,10 +82,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-
-  verification: {
-    google: 'YOUR_GOOGLE_VERIFICATION_CODE_HERE', // Paste your code from Google Search Console
   },
 
   category: "technology",

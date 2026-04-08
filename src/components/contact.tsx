@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Send, CheckCircle2, AlertCircle, Loader2, Mail, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
@@ -11,7 +11,7 @@ export default function Contact() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus("idle");
@@ -40,7 +40,7 @@ export default function Contact() {
       setIsSubmitting(false);
       setTimeout(() => setStatus("idle"), 6000);
     }
-  };
+  }, []);
 
   return (
     <section id="contact" className="dr-container">
@@ -223,7 +223,7 @@ export default function Contact() {
               <p className="dr-box-title">Sale and general inquiries</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1.5rem' }}>
                 <a href="tel:+14154063053" className="dr-contact-row">
-                  <Phone size={18} /> 415-406-3053
+                  <Phone size={18} /> +92 321 5353105
                 </a>
                 <a href="mailto:info@octabitlogics.com" className="dr-contact-row">
                   <Mail size={18} /> info@octabitlogics.com

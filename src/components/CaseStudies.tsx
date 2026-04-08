@@ -6,94 +6,94 @@ import ScrollReveal from "./ScrollReveal";
 
 // ── Case studies data ─────────────────────────────────────────────────────────
 const CASES = [
-    {
-        id: 1,
-        industry: "SaaS (US)",
-        logo: "OBL",
-        logoSub: "OCTABITLOGICS",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80&fit=crop",
-        title: "Automated SaaS Analytics Platform for Real-Time Business Intelligence",
-        stats: [
-            { value: "40%", label: "increase in user retention" },
-            { value: "3×", label: "faster report generation" },
-            { value: "60%", label: "reduction in manual tasks" },
-        ],
-    },
-    {
-        id: 2,
-        industry: "FinTech (PK)",
-        logo: "FT",
-        logoSub: "FINTECH CLIENT",
-        image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=700&q=80&fit=crop",
-        title: "Custom AI-Driven Payment Pipeline for Fraud Detection & Risk Scoring",
-        stats: [
-            { value: "35%", label: "reduction in fraud cases" },
-            { value: "50%", label: "faster transaction processing" },
-            { value: "28%", label: "improvement in risk accuracy" },
-        ],
-    },
-    {
-        id: 3,
-        industry: "Healthcare (UK)",
-        logo: "HC",
-        logoSub: "HEALTH CLIENT",
-        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=700&q=80&fit=crop",
-        title: "Cloud-Native Patient Data Pipeline for Resource & Billing Optimization",
-        stats: [
-            { value: "20%", label: "increase in billing accuracy" },
-            { value: "15h", label: "saved per week" },
-            { value: "45%", label: "boost in staff efficiency" },
-        ],
-    },
-    {
-        id: 4,
-        industry: "E-Commerce (US)",
-        logo: "EC",
-        logoSub: "ECOM CLIENT",
-        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=80&fit=crop",
-        title: "Full-Stack E-Commerce Platform with AI-Powered Recommendation Engine",
-        stats: [
-            { value: "55%", label: "uplift in conversion rate" },
-            { value: "30%", label: "increase in avg order value" },
-            { value: "2×", label: "faster page load times" },
-        ],
-    },
-    {
-        id: 5,
-        industry: "Logistics (EU)",
-        logo: "LG",
-        logoSub: "LOGISTICS CLIENT",
-        image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=80&fit=crop",
-        title: "Real-Time Fleet Tracking & Route Optimization with ML-Powered Dispatch",
-        stats: [
-            { value: "22%", label: "drop in fuel costs" },
-            { value: "38%", label: "faster delivery times" },
-            { value: "90%", label: "on-time delivery rate" },
-        ],
-    },
+  {
+    id: 1,
+    industry: "SaaS (US)",
+    logo: "OBL",
+    logoSub: "OCTABITLOGICS",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80&fit=crop",
+    title: "Automated SaaS Analytics Platform for Real-Time Business Intelligence",
+    stats: [
+      { value: "40%", label: "increase in user retention" },
+      { value: "3×", label: "faster report generation" },
+      { value: "60%", label: "reduction in manual tasks" },
+    ],
+  },
+  {
+    id: 2,
+    industry: "FinTech (PK)",
+    logo: "FT",
+    logoSub: "FINTECH CLIENT",
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=700&q=80&fit=crop",
+    title: "Custom AI-Driven Payment Pipeline for Fraud Detection & Risk Scoring",
+    stats: [
+      { value: "35%", label: "reduction in fraud cases" },
+      { value: "50%", label: "faster transaction processing" },
+      { value: "28%", label: "improvement in risk accuracy" },
+    ],
+  },
+  {
+    id: 3,
+    industry: "Healthcare (UK)",
+    logo: "HC",
+    logoSub: "HEALTH CLIENT",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=700&q=80&fit=crop",
+    title: "Cloud-Native Patient Data Pipeline for Resource & Billing Optimization",
+    stats: [
+      { value: "20%", label: "increase in billing accuracy" },
+      { value: "15h", label: "saved per week" },
+      { value: "45%", label: "boost in staff efficiency" },
+    ],
+  },
+  {
+    id: 4,
+    industry: "E-Commerce (US)",
+    logo: "EC",
+    logoSub: "ECOM CLIENT",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=80&fit=crop",
+    title: "Full-Stack E-Commerce Platform with AI-Powered Recommendation Engine",
+    stats: [
+      { value: "55%", label: "uplift in conversion rate" },
+      { value: "30%", label: "increase in avg order value" },
+      { value: "2×", label: "faster page load times" },
+    ],
+  },
+  {
+    id: 5,
+    industry: "Logistics (EU)",
+    logo: "LG",
+    logoSub: "LOGISTICS CLIENT",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=80&fit=crop",
+    title: "Real-Time Fleet Tracking & Route Optimization with ML-Powered Dispatch",
+    stats: [
+      { value: "22%", label: "drop in fuel costs" },
+      { value: "38%", label: "faster delivery times" },
+      { value: "90%", label: "on-time delivery rate" },
+    ],
+  },
 ];
 
 const VISIBLE = 3;
 
 export default function CaseStudies() {
-    const [offset, setOffset] = useState(0);
-    const [isMobile, setIsMobile] = useState(false);
+  const [offset, setOffset] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
-    useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth <= 960);
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 960);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-    const maxOffset = CASES.length - VISIBLE;
-    const prev = () => setOffset((o) => Math.max(o - 1, 0));
-    const next = () => setOffset((o) => Math.min(o + 1, maxOffset));
-    const visible = isMobile ? CASES : CASES.slice(offset, offset + VISIBLE);
+  const maxOffset = CASES.length - VISIBLE;
+  const prev = () => setOffset((o) => Math.max(o - 1, 0));
+  const next = () => setOffset((o) => Math.min(o + 1, maxOffset));
+  const visible = isMobile ? CASES : CASES.slice(offset, offset + VISIBLE);
 
-    return (
-        <section id="case-studies">
-            <style>{`
+  return (
+    <section id="case-studies">
+      <style>{`
         #case-studies {
           background: #ffffff;
           padding: 5rem 0;
@@ -381,93 +381,93 @@ export default function CaseStudies() {
         }
       `}</style>
 
-            <div className="cs-inner">
-                {/* ── Header ── */}
-                <ScrollReveal y={15} duration={0.45} delay={0}>
-                  <div className="cs-header">
-                      <h2 className="cs-heading">
-                          Spotlight on <span>Client Success Stories</span>
-                      </h2>
-                      <div className="cs-header-right">
-                          <button className="cs-all-btn">All Case Studies →</button>
-                          <button className="cs-nav-btn" onClick={prev} disabled={offset === 0} aria-label="Previous">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                                  <polyline points="15 18 9 12 15 6" />
-                              </svg>
-                          </button>
-                          <button className="cs-nav-btn" onClick={next} disabled={offset >= maxOffset} aria-label="Next">
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                                  <polyline points="9 18 15 12 9 6" />
-                              </svg>
-                          </button>
-                      </div>
-                  </div>
-                </ScrollReveal>
-
-                {/* ── Cards ── */}
-                <ScrollReveal y={20} duration={0.5} delay={0.1}>
-                <AnimatePresence mode="popLayout">
-                    <motion.div
-                        key={offset}
-                        className="cs-grid"
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -50 }}
-                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-                    >
-                        {visible.map((c) => (
-                            <div key={c.id} className="cs-card">
-                                {/* Full-bleed photo */}
-                                <img src={c.image} alt={c.title} className="cs-img" loading="lazy" />
-
-                                {/* Gradient scrim */}
-                                <div className="cs-scrim" />
-
-                                {/* All content on top */}
-                                <div className="cs-content">
-                                    {/* Top: logo badge */}
-                                    <div className="cs-logo-badge">
-                                        <span className="cs-logo-initials">{c.logo}</span>
-                                        <span className="cs-logo-sub">{c.logoSub}</span>
-                                    </div>
-
-                                    {/* Bottom: industry → title → stats → button */}
-                                    <div className="cs-bottom">
-                                        <span className="cs-industry-tag">{c.industry}</span>
-                                        <p className="cs-title">{c.title}</p>
-
-                                        <div className="cs-stats">
-                                            {c.stats.map((s) => (
-                                                <div key={s.label} className="cs-stat">
-                                                    <span className="cs-stat-value">{s.value}</span>
-                                                    <span className="cs-stat-label">{s.label}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        <button className="cs-read-btn">
-                                            Read More →
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </motion.div>
-                </AnimatePresence>
-                </ScrollReveal>
-
-                {/* Pagination dots */}
-                <div className="cs-dots">
-                    {Array.from({ length: maxOffset + 1 }).map((_, i) => (
-                        <button
-                            key={i}
-                            className={`cs-dot${offset === i ? " active" : ""}`}
-                            onClick={() => setOffset(i)}
-                            aria-label={`Page ${i + 1}`}
-                        />
-                    ))}
-                </div>
+      <div className="cs-inner">
+        {/* ── Header ── */}
+        <ScrollReveal y={15} duration={0.45} delay={0}>
+          <div className="cs-header">
+            <h2 className="cs-heading">
+              Spotlight on <span>Client Success Stories</span>
+            </h2>
+            <div className="cs-header-right">
+              <button className="cs-all-btn">All Case Studies →</button>
+              <button className="cs-nav-btn" onClick={prev} disabled={offset === 0} aria-label="Previous">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+              <button className="cs-nav-btn" onClick={next} disabled={offset >= maxOffset} aria-label="Next">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
             </div>
-        </section>
-    );
+          </div>
+        </ScrollReveal>
+
+        {/* ── Cards ── */}
+        <ScrollReveal y={20} duration={0.5} delay={0.1}>
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              key={offset}
+              className="cs-grid"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+            >
+              {visible.map((c) => (
+                <div key={c.id} className="cs-card">
+                  {/* Full-bleed photo */}
+                  <img src={c.image} alt={c.title} className="cs-img" loading="lazy" />
+
+                  {/* Gradient scrim */}
+                  <div className="cs-scrim" />
+
+                  {/* All content on top */}
+                  <div className="cs-content">
+                    {/* Top: logo badge */}
+                    <div className="cs-logo-badge">
+                      <span className="cs-logo-initials">{c.logo}</span>
+                      <span className="cs-logo-sub">{c.logoSub}</span>
+                    </div>
+
+                    {/* Bottom: industry → title → stats → button */}
+                    <div className="cs-bottom">
+                      <span className="cs-industry-tag">{c.industry}</span>
+                      <p className="cs-title">{c.title}</p>
+
+                      <div className="cs-stats">
+                        {c.stats.map((s) => (
+                          <div key={s.label} className="cs-stat">
+                            <span className="cs-stat-value">{s.value}</span>
+                            <span className="cs-stat-label">{s.label}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <button className="cs-read-btn">
+                        Read More →
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </ScrollReveal>
+
+        {/* Pagination dots */}
+        <div className="cs-dots">
+          {Array.from({ length: maxOffset + 1 }).map((_, i) => (
+            <button
+              key={i}
+              className={`cs-dot${offset === i ? " active" : ""}`}
+              onClick={() => setOffset(i)}
+              aria-label={`Page ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

@@ -1,77 +1,78 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, lazy, Suspense } from "react";
 import Navbar from "../components/Header";
-import Hero from "../components/hero";
-import About from "../components/about";
-import CaseStudies from "../components/CaseStudies";
-import Testimonials from "../components/Testimonials";
-import Services from "../components/services";
-import Contact from "../components/contact";
-import Footer from "../components/Footer";
-import TaglineBar from "../components/TaglineBar";
-import PartnersBar from "../components/partnerbar";
-import TechPartnersBar from "../components/TechPartnersBar";
-import StatementBanner from "../components/statementBanner";
-import ExpertiseDomains from "../components/ExpertiseDomains";
-import TechStack from "../components/Techstack";
 
-const SECTIONS = [
-  "home", "about-split", "services", "contactd"
-];
-//fix tgus 
+// ─── Lazy‑load all below‑the‑fold sections ─────────────────────────────────
+const Hero = lazy(() => import("../components/hero"));
+const TaglineBar = lazy(() => import("../components/TaglineBar"));
+const CaseStudies = lazy(() => import("../components/CaseStudies"));
+const About = lazy(() => import("../components/about"));
+const StatementBanner = lazy(() => import("../components/statementBanner"));
+const ExpertiseDomains = lazy(() => import("../components/ExpertiseDomains"));
+const Services = lazy(() => import("../components/services"));
+const TechStack = lazy(() => import("../components/Techstack"));
+const Testimonials = lazy(() => import("../components/Testimonials"));
+const Contact = lazy(() => import("../components/contact"));
+const Footer = lazy(() => import("../components/Footer"));
+
+const SECTIONS = ["home", "about-split", "services", "contactd"];
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
 
   /* Track active section on scroll */
   useEffect(() => {
+    let rafId = 0;
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 120;
-      for (let i = SECTIONS.length - 1; i >= 0; i--) {
-        const el = document.getElementById(SECTIONS[i]);
-        if (el && el.offsetTop <= scrollPos) {
-          setActiveSection(SECTIONS[i]);
-          break;
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const scrollPos = window.scrollY + 120;
+        for (let i = SECTIONS.length - 1; i >= 0; i--) {
+          const el = document.getElementById(SECTIONS[i]);
+          if (el && el.offsetTop <= scrollPos) {
+            setActiveSection(SECTIONS[i]);
+            break;
+          }
         }
-      }
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
-  /* Smooth scroll helper passed down to all components */
-  const scrollTo = (href: string) => {
+  /* Stable smooth‑scroll helper */
+  const scrollTo = useCallback((href: string) => {
     const id = href.replace("#", "");
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, []);
 
   return (
     <>
-      <Navbar
-        activeSection={activeSection}
-        onNavClick={scrollTo}
-      />
+      <Navbar activeSection={activeSection} onNavClick={scrollTo} />
 
       <main>
-        <Hero onNavClick={scrollTo} />
-        <TaglineBar />
-        <CaseStudies />
-
-        <About />
-        <StatementBanner />
-        <ExpertiseDomains />
-        {/* <TechPartnersBar /> */}
-        {/* <PartnersBar /> */}
-        <Services />
-        <TechStack />
-        <Testimonials />
-
-        <Contact />
-
+        <Suspense fallback={<div style={{ minHeight: '100vh', width: '100%' }}></div>}>
+          <Hero onNavClick={scrollTo} />
+          <TaglineBar />
+          <CaseStudies />
+          <About />
+          <StatementBanner />
+          <ExpertiseDomains />
+          <Services />
+          <TechStack />
+          <Testimonials />
+          <Contact />
+        </Suspense>
       </main>
 
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </>
   );
 }

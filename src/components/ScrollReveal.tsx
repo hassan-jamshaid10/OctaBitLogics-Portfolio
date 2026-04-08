@@ -27,7 +27,7 @@ export default function ScrollReveal({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration, delay, ease: "easeOut" }}
-      style={{ ...style, willChange: "opacity, transform" }} /* GPU Acceleration for ultra-smooth performance */
+      style={style}
     >
       {children}
     </motion.div>

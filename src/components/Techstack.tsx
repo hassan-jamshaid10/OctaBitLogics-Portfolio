@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 
@@ -100,13 +100,22 @@ const TECH_CATEGORIES = [
 export default function TechStack() {
   const [activeIdx, setActiveIdx] = useState(0);
 
-  const prevTab = () => {
+  const prevTab = useCallback(() => {
     setActiveIdx((prev) => (prev === 0 ? TECH_CATEGORIES.length - 1 : prev - 1));
-  };
+  }, []);
 
-  const nextTab = () => {
+  const nextTab = useCallback(() => {
     setActiveIdx((prev) => (prev === TECH_CATEGORIES.length - 1 ? 0 : prev + 1));
-  };
+  }, []);
+
+  const rows = useMemo(() => {
+    const images = TECH_CATEGORIES[activeIdx].images;
+    return [
+      images.slice(0, 4),
+      images.slice(4, 7),
+      images.slice(7, 9),
+    ];
+  }, [activeIdx]);
 
   return (
     <section className="tech-stacks-section" aria-label="Tech stack">
@@ -328,35 +337,25 @@ export default function TechStack() {
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              {(() => {
-                const images = TECH_CATEGORIES[activeIdx].images;
-                const rows = [
-                  images.slice(0, 4), // Row 1 (4 items)
-                  images.slice(4, 7), // Row 2 (3 items)
-                  images.slice(7, 9)  // Row 3 (2 items)
-                ];
-
-                return rows.map((row, rIdx) => (
-                  <div key={rIdx} className="tech-row">
-                    {row.map((imgSrc, i) => {
-                      const filename = imgSrc.split("/").pop()?.split(".")[0]?.replace(/_/g, " ") || "Tech Logo";
-                      const absoluteIndex = rIdx * 4 + i;
-                      
-                      return (
-                        <motion.div 
-                          key={imgSrc} 
-                          className="tech-logo-wrapper"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.4, delay: absoluteIndex * 0.05 }}
-                        >
-                          <img src={imgSrc} alt={filename} className="tech-logo" loading="lazy" />
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-                ));
-              })()}
+              {rows.map((row, rIdx) => (
+                <div key={rIdx} className="tech-row">
+                  {row.map((imgSrc, i) => {
+                    const filename = imgSrc.split("/").pop()?.split(".")[0]?.replace(/_/g, " ") || "Tech Logo";
+                    const absoluteIndex = rIdx * 4 + i;
+                    return (
+                      <motion.div
+                        key={imgSrc}
+                        className="tech-logo-wrapper"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.4, delay: absoluteIndex * 0.05 }}
+                      >
+                        <img src={imgSrc} alt={filename} className="tech-logo" loading="lazy" />
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              ))}
             </motion.div>
           </AnimatePresence>
 

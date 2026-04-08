@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import React, { MouseEvent } from "react";
+import React, { MouseEvent, useCallback } from "react";
 import BackgroundNightfall from "./BackgroundNightfall";
 
 // --- ANIMATED ICONS ---
@@ -15,21 +15,21 @@ const SoftwareDevIcon = () => (
     {/* Animated code lines */}
     <motion.line x1="14" y1="22" x2="30" y2="22" stroke="#ffffff" strokeWidth="2" strokeLinecap="round"
       animate={{ pathLength: [0, 1, 1, 0], opacity: [0, 1, 1, 0] }}
-      transition={{ duration: 3, repeat: Infinity, times: [0, 0.4, 0.8, 1] }} 
+      transition={{ duration: 3, repeat: Infinity, times: [0, 0.4, 0.8, 1] }}
     />
     <motion.line x1="14" y1="28" x2="40" y2="28" stroke="#ffffff" strokeWidth="2" strokeLinecap="round"
       animate={{ pathLength: [0, 1, 1, 0], opacity: [0, 1, 1, 0] }}
-      transition={{ duration: 3, delay: 0.5, repeat: Infinity, times: [0, 0.4, 0.8, 1] }} 
+      transition={{ duration: 3, delay: 0.5, repeat: Infinity, times: [0, 0.4, 0.8, 1] }}
     />
     <motion.line x1="14" y1="34" x2="24" y2="34" stroke="#ffffff" strokeWidth="2" strokeLinecap="round"
       animate={{ pathLength: [0, 1, 1, 0], opacity: [0, 1, 1, 0] }}
-      transition={{ duration: 3, delay: 1, repeat: Infinity, times: [0, 0.4, 0.8, 1] }} 
+      transition={{ duration: 3, delay: 1, repeat: Infinity, times: [0, 0.4, 0.8, 1] }}
     />
     {/* Spinning Gear */}
     <motion.g animate={{ rotate: 360 }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} style={{ originX: "42px", originY: "32px" }}>
       <circle cx="42" cy="32" r="4" stroke="#ffffff" strokeWidth="1.5" />
-      <path d="M42 26V28M42 36V38M36 32H38M46 32H48" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round"/>
-      <path d="M37.5 27.5L39 29M45 29L46.5 27.5M39 35L37.5 36.5M46.5 36.5L45 35" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M42 26V28M42 36V38M36 32H38M46 32H48" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M37.5 27.5L39 29M45 29L46.5 27.5M39 35L37.5 36.5M46.5 36.5L45 35" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" />
     </motion.g>
   </svg>
 );
@@ -87,8 +87,8 @@ const AIAIutomationIcon = () => (
 const CloudIcon = () => (
   <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
     {/* Cloud Shape */}
-    <motion.path 
-      d="M44 32C44.5 32 45 32 45.4294 32.1388C48.0694 32.9904 50 35.4851 50 38.5C50 42.0899 47.0899 45 43.5 45H17.5C13.3579 45 10 41.6421 10 37.5C10 33.3579 13.3579 30 17.5 30C17.7538 30 18.0047 30.0126 18.2519 30.0371C19.7891 25.4093 24.1611 22 29.5 22C35.8513 22 41 27.1487 41 33.5C41 33.5135 41 33.527 40.9999 33.5404C42.4276 32.5513 43.3444 32 44 32Z" 
+    <motion.path
+      d="M44 32C44.5 32 45 32 45.4294 32.1388C48.0694 32.9904 50 35.4851 50 38.5C50 42.0899 47.0899 45 43.5 45H17.5C13.3579 45 10 41.6421 10 37.5C10 33.3579 13.3579 30 17.5 30C17.7538 30 18.0047 30.0126 18.2519 30.0371C19.7891 25.4093 24.1611 22 29.5 22C35.8513 22 41 27.1487 41 33.5C41 33.5135 41 33.527 40.9999 33.5404C42.4276 32.5513 43.3444 32 44 32Z"
       stroke="#3BADB0" strokeWidth="2" fill="rgba(59,173,176,0.1)"
       animate={{ y: [-2, 2, -2] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
     />
@@ -114,10 +114,10 @@ const UIDesignIcon = () => (
     <rect x="8" y="10" width="14" height="40" rx="2" fill="#3BADB0" fillOpacity="0.2" stroke="#3BADB0" strokeWidth="2" />
     <line x1="22" y1="20" x2="52" y2="20" stroke="#3BADB0" strokeWidth="2" />
     <rect x="28" y="28" width="18" height="12" rx="2" fill="#ffffff" fillOpacity="0.3" />
-    
+
     {/* Animated Cursor Arrow */}
-    <motion.path 
-      d="M36 34L44 48L40 48L36 56L34 56L38 48L32 48L36 34Z" 
+    <motion.path
+      d="M36 34L44 48L40 48L36 56L34 56L38 48L32 48L36 34Z"
       fill="#ffffff" stroke="#1B2E5E" strokeWidth="1"
       animate={{ x: [-10, 5, -10], y: [-5, 10, -5] }}
       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -166,7 +166,7 @@ const SERVICES = [
 
 const ArrowIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
   </svg>
 );
 
@@ -175,7 +175,7 @@ function ServiceCard({ s, i }: { s: typeof SERVICES[0]; i: number }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  function handleMouseMove({
+  const handleMouseMove = useCallback(function ({
     currentTarget,
     clientX,
     clientY,
@@ -183,7 +183,7 @@ function ServiceCard({ s, i }: { s: typeof SERVICES[0]; i: number }) {
     const { left, top } = currentTarget.getBoundingClientRect();
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
-  }
+  }, [mouseX, mouseY]);
 
   return (
     <motion.div
@@ -428,14 +428,14 @@ export default function Services() {
           .bento-card { grid-column: span 6 !important; min-height: 280px; padding: 2rem; }
         }
       `}</style>
-      
+
       <BackgroundNightfall />
-      
+
       <div className="srv-blob1" />
       <div className="srv-blob2" />
 
       <div className="srv-inner">
-        <motion.div 
+        <motion.div
           className="srv-header"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

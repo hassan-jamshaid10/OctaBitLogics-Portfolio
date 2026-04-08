@@ -59,6 +59,8 @@ export default function AboutSplit() {
           position: relative;
           overflow: hidden;
           min-height: 380px;
+          height: 100%;
+          box-sizing: border-box;
         }
 
         /* corner glow */
@@ -136,6 +138,8 @@ export default function AboutSplit() {
           position: relative;
           overflow: hidden;
           min-height: 380px;
+          height: 100%;
+          box-sizing: border-box;
         }
 
         /* decorative octagon shapes */
@@ -227,7 +231,7 @@ export default function AboutSplit() {
 
       <div className="as-wrap">
         {/* LEFT */}
-        <ScrollReveal y={20} duration={0.5} delay={0}>
+        <ScrollReveal y={20} duration={0.5} delay={0} style={{ height: '100%' }}>
           <div className="as-left">
             <div>
               <div className="as-est">Est. 2025</div>
@@ -252,7 +256,7 @@ export default function AboutSplit() {
         </ScrollReveal>
 
         {/* RIGHT */}
-        <ScrollReveal y={20} duration={0.5} delay={0.15}>
+        <ScrollReveal y={20} duration={0.5} delay={0.15} style={{ height: '100%' }}>
           <div className="as-right">
             <BackgroundNightfall nightGradient="linear-gradient(135deg, #0f1c3f 0%, #080d1e 45%, #03060e 100%)" />
             <div style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", height: "100%", justifyContent: "space-between" }}>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 const NAV_LINKS = [
@@ -64,7 +64,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
     }
   }, [hoveredLink, activeSection, pathname]);
 
-  const handleNav = (e: React.MouseEvent, href: string) => {
+  const handleNav = useCallback((e: React.MouseEvent, href: string) => {
     e.preventDefault();
     setMenuOpen(false);
 
@@ -77,23 +77,23 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
         if (onNavClick) onNavClick(href);
       }
     }
-  };
+  }, [pathname, router, onNavClick]);
 
-  const handleLogoClick = () => {
+  const handleLogoClick = useCallback(() => {
     if (pathname !== '/') {
       router.push('/#home');
     } else {
       if (onNavClick) onNavClick('#home');
     }
-  };
+  }, [pathname, router, onNavClick]);
 
-  const handleCtaClick = () => {
+  const handleCtaClick = useCallback(() => {
     if (pathname !== '/') {
       router.push('/#contact');
     } else {
       if (onNavClick) onNavClick('#contact');
     }
-  };
+  }, [pathname, router, onNavClick]);
 
   return (
     <>

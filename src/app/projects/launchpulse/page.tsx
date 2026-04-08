@@ -10,7 +10,7 @@ export default function LaunchPulseCaseStudy() {
   return (
     <>
       <Navbar activeSection="projects" />
-      
+
       <main className="cs-page">
         <style>{`
           .cs-page {
@@ -119,7 +119,7 @@ export default function LaunchPulseCaseStudy() {
              margin-top: 2rem;
           }
         `}</style>
-        
+
         {/* ── TOP TONE: DARK ── */}
         <header className="cs-hero">
           <BackgroundNightfall />
@@ -136,7 +136,7 @@ export default function LaunchPulseCaseStudy() {
 
         {/* ── BOTTOM TONE: LIGHT ── */}
         <section className="cs-body">
-            <p className="cs-upcoming">Full case study coming soon...</p>
+          <p className="cs-upcoming">Full case study coming soon...</p>
         </section>
       </main>
 

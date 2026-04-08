@@ -6,102 +6,97 @@ import BackgroundNightfall from "./BackgroundNightfall";
 
 // ── Social SVGs ───────────────────────────────────────────────────────────────
 const IconFacebook = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-    </svg>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
 );
 const IconInstagram = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-    </svg>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+  </svg>
 );
 const IconLinkedin = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-        <rect x="2" y="9" width="4" height="12" />
-        <circle cx="4" cy="4" r="2" />
-    </svg>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
 );
 const IconX = () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
-    </svg>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
+  </svg>
 );
 const IconYoutube = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z" />
-    </svg>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z" />
+  </svg>
 );
 const IconPhone = () => (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.5 19.79 19.79 0 0 1 1.61 2.84 2 2 0 0 1 3.59 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-    </svg>
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.5 19.79 19.79 0 0 1 1.61 2.84 2 2 0 0 1 3.59 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+  </svg>
 );
 const IconMail = () => (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-        <polyline points="22,6 12,13 2,6" />
-    </svg>
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+    <polyline points="22,6 12,13 2,6" />
+  </svg>
 );
 const IconMapPin = () => (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-        <circle cx="12" cy="10" r="3" />
-    </svg>
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
 );
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 const SERVICES_LINKS = [
-    "Custom Software Dev",
-    "Mobile App Development",
-    "AI & Automation",
-    "Cloud & DevOps",
-    "UI/UX Design",
-    "Staff Augmentation",
+  "Custom Software Dev",
+  "Mobile App Development",
+  "AI & Automation",
+  "Cloud & DevOps",
+  "UI/UX Design",
+  "Staff Augmentation",
 ];
 const INDUSTRIES_LINKS = [
-    "FinTech",
-    "E-Commerce",
-    "Healthcare",
-    "Real Estate",
-    "Logistics",
-    "SaaS & B2B",
+  "FinTech",
+  "E-Commerce",
+  "Healthcare",
+  "Real Estate",
+  "Logistics",
+  "SaaS & B2B",
 ];
 const USEFUL_LINKS = ["About", "Contact", "Home"];
 const COMPANY_LINKS = ["Who We Are", "Blogs", "Contact"];
 
 const SOCIALS = [
-    { Icon: IconFacebook, label: "Facebook" },
-    { Icon: IconInstagram, label: "Instagram" },
-    { Icon: IconLinkedin, label: "LinkedIn" },
-    { Icon: IconX, label: "X" },
-    { Icon: IconYoutube, label: "YouTube" },
+  { Icon: IconFacebook, label: "Facebook" },
+  { Icon: IconInstagram, label: "Instagram" },
+  { Icon: IconLinkedin, label: "LinkedIn" },
+  { Icon: IconX, label: "X" },
+  { Icon: IconYoutube, label: "YouTube" },
 ];
 
-// ── Animation helpers ─────────────────────────────────────────────────────────
-type FadeUpProps = {
-    initial: { opacity: number; y: number };
-    whileInView: { opacity: number; y: number };
-    viewport: { once: true };
-    transition: { duration: number; ease: "easeOut"; delay: number };
-};
-const fadeUp = (delay = 0): FadeUpProps => ({
-    initial: { opacity: 0, y: 22 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.55, ease: "easeOut", delay },
-});
+const CURRENT_YEAR = new Date().getFullYear();
 
-// ── Component ─────────────────────────────────────────────────────────────────
+// Pre‑computed animation props — created once at module load, never re‑created
+const FU0 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0 } };
+const FU008 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0.08 } };
+const FU014 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0.14 } };
+const FU020 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0.20 } };
+const FU026 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0.26 } };
+const FU01 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0.1 } };
+const FU018 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0.18 } };
+
 export default function Footer() {
-    const year = new Date().getFullYear();
 
-    return (
-        <footer id="ftr">
-            {/* ── Scoped styles ─────────────────────────────────────────────────── */}
-            <style>{`
+  return (
+    <footer id="ftr">
+      {/* ── Scoped styles ─────────────────────────────────────────────────── */}
+      <style>{`
         /* Root */
         #ftr {
           position: relative;
@@ -411,159 +406,156 @@ export default function Footer() {
         }
       `}</style>
 
-            {/* Animated day-to-night background */}
-            <BackgroundNightfall />
+      {/* Animated day-to-night background */}
+      <BackgroundNightfall />
 
-            {/* Decorative blobs */}
-            <div className="ftr-blob1" />
-            <div className="ftr-blob2" />
+      {/* Decorative blobs */}
+      <div className="ftr-blob1" />
+      <div className="ftr-blob2" />
 
-            <div className="ftr-wrap">
+      <div className="ftr-wrap">
 
-                {/* ══════════════════════════════════════════
+        {/* ══════════════════════════════════════════
             TOP: Logo column + 4 nav columns
             ══════════════════════════════════════════ */}
-                <motion.div className="ftr-top" {...fadeUp(0)}>
+        <motion.div className="ftr-top" {...FU0}>
 
-                    {/* ── Brand / Logo column ── */}
-                    <motion.div {...fadeUp(0)}>
-                        <div className="ftr-logo-row">
-                            <img src="/octa.png" alt="OctaBitLogics Logo" className="ftr-logo-img" />
-                            <div className="ftr-brand-block">
-                                <span className="ftr-brand-name">
-                                    <span>OctaBit</span>Logics
-                                </span>
-                                <span className="ftr-brand-sub">Software Studio</span>
-                            </div>
-                        </div>
+          {/* ── Brand / Logo column ── */}
+          <motion.div {...FU0}>
+            <div className="ftr-logo-row">
+              <img src="/octa.png" alt="OctaBitLogics Logo" className="ftr-logo-img" />
+              <div className="ftr-brand-block">
+                <span className="ftr-brand-name">
+                  <span>OctaBit</span>Logics
+                </span>
+                <span className="ftr-brand-sub">Software Studio</span>
+              </div>
+            </div>
 
-                        <p className="ftr-tagline">
-                            OctaBitLogics is a global technology partner delivering end-to-end
-                            services including custom software, AI automation, cloud infrastructure,
-                            and modern mobile experiences.
-                        </p>
+            <p className="ftr-tagline">
+              OctaBitLogics is a global technology partner delivering end-to-end
+              services including custom software, AI automation, cloud infrastructure,
+              and modern mobile experiences.
+            </p>
 
-                        <div className="ftr-contact-chips">
-                            <a href="tel:+18001234567" className="ftr-chip">
-                                <IconPhone /> +1 (800) 123-4567
-                            </a>
-                            <a href="mailto:hello@octabitlogics.com" className="ftr-chip">
-                                <IconMail /> hello@octabitlogics.com
-                            </a>
-                        </div>
+            <div className="ftr-contact-chips">
+              <a href="tel:+18001234567" className="ftr-chip">
+                <IconPhone /> +92 321 5353105
+              </a>
+              <a href="mailto:info@octabitlogics.com" className="ftr-chip">
+                <IconMail /> info@octabitlogics.com
+              </a>
+            </div>
 
-                        <p className="ftr-follow-label">Follow Us</p>
-                        <div className="ftr-socials">
-                            {SOCIALS.map(({ Icon, label }) => (
-                                <a key={label} href="#" className="ftr-social" aria-label={label}>
-                                    <Icon />
-                                </a>
-                            ))}
-                        </div>
-                    </motion.div>
+            <p className="ftr-follow-label">Follow Us</p>
+            <div className="ftr-socials">
+              {SOCIALS.map(({ Icon, label }) => (
+                <a key={label} href="#" className="ftr-social" aria-label={label}>
+                  <Icon />
+                </a>
+              ))}
+            </div>
+          </motion.div>
 
-                    {/* ── Services column ── */}
-                    <motion.div {...fadeUp(0.08)}>
-                        <p className="ftr-col-heading">Services</p>
-                        <nav className="ftr-nav-links">
-                            {SERVICES_LINKS.map((item) => (
-                                <a key={item} href="#services" className="ftr-nav-link">{item}</a>
-                            ))}
-                        </nav>
-                    </motion.div>
+          {/* ── Services column ── */}
+          <motion.div {...FU008}>
+            <p className="ftr-col-heading">Services</p>
+            <nav className="ftr-nav-links">
+              {SERVICES_LINKS.map((item) => (
+                <a key={item} href="#services" className="ftr-nav-link">{item}</a>
+              ))}
+            </nav>
+          </motion.div>
 
-                    {/* ── Industries column ── */}
-                    <motion.div {...fadeUp(0.14)}>
-                        <p className="ftr-col-heading">Industries</p>
-                        <nav className="ftr-nav-links">
-                            {INDUSTRIES_LINKS.map((item) => (
-                                <a key={item} href="#" className="ftr-nav-link">{item}</a>
-                            ))}
-                        </nav>
-                    </motion.div>
+          {/* ── Industries column ── */}
+          <motion.div {...FU014}>
+            <p className="ftr-col-heading">Industries</p>
+            <nav className="ftr-nav-links">
+              {INDUSTRIES_LINKS.map((item) => (
+                <a key={item} href="#" className="ftr-nav-link">{item}</a>
+              ))}
+            </nav>
+          </motion.div>
 
-                    {/* ── Useful Links column ── */}
-                    <motion.div {...fadeUp(0.20)}>
-                        <p className="ftr-col-heading">Useful Links</p>
-                        <nav className="ftr-nav-links">
-                            {USEFUL_LINKS.map((item) => (
-                                <a key={item} href={`#${item.toLowerCase().replace(/ /g, "")}`} className="ftr-nav-link">{item}</a>
-                            ))}
-                        </nav>
-                    </motion.div>
+          {/* ── Useful Links column ── */}
+          <motion.div {...FU020}>
+            <p className="ftr-col-heading">Useful Links</p>
+            <nav className="ftr-nav-links">
+              {USEFUL_LINKS.map((item) => (
+                <a key={item} href={`#${item.toLowerCase().replace(/ /g, "")}`} className="ftr-nav-link">{item}</a>
+              ))}
+            </nav>
+          </motion.div>
 
-                    {/* ── Company column ── */}
-                    <motion.div {...fadeUp(0.26)}>
-                        <p className="ftr-col-heading">Company</p>
-                        <nav className="ftr-nav-links">
-                            {COMPANY_LINKS.map((item) => (
-                                <a key={item} href="#" className="ftr-nav-link">{item}</a>
-                            ))}
-                        </nav>
-                    </motion.div>
+          {/* ── Company column ── */}
+          <motion.div {...FU026}>
+            <p className="ftr-col-heading">Company</p>
+            <nav className="ftr-nav-links">
+              {COMPANY_LINKS.map((item) => (
+                <a key={item} href="#" className="ftr-nav-link">{item}</a>
+              ))}
+            </nav>
+          </motion.div>
 
-                </motion.div>
+        </motion.div>
 
-                {/* ══════════════════════════════════════════
+        {/* ══════════════════════════════════════════
             MIDDLE INFO STRIP  (Address | Contact | Follow)
             ══════════════════════════════════════════ */}
-                <motion.div className="ftr-strip" {...fadeUp(0.1)}>
+        <motion.div className="ftr-strip" {...FU01}>
 
-                    {/* Address */}
-                    <div className="ftr-strip-cell">
-                        <p className="ftr-strip-heading">Address</p>
-                        <div className="ftr-addr-item">
-                            <IconMapPin />
-                            <span>🇺🇸&nbsp; 150 E El St #1810, New York, NY 10017</span>
-                        </div>
-                        <div className="ftr-addr-item">
-                            <IconMapPin />
-                            <span>🇵🇰&nbsp; 11th Floor, Hafeez Tower, Sector&nbsp;R DHA Phase&nbsp;2, Lahore</span>
-                        </div>
-                    </div>
+          {/* Address */}
+          <div className="ftr-strip-cell">
+            <p className="ftr-strip-heading">Address</p>
+            <div className="ftr-addr-item">
+              <IconMapPin />
+              <span>&nbsp; Lahore, Punjab, Pakistan</span>
+            </div>
 
-                    {/* Contact */}
-                    <div className="ftr-strip-cell">
-                        <p className="ftr-strip-heading">Contact Us</p>
-                        <div className="ftr-contact-row">
-                            <IconPhone />
-                            <a href="tel:+18001234567">+1 (800) 123-4567</a>
-                        </div>
-                        <div className="ftr-contact-row">
-                            <IconMail />
-                            <a href="mailto:info@octabitlogics.com">info@octabitlogics.com</a>
-                        </div>
-                    </div>
+          </div>
 
-                    {/* Follow us (repeated for the strip layout) */}
-                    <div className="ftr-strip-cell">
-                        <p className="ftr-strip-heading">Follow Us</p>
-                        <div className="ftr-socials">
-                            {SOCIALS.map(({ Icon, label }) => (
-                                <a key={label} href="#" className="ftr-social" aria-label={label}>
-                                    <Icon />
-                                </a>
-                            ))}
-                        </div>
-                    </div>
+          {/* Contact */}
+          <div className="ftr-strip-cell">
+            <p className="ftr-strip-heading">Contact Us</p>
+            <div className="ftr-contact-row">
+              <IconPhone />
+              <a href="tel:+18001234567">+92 321 5353105</a>
+            </div>
+            <div className="ftr-contact-row">
+              <IconMail />
+              <a href="mailto:info@octabitlogics.com">info@octabitlogics.com</a>
+            </div>
+          </div>
 
-                </motion.div>
+          {/* Follow us (repeated for the strip layout) */}
+          <div className="ftr-strip-cell">
+            <p className="ftr-strip-heading">Follow Us</p>
+            <div className="ftr-socials">
+              {SOCIALS.map(({ Icon, label }) => (
+                <a key={label} href="#" className="ftr-social" aria-label={label}>
+                  <Icon />
+                </a>
+              ))}
+            </div>
+          </div>
 
-                {/* ══════════════════════════════════════════
+        </motion.div>
+
+        {/* ══════════════════════════════════════════
             BOTTOM BAR
             ══════════════════════════════════════════ */}
-                <motion.div className="ftr-bottom" {...fadeUp(0.18)}>
-                    <p className="ftr-copy">&copy; {year} OctaBitLogics. All rights reserved.</p>
-                    <div className="ftr-legal">
-                        <a href="#">Terms &amp; Conditions</a>
-                        <span className="ftr-legal-sep" />
-                        <a href="#">Privacy Policy</a>
-                        <span className="ftr-legal-sep" />
-                        <a href="#">Cookie Policy</a>
-                    </div>
-                </motion.div>
+        <motion.div className="ftr-bottom" {...FU018}>
+          <p className="ftr-copy">&copy; {CURRENT_YEAR} OctaBitLogics. All rights reserved.</p>
+          {/* <div className="ftr-legal">
+            <a href="#">Terms &amp; Conditions</a>
+            <span className="ftr-legal-sep" />
+            <a href="#">Privacy Policy</a>
+            <span className="ftr-legal-sep" />
+            <a href="#">Cookie Policy</a>
+          </div> */}
+        </motion.div>
 
-            </div>
-        </footer>
-    );
+      </div>
+    </footer>
+  );
 }

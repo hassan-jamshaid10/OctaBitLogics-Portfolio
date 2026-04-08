@@ -109,6 +109,9 @@ export default function Hero({ onNavClick }: HeroProps) {
 
   const slide = SLIDES[textIndex];
 
+  const handleCta1 = useCallback(() => onNavClick(slide.cta1.href), [onNavClick, slide.cta1.href]);
+  const handleCta2 = useCallback(() => onNavClick(slide.cta2.href), [onNavClick, slide.cta2.href]);
+
   return (
     <section id="home" className="hero">
       <style>{`
@@ -296,15 +299,16 @@ export default function Hero({ onNavClick }: HeroProps) {
         }
       `}</style>
 
-      {/* ── Multiple Pre-Loaded Videos ── */}
+      {/* ── Videos — only the active one autoplays ── */}
       {VIDEOS.map((src, i) => (
         <video
           key={src}
           className={`hero-video ${i === index ? "active" : ""}`}
-          autoPlay
+          autoPlay={i === index}
           muted
           playsInline
           loop
+          preload={i === index ? "auto" : "none"}
         >
           <source src={src} type="video/mp4" />
         </video>
@@ -346,8 +350,8 @@ export default function Hero({ onNavClick }: HeroProps) {
 
             {/* CTAs */}
             <motion.div className="hero-ctas" variants={textFade}>
-              <button className="cta-primary" onClick={() => onNavClick(slide.cta1.href)}>{slide.cta1.label}</button>
-              <button className="cta-secondary" onClick={() => onNavClick(slide.cta2.href)}>{slide.cta2.label}</button>
+              <button className="cta-primary" onClick={handleCta1}>{slide.cta1.label}</button>
+              <button className="cta-secondary" onClick={handleCta2}>{slide.cta2.label}</button>
             </motion.div>
           </motion.div>
         </AnimatePresence>

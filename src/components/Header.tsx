@@ -262,20 +262,21 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
         .mobile-menu {
           position: fixed;
           top: 72px; left: 0; right: 0;
-          background: linear-gradient(135deg, rgba(59,173,176,0.97) 0%, rgba(27,46,94,0.98) 100%);
+          background: rgba(8, 13, 30, 0.96);
           backdrop-filter: blur(24px);
           -webkit-backdrop-filter: blur(24px);
-          border-bottom: 1px solid rgba(255,255,255,0.15);
-          padding: 1rem;
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+          padding: 1.5rem 1.5rem 2rem;
           display: flex;
           flex-direction: column;
-          gap: 0.4rem;
+          gap: 0.6rem;
           transform: translateY(-110%) scaleY(0.92);
           opacity: 0;
           transition: transform 0.35s cubic-bezier(.4,0,.2,1),
                       opacity   0.3s ease;
           transform-origin: top;
           z-index: 999;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
         .mobile-menu.open {
@@ -285,40 +286,46 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
 
         .mobile-link {
           font-family: 'Oxanium', monospace;
-          font-size: 0.82rem;
+          font-size: 0.88rem;
           font-weight: 600;
-          letter-spacing: 0.07em;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
           text-decoration: none;
-          color: rgba(255,255,255,0.8);
-          padding: 12px 18px;
+          color: rgba(255,255,255,0.6);
+          padding: 14px 20px;
           border-radius: 12px;
           border: 1px solid transparent;
+          background: rgba(255,255,255,0.02);
           transition: all 0.2s ease;
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.75rem;
         }
 
         .mobile-link::before {
           content: '';
           width: 5px; height: 5px;
           border-radius: 50%;
-          background: rgba(255,255,255,0.5);
+          background: #3badb0;
           opacity: 0;
-          transition: opacity 0.2s ease;
+          transition: opacity 0.2s ease, transform 0.2s ease;
+          transform: scale(0.5);
           flex-shrink: 0;
+          box-shadow: 0 0 8px #3badb0;
         }
 
         .mobile-link.active,
         .mobile-link:hover {
-          background: rgba(255,255,255,0.15);
+          background: rgba(59,173,176,0.1);
           color: white;
-          border-color: rgba(255,255,255,0.2);
+          border-color: rgba(59,173,176,0.25);
         }
 
         .mobile-link.active::before,
-        .mobile-link:hover::before { opacity: 1; }
+        .mobile-link:hover::before { 
+          opacity: 1; 
+          transform: scale(1);
+        }
 
         @keyframes navItemIn {
           from { opacity: 0; transform: translateY(-12px); }

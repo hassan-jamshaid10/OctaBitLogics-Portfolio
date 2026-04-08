@@ -295,7 +295,7 @@ export default function Hero({ onNavClick }: HeroProps) {
           .hero-h1 { font-size: clamp(1.9rem, 9vw, 2.5rem); }
           .hero-p { font-size: 0.94rem; }
           .cta-primary, .cta-secondary { width: 100%; justify-content: center; }
-          .hero-ctas { width: 100%; }
+          .hero-ctas { width: 100%; flex-direction: column; }
         }
       `}</style>
 

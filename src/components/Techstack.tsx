@@ -272,12 +272,30 @@ export default function TechStack() {
         }
 
         @media (max-width: 768px) {
-          .tech-tabs { gap: 1rem; }
-          .tech-tab { font-size: 0.95rem; }
-          .tech-content-area { flex-direction: column; gap: 2rem; }
+          .tech-stacks-section { padding: 1.5rem 0 2rem; }
+          .tech-tabs { 
+            justify-content: center;
+            padding: 0 1.25rem 0rem;
+            margin-bottom: 1.5rem;
+            gap: 0.75rem;
+            border-bottom: none;
+          }
+          .tech-tab { 
+            font-size: 0.85rem;
+            padding: 8px 18px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 100px;
+          }
+          .tech-tab.active {
+            background: rgba(59,173,176,0.1);
+            border-color: #3badb0;
+          }
+          .tech-tab.active::after { display: none; }
+          .tech-content-area { flex-direction: column; min-height: auto; }
           .nav-btn { display: none; }
           .tech-grid { gap: 2.2rem; }
-          .tech-row { gap: 1.5rem; }
+          .tech-row { gap: 1.5rem; flex-wrap: wrap; }
           .tech-logo-wrapper { width: 70px; height: 40px; }
         }
       `

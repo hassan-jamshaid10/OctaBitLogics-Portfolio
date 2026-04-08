@@ -4,7 +4,7 @@
   --background: #ffffff;
   --foreground: #171717;
 }
-
+//fix
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -48,6 +48,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {

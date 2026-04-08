@@ -220,11 +220,12 @@ export default function AboutSplit() {
         /* responsive */
         @media (max-width: 860px) {
           .as-wrap { grid-template-columns: 1fr; }
-          .as-left { border-right: 1px solid rgba(59,173,176,0.18); border-bottom: none; }
+          .as-left { border-right: none; border-bottom: 1px solid rgba(59,173,176,0.18); }
           .as-left, .as-right { min-height: auto; padding: 3rem 2.25rem; }
         }
         @media (max-width: 480px) {
-          #about-split { padding: 4rem 1.25rem; }
+          #about-split { padding: 2rem 1rem; }
+          .as-left, .as-right { padding: 2rem 1.25rem; }
         }
       `}</style>
 

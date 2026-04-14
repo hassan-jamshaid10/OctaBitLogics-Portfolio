@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { label: "About", href: "#about-split" },
   { label: "Services", href: "#services" },
   { label: "Projects", href: "/projects" },
+  { label: "Blogs", href: "#blogs" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -64,6 +65,13 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
     }
   }, [hoveredLink, activeSection, pathname]);
 
+  const navigateToSection = useCallback((sectionId: string) => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('scrollToSection', sectionId.replace('#', ''));
+    }
+    router.push('/');
+  }, [router]);
+
   const handleNav = useCallback((e: React.MouseEvent, href: string) => {
     e.preventDefault();
     setMenuOpen(false);
@@ -72,28 +80,28 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
       router.push(href);
     } else {
       if (pathname !== '/') {
-        router.push('/' + href);
+        navigateToSection(href);
       } else {
         if (onNavClick) onNavClick(href);
       }
     }
-  }, [pathname, router, onNavClick]);
+  }, [pathname, router, onNavClick, navigateToSection]);
 
   const handleLogoClick = useCallback(() => {
     if (pathname !== '/') {
-      router.push('/#home');
+      navigateToSection('home');
     } else {
       if (onNavClick) onNavClick('#home');
     }
-  }, [pathname, router, onNavClick]);
+  }, [pathname, navigateToSection, onNavClick]);
 
   const handleCtaClick = useCallback(() => {
     if (pathname !== '/') {
-      router.push('/#contact');
+      navigateToSection('contact');
     } else {
       if (onNavClick) onNavClick('#contact');
     }
-  }, [pathname, router, onNavClick]);
+  }, [pathname, navigateToSection, onNavClick]);
 
   return (
     <>

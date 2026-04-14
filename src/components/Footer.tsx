@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import React from "react";
 import BackgroundNightfall from "./BackgroundNightfall";
+import Link from "next/link";
+import SectionLink from "./SectionLink";
 
 // ── Social SVGs ───────────────────────────────────────────────────────────────
 const IconFacebook = () => (
@@ -54,23 +56,30 @@ const IconMapPin = () => (
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 const SERVICES_LINKS = [
-  "Custom Software Dev",
-  "Mobile App Development",
-  "AI & Automation",
-  "Cloud & DevOps",
-  "UI/UX Design",
-  "Staff Augmentation",
+  { label: "Custom Software Dev", href: "/services/custom-software-development" },
+  { label: "Mobile App Development", href: "/services/mobile-app-development" },
+  { label: "AI & Automation", href: "/services/ai-and-automation" },
+  { label: "Cloud & DevOps", href: "/services/cloud-and-devops" },
+  { label: "UI/UX Design", href: "/services/ui-ux-design" },
 ];
-const INDUSTRIES_LINKS = [
-  "FinTech",
-  "E-Commerce",
-  "Healthcare",
-  "Real Estate",
-  "Logistics",
-  "SaaS & B2B",
+const PROJECTS_LINKS = [
+  { label: "LaunchPulse RAG", href: "/projects/launchpulse" },
+  { label: "SaaS Analytics", href: "/case-studies/saas-analytics" },
+  { label: "FinTech Pipeline", href: "/case-studies/fintech-pipeline" },
+  { label: "Healthcare Data", href: "/case-studies/healthcare-pipeline" },
+  { label: "E-Commerce", href: "/case-studies/ecommerce-platform" },
 ];
-const USEFUL_LINKS = ["About", "Contact", "Home"];
-const COMPANY_LINKS = ["Who We Are", "Blogs", "Contact"];
+const USEFUL_LINKS = [
+  { label: "Home", href: "home", isSection: true },
+  { label: "About", href: "about-split", isSection: true },
+  { label: "Services", href: "services", isSection: true },
+  { label: "Projects", href: "case-studies", isSection: true },
+  { label: "Blogs", href: "blogs", isSection: true },
+];
+const COMPANY_LINKS = [
+  { label: "Engineering Approach", href: "/engineering-approach" },
+  { label: "Contact Us", href: "contact", isSection: true },
+];
 
 const SOCIALS = [
   { Icon: IconFacebook, label: "Facebook" },
@@ -462,17 +471,21 @@ export default function Footer() {
             <p className="ftr-col-heading">Services</p>
             <nav className="ftr-nav-links">
               {SERVICES_LINKS.map((item) => (
-                <a key={item} href="#services" className="ftr-nav-link">{item}</a>
+                <Link key={item.label} href={item.href} className="ftr-nav-link">
+                  {item.label}
+                </Link>
               ))}
             </nav>
           </motion.div>
 
-          {/* ── Industries column ── */}
+          {/* ── Case Studies column ── */}
           <motion.div {...FU014}>
-            <p className="ftr-col-heading">Industries</p>
+            <p className="ftr-col-heading">Case Studies</p>
             <nav className="ftr-nav-links">
-              {INDUSTRIES_LINKS.map((item) => (
-                <a key={item} href="#" className="ftr-nav-link">{item}</a>
+              {PROJECTS_LINKS.map((item) => (
+                <Link key={item.label} href={item.href} className="ftr-nav-link">
+                  {item.label}
+                </Link>
               ))}
             </nav>
           </motion.div>
@@ -482,7 +495,15 @@ export default function Footer() {
             <p className="ftr-col-heading">Useful Links</p>
             <nav className="ftr-nav-links">
               {USEFUL_LINKS.map((item) => (
-                <a key={item} href={`#${item.toLowerCase().replace(/ /g, "")}`} className="ftr-nav-link">{item}</a>
+                item.isSection ? (
+                  <SectionLink key={item.label} section={item.href} className="ftr-nav-link">
+                    {item.label}
+                  </SectionLink>
+                ) : (
+                  <Link key={item.label} href={item.href} className="ftr-nav-link">
+                    {item.label}
+                  </Link>
+                )
               ))}
             </nav>
           </motion.div>
@@ -492,7 +513,15 @@ export default function Footer() {
             <p className="ftr-col-heading">Company</p>
             <nav className="ftr-nav-links">
               {COMPANY_LINKS.map((item) => (
-                <a key={item} href="#" className="ftr-nav-link">{item}</a>
+                item.isSection ? (
+                  <SectionLink key={item.label} section={item.href} className="ftr-nav-link">
+                    {item.label}
+                  </SectionLink>
+                ) : (
+                  <Link key={item.label} href={item.href} className="ftr-nav-link">
+                    {item.label}
+                  </Link>
+                )
               ))}
             </nav>
           </motion.div>

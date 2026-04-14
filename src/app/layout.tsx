@@ -47,12 +47,6 @@ export const metadata: Metadata = {
     canonical: "/",
   },
 
-  icons: {
-    icon: "/octa.png",
-    shortcut: "/octa.png",
-    apple: "/octa.png",
-  },
-
   openGraph: {
     title: "OctaBitLogics | Leading AI & SaaS Development Agency",
     description: "Transforming ambitious ideas into futuristic digital realities. Experts in AI, SaaS, and Cloud Infrastructure.",

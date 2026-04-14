@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import ScrollReveal from "./ScrollReveal";
 
 const PHRASES = [
@@ -90,8 +91,8 @@ export default function TaglineBar() {
 
       <div className="tagline-track">
         {items.map((phrase, pi) => (
-          <>
-            <span key={`phrase-${pi}`} className="tagline-phrase">
+          <React.Fragment key={pi}>
+            <span className="tagline-phrase">
               {phrase.words.map((word, wi) => (
                 <span
                   key={wi}
@@ -101,8 +102,8 @@ export default function TaglineBar() {
                 </span>
               ))}
             </span>
-            <span key={`sep-${pi}`} className="tagline-sep" />
-          </>
+            <span className="tagline-sep" />
+          </React.Fragment>
         ))}
       </div>
     </ScrollReveal>

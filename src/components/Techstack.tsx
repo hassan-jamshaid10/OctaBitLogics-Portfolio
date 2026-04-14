@@ -126,7 +126,8 @@ export default function TechStack() {
           background: #ffffff;
           position: relative;
           overflow: hidden;
-          padding: 80px 0;
+          padding: 0 !important;
+          margin: 0 !important;
           font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
         }
 
@@ -211,7 +212,7 @@ export default function TechStack() {
           align-items: center;
           justify-content: space-between;
           padding: 0 1rem;
-          min-height: 280px; /* enough space for items */
+          min-height: 280px;
         }
 
         .nav-btn {
@@ -272,7 +273,7 @@ export default function TechStack() {
         }
 
         @media (max-width: 768px) {
-          .tech-stacks-section { padding: 1.5rem 0 2rem; }
+          .tech-stacks-section { padding: 0 !important; }
           .tech-tabs { 
             justify-content: center;
             padding: 0 1.25rem 0rem;

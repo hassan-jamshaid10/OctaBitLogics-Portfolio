@@ -2,6 +2,7 @@
 
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import React, { MouseEvent, useCallback } from "react";
+import Link from "next/link";
 import BackgroundNightfall from "./BackgroundNightfall";
 
 // --- ANIMATED ICONS ---
@@ -133,30 +134,35 @@ const UIDesignIcon = () => (
 
 const SERVICES = [
   {
+    slug: "custom-software-development",
     icon: <SoftwareDevIcon />,
     title: "Custom Software Development",
     desc: "We architect and build robust, scalable software tailored to your exact requirements, from internal tools to enterprise platforms.",
     colSpan: "span 4",
   },
   {
+    slug: "mobile-app-development",
     icon: <MobileAppIcon />,
     title: "Mobile App Development",
     desc: "Cross-platform and native mobile experiences built for performance, intuition, and scale.",
     colSpan: "span 2",
   },
   {
+    slug: "ai-and-automation",
     icon: <AIAIutomationIcon />,
     title: "AI & Automation",
     desc: "Integrate LLMs, build RAG pipelines, and automate workflows. We make AI a genuine part of your product.",
     colSpan: "span 2",
   },
   {
+    slug: "cloud-and-devops",
     icon: <CloudIcon />,
     title: "Cloud & DevOps",
     desc: "Modern cloud infrastructure and CI/CD pipelines built for reliability and developer velocity at every stage.",
     colSpan: "span 2",
   },
   {
+    slug: "ui-ux-design",
     icon: <UIDesignIcon />,
     title: "UI / UX Design",
     desc: "Interfaces that are beautiful and functional. We design product experiences that users love, grounded in research.",
@@ -215,9 +221,9 @@ function ServiceCard({ s, i }: { s: typeof SERVICES[0]; i: number }) {
             <p className="srv-desc">{s.desc}</p>
           </div>
         </div>
-        <button className="srv-btn">
+        <Link href={`/services/${s.slug}`} className="srv-btn">
           Explore <ArrowIcon />
-        </button>
+        </Link>
       </div>
     </motion.div>
   );
@@ -402,6 +408,7 @@ export default function Services() {
           padding: 8px 20px;
           border-radius: 8px;
           cursor: pointer;
+          text-decoration: none;
           width: fit-content;
           transition: all 0.3s ease;
           margin-top: 2rem;

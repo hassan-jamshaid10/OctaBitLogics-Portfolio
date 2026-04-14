@@ -14,6 +14,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 1.0,
         },
 
+        // ── Engineering Approach
+        {
+            url: `${BASE}/engineering-approach`,
+            lastModified: now,
+            changeFrequency: 'monthly',
+            priority: 0.85,
+        },
+
         // ── Primary section anchors  (treated as canonical page URLs by crawlers)
         {
             url: `${BASE}/#about`,
@@ -73,5 +81,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 0.75,
         },
+
+        // ── Services Pages
+        { url: `${BASE}/services/custom-software-development`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+        { url: `${BASE}/services/mobile-app-development`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+        { url: `${BASE}/services/ai-and-automation`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+        { url: `${BASE}/services/cloud-and-devops`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+        { url: `${BASE}/services/ui-ux-design`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+
+        // ── Case Studies Pages
+        { url: `${BASE}/case-studies/ecommerce-platform`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+        { url: `${BASE}/case-studies/logistics-fleet`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+        { url: `${BASE}/case-studies/saas-analytics`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+        { url: `${BASE}/case-studies/healthcare-pipeline`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+        { url: `${BASE}/case-studies/fintech-pipeline`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+
+        // ── Blog Pages
+        { url: `${BASE}/blogs/nextjs-15-react-server-components`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
+        { url: `${BASE}/blogs/scaling-rag-pipelines`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
+        { url: `${BASE}/blogs/go-microservices-high-performance`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
     ]
 }

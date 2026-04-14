@@ -87,10 +87,14 @@ function BackgroundNightfall({
         .nightfall-global-net {
           transform-origin: center;
           animation: rotNet 60s linear infinite;
+          will-change: transform;
+          transform: translateZ(0);
         }
         .nightfall-global-net-2 {
           animation: rotNetRev 80s linear infinite;
           opacity: 0.5;
+          will-change: transform;
+          transform: translateZ(0);
         }
         @keyframes rotNet {
           0% { transform: rotate(0deg) scale(1); }
@@ -106,13 +110,15 @@ function BackgroundNightfall({
           position: absolute;
           border-radius: 50%;
           background: radial-gradient(circle, rgba(167, 255, 249, 0.08) 0%, transparent 60%);
+          will-change: transform;
+          transform: translateZ(0);
         }
         .nf-orb-1 { width: 400px; height: 400px; top: 10%; left: 20%; animation: floatOrbN 12s infinite alternate; }
         .nf-orb-2 { width: 500px; height: 500px; bottom: 10%; right: 10%; animation: floatOrbN 15s infinite alternate-reverse; }
         .nf-orb-3 { width: 350px; height: 350px; top: 50%; left: 50%; animation: floatOrbN 10s infinite alternate; }
         @keyframes floatOrbN {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(40px, -40px); }
+          0% { transform: translate3d(0, 0, 0); }
+          100% { transform: translate3d(40px, -40px, 0); }
         }
       `}</style>
 
@@ -126,6 +132,7 @@ function BackgroundNightfall({
         className="nightfall-global-stars-wrap"
         initial={{ opacity: 0, scale: 1.05, y: 20 }}
         animate={starsControls}
+        style={{ willChange: "opacity, transform", transform: "translateZ(0)" }}
       >
         <svg className="nightfall-global-svg" viewBox="0 0 1000 1000" preserveAspectRatio="none">
           <g className="nightfall-global-net">

@@ -3,11 +3,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
+import Link from "next/link";
 
 // ── Case studies data ─────────────────────────────────────────────────────────
 const CASES = [
   {
     id: 1,
+    slug: "saas-analytics",
     industry: "SaaS (US)",
     logo: "OBL",
     logoSub: "OCTABITLOGICS",
@@ -21,6 +23,7 @@ const CASES = [
   },
   {
     id: 2,
+    slug: "fintech-pipeline",
     industry: "FinTech (PK)",
     logo: "FT",
     logoSub: "FINTECH CLIENT",
@@ -34,6 +37,7 @@ const CASES = [
   },
   {
     id: 3,
+    slug: "healthcare-pipeline",
     industry: "Healthcare (UK)",
     logo: "HC",
     logoSub: "HEALTH CLIENT",
@@ -47,6 +51,7 @@ const CASES = [
   },
   {
     id: 4,
+    slug: "ecommerce-platform",
     industry: "E-Commerce (US)",
     logo: "EC",
     logoSub: "ECOM CLIENT",
@@ -60,6 +65,7 @@ const CASES = [
   },
   {
     id: 5,
+    slug: "logistics-fleet",
     industry: "Logistics (EU)",
     logo: "LG",
     logoSub: "LOGISTICS CLIENT",
@@ -96,7 +102,7 @@ export default function CaseStudies() {
       <style>{`
         #case-studies {
           background: #ffffff;
-          padding: 5rem 0;
+          padding: 7rem 0;
           position: relative;
           overflow: hidden;
           font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
@@ -127,7 +133,7 @@ export default function CaseStudies() {
         }
         .cs-heading {
           font-family: 'Oxanium', monospace;
-          font-size: clamp(1.5rem, 3vw, 2.2rem);
+          font-size: clamp(1.8rem, 4vw, 2.8rem);
           font-weight: 800;
           color: #1B2E5E;
           line-height: 1.15;
@@ -155,7 +161,7 @@ export default function CaseStudies() {
         .cs-all-btn:hover { background: #3BADB0; color: #fff; }
 
         .cs-nav-btn {
-          width: 40px; height: 40px;
+          width: 50px; height: 50px;
           border-radius: 50%;
           border: 1.5px solid rgba(27,46,94,0.2);
           background: #fff; color: #1B2E5E;
@@ -182,7 +188,7 @@ export default function CaseStudies() {
           border-radius: 16px;
           overflow: hidden;
           /* fixed tall aspect */
-          aspect-ratio: 3 / 4;
+          aspect-ratio: 2 / 3;
           cursor: pointer;
         }
 
@@ -193,8 +199,10 @@ export default function CaseStudies() {
           object-fit: cover;
           transition: transform 0.55s ease;
           z-index: 0;
+          will-change: transform;
+          transform: translateZ(0);
         }
-        .cs-card:hover .cs-img { transform: scale(1.06); }
+        .cs-card:hover .cs-img { transform: scale(1.06) translateZ(0); }
 
         /* strong gradient scrim — clear top, dark bottom */
         .cs-scrim {
@@ -266,7 +274,7 @@ export default function CaseStudies() {
         }
         .cs-title {
           font-family: 'Oxanium', monospace;
-          font-size: 0.92rem; font-weight: 700;
+          font-size: 1.05rem; font-weight: 700;
           color: #ffffff; line-height: 1.4;
         }
 
@@ -286,7 +294,7 @@ export default function CaseStudies() {
         }
         .cs-stat-value {
           font-family: 'Oxanium', monospace;
-          font-size: 1.25rem; font-weight: 800;
+          font-size: 1.4rem; font-weight: 800;
           color: #3BADB0; line-height: 1;
         }
         .cs-stat-label {
@@ -364,8 +372,8 @@ export default function CaseStudies() {
           .cs-dots { display: none; }
         }
         @media (max-width: 600px) {
-          #case-studies { padding: 3.5rem 0; }
-          .cs-card { aspect-ratio: 4 / 3; min-width: 85vw; }
+          #case-studies { padding: 4.5rem 0; }
+          .cs-card { aspect-ratio: 2 / 3; min-width: 85vw; }
           .cs-header {
             flex-direction: column;
             align-items: flex-start;
@@ -389,14 +397,13 @@ export default function CaseStudies() {
               Spotlight on <span>Client Success Stories</span>
             </h2>
             <div className="cs-header-right">
-              <button className="cs-all-btn">All Case Studies →</button>
               <button className="cs-nav-btn" onClick={prev} disabled={offset === 0} aria-label="Previous">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                   <polyline points="15 18 9 12 15 6" />
                 </svg>
               </button>
               <button className="cs-nav-btn" onClick={next} disabled={offset >= maxOffset} aria-label="Next">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                   <polyline points="9 18 15 12 9 6" />
                 </svg>
               </button>
@@ -445,9 +452,9 @@ export default function CaseStudies() {
                         ))}
                       </div>
 
-                      <button className="cs-read-btn">
+                      <Link href={`/case-studies/${c.slug}`} className="cs-read-btn">
                         Read More →
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

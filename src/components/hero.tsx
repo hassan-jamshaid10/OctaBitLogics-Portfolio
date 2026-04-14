@@ -138,6 +138,8 @@ export default function Hero({ onNavClick }: HeroProps) {
           filter: saturate(1.1) contrast(1.05);
           opacity: 0;
           transition: opacity 0.8s ease-in-out;
+          will-change: opacity, transform;
+          transform: translateZ(0);
         }
 
         .hero-video.active {
@@ -153,6 +155,7 @@ export default function Hero({ onNavClick }: HeroProps) {
             rgba(31,64,128,0.32) 48%,
             rgba(27,46,94,0.42) 100%
           );
+          pointer-events: none;
         }
         .hero-vignette {
           position: absolute; inset: 0; z-index: 2;
@@ -299,16 +302,16 @@ export default function Hero({ onNavClick }: HeroProps) {
         }
       `}</style>
 
-      {/* ── Videos — only the active one autoplays ── */}
+      {/* ── Videos — all autoplay and buffer to allow seamless crossfade ── */}
       {VIDEOS.map((src, i) => (
         <video
           key={src}
           className={`hero-video ${i === index ? "active" : ""}`}
-          autoPlay={i === index}
+          autoPlay
           muted
           playsInline
           loop
-          preload={i === index ? "auto" : "none"}
+          preload="auto"
         >
           <source src={src} type="video/mp4" />
         </video>

@@ -2,588 +2,263 @@
 
 import { motion } from "framer-motion";
 import React from "react";
-import BackgroundNightfall from "./BackgroundNightfall";
 import Link from "next/link";
 import SectionLink from "./SectionLink";
 
-// ── Social SVGs ───────────────────────────────────────────────────────────────
-const IconFacebook = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-  </svg>
-);
-const IconInstagram = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-    <circle cx="12" cy="12" r="4" />
-    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-  </svg>
-);
+// ── SVG icons ─────────────────────────────────────────────────────────────────
 const IconLinkedin = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect x="2" y="9" width="4" height="12" />
-    <circle cx="4" cy="4" r="2" />
+    <rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" />
   </svg>
 );
-const IconX = () => (
+const IconGithub = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
+  </svg>
+);
+const IconTwitter = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.264 5.633L18.244 2.25Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
   </svg>
 );
-const IconYoutube = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z" />
-  </svg>
-);
-const IconPhone = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 11.5 19.79 19.79 0 0 1 1.61 2.84 2 2 0 0 1 3.59 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-  </svg>
-);
-const IconMail = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-    <polyline points="22,6 12,13 2,6" />
-  </svg>
-);
-const IconMapPin = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-    <circle cx="12" cy="10" r="3" />
-  </svg>
-);
 
-// ── Data ──────────────────────────────────────────────────────────────────────
-const SERVICES_LINKS = [
-  { label: "Custom Software Dev", href: "/services/custom-software-development" },
-  { label: "Mobile App Development", href: "/services/mobile-app-development" },
-  { label: "AI & Automation", href: "/services/ai-and-automation" },
-  { label: "Cloud & DevOps", href: "/services/cloud-and-devops" },
-  { label: "UI/UX Design", href: "/services/ui-ux-design" },
-];
-const PROJECTS_LINKS = [
-  { label: "LaunchPulse RAG", href: "/projects/launchpulse" },
-  { label: "SaaS Analytics", href: "/case-studies/saas-analytics" },
-  { label: "FinTech Pipeline", href: "/case-studies/fintech-pipeline" },
-  { label: "Healthcare Data", href: "/case-studies/healthcare-pipeline" },
-  { label: "E-Commerce", href: "/case-studies/ecommerce-platform" },
-];
-const USEFUL_LINKS = [
-  { label: "Home", href: "home", isSection: true },
-  { label: "About", href: "about-split", isSection: true },
-  { label: "Services", href: "services", isSection: true },
-  { label: "Projects", href: "case-studies", isSection: true },
-  { label: "Blogs", href: "blogs", isSection: true },
+// ── Navigation data ────────────────────────────────────────────────────────────
+const PRODUCT_LINKS = [
+  { label: "Features",  href: "#services",   isSection: true },
+  { label: "Pricing",   href: "#contact",    isSection: true },
+  { label: "Solutions", href: "#services",   isSection: true },
 ];
 const COMPANY_LINKS = [
-  { label: "Engineering Approach", href: "/engineering-approach" },
-  { label: "Contact Us", href: "contact", isSection: true },
+  { label: "About Us", href: "about-split", isSection: true },
+  { label: "Careers",  href: "#contact",    isSection: false, to: "/contact" },
+  { label: "Contact",  href: "contact",     isSection: true },
 ];
-
 const SOCIALS = [
-  { Icon: IconFacebook, label: "Facebook" },
-  { Icon: IconInstagram, label: "Instagram" },
-  { Icon: IconLinkedin, label: "LinkedIn" },
-  { Icon: IconX, label: "X" },
-  { Icon: IconYoutube, label: "YouTube" },
+  { Icon: IconLinkedin, label: "LinkedIn", href: "#" },
+  { Icon: IconGithub,   label: "GitHub",   href: "#" },
+  { Icon: IconTwitter,  label: "Twitter",  href: "#" },
 ];
 
 const CURRENT_YEAR = new Date().getFullYear();
 
-// Pre‑computed animation props — created once at module load, never re‑created
-const FU0 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0 } };
-const FU008 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0.08 } };
-const FU014 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0.14 } };
-const FU020 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0.20 } };
-const FU026 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0.26 } };
-const FU01 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0.1 } };
-const FU018 = { initial: { opacity: 0, y: 22 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true as const }, transition: { duration: 0.55, ease: "easeOut" as const, delay: 0.18 } };
+const FU = (delay: number) => ({
+  initial:     { opacity: 0, y: 22 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport:    { once: true as const },
+  transition:  { duration: 0.55, ease: "easeOut" as const, delay },
+});
 
 export default function Footer() {
-
   return (
     <footer id="ftr">
-      {/* ── Scoped styles ─────────────────────────────────────────────────── */}
       <style>{`
-        /* Root */
         #ftr {
-          position: relative;
-          overflow: hidden;
-          background: linear-gradient(145deg, #3BADB0 0%, #1f4080 48%, #1B2E5E 100%);
-          font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-          color: #ffffff;
+          background: #f9fafb;
+          border-top: 1px solid #e3e2e6;
+          font-family: 'Inter', sans-serif;
+          color: #1a1b1e;
         }
 
-        /* ── Blobs ── */
-        .ftr-blob1 {
-          position: absolute; top: -140px; left: -130px;
-          width: 520px; height: 520px; border-radius: 50%;
-          background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 65%);
-          pointer-events: none; z-index: 0;
-        }
-        .ftr-blob2 {
-          position: absolute; bottom: -100px; right: -90px;
-          width: 480px; height: 480px; border-radius: 50%;
-          background: radial-gradient(circle, rgba(59,173,176,0.14) 0%, transparent 65%);
-          pointer-events: none; z-index: 0;
-        }
-
-        /* ── Wrapper ── */
         .ftr-wrap {
-          position: relative; z-index: 1;
           max-width: 1280px;
           margin: 0 auto;
-          padding: 0 2.5rem;
+          padding: 0 40px;
         }
 
-        /* ── Divider ── */
-        .ftr-divider {
-          border: none;
-          border-top: 1px solid rgba(255,255,255,0.1);
-          margin: 0;
-        }
-
-        /* ════════════════════════════════════════
-           TOP SECTION  (logo col + 4 nav cols)
-           ════════════════════════════════════════ */
+        /* ── Main grid ── */
         .ftr-top {
           display: grid;
-          grid-template-columns: 320px 1fr 1fr 1fr 1fr;
-          gap: 3rem;
-          padding: 4rem 0 3.5rem;
+          grid-template-columns: 1.4fr 1fr 1fr 1fr;
+          gap: 2rem;
+          padding: 3.5rem 0 3rem;
         }
 
-        /* ── Logo column ── */
+        /* Brand column */
+        .ftr-brand-col {}
         .ftr-logo-row {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
-          margin-bottom: 1.1rem;
+          gap: 0.5rem;
+          margin-bottom: 1rem;
         }
         .ftr-logo-img {
-          width: 58px; height: 58px;
+          width: 36px; height: 36px;
           object-fit: contain;
         }
-        .ftr-brand-block { display: flex; flex-direction: column; }
         .ftr-brand-name {
-          font-family: 'Oxanium', monospace;
-          font-size: 1.25rem;
-          font-weight: 800;
-          letter-spacing: 0.04em;
-          line-height: 1.1;
-          color: #fff;
+          font-family: 'Manrope', sans-serif;
+          font-size: 1.15rem;
+          font-weight: 900;
+          color: #002046;
+          letter-spacing: -0.01em;
         }
-        .ftr-brand-name span { color: #3BADB0; }
-        .ftr-brand-sub {
-          font-size: 0.6rem;
-          font-weight: 500;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.5);
-          margin-top: 2px;
+        .ftr-brand-name span { color: #22c55e; }
+        .ftr-brand-desc {
+          font-size: 0.85rem;
+          line-height: 1.65;
+          color: #6b7280;
+          max-width: 260px;
         }
 
-        .ftr-tagline {
-          font-size: 0.88rem;
-          line-height: 1.72;
-          color: rgba(255,255,255,0.62);
-          margin-bottom: 1.4rem;
-        }
-
-        /* Phone / email chips */
-        .ftr-contact-chips {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.6rem;
-          margin-bottom: 1.6rem;
-        }
-        .ftr-chip {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.45rem;
-          font-size: 0.8rem;
-          color: rgba(255,255,255,0.85);
-          background: rgba(255,255,255,0.08);
-          border: 1px solid rgba(255,255,255,0.15);
-          border-radius: 100px;
-          padding: 6px 14px;
-          text-decoration: none;
-          transition: background 0.25s, border-color 0.25s, color 0.25s;
-        }
-        .ftr-chip:hover {
-          background: rgba(59,173,176,0.22);
-          border-color: #3BADB0;
-          color: #fff;
-        }
-        .ftr-chip svg { flex-shrink: 0; opacity: 0.75; }
-
-        /* Follow us */
-        .ftr-follow-label {
-          font-family: 'Oxanium', monospace;
-          font-size: 0.65rem;
+        /* Nav columns */
+        .ftr-nav-col {}
+        .ftr-col-title {
+          font-family: 'Manrope', sans-serif;
+          font-size: 0.85rem;
           font-weight: 700;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.45);
-          margin-bottom: 0.75rem;
+          color: #22c55e;
+          margin-bottom: 1rem;
         }
-        .ftr-socials {
-          display: flex;
-          gap: 0.6rem;
-          flex-wrap: wrap;
-        }
-        .ftr-social {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 38px; height: 38px;
-          border-radius: 10px;
-          background: rgba(255,255,255,0.08);
-          border: 1px solid rgba(255,255,255,0.14);
-          color: rgba(255,255,255,0.75);
-          text-decoration: none;
-          transition: all 0.25s ease;
-        }
-        .ftr-social:hover {
-          background: #3BADB0;
-          border-color: #a7fff9;
-          color: #fff;
-          box-shadow: 0 0 15px rgba(59,173,176,0.45);
-          transform: translateY(-2px);
-        }
-
-        /* ── Nav columns ── */
-        .ftr-col-heading {
-          font-family: 'Oxanium', monospace;
-          font-size: 0.95rem;
-          font-weight: 800;
-          letter-spacing: 0.04em;
-          color: #ffffff;
-          margin-bottom: 1.2rem;
-          position: relative;
-          padding-bottom: 0.7rem;
-        }
-        .ftr-col-heading::after {
-          content: '';
-          position: absolute;
-          bottom: 0; left: 0;
-          width: 28px; height: 2px;
-          background: #3BADB0;
-          border-radius: 2px;
-        }
-
-        .ftr-nav-links {
+        .ftr-nav-list {
+          list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 0.7rem;
-        }
-        .ftr-nav-link {
-          font-size: 0.87rem;
-          color: rgba(255,255,255,0.62);
-          text-decoration: none;
-          transition: color 0.22s ease, padding-left 0.22s ease;
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-        }
-        .ftr-nav-link::before {
-          content: '';
-          display: inline-block;
-          width: 5px; height: 1.5px;
-          background: rgba(59,173,176,0.7);
-          border-radius: 2px;
-          transition: width 0.22s ease;
-          flex-shrink: 0;
-        }
-        .ftr-nav-link:hover { color: #a7fff9; }
-        .ftr-nav-link:hover::before { width: 10px; }
-
-        /* ════════════════════════════════════════
-           MIDDLE STRIP  (Address | Contact | Follow)
-           ════════════════════════════════════════ */
-        .ftr-strip {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          gap: 0;
-          border-top: 1px solid rgba(255,255,255,0.1);
-          border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .ftr-strip-cell {
-          padding: 1.6rem 2rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-        .ftr-strip-cell:not(:last-child) {
-          border-right: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .ftr-strip-heading {
-          font-family: 'Oxanium', monospace;
-          font-size: 0.78rem;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.5);
-          margin-bottom: 0.25rem;
-        }
-
-        .ftr-addr-item {
-          display: flex;
-          align-items: flex-start;
           gap: 0.6rem;
-          font-size: 0.84rem;
-          color: rgba(255,255,255,0.72);
-          line-height: 1.55;
         }
-        .ftr-addr-item svg { flex-shrink: 0; margin-top: 3px; color: #3BADB0; }
+        .ftr-nav-list a {
+          font-size: 0.85rem;
+          color: #6b7280;
+          text-decoration: none;
+          transition: color 0.2s ease;
+          cursor: pointer;
+        }
+        .ftr-nav-list a:hover { color: #1e3a6e; text-decoration: underline; text-underline-offset: 4px; }
 
-        .ftr-contact-row {
+        /* Social links */
+        .ftr-socials-col {}
+        .ftr-social-row {
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+        }
+        .ftr-social-link {
+          font-size: 0.85rem;
+          color: #6b7280;
+          text-decoration: none;
           display: flex;
           align-items: center;
-          gap: 0.7rem;
-          font-size: 0.84rem;
-          color: rgba(255,255,255,0.72);
+          gap: 0.35rem;
+          transition: color 0.2s ease;
         }
-        .ftr-contact-row svg { color: #3BADB0; flex-shrink: 0; }
-        .ftr-contact-row a {
-          color: inherit;
-          text-decoration: none;
-          transition: color 0.2s;
-        }
-        .ftr-contact-row a:hover { color: #a7fff9; }
+        .ftr-social-link:hover { color: #1e3a6e; text-decoration: underline; text-underline-offset: 4px; }
 
-        /* ════════════════════════════════════════
-           BOTTOM BAR
-           ════════════════════════════════════════ */
-        .ftr-bottom {
-          padding: 1.4rem 0;
+        /* ── Bottom bar ── */
+        .ftr-bottom-bar {
+          border-top: 1px solid #e3e2e6;
           display: flex;
           justify-content: space-between;
           align-items: center;
           flex-wrap: wrap;
           gap: 0.75rem;
+          padding: 1.5rem 0;
         }
         .ftr-copy {
-          font-family: 'Oxanium', monospace;
-          font-size: 0.8rem;
-          color: rgba(255,255,255,0.38);
-          letter-spacing: 0.04em;
+          font-size: 0.82rem;
+          color: #6b7280;
         }
         .ftr-legal {
           display: flex;
-          gap: 1rem;
-          align-items: center;
+          gap: 1.5rem;
+          flex-wrap: wrap;
         }
         .ftr-legal a {
-          font-size: 0.8rem;
-          color: rgba(255,255,255,0.45);
+          font-size: 0.82rem;
+          color: #6b7280;
           text-decoration: none;
           transition: color 0.2s;
         }
-        .ftr-legal a:hover { color: #a7fff9; }
-        .ftr-legal-sep {
-          width: 1px; height: 14px;
-          background: rgba(255,255,255,0.2);
-        }
+        .ftr-legal a:hover { color: #1e3a6e; text-decoration: underline; text-underline-offset: 4px; }
 
-        /* ── Responsive ── */
-        @media (max-width: 1100px) {
-          .ftr-top {
-            grid-template-columns: 1fr 1fr 1fr;
-          }
-          .ftr-top > *:first-child {
-            grid-column: 1 / -1;
-          }
+        /* Responsive */
+        @media (max-width: 1024px) {
+          .ftr-top { grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem 0 2.5rem; }
+          .ftr-brand-col { grid-column: 1 / -1; }
         }
-        @media (max-width: 768px) {
-          .ftr-top {
-            grid-template-columns: 1fr 1fr;
-            padding: 3rem 0 2.5rem;
-          }
-          .ftr-top > *:first-child { grid-column: 1 / -1; }
-          .ftr-strip { grid-template-columns: 1fr; }
-          .ftr-strip-cell:not(:last-child) { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
-          .ftr-wrap { padding: 0 1.25rem; }
+        @media (max-width: 640px) {
+          .ftr-wrap { padding: 0 16px; }
+          .ftr-top { grid-template-columns: 1fr 1fr; }
+          .ftr-brand-col { grid-column: 1 / -1; }
+          .ftr-bottom-bar { flex-direction: column; align-items: flex-start; }
         }
         @media (max-width: 480px) {
           .ftr-top { grid-template-columns: 1fr; }
-          .ftr-bottom { flex-direction: column; align-items: flex-start; }
-          .ftr-legal { flex-wrap: wrap; }
         }
       `}</style>
 
-      {/* Animated day-to-night background */}
-      <BackgroundNightfall />
-
-      {/* Decorative blobs */}
-      <div className="ftr-blob1" />
-      <div className="ftr-blob2" />
-
       <div className="ftr-wrap">
+        <motion.div className="ftr-top" {...FU(0)}>
 
-        {/* ══════════════════════════════════════════
-            TOP: Logo column + 4 nav columns
-            ══════════════════════════════════════════ */}
-        <motion.div className="ftr-top" {...FU0}>
-
-          {/* ── Brand / Logo column ── */}
-          <motion.div {...FU0}>
+          {/* Brand column */}
+          <motion.div className="ftr-brand-col" {...FU(0)}>
             <div className="ftr-logo-row">
-              <img src="/octa.png" alt="OctaBitLogics Logo" className="ftr-logo-img" />
-              <div className="ftr-brand-block">
-                <span className="ftr-brand-name">
-                  <span>OctaBit</span>Logics
-                </span>
-                <span className="ftr-brand-sub">Software Studio</span>
-              </div>
+              <img src="/octa.png" alt="OctaBitLogics" className="ftr-logo-img" />
+              <span className="ftr-brand-name">OctaBit<span>logics</span></span>
             </div>
-
-            <p className="ftr-tagline">
-              OctaBitLogics is a global technology partner delivering end-to-end
-              services including custom software, AI automation, cloud infrastructure,
-              and modern mobile experiences.
+            <p className="ftr-brand-desc">
+              Empowering the future with precision-engineered AI and elite software architecture.
             </p>
-
-            <div className="ftr-contact-chips">
-              <a href="tel:+18001234567" className="ftr-chip">
-                <IconPhone /> +92 321 5353105
-              </a>
-              <a href="mailto:info@octabitlogics.com" className="ftr-chip">
-                <IconMail /> info@octabitlogics.com
-              </a>
-            </div>
-
-            <p className="ftr-follow-label">Follow Us</p>
-            <div className="ftr-socials">
-              {SOCIALS.map(({ Icon, label }) => (
-                <a key={label} href="#" className="ftr-social" aria-label={label}>
-                  <Icon />
-                </a>
-              ))}
-            </div>
           </motion.div>
 
-          {/* ── Services column ── */}
-          <motion.div {...FU008}>
-            <p className="ftr-col-heading">Services</p>
-            <nav className="ftr-nav-links">
-              {SERVICES_LINKS.map((item) => (
-                <Link key={item.label} href={item.href} className="ftr-nav-link">
-                  {item.label}
-                </Link>
+          {/* Product column */}
+          <motion.div className="ftr-nav-col" {...FU(0.08)}>
+            <p className="ftr-col-title">Product</p>
+            <ul className="ftr-nav-list">
+              {PRODUCT_LINKS.map((item) => (
+                <li key={item.label}>
+                  {item.isSection ? (
+                    <SectionLink section={item.href.replace("#", "")} className="">
+                      {item.label}
+                    </SectionLink>
+                  ) : (
+                    <a href={item.href}>{item.label}</a>
+                  )}
+                </li>
               ))}
-            </nav>
+            </ul>
           </motion.div>
 
-          {/* ── Case Studies column ── */}
-          <motion.div {...FU014}>
-            <p className="ftr-col-heading">Case Studies</p>
-            <nav className="ftr-nav-links">
-              {PROJECTS_LINKS.map((item) => (
-                <Link key={item.label} href={item.href} className="ftr-nav-link">
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </motion.div>
-
-          {/* ── Useful Links column ── */}
-          <motion.div {...FU020}>
-            <p className="ftr-col-heading">Useful Links</p>
-            <nav className="ftr-nav-links">
-              {USEFUL_LINKS.map((item) => (
-                item.isSection ? (
-                  <SectionLink key={item.label} section={item.href} className="ftr-nav-link">
-                    {item.label}
-                  </SectionLink>
-                ) : (
-                  <Link key={item.label} href={item.href} className="ftr-nav-link">
-                    {item.label}
-                  </Link>
-                )
-              ))}
-            </nav>
-          </motion.div>
-
-          {/* ── Company column ── */}
-          <motion.div {...FU026}>
-            <p className="ftr-col-heading">Company</p>
-            <nav className="ftr-nav-links">
+          {/* Company column */}
+          <motion.div className="ftr-nav-col" {...FU(0.14)}>
+            <p className="ftr-col-title">Company</p>
+            <ul className="ftr-nav-list">
               {COMPANY_LINKS.map((item) => (
-                item.isSection ? (
-                  <SectionLink key={item.label} section={item.href} className="ftr-nav-link">
-                    {item.label}
-                  </SectionLink>
-                ) : (
-                  <Link key={item.label} href={item.href} className="ftr-nav-link">
-                    {item.label}
-                  </Link>
-                )
+                <li key={item.label}>
+                  {item.isSection ? (
+                    <SectionLink section={item.href} className="">
+                      {item.label}
+                    </SectionLink>
+                  ) : (
+                    <a href={item.href}>{item.label}</a>
+                  )}
+                </li>
               ))}
-            </nav>
+            </ul>
+          </motion.div>
+
+          {/* Follow Us column */}
+          <motion.div className="ftr-socials-col" {...FU(0.2)}>
+            <p className="ftr-col-title">Follow Us</p>
+            <div className="ftr-social-row">
+              {SOCIALS.map(({ Icon, label, href }) => (
+                <a key={label} href={href} className="ftr-social-link" aria-label={label}>
+                  {label}
+                </a>
+              ))}
+            </div>
           </motion.div>
 
         </motion.div>
 
-        {/* ══════════════════════════════════════════
-            MIDDLE INFO STRIP  (Address | Contact | Follow)
-            ══════════════════════════════════════════ */}
-        <motion.div className="ftr-strip" {...FU01}>
-
-          {/* Address */}
-          <div className="ftr-strip-cell">
-            <p className="ftr-strip-heading">Address</p>
-            <div className="ftr-addr-item">
-              <IconMapPin />
-              <span>&nbsp; Lahore, Punjab, Pakistan</span>
-            </div>
-
-          </div>
-
-          {/* Contact */}
-          <div className="ftr-strip-cell">
-            <p className="ftr-strip-heading">Contact Us</p>
-            <div className="ftr-contact-row">
-              <IconPhone />
-              <a href="tel:+18001234567">+92 321 5353105</a>
-            </div>
-            <div className="ftr-contact-row">
-              <IconMail />
-              <a href="mailto:info@octabitlogics.com">info@octabitlogics.com</a>
-            </div>
-          </div>
-
-          {/* Follow us (repeated for the strip layout) */}
-          <div className="ftr-strip-cell">
-            <p className="ftr-strip-heading">Follow Us</p>
-            <div className="ftr-socials">
-              {SOCIALS.map(({ Icon, label }) => (
-                <a key={label} href="#" className="ftr-social" aria-label={label}>
-                  <Icon />
-                </a>
-              ))}
-            </div>
-          </div>
-
-        </motion.div>
-
-        {/* ══════════════════════════════════════════
-            BOTTOM BAR
-            ══════════════════════════════════════════ */}
-        <motion.div className="ftr-bottom" {...FU018}>
-          <p className="ftr-copy">&copy; {CURRENT_YEAR} OctaBitLogics. All rights reserved.</p>
-          {/* <div className="ftr-legal">
-            <a href="#">Terms &amp; Conditions</a>
-            <span className="ftr-legal-sep" />
+        {/* Bottom bar */}
+        <motion.div className="ftr-bottom-bar" {...FU(0.1)}>
+          <p className="ftr-copy">© {CURRENT_YEAR} OctaBitLogics. Precision in Intelligence.</p>
+          <nav className="ftr-legal">
             <a href="#">Privacy Policy</a>
-            <span className="ftr-legal-sep" />
-            <a href="#">Cookie Policy</a>
-          </div> */}
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookies</a>
+          </nav>
         </motion.div>
-
       </div>
     </footer>
   );

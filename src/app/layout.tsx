@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Orbitron, Geist_Mono } from "next/font/google";
+import { Orbitron, Geist_Mono, Manrope, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -15,6 +15,20 @@ const orbitron = Orbitron({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// New design primary display font
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+// New design body font
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -120,16 +134,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${orbitron.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${orbitron.variable} ${geistMono.variable} ${manrope.variable} ${inter.variable} h-full antialiased`}
       prefix="og: http://ogp.me/ns#"
     >
       <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full bg-[#02040a] selection:bg-[#00fff0] selection:text-[#02040a]">
+      <body className="min-h-full bg-[#faf9fd] selection:bg-[#a2f796] selection:text-[#002046]">
         {children}
         <Analytics />
         <SpeedInsights />

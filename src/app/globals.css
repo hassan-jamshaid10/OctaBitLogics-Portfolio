@@ -1,29 +1,70 @@
-/* @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Oxanium:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-//fix
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
-
- 
-
-@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
-
+/* ─── Design Tokens ─────────────────────────────────────────────────── */
 :root {
+  /* Primary palette (navy) */
+  --primary:             #002046;
+  --primary-container:   #1b365d;
+  --on-primary:          #ffffff;
+  --on-primary-container:#87a0cd;
+  --primary-fixed:       #d6e3ff;
+  --primary-fixed-dim:   #aec7f7;
+  --inverse-primary:     #aec7f7;
+  --on-primary-fixed:    #001b3d;
+  --on-primary-fixed-variant: #2e476f;
+
+  /* Secondary palette (green) */
+  --secondary:            #1b6d1e;
+  --secondary-container:  #a2f796;
+  --on-secondary:         #ffffff;
+  --on-secondary-container: #237324;
+  --secondary-fixed:      #a2f796;
+  --secondary-fixed-dim:  #87da7d;
+  --on-secondary-fixed:   #002202;
+  --on-secondary-fixed-variant: #00530b;
+
+  /* Tertiary palette */
+  --tertiary:             #19231a;
+  --tertiary-container:   #2e392f;
+  --on-tertiary:          #ffffff;
+  --on-tertiary-container:#97a295;
+  --tertiary-fixed:       #dae6d7;
+  --tertiary-fixed-dim:   #becabc;
+  --on-tertiary-fixed:    #141e15;
+  --on-tertiary-fixed-variant: #3f4a3f;
+
+  /* Surface / Background */
+  --background:           #faf9fd;
+  --on-background:        #1a1b1e;
+  --surface:              #faf9fd;
+  --surface-dim:          #dad9dd;
+  --surface-bright:       #faf9fd;
+  --surface-container-lowest:  #ffffff;
+  --surface-container-low:     #f4f3f7;
+  --surface-container:         #efedf1;
+  --surface-container-high:    #e9e7eb;
+  --surface-container-highest: #e3e2e6;
+  --surface-variant:      #e3e2e6;
+  --surface-tint:         #465f88;
+  --inverse-surface:      #2f3033;
+
+  /* On-surface */
+  --on-surface:           #1a1b1e;
+  --on-surface-variant:   #44474e;
+  --inverse-on-surface:   #f1f0f4;
+
+  /* Outline */
+  --outline:              #74777f;
+  --outline-variant:      #c4c6cf;
+
+  /* Error */
+  --error:                #ba1a1a;
+  --on-error:             #ffffff;
+  --error-container:      #ffdad6;
+  --on-error-container:   #93000a;
+
+  /* Legacy teal (kept for old components) */
   --teal: #3BADB0;
   --teal-light: #54C5C8;
   --teal-dark: #2A8F92;
@@ -34,12 +75,18 @@
   --navy-glow: rgba(27, 46, 94, 0.15);
   --white: #FFFFFF;
   --off-white: #F4FAFB;
-  --surface: #EEF6F7;
   --text-muted: #6B8A8B;
   --border: rgba(59, 173, 176, 0.2);
   --border-strong: rgba(59, 173, 176, 0.35);
+
+  /* Spacing */
+  --margin-desktop: 40px;
+  --margin-mobile: 16px;
+  --gutter: 24px;
+  --container-max: 1280px;
 }
 
+/* ─── Reset ─────────────────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -52,20 +99,28 @@ html {
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--off-white);
-  color: var(--navy);
+  font-family: 'Inter', 'DM Sans', sans-serif;
+  background: var(--background);
+  color: var(--on-surface);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Shared section styles */
+/* ─── Material Symbols ──────────────────────────────────────────────── */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ─── Glassmorphism ─────────────────────────────────────────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ─── Section Defaults (legacy kept for existing components) ────────── */
 section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6rem 2rem 4rem;
   position: relative;
 }
 
@@ -76,7 +131,7 @@ section {
 }
 
 .section-tag {
-  font-family: 'Oxanium', monospace;
+  font-family: 'Manrope', 'Oxanium', monospace;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -98,24 +153,7 @@ section {
   border-radius: 2px;
 }
 
-h2 {
-  font-family: 'Oxanium', monospace;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 1rem;
-  line-height: 1.1;
-}
-
-p.lead {
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: var(--text-muted);
-  max-width: 580px;
-  margin: 0 auto;
-}
-
-/* Shared card styles */
+/* ─── Shared card styles (legacy) ───────────────────────────────────── */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -145,7 +183,7 @@ p.lead {
 }
 
 .card h3 {
-  font-family: 'Oxanium', monospace;
+  font-family: 'Manrope', 'Oxanium', monospace;
   font-size: 1rem;
   font-weight: 700;
   color: var(--navy);
@@ -158,7 +196,7 @@ p.lead {
   line-height: 1.65;
 }
 
-/* Fade-in-up animation utility */
+/* ─── Animations ─────────────────────────────────────────────────────── */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }

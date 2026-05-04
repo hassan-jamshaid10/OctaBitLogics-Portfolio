@@ -54,7 +54,7 @@ export default function Footer() {
     <footer id="ftr">
       <style>{`
         #ftr {
-          background: #f9fafb;
+          background: #ffffff;
           border-top: 1px solid #e3e2e6;
           font-family: 'Inter', sans-serif;
           color: #1a1b1e;
@@ -83,17 +83,10 @@ export default function Footer() {
           margin-bottom: 1rem;
         }
         .ftr-logo-img {
-          width: 36px; height: 36px;
+          width: 200px;
+          height: 56px;
           object-fit: contain;
         }
-        .ftr-brand-name {
-          font-family: 'Manrope', sans-serif;
-          font-size: 1.15rem;
-          font-weight: 900;
-          color: #002046;
-          letter-spacing: -0.01em;
-        }
-        .ftr-brand-name span { color: #22c55e; }
         .ftr-brand-desc {
           font-size: 0.85rem;
           line-height: 1.65;
@@ -192,8 +185,7 @@ export default function Footer() {
           {/* Brand column */}
           <motion.div className="ftr-brand-col" {...FU(0)}>
             <div className="ftr-logo-row">
-              <img src="/octa.png" alt="OctaBitLogics" className="ftr-logo-img" />
-              <span className="ftr-brand-name">OctaBit<span>logics</span></span>
+              <img src="/octabit final.png" alt="OctaBitLogics" className="ftr-logo-img" />
             </div>
             <p className="ftr-brand-desc">
               Empowering the future with precision-engineered AI and elite software architecture.

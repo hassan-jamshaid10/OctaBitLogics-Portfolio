@@ -12,21 +12,22 @@ export default function TaglineBar() {
       <style>{`
         .trusted-bar {
           width: 100%;
-          background: #f4f3f7;
-          border-top: 1px solid #c4c6cf40;
-          border-bottom: 1px solid #c4c6cf40;
-          padding: 3rem 40px;
+          background: #ffffff;
+          border-top: 1px solid #f0f0f0;
+          border-bottom: 1px solid #f0f0f0;
+          padding: 3.5rem 40px;
         }
 
         .trusted-label {
           text-align: center;
           font-family: 'Inter', sans-serif;
-          font-size: 0.7rem;
-          font-weight: 500;
+          font-size: 0.75rem;
+          font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #74777f;
-          margin-bottom: 2.5rem;
+          color: #002046;
+          opacity: 0.4;
+          margin-bottom: 3rem;
         }
 
         .trusted-logos-wrap {
@@ -44,11 +45,11 @@ export default function TaglineBar() {
         }
         .trusted-logos-wrap::before {
           left: 0;
-          background: linear-gradient(to right, #f4f3f7, transparent);
+          background: linear-gradient(to right, #ffffff, transparent);
         }
         .trusted-logos-wrap::after {
           right: 0;
-          background: linear-gradient(to left, #f4f3f7, transparent);
+          background: linear-gradient(to left, #ffffff, transparent);
         }
 
         .trusted-logos-track {
@@ -73,12 +74,16 @@ export default function TaglineBar() {
 
         .trusted-logo-item {
           font-family: 'Manrope', sans-serif;
-          font-size: 1.5rem;
+          font-size: 1.6rem;
           font-weight: 900;
           color: #002046;
-          letter-spacing: -0.01em;
+          letter-spacing: -0.02em;
           white-space: nowrap;
           user-select: none;
+          transition: color 0.3s ease;
+        }
+        .trusted-logo-item:hover {
+          color: #2ECC40;
         }
 
         @media (max-width: 600px) {

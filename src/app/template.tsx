@@ -112,7 +112,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
               animate={{ rotate: -90, scale: 1.3, opacity: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
             />
-            <img src="/octa.png" alt="OctaBitLogics Logo" className="pg-logo" />
+            <img src="/octabit final.png" alt="OctaBitLogics Logo" className="pg-logo" />
           </div>
 
           <div className="pg-brand-text"><span>Octa</span>BitLogics</div>

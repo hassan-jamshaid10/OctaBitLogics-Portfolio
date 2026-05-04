@@ -46,15 +46,16 @@ export default function CaseStudies() {
         }
         .proj-badge {
           display: inline-block;
-          background: #4ade80;
-          color: #002202;
+          background: #2ECC40;
+          color: #ffffff;
           font-family: 'Inter', sans-serif;
           font-size: 0.72rem;
-          font-weight: 500;
+          font-weight: 700;
           letter-spacing: 0.05em;
-          padding: 5px 16px;
+          padding: 6px 18px;
           border-radius: 9999px;
           margin-bottom: 1.5rem;
+          box-shadow: 0 4px 12px rgba(46,204,64,0.3);
         }
         .proj-h2 {
           font-family: 'Manrope', sans-serif;
@@ -118,43 +119,40 @@ export default function CaseStudies() {
         }
         .proj-card:hover .proj-explore { opacity: 1; }
         .proj-explore-btn {
-          background: #1b6d1e;
+          background: #2ECC40;
           color: #ffffff;
           font-family: 'Inter', sans-serif;
           font-size: 0.82rem;
-          font-weight: 600;
-          padding: 12px 28px;
+          font-weight: 700;
+          padding: 14px 32px;
           border-radius: 9999px;
           letter-spacing: 0.02em;
+          box-shadow: 0 8px 20px rgba(46,204,64,0.4);
         }
 
         /* Card text */
         .proj-category {
           font-family: 'Inter', sans-serif;
-          font-size: 0.72rem;
-          font-weight: 600;
-          letter-spacing: 0.05em;
-          color: #87da7d;
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          color: #2ECC40;
           margin-bottom: 0.5rem;
         }
         .proj-title {
           font-family: 'Manrope', sans-serif;
-          font-size: 1.75rem;
-          font-weight: 700;
-          color: #4ade80;
+          font-size: 1.85rem;
+          font-weight: 800;
+          color: #ffffff;
           margin-bottom: 1rem;
-          letter-spacing: -0.01em;
+          letter-spacing: -0.02em;
           line-height: 1.2;
         }
         .proj-desc {
-          display: inline-block;
-          background: #4ade80;
-          color: #002202;
           font-family: 'Inter', sans-serif;
-          font-size: 0.82rem;
-          font-weight: 500;
-          padding: 6px 16px;
-          border-radius: 9999px;
+          font-size: 0.95rem;
+          line-height: 1.7;
+          color: rgba(255,255,255,0.6);
         }
 
         /* View all link */
@@ -166,20 +164,22 @@ export default function CaseStudies() {
         .proj-view-all-btn {
           display: inline-flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.6rem;
           font-family: 'Inter', sans-serif;
-          font-size: 0.88rem;
-          font-weight: 600;
-          color: #4ade80;
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: #2ECC40;
           text-decoration: none;
-          border: 1.5px solid rgba(74,222,128,0.35);
-          padding: 12px 28px;
+          border: 2px solid rgba(46,204,64,0.3);
+          padding: 14px 32px;
           border-radius: 9999px;
-          transition: all 0.25s ease;
+          transition: all 0.3s ease;
         }
         .proj-view-all-btn:hover {
-          background: rgba(74,222,128,0.08);
-          border-color: #4ade80;
+          background: rgba(46,204,64,0.06);
+          border-color: #2ECC40;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(46,204,64,0.15);
         }
 
         /* Responsive */

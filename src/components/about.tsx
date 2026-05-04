@@ -47,10 +47,10 @@ export default function AboutSplit() {
         /* ── LEFT PANEL ── */
         .as-left {
           background: linear-gradient(145deg,
-            rgba(59,173,176,0.09) 0%,
-            rgba(27,46,94,0.06) 100%
+            rgba(0,32,70,0.03) 0%,
+            rgba(0,32,70,0.01) 100%
           );
-          border: 1px solid rgba(59,173,176,0.18);
+          border: 1px solid rgba(0,32,70,0.08);
           border-right: none;
           padding: 2.5rem 3rem;
           display: flex;
@@ -73,27 +73,28 @@ export default function AboutSplit() {
         }
 
         .as-est {
-          font-family: 'Oxanium', monospace;
-          font-size: 0.62rem; font-weight: 700;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem; font-weight: 700;
           letter-spacing: 0.2em; text-transform: uppercase;
-          color: #3BADB0;
+          color: #2ECC40;
           display: flex; align-items: center; gap: 0.5rem;
           margin-bottom: 1.6rem;
         }
         .as-est::before {
           content: '';
           display: inline-block; width: 18px; height: 1px;
-          background: #3BADB0;
+          background: #2ECC40;
         }
 
         .as-left h2 {
-          font-family: 'Oxanium', monospace;
+          font-family: 'Manrope', sans-serif;
           font-size: clamp(1.6rem, 2.5vw, 2.25rem);
-          font-weight: 800; line-height: 1.1;
-          color: #1B2E5E;
+          font-weight: 800; line-height: 1.15;
+          color: #002046;
+          letter-spacing: -0.02em;
         }
         .as-left h2 span {
-          background: linear-gradient(135deg, #3BADB0 0%, #1B2E5E 100%);
+          background: linear-gradient(135deg, #4ade80 0%, #3BADB0 100%);
           -webkit-background-clip: text; -webkit-text-fill-color: transparent;
           background-clip: text;
         }
@@ -104,33 +105,35 @@ export default function AboutSplit() {
         }
 
         .as-left-body p {
-          font-size: 0.875rem; line-height: 1.88; color: #4e6070;
-          border-top: 1px solid rgba(59,173,176,0.2);
-          padding-top: 1rem;
-          margin-bottom: 1rem;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.9rem; line-height: 1.8; color: #44474e;
+          border-top: 1px solid rgba(0,32,70,0.08);
+          padding-top: 1.25rem;
+          margin-bottom: 1.25rem;
         }
 
         .as-pills {
           display: flex; flex-wrap: wrap; gap: 0.5rem;
         }
         .as-pill {
-          font-family: 'Oxanium', monospace;
-          font-size: 0.56rem; font-weight: 700;
-          letter-spacing: 0.12em; text-transform: uppercase;
-          color: #3BADB0;
-          border: 1px solid rgba(59,173,176,0.28);
-          background: rgba(59,173,176,0.06);
-          padding: 4px 11px; border-radius: 100px;
-          transition: background 0.2s ease, border-color 0.2s ease;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem; font-weight: 700;
+          letter-spacing: 0.08em; text-transform: uppercase;
+          color: #2ECC40;
+          border: 1px solid rgba(46,204,64,0.25);
+          background: rgba(46,204,64,0.06);
+          padding: 5px 12px; border-radius: 100px;
+          transition: all 0.3s ease;
         }
         .as-pill:hover {
-          background: rgba(59,173,176,0.12);
-          border-color: rgba(59,173,176,0.45);
+          background: rgba(46,204,64,0.12);
+          border-color: rgba(46,204,64,0.5);
+          transform: translateY(-1px);
         }
 
         /* ── RIGHT PANEL ── */
         .as-right {
-          background: linear-gradient(145deg, #3BADB0 0%, #1f4080 55%, #1B2E5E 100%);
+          background: linear-gradient(145deg, #002046 0%, #001530 100%);
           padding: 2.5rem 3rem;
           display: flex;
           flex-direction: column;
@@ -161,8 +164,8 @@ export default function AboutSplit() {
         }
 
         .as-mission-tag {
-          font-family: 'Oxanium', monospace;
-          font-size: 0.62rem; font-weight: 700;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem; font-weight: 700;
           letter-spacing: 0.2em; text-transform: uppercase;
           color: rgba(255,255,255,0.5);
           display: flex; align-items: center; gap: 0.5rem;
@@ -175,14 +178,15 @@ export default function AboutSplit() {
         }
 
         .as-right h2 {
-          font-family: 'Oxanium', monospace;
+          font-family: 'Manrope', sans-serif;
           font-size: clamp(1.6rem, 2.5vw, 2.25rem);
-          font-weight: 800; line-height: 1.1;
+          font-weight: 800; line-height: 1.15;
           color: #ffffff;
+          letter-spacing: -0.02em;
         }
         .as-right h2 em {
           font-style: normal;
-          color: rgba(255,255,255,0.55);
+          color: #2ECC40;
         }
 
         .as-right-body {
@@ -199,18 +203,19 @@ export default function AboutSplit() {
 
         .as-loc {
           display: inline-flex; align-items: center; gap: 0.45rem;
-          font-family: 'Oxanium', monospace;
-          font-size: 0.6rem; font-weight: 700;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem; font-weight: 700;
           letter-spacing: 0.13em; text-transform: uppercase;
           color: rgba(255,255,255,0.6);
           border: 1px solid rgba(255,255,255,0.18);
           background: rgba(255,255,255,0.06);
-          padding: 5px 13px; border-radius: 100px;
+          padding: 6px 14px; border-radius: 100px;
         }
         .as-loc-dot {
-          width: 5px; height: 5px; border-radius: 50%;
-          background: #3BADB0;
+          width: 6px; height: 6px; border-radius: 50%;
+          background: #2ECC40;
           animation: asBlip 1.8s ease infinite;
+          box-shadow: 0 0 8px rgba(46,204,64,0.6);
         }
         @keyframes asBlip {
           0%,100% { opacity:1; transform:scale(1); }

@@ -74,7 +74,7 @@ export default function Blogs() {
       <style>{`
         #blogs {
           position: relative;
-          background: #ffffff;
+          background: #0A1628;
           padding: 8rem 3rem;
           font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
           overflow: hidden;
@@ -83,8 +83,21 @@ export default function Blogs() {
         #blogs::before {
           content: '';
           position: absolute; inset: 0;
-          background-image: radial-gradient(circle, rgba(59,173,176,0.1) 1px, transparent 1px);
+          background-image: radial-gradient(circle, rgba(0,32,70,0.6) 1px, transparent 1px);
           background-size: 30px 30px;
+          pointer-events: none;
+        }
+
+        #blogs::after {
+          content: '';
+          position: absolute;
+          top: -250px; left: 50%;
+          transform: translateX(-50%);
+          width: 900px; height: 900px;
+          background: radial-gradient(ellipse at center,
+            rgba(46,204,64,0.07) 0%,
+            rgba(0,32,70,0.12) 45%,
+            transparent 70%);
           pointer-events: none;
         }
 
@@ -103,27 +116,42 @@ export default function Blogs() {
         .blg-tag {
           display: inline-flex;
           align-items: center;
-          gap: 0.5rem;
-          font-family: 'Oxanium', monospace;
+          gap: 0.6rem;
+          font-family: 'Inter', sans-serif;
           font-size: 0.7rem;
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #3BADB0;
-          margin-bottom: 1rem;
+          color: #2ECC40;
+          background: rgba(46,204,64,0.1);
+          border: 1px solid rgba(46,204,64,0.25);
+          padding: 6px 14px;
+          border-radius: 100px;
+          margin-bottom: 1.2rem;
         }
         .blg-tag::before {
           content: '';
-          width: 16px; height: 1px;
-          background: #3BADB0;
+          width: 6px; height: 6px;
+          background: #2ECC40;
+          border-radius: 50%;
+          box-shadow: 0 0 6px rgba(46,204,64,0.7);
         }
 
         .blg-header h2 {
-          font-family: 'Oxanium', monospace;
-          font-size: clamp(2.5rem, 5vw, 3.5rem);
+          font-family: 'Manrope', sans-serif;
+          font-size: clamp(1.9rem, 3.5vw, 2.7rem);
           font-weight: 800;
-          color: #1B2E5E;
-          line-height: 1.1;
+          color: #ffffff;
+          letter-spacing: -0.025em;
+          line-height: 1.2;
+          margin-bottom: 0.75rem;
+        }
+
+        .blg-header h2 .green-accent {
+          background: linear-gradient(135deg, #4ade80 0%, #3BADB0 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         .blg-grid {
@@ -139,19 +167,36 @@ export default function Blogs() {
         .blg-card-inner {
           display: flex;
           flex-direction: column;
-          background: #ffffff;
+          background: rgba(0,32,70,0.5);
+          backdrop-filter: blur(16px);
           border-radius: 16px;
-          border: 1px solid rgba(59,173,176,0.15);
+          border: 1px solid rgba(255,255,255,0.08);
           overflow: hidden;
           text-decoration: none;
-          transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+          transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
           width: 100%;
+          position: relative;
+        }
+
+        .blg-card-inner::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 3px;
+          background: linear-gradient(90deg, #002046, #2ECC40, #002046);
+          opacity: 0;
+          transition: opacity 0.4s ease;
+        }
+
+        .blg-card-inner:hover::before {
+          opacity: 1;
         }
 
         .blg-card-inner:hover {
           transform: translateY(-8px);
-          box-shadow: 0 20px 40px rgba(27,46,94,0.08);
-          border-color: rgba(59,173,176,0.5);
+          background: rgba(0,32,70,0.75);
+          box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(46,204,64,0.25);
+          border-color: rgba(46,204,64,0.3);
         }
 
         .blg-img-wrap {
@@ -179,10 +224,10 @@ export default function Blogs() {
           position: absolute;
           top: 1rem;
           left: 1rem;
-          background: rgba(8, 13, 30, 0.85);
+          background: rgba(0,32,70,0.88);
           backdrop-filter: blur(8px);
-          border: 1px solid rgba(255,255,255,0.1);
-          color: #a7fff9;
+          border: 1px solid rgba(46,204,64,0.35);
+          color: #2ECC40;
           font-family: 'Oxanium', monospace;
           font-size: 0.65rem;
           font-weight: 700;
@@ -190,6 +235,7 @@ export default function Blogs() {
           text-transform: uppercase;
           padding: 6px 12px;
           border-radius: 100px;
+          box-shadow: 0 0 12px rgba(46,204,64,0.15);
         }
 
         .blg-content {
@@ -203,37 +249,39 @@ export default function Blogs() {
           display: flex;
           align-items: center;
           gap: 0.75rem;
-          font-family: 'Oxanium', monospace;
+          font-family: 'Inter', sans-serif;
           font-size: 0.75rem;
-          color: #64748b;
+          color: rgba(255,255,255,0.45);
           font-weight: 600;
           margin-bottom: 1rem;
         }
 
         .blg-dot {
           width: 4px; height: 4px;
-          background: #cbd5e1;
+          background: rgba(255,255,255,0.25);
           border-radius: 50%;
         }
 
         .blg-title {
-          font-family: 'Oxanium', monospace;
-          font-size: 1.3rem;
+          font-family: 'Manrope', sans-serif;
+          font-size: 1.15rem;
           font-weight: 800;
-          color: #1B2E5E;
+          color: #ffffff;
+          letter-spacing: -0.015em;
           line-height: 1.35;
           margin-bottom: 1rem;
           transition: color 0.3s ease;
         }
 
         .blg-card-inner:hover .blg-title {
-          color: #3BADB0;
+          color: #4ade80;
         }
 
         .blg-excerpt {
+          font-family: 'Inter', sans-serif;
           font-size: 0.95rem;
           line-height: 1.7;
-          color: #4e6070;
+          color: rgba(255,255,255,0.55);
           margin-bottom: 2rem;
           flex: 1;
         }
@@ -242,14 +290,16 @@ export default function Blogs() {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          font-family: 'Oxanium', monospace;
+          font-family: 'Inter', sans-serif;
           font-size: 0.8rem;
           font-weight: 700;
           letter-spacing: 0.05em;
           text-transform: uppercase;
-          color: #1B2E5E;
+          color: rgba(255,255,255,0.6);
           transition: color 0.3s ease;
           margin-top: auto;
+          padding-top: 1rem;
+          border-top: 1px solid rgba(255,255,255,0.07);
         }
 
         .blg-read-more svg {
@@ -257,7 +307,7 @@ export default function Blogs() {
         }
 
         .blg-card-inner:hover .blg-read-more {
-          color: #3BADB0;
+          color: #4ade80;
         }
 
         .blg-card-inner:hover .blg-read-more svg {
@@ -283,7 +333,7 @@ export default function Blogs() {
           transition={{ duration: 0.6 }}
         >
           <div className="blg-tag">Tech & Engineering</div>
-          <h2>Latest Insights</h2>
+          <h2>Latest <span className="green-accent">Insights</span></h2>
         </motion.div>
 
         <div className="blg-grid">

@@ -7,8 +7,8 @@ const NAV_LINKS = [
   { label: "Home",       href: "#home" },
   { label: "About",      href: "#about-split" },
   { label: "Projects",   href: "/projects" },
-  { label: "Blogs",      href: "#blogs" },
   { label: "Services",   href: "#services" },
+  { label: "Blogs",      href: "#blogs" },
   { label: "Contact Us", href: "#contact" },
 ];
 
@@ -90,13 +90,11 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0 2rem;
-          background: rgba(255,255,255,0.7);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(255,255,255,0.2);
+          padding: 0 2rem 0 0;
+          background: #ffffff;
+          border-bottom: 1px solid rgba(0,0,0,0.08);
           box-shadow: 0 1px 8px rgba(0,0,0,0.06);
-          transition: all 0.4s cubic-bezier(.4,0,.2,1);
+          transition: box-shadow 0.4s cubic-bezier(.4,0,.2,1);
           opacity: 0;
           transform: translateY(-20px);
         }
@@ -105,7 +103,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           transform: translateY(0);
         }
         .obl-nav.scrolled {
-          background: rgba(255,255,255,0.88);
+          background: #ffffff;
           box-shadow: 0 4px 24px rgba(0,0,0,0.1);
         }
         .obl-nav-inner {
@@ -125,22 +123,14 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           cursor: pointer;
           text-decoration: none;
           user-select: none;
+          margin-left: 1.5rem;
         }
         .obl-logo-img {
-          width: 44px; height: 44px;
+          width: 200px;
+          height: 56px;
           object-fit: contain;
-          transition: transform 0.3s ease;
         }
-        .obl-logo:hover .obl-logo-img { transform: rotate(-6deg) scale(1.08); }
-        .obl-logo-text {
-          font-family: 'Manrope', sans-serif;
-          font-size: 1.35rem;
-          font-weight: 900;
-          color: #002046;
-          letter-spacing: -0.01em;
-          line-height: 1;
-        }
-        .obl-logo-text span { color: #1b6d1e; }
+        .obl-logo:hover .obl-logo-img { transform: none; }
 
         /* ── Desktop links ── */
         .obl-links {
@@ -281,8 +271,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
         <div className="obl-nav-inner">
           {/* Logo */}
           <div className="obl-logo" onClick={handleLogoClick}>
-            <img src="/octa.png" alt="OctaBitLogics" className="obl-logo-img" />
-            <span className="obl-logo-text">OctaBit<span>logics</span></span>
+            <img src="/octabit final.png" alt="OctaBitLogics" className="obl-logo-img" />
           </div>
 
           {/* Desktop links */}

@@ -39,11 +39,11 @@ export default function Hero({ onNavClick }: HeroProps) {
         /* ── Background blobs ── */
         .hero-blob-top {
           position: absolute;
-          top: -10%;
+          top: -15%;
           right: -10%;
-          width: 600px;
-          height: 600px;
-          background: rgba(162, 247, 150, 0.20);
+          width: 700px;
+          height: 700px;
+          background: radial-gradient(circle, rgba(46, 204, 64, 0.15) 0%, transparent 70%);
           border-radius: 50%;
           filter: blur(120px);
           pointer-events: none;
@@ -51,11 +51,11 @@ export default function Hero({ onNavClick }: HeroProps) {
         }
         .hero-blob-bottom {
           position: absolute;
-          bottom: -5%;
+          bottom: -10%;
           left: -5%;
-          width: 400px;
-          height: 400px;
-          background: rgba(27, 54, 93, 0.10);
+          width: 500px;
+          height: 500px;
+          background: radial-gradient(circle, rgba(0, 32, 70, 0.08) 0%, transparent 70%);
           border-radius: 50%;
           filter: blur(100px);
           pointer-events: none;
@@ -83,33 +83,40 @@ export default function Hero({ onNavClick }: HeroProps) {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          padding: 5px 14px 5px 10px;
-          background: #a2f796;
+          padding: 6px 16px 6px 12px;
+          background: rgba(46, 204, 64, 0.1);
+          border: 1px solid rgba(46, 204, 64, 0.2);
           border-radius: 9999px;
           font-family: 'Inter', sans-serif;
-          font-size: 0.72rem;
-          font-weight: 500;
-          color: #237324;
+          font-size: 0.75rem;
+          font-weight: 600;
+          color: #2ECC40;
           width: fit-content;
-          margin-bottom: 1rem;
+          margin-bottom: 1.5rem;
+          letter-spacing: 0.02em;
         }
         .hero-badge-dot {
           width: 8px; height: 8px;
-          background: #1b6d1e;
+          background: #2ECC40;
           border-radius: 50%;
           flex-shrink: 0;
+          box-shadow: 0 0 10px rgba(46, 204, 64, 0.5);
         }
 
         .hero-h1 {
           font-family: 'Manrope', sans-serif;
-          font-size: clamp(2.6rem, 4.8vw, 3.5rem);
+          font-size: clamp(2.8rem, 5vw, 4rem);
           font-weight: 800;
-          line-height: 1.1;
-          letter-spacing: -0.02em;
+          line-height: 1.05;
+          letter-spacing: -0.03em;
           color: #002046;
           margin: 0;
         }
-        .hero-h1 .accent { color: #1b6d1e; }
+        .hero-h1 .accent { 
+          background: linear-gradient(135deg, #2ECC40 0%, #3BADB0 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
 
         .hero-p {
           font-family: 'Inter', sans-serif;
@@ -128,40 +135,43 @@ export default function Hero({ onNavClick }: HeroProps) {
         }
         .hero-btn-primary {
           font-family: 'Inter', sans-serif;
-          font-size: 0.85rem;
-          font-weight: 600;
-          letter-spacing: 0.04em;
-          background: #1b365d;
-          color: #87a0cd;
+          font-size: 0.9rem;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+          background: #002046;
+          color: #ffffff;
           border: none;
-          padding: 16px 32px;
-          border-radius: 12px;
+          padding: 18px 36px;
+          border-radius: 14px;
           cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 8px 24px rgba(27,54,93,0.25);
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          box-shadow: 0 10px 30px rgba(0,32,70,0.2);
         }
         .hero-btn-primary:hover {
-          opacity: 0.88;
-          transform: translateY(-2px);
-          box-shadow: 0 12px 32px rgba(27,54,93,0.35);
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 15px 35px rgba(0,32,70,0.3), 0 0 15px rgba(46,204,64,0.3);
+          background: #002a5c;
         }
         .hero-btn-primary:active { transform: scale(0.96); }
 
         .hero-btn-secondary {
           font-family: 'Inter', sans-serif;
-          font-size: 0.85rem;
-          font-weight: 600;
-          letter-spacing: 0.04em;
+          font-size: 0.9rem;
+          font-weight: 700;
+          letter-spacing: 0.02em;
           background: transparent;
-          color: #1b6d1e;
-          border: 1.5px solid #1b6d1e;
-          padding: 15px 32px;
-          border-radius: 12px;
+          color: #002046;
+          border: 2px solid #e3e2e6;
+          padding: 16px 36px;
+          border-radius: 14px;
           cursor: pointer;
           transition: all 0.3s ease;
         }
         .hero-btn-secondary:hover {
-          background: rgba(27,109,30,0.06);
+          border-color: #2ECC40;
+          color: #2ECC40;
+          background: rgba(46,204,64,0.04);
+          transform: translateY(-2px);
         }
         .hero-btn-secondary:active { transform: scale(0.96); }
 
@@ -174,14 +184,14 @@ export default function Hero({ onNavClick }: HeroProps) {
         }
 
         .hero-card {
-          background: rgba(255, 255, 255, 0.7);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 16px;
-          padding: 16px;
+          background: rgba(255, 255, 255, 0.6);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 24px;
+          padding: 12px;
           transform: rotate(2deg);
-          box-shadow: 0 24px 64px rgba(0,0,0,0.12);
+          box-shadow: 0 40px 100px rgba(0,32,70,0.15);
           position: relative;
           z-index: 1;
         }
@@ -216,15 +226,16 @@ export default function Hero({ onNavClick }: HeroProps) {
         }
         .hero-stat-icon {
           width: 48px; height: 48px;
-          background: #22c55e;
-          border-radius: 10px;
+          background: #2ECC40;
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          box-shadow: 0 8px 20px rgba(46,204,64,0.3);
         }
         .hero-stat-icon span {
-          font-size: 1.4rem;
+          font-size: 1.5rem;
           color: white;
         }
         .hero-stat-label {
@@ -250,7 +261,7 @@ export default function Hero({ onNavClick }: HeroProps) {
         .hero-stat-bar-fill {
           height: 100%;
           width: 99.8%;
-          background: #1b6d1e;
+          background: #2ECC40;
           border-radius: 9999px;
         }
 
@@ -314,16 +325,39 @@ export default function Hero({ onNavClick }: HeroProps) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="hero-card">
+          <motion.div 
+            className="hero-card"
+            animate={{ 
+              y: [0, -15, 0],
+              rotate: [2, 3, 2]
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
             <img
               className="hero-img"
-              src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=700&q=80&fit=crop"
-              alt="Futuristic AI neural network workspace"
+              src="/hero_ai_architecture_1777929290313.png"
+              alt="Futuristic AI neural network architecture"
             />
-          </div>
+          </motion.div>
 
           {/* Stat widget */}
-          <div className="hero-stat-widget">
+          <motion.div 
+            className="hero-stat-widget"
+            animate={{ 
+              y: [0, 10, 0],
+              x: [0, -5, 0]
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+          >
             <div className="hero-stat-top">
               <div className="hero-stat-icon">
                 <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>analytics</span>
@@ -336,7 +370,7 @@ export default function Hero({ onNavClick }: HeroProps) {
             <div className="hero-stat-bar-bg">
               <div className="hero-stat-bar-fill" />
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

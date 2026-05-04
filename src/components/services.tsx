@@ -33,8 +33,8 @@ const SERVICES_SMALL = [
     image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=400&q=80&fit=crop",
     imageAlt: "UI/UX Design",
     icon: "grid_view",
-    iconBg: "#dcfce7",
-    iconColor: "#16a34a",
+    iconBg: "#4ade80",
+    iconColor: "#ffffff",
     title: "UI/UX Design",
     desc: "Cognitive-led design systems that humanize complex data visualizations.",
   },
@@ -43,8 +43,8 @@ const SERVICES_SMALL = [
     image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=400&q=80&fit=crop",
     imageAlt: "DevOps & MLOps",
     icon: "terminal",
-    iconBg: "#dcfce7",
-    iconColor: "#16a34a",
+    iconBg: "#22c55e",
+    iconColor: "#ffffff",
     title: "DevOps & MLOps",
     desc: "Automated deployment cycles ensuring zero-downtime model updates.",
   },
@@ -53,8 +53,8 @@ const SERVICES_SMALL = [
     image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&q=80&fit=crop",
     imageAlt: "Cloud Solutions",
     icon: "cloud",
-    iconBg: "#dcfce7",
-    iconColor: "#16a34a",
+    iconBg: "#16a34a",
+    iconColor: "#ffffff",
     title: "Cloud Solutions",
     desc: "Scalable cloud-native infrastructure on AWS, GCP, and Azure.",
   },
@@ -71,17 +71,51 @@ export default function Services() {
   return (
     <section id="services">
       <style>{`
+        /* ── Section shell ── */
         #services {
-          background: #faf9fd;
+          background: linear-gradient(135deg, #001428 0%, #002046 50%, #001830 100%);
           padding: 6rem 40px;
           position: relative;
           overflow: hidden;
           min-height: unset;
         }
 
+        /* animated grid overlay */
+        #services::before {
+          content: '';
+          position: absolute; inset: 0;
+          background-image:
+            linear-gradient(rgba(46,204,64,0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(46,204,64,0.05) 1px, transparent 1px);
+          background-size: 48px 48px;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        /* glow orb – top right */
+        #services::after {
+          content: '';
+          position: absolute; top: -200px; right: -200px;
+          width: 600px; height: 600px; border-radius: 50%;
+          background: radial-gradient(circle, rgba(46,204,64,0.1) 0%, transparent 65%);
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        /* glow orb – bottom left */
+        .srv-glow-bl {
+          position: absolute; bottom: -180px; left: -180px;
+          width: 520px; height: 520px; border-radius: 50%;
+          background: radial-gradient(circle, rgba(0,32,70,0.15) 0%, transparent 65%);
+          pointer-events: none;
+          z-index: 0;
+        }
+
         .srv-wrap {
           max-width: 1280px;
           margin: 0 auto;
+          position: relative;
+          z-index: 1;
         }
 
         /* ── Section header ── */
@@ -94,135 +128,182 @@ export default function Services() {
           flex-wrap: wrap;
         }
         .srv-header-left { max-width: 600px; }
+
+        .srv-eyebrow {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.55rem;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #2ECC40;
+          margin-bottom: 1rem;
+        }
+        .srv-eyebrow::before,
+        .srv-eyebrow::after {
+          content: '';
+          display: block;
+          width: 24px; height: 1.5px;
+          background: #2ECC40;
+          border-radius: 2px;
+          opacity: 0.6;
+        }
+
         .srv-section-h2 {
           font-family: 'Manrope', sans-serif;
-          font-size: clamp(1.8rem, 3.5vw, 2.2rem);
-          font-weight: 700;
-          color: #002046;
+          font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+          font-weight: 800;
+          color: #ffffff;
           margin-bottom: 1rem;
-          line-height: 1.2;
-          letter-spacing: -0.01em;
+          line-height: 1.15;
+          letter-spacing: -0.025em;
+        }
+        .srv-section-h2 .hl {
+          background: linear-gradient(135deg, #2ECC40 0%, #3BADB0 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
         .srv-section-p {
           font-family: 'Inter', sans-serif;
           font-size: 0.95rem;
-          line-height: 1.65;
-          color: #44474e;
+          line-height: 1.7;
+          color: rgba(255,255,255,0.6);
         }
         .srv-catalog-btn {
           display: inline-flex;
           align-items: center;
-          gap: 0.4rem;
+          gap: 0.5rem;
           font-family: 'Inter', sans-serif;
           font-size: 0.85rem;
           font-weight: 600;
-          color: #1b6d1e;
-          background: none;
-          border: none;
+          color: #4ade80;
+          background: rgba(74,222,128,0.1);
+          border: 1px solid rgba(74,222,128,0.25);
+          padding: 10px 20px;
+          border-radius: 8px;
           cursor: pointer;
           text-decoration: none;
-          transition: gap 0.2s;
+          transition: all 0.25s ease;
           white-space: nowrap;
         }
-        .srv-catalog-btn:hover { gap: 0.7rem; }
-        .srv-catalog-btn .srv-arrow-icon { color: #1b6d1e; }
+        .srv-catalog-btn:hover {
+          background: rgba(74,222,128,0.18);
+          border-color: rgba(74,222,128,0.5);
+          transform: translateY(-1px);
+          box-shadow: 0 6px 20px rgba(74,222,128,0.15);
+        }
+        .srv-catalog-btn .srv-arrow-icon { color: #4ade80; transition: transform 0.2s; }
+        .srv-catalog-btn:hover .srv-arrow-icon { transform: translateX(3px); }
 
         /* ── Bento Grid ── */
         .srv-bento {
           display: grid;
           grid-template-columns: repeat(6, 1fr);
-          gap: 24px;
+          gap: 20px;
         }
 
         /* Large cards: span 3 */
         .srv-card-lg {
           grid-column: span 3;
-          background: rgba(255,255,255,0.7);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border: 1px solid rgba(255,255,255,0.2);
-          border-radius: 16px;
+          background: rgba(255,255,255,0.05);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 20px;
           overflow: hidden;
           padding: 2rem;
           display: flex;
           flex-direction: column;
-          transition: border-color 0.35s ease, box-shadow 0.35s ease;
+          transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
           cursor: pointer;
-          box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+          box-shadow: 0 4px 24px rgba(0,0,0,0.2);
         }
         .srv-card-lg:hover {
-          border-color: rgba(27,109,30,0.3);
-          box-shadow: 0 12px 40px rgba(0,0,0,0.09);
+          border-color: rgba(46,204,64,0.4);
+          box-shadow: 0 16px 48px rgba(46,204,64,0.15), 0 4px 24px rgba(0,0,0,0.3);
+          transform: translateY(-8px);
         }
 
         /* Small cards: span 2 */
         .srv-card-sm {
           grid-column: span 2;
-          background: rgba(255,255,255,0.7);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border: 1px solid rgba(255,255,255,0.2);
-          border-radius: 16px;
+          background: rgba(255,255,255,0.05);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 20px;
           overflow: hidden;
           padding: 2rem;
           display: flex;
           flex-direction: column;
-          transition: border-color 0.35s ease, box-shadow 0.35s ease;
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
           cursor: pointer;
-          box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+          box-shadow: 0 4px 24px rgba(0,0,0,0.2);
         }
         .srv-card-sm:hover {
-          border-color: rgba(27,109,30,0.3);
-          box-shadow: 0 12px 40px rgba(0,0,0,0.09);
+          border-color: rgba(46,204,64,0.4);
+          box-shadow: 0 16px 48px rgba(46,204,64,0.15), 0 4px 24px rgba(0,0,0,0.3);
+          transform: translateY(-8px);
         }
 
         /* Card image */
         .srv-card-img-wrap {
           width: 100%;
           overflow: hidden;
-          border-radius: 10px;
+          border-radius: 12px;
           margin-bottom: 1.5rem;
+          position: relative;
         }
-        .srv-card-lg .srv-card-img-wrap { height: 192px; }
-        .srv-card-sm .srv-card-img-wrap { height: 128px; }
+        .srv-card-img-wrap::after {
+          content: '';
+          position: absolute; inset: 0;
+          background: linear-gradient(to bottom, transparent 40%, rgba(0,20,40,0.5) 100%);
+          border-radius: 12px;
+        }
+        .srv-card-lg .srv-card-img-wrap { height: 200px; }
+        .srv-card-sm .srv-card-img-wrap { height: 130px; }
         .srv-card-img {
           width: 100%; height: 100%;
           object-fit: cover;
           transition: transform 0.55s ease;
         }
         .srv-card-lg:hover .srv-card-img,
-        .srv-card-sm:hover .srv-card-img { transform: scale(1.05); }
+        .srv-card-sm:hover .srv-card-img { transform: scale(1.06); }
 
         /* Icon box */
         .srv-icon-box {
           width: 52px; height: 52px;
-          border-radius: 12px;
+          border-radius: 14px;
           display: flex;
           align-items: center;
           justify-content: center;
           margin-bottom: 1.25rem;
           flex-shrink: 0;
-          transition: transform 0.3s ease;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.2);
         }
         .srv-card-lg:hover .srv-icon-box,
-        .srv-card-sm:hover .srv-icon-box { transform: scale(1.1); }
-        .srv-card-sm .srv-icon-box { width: 44px; height: 44px; }
+        .srv-card-sm:hover .srv-icon-box {
+          transform: scale(1.12);
+          box-shadow: 0 8px 24px rgba(46,204,64,0.3);
+        }
+        .srv-card-sm .srv-icon-box { width: 44px; height: 44px; border-radius: 12px; }
 
         .srv-icon-box span {
           font-size: 1.6rem;
           color: white;
         }
-        .srv-card-sm .srv-icon-box span {
-          font-size: 1.3rem;
-          /* color set via style prop */
-        }
+        .srv-card-sm .srv-icon-box span { font-size: 1.3rem; }
 
         /* Card text */
         .srv-card-title {
           font-family: 'Manrope', sans-serif;
           font-size: 1.15rem;
           font-weight: 700;
-          color: #002046;
+          color: #ffffff;
           margin-bottom: 0.6rem;
           line-height: 1.25;
         }
@@ -231,7 +312,7 @@ export default function Services() {
           font-family: 'Inter', sans-serif;
           font-size: 0.9rem;
           line-height: 1.65;
-          color: #44474e;
+          color: rgba(255,255,255,0.55);
           flex: 1;
         }
         .srv-card-sm .srv-card-desc { font-size: 0.85rem; }
@@ -244,6 +325,8 @@ export default function Services() {
           gap: 0.5rem;
           list-style: none;
           padding: 0;
+          border-top: 1px solid rgba(255,255,255,0.08);
+          padding-top: 1rem;
         }
         .srv-bullet {
           display: flex;
@@ -252,9 +335,9 @@ export default function Services() {
           font-family: 'Inter', sans-serif;
           font-size: 0.82rem;
           font-weight: 500;
-          color: #1a1b1e;
+          color: rgba(255,255,255,0.75);
         }
-        .srv-bullet span.icon { font-size: 1rem; color: #1b6d1e; }
+        .srv-bullet span.icon { font-size: 1rem; color: #2ECC40; }
 
         /* Responsive */
         @media (max-width: 1024px) {
@@ -269,6 +352,9 @@ export default function Services() {
         }
       `}</style>
 
+      {/* bottom-left glow orb */}
+      <div className="srv-glow-bl" />
+
       <div className="srv-wrap">
         {/* Header row */}
         <motion.div
@@ -279,7 +365,8 @@ export default function Services() {
           transition={{ duration: 0.55 }}
         >
           <div className="srv-header-left">
-            <h2 className="srv-section-h2">Core Competencies</h2>
+            <div className="srv-eyebrow">What We Do</div>
+            <h2 className="srv-section-h2">Core <span className="hl">Competencies</span></h2>
             <p className="srv-section-p">
               We deliver end-to-end technical excellence across the entire stack, from hardware-accelerated
               ML models to fluid design experiences.

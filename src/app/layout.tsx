@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     siteName: "OctaBitLogics",
     images: [
       {
-        url: "/octa.png",
+        url: "/octabit final.png",
         width: 1200,
         height: 630,
         alt: "OctaBitLogics - Pioneering the Digital Frontier",
@@ -82,7 +82,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "OctaBitLogics | AI & SaaS Solutions",
     description: "Professional, futuristic IT solutions for global businesses. AI, SaaS, and custom software.",
-    images: ["/octa.png"],
+    images: ["/octabit final.png"],
     creator: "@octabitlogics",
   },
 
@@ -117,7 +117,7 @@ export default function RootLayout({
     "@type": "Organization",
     name: "OctaBitLogics",
     url: "https://octabitlogics.com",
-    logo: "https://octabitlogics.com/octa.png",
+    logo: "https://octabitlogics.com/octabit final.png",
     description: "OctaBitLogics is a premier Software Development agency specializing in AI-driven automation and SaaS platforms.",
     address: {
       "@type": "PostalAddress",

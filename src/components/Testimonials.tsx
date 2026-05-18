@@ -93,13 +93,13 @@ function HighlightedText({ text, highlights }: { text: string; highlights: strin
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
 const StarIcon = () => (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="#3BADB0" xmlns="http://www.w3.org/2000/svg">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="#2ECC40" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
     </svg>
 );
 
 const QuoteWatermark = () => (
-    <svg width="80" height="80" viewBox="0 0 24 24" fill="rgba(59,173,176,0.06)" xmlns="http://www.w3.org/2000/svg" className="tm-quote-watermark">
+    <svg width="80" height="80" viewBox="0 0 24 24" fill="rgba(46,204,64,0.06)" xmlns="http://www.w3.org/2000/svg" className="tm-quote-watermark">
         <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" />
     </svg>
 );
@@ -159,19 +159,19 @@ export default function Testimonials() {
             <style>{`
         #testimonials {
           background: #ffffff;
-          padding: 3.5rem 0 4rem;
+          padding: 5rem 0 6rem;
           position: relative;
           overflow: hidden;
-          font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+          font-family: 'Inter', sans-serif;
         }
         
-        /* Deep ambient background glow */
+        /* dot grid overlay */
         .tm-glow {
-          position: absolute;
-          top: 50%; left: 50%;
-          transform: translate(-50%, -50%);
-          width: 800px; height: 500px;
-          background: radial-gradient(ellipse at center, rgba(59,173,176,0.06) 0%, transparent 60%);
+          position: absolute; inset: 0;
+          background-image:
+            linear-gradient(rgba(0,32,70,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,32,70,0.04) 1px, transparent 1px);
+          background-size: 56px 56px;
           pointer-events: none;
           z-index: 0;
         }
@@ -191,31 +191,31 @@ export default function Testimonials() {
           display: inline-flex;
           align-items: center;
           gap: 0.45rem;
-          font-family: 'Oxanium', monospace;
+          font-family: 'Inter', sans-serif;
           font-size: 0.68rem;
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #3BADB0;
-          background: rgba(59,173,176,0.1);
-          border: 1px solid rgba(59,173,176,0.25);
+          color: #2ECC40;
+          background: rgba(46,204,64,0.1);
+          border: 1px solid rgba(46,204,64,0.3);
           padding: 6px 14px;
           border-radius: 100px;
           margin-bottom: 1.5rem;
         }
         .tm-heading {
-          font-family: 'Oxanium', monospace;
-          font-size: clamp(2rem, 4vw, 3rem);
-          font-weight: 900;
-          color: #1B2E5E;
-          letter-spacing: -0.02em;
+          font-family: 'Manrope', sans-serif;
+          font-size: clamp(2rem, 4vw, 2.8rem);
+          font-weight: 800;
+          color: #002046;
+          letter-spacing: -0.025em;
           line-height: 1.1;
           text-align: center;
           margin-bottom: 2rem;
           max-width: 600px;
         }
         .tm-heading span {
-          background: linear-gradient(135deg, #3BADB0 0%, #1f4080 100%);
+          background: linear-gradient(135deg, #2ECC40 0%, #3BADB0 100%);
           -webkit-background-clip: text; -webkit-text-fill-color: transparent;
           background-clip: text;
         }
@@ -238,10 +238,10 @@ export default function Testimonials() {
           background: #ffffff;
           border-radius: 24px;
           padding: 3rem 3.5rem;
-          border: 1px solid rgba(59,173,176,0.15);
+          border: 1px solid rgba(0,32,70,0.1);
           box-shadow: 
-            0 20px 50px rgba(27,46,94,0.08),
-            0 4px 15px rgba(59,173,176,0.05);
+            0 30px 60px rgba(0,32,70,0.1),
+            0 0 0 1px rgba(46,204,64,0.08);
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -251,8 +251,8 @@ export default function Testimonials() {
         /* Subtle colored top lip */
         .tm-card::before {
           content: '';
-          position: absolute; top: 0; left: 0; right: 0; height: 5px;
-          background: linear-gradient(90deg, #3BADB0, #1f4080);
+          position: absolute; top: 0; left: 0; right: 0; height: 3px;
+          background: linear-gradient(90deg, #2ECC40, #3BADB0);
         }
 
         .tm-quote-watermark {
@@ -264,16 +264,16 @@ export default function Testimonials() {
         /* Quote text */
         .tm-quote {
           position: relative; z-index: 1;
-          font-size: 1.15rem;
-          line-height: 1.7;
-          color: #1e293b;
+          font-size: 1.1rem;
+          line-height: 1.75;
+          color: rgba(0,32,70,0.8);
           font-weight: 400;
           flex: 1;
         }
         
         .tm-hl {
-          background: rgba(59,173,176,0.12);
-          color: #3BADB0;
+          background: rgba(46,204,64,0.1);
+          color: #2ECC40;
           font-weight: 600;
           padding: 2px 6px;
           border-radius: 4px;
@@ -287,30 +287,30 @@ export default function Testimonials() {
           gap: 1.25rem;
           margin-top: 2rem;
           position: relative; z-index: 1;
-          border-top: 1px solid rgba(27,46,94,0.08);
+          border-top: 1px solid rgba(0,32,70,0.1);
           padding-top: 1.5rem;
         }
         .tm-avatar {
           width: 65px; height: 65px;
           border-radius: 50%;
           object-fit: cover;
-          border: 2px solid #fff;
-          box-shadow: 0 4px 15px rgba(27,46,94,0.15);
+          border: 2px solid rgba(0,32,70,0.15);
+          box-shadow: 0 4px 15px rgba(0,32,70,0.1);
         }
         .tm-meta {
           display: flex;
           flex-direction: column;
         }
         .tm-name {
-          font-family: 'Oxanium', monospace;
-          font-size: 1.1rem;
-          font-weight: 800;
-          color: #1B2E5E;
+          font-family: 'Manrope', sans-serif;
+          font-size: 1rem;
+          font-weight: 700;
+          color: #002046;
           line-height: 1.2;
         }
         .tm-role {
-          font-size: 0.8rem;
-          color: rgba(27,46,94,0.6);
+          font-size: 0.78rem;
+          color: rgba(0,32,70,0.45);
           margin-top: 4px;
           margin-bottom: 6px;
         }
@@ -330,20 +330,19 @@ export default function Testimonials() {
         .tm-nav-btn {
           width: 50px; height: 50px;
           border-radius: 50%;
-          background: #ffffff;
-          border: 1px solid rgba(59,173,176,0.25);
-          color: #1B2E5E;
+          background: rgba(0,32,70,0.05);
+          border: 1px solid rgba(0,32,70,0.15);
+          color: rgba(0,32,70,0.5);
           display: flex; align-items: center; justify-content: center;
           cursor: pointer;
           transition: all 0.25s ease;
-          box-shadow: 0 4px 15px rgba(27,46,94,0.05);
         }
         .tm-nav-btn:hover {
-          background: #3BADB0;
-          border-color: #3BADB0;
-          color: #fff;
+          background: rgba(46,204,64,0.1);
+          border-color: #2ECC40;
+          color: #2ECC40;
           transform: translateY(-3px) scale(1.05);
-          box-shadow: 0 8px 20px rgba(59,173,176,0.25);
+          box-shadow: 0 8px 20px rgba(46,204,64,0.15);
         }
 
         .tm-dots {
@@ -353,12 +352,12 @@ export default function Testimonials() {
         .tm-dot {
           width: 24px; height: 4px;
           border-radius: 2px;
-          background: rgba(27,46,94,0.15);
+          background: rgba(0,32,70,0.15);
           border: none; padding: 0; cursor: pointer;
           transition: all 0.3s ease;
         }
         .tm-dot.active {
-          background: #3BADB0;
+          background: #2ECC40;
           width: 36px;
         }
 

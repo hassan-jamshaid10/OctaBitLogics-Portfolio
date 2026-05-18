@@ -1,111 +1,107 @@
 "use client";
 
 import React from "react";
-import ScrollReveal from "./ScrollReveal";
 
-const PHRASES = [
-  { words: ["Creative", "Minds.", "Deep", "Experience.", "Gen-Z", "Energy."] },
-  { words: ["We", "Love", "Tech", "&", "Build", "With", "Precision."] },
-  { words: ["Modern", "Vibe.", "Genuine", "Passion.", "Pro", "Execution."] },
-  { words: ["Fresh", "Ideas.", "Honest", "Work.", "Creative", "Spirit."] },
-];
-
-/* Teal → navy stops — each word cycles through a different stop */
-const COLORS = ["#3BADB0", "#2E8FA6", "#26729C", "#1E5692", "#1B2E5E"];
+const LOGOS = ["VERTEX", "QUANTUM", "NEXUS", "CORELINE", "LUMINA"];
 
 export default function TaglineBar() {
-  /* Double the array so the seamless loop works */
-  const items = [...PHRASES, ...PHRASES];
+  const items = [...LOGOS, ...LOGOS]; // doubled for seamless loop
 
   return (
-    <ScrollReveal className="tagline-bar">
+    <section style={{ minHeight: "unset", display: "block", padding: 0 }}>
       <style>{`
-        .tagline-bar {
+        .trusted-bar {
           width: 100%;
           background: #ffffff;
-          border-top: 1px solid #e2e8ec;
-          border-bottom: 1px solid #e2e8ec;
+          border-top: 1px solid #f0f0f0;
+          border-bottom: 1px solid #f0f0f0;
+          padding: 3.5rem 40px;
+        }
+
+        .trusted-label {
+          text-align: center;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #002046;
+          opacity: 0.4;
+          margin-bottom: 3rem;
+        }
+
+        .trusted-logos-wrap {
           overflow: hidden;
           position: relative;
         }
-
-        /* Fade edges */
-        .tagline-bar::before,
-        .tagline-bar::after {
+        .trusted-logos-wrap::before,
+        .trusted-logos-wrap::after {
           content: '';
           position: absolute;
           top: 0; bottom: 0;
-          width: 100px;
+          width: 80px;
           z-index: 2;
           pointer-events: none;
         }
-        .tagline-bar::before {
+        .trusted-logos-wrap::before {
           left: 0;
           background: linear-gradient(to right, #ffffff, transparent);
         }
-        .tagline-bar::after {
+        .trusted-logos-wrap::after {
           right: 0;
           background: linear-gradient(to left, #ffffff, transparent);
         }
 
-        .tagline-track {
+        .trusted-logos-track {
           display: flex;
           align-items: center;
           width: max-content;
-          animation: taglineSlide 32s linear infinite;
-          padding: 13px 0;
+          animation: logoSlide 24s linear infinite;
+          gap: 5rem;
+          padding: 0.5rem 0;
+          opacity: 0.6;
+          transition: opacity 0.4s ease;
         }
-
-        .tagline-track:hover {
+        .trusted-logos-track:hover {
           animation-play-state: paused;
+          opacity: 1;
         }
 
-        @keyframes taglineSlide {
+        @keyframes logoSlide {
           from { transform: translateX(0); }
           to   { transform: translateX(-50%); }
         }
 
-        .tagline-phrase {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 0 2.2rem;
+        .trusted-logo-item {
+          font-family: 'Manrope', sans-serif;
+          font-size: 1.6rem;
+          font-weight: 900;
+          color: #002046;
+          letter-spacing: -0.02em;
           white-space: nowrap;
-          font-family: 'Oxanium', monospace;
-          font-size: 0.82rem;
-          font-weight: 700;
-          letter-spacing: 0.09em;
-          text-transform: uppercase;
+          user-select: none;
+          transition: color 0.3s ease;
+        }
+        .trusted-logo-item:hover {
+          color: #2ECC40;
         }
 
-        .tagline-sep {
-          display: inline-block;
-          width: 5px;
-          height: 5px;
-          border-radius: 50%;
-          background: #cbd5db;
-          flex-shrink: 0;
-          margin: 0 0.6rem;
+        @media (max-width: 600px) {
+          .trusted-bar { padding: 2.5rem 16px; }
+          .trusted-logo-item { font-size: 1.2rem; }
         }
       `}</style>
 
-      <div className="tagline-track">
-        {items.map((phrase, pi) => (
-          <React.Fragment key={pi}>
-            <span className="tagline-phrase">
-              {phrase.words.map((word, wi) => (
-                <span
-                  key={wi}
-                  style={{ color: COLORS[wi % COLORS.length] }}
-                >
-                  {word}
-                </span>
-              ))}
-            </span>
-            <span className="tagline-sep" />
-          </React.Fragment>
-        ))}
+      <div className="trusted-bar">
+        <p className="trusted-label">Trusted by Global Innovators</p>
+        <div className="trusted-logos-wrap">
+          <div className="trusted-logos-track">
+            {items.map((logo, i) => (
+              <span key={i} className="trusted-logo-item">{logo}</span>
+            ))}
+          </div>
+        </div>
       </div>
-    </ScrollReveal>
+    </section>
   );
 }

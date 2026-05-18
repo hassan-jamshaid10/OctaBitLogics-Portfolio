@@ -1,4 +1,4 @@
-"use client";
+"use client";   //hello 
 
 import { useEffect, useState, useCallback, lazy, Suspense } from "react";
 import Navbar from "../components/Header";

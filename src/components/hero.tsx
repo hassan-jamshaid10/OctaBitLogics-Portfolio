@@ -1,363 +1,377 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useCallback } from "react";
+import { motion } from "framer-motion";
 
-// ── Exact Cloudinary video URLs ───────────────────────────────────────────────
-const VIDEOS = [
-  "https://res.cloudinary.com/ddcblcups/video/upload/v1775331186/v1.mp4",
-  "https://res.cloudinary.com/ddcblcups/video/upload/v1775330949/v2.mp4",
-  "https://res.cloudinary.com/ddcblcups/video/upload/v1775330956/v3.mp4",
-];
-
-// ── Slide content — synced 1:1 with VIDEOS array ─────────────────────────────
-const SLIDES = [
-  {
-    badge: "Just Getting Started",
-    words: [
-      { text: "Fresh", cls: "w1" },
-      { text: "Ideas.", cls: "w2" },
-      { text: "Real", cls: "w3" },
-      { text: "Ambition.", cls: "w4" },
-      { text: "Day", cls: "w5" },
-      { text: "One", cls: "w6" },
-      { text: "Energy.", cls: "w7" },
-    ],
-    body: "We are a team of bold, creative minds with deep professional experience. We bring an unstoppable love for modern tech, vibrant innovation, and rigorous execution to every project we take on.",
-    cta1: { label: "What We Do →", href: "#services" },
-    cta2: { label: "Our Story", href: "#about-split" },
-  },
-  {
-    badge: "AI-Powered Solutions",
-    words: [
-      { text: "Intelligent", cls: "w3" },
-      { text: "Systems.", cls: "w2" },
-      { text: "Built", cls: "w1" },
-      { text: "For", cls: "w4" },
-      { text: "The", cls: "w6" },
-      { text: "Future.", cls: "w5" },
-    ],
-    body: "We architect AI-driven automation, LLM-powered pipelines and smart infrastructure that puts your business years ahead of the curve — ready to scale on day one.",
-    cta1: { label: "Explore AI →", href: "#services" },
-    cta2: { label: "See Our Work", href: "#projects" },
-  },
-  {
-    badge: "Cloud & DevOps Excellence",
-    words: [
-      { text: "Scalable", cls: "w5" },
-      { text: "Cloud.", cls: "w1" },
-      { text: "Reliable", cls: "w2" },
-      { text: "DevOps.", cls: "w3" },
-      { text: "Infinite", cls: "w7" },
-      { text: "Scale.", cls: "w4" },
-    ],
-    body: "Modern cloud infrastructure and CI/CD pipelines engineered for zero-downtime deployments, auto-scaling resilience, and the developer velocity your team deserves.",
-    cta1: { label: "Cloud Solutions →", href: "#services" },
-    cta2: { label: "Get In Touch", href: "#contact" },
-  },
-] as const;
-
-const SLIDE_DURATION = 5_000; // ms
-
-// ── Framer Motion variants ────────────────────────────────────────────────────
-const textFade = {
-  hidden: { opacity: 0, y: 18, filter: "blur(8px)" },
-  show: {
-    opacity: 1, y: 0, filter: "blur(0px)",
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
-  },
-  exit: {
-    opacity: 0, y: -14, filter: "blur(5px)",
-    transition: { duration: 0.35, ease: [0.4, 0, 1, 1] as [number, number, number, number] }
-  },
-};
-
-const wordFade = {
-  hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
-  show: (i: number) => ({
-    opacity: 1, y: 0, filter: "blur(0px)",
-    transition: {
-      duration: 0.6, delay: i * 0.07,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number]
-    },
-  }),
-  exit: { opacity: 0, transition: { duration: 0.25 } },
-};
-
-// ── Component ─────────────────────────────────────────────────────────────────
 interface HeroProps {
   onNavClick: (href: string) => void;
 }
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
+  show: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  }),
+};
+
 export default function Hero({ onNavClick }: HeroProps) {
-  const [index, setIndex] = useState(0);
-  const [textIndex, setTextIndex] = useState(0);
-
-  // ── 5-second video auto-advance ──
-  useEffect(() => {
-    const advance = () => setIndex((prev) => (prev + 1) % VIDEOS.length);
-    const timer = setInterval(advance, SLIDE_DURATION);
-    return () => clearInterval(timer);
-  }, []);
-
-  // ── 15-second text auto-advance (1 full video cycle) ──
-  useEffect(() => {
-    const advanceText = () => setTextIndex((prev) => (prev + 1) % SLIDES.length);
-    const textTimer = setInterval(advanceText, SLIDE_DURATION * VIDEOS.length);
-    return () => clearInterval(textTimer);
-  }, []);
-
-  const slide = SLIDES[textIndex];
-
-  const handleCta1 = useCallback(() => onNavClick(slide.cta1.href), [onNavClick, slide.cta1.href]);
-  const handleCta2 = useCallback(() => onNavClick(slide.cta2.href), [onNavClick, slide.cta2.href]);
+  const handleConsult = useCallback(() => onNavClick("#contact"), [onNavClick]);
+  const handleEcosystem = useCallback(() => onNavClick("#services"), [onNavClick]);
 
   return (
-    <section id="home" className="hero">
+    <section id="home">
       <style>{`
-        /* ── Section ── */
-        #home.hero {
+        /* ── Hero Section ── */
+        #home {
           position: relative;
           min-height: 100vh;
-          overflow: hidden;
           display: flex;
           align-items: center;
           justify-content: center;
           padding-top: 80px;
-          background: #060e1f;
-          isolation: isolate;
+          overflow: hidden;
+          background: #faf9fd;
         }
 
-        /* ── All videos render at once for zero gap ── */
-        .hero-video {
+        /* ── Background blobs ── */
+        .hero-blob-top {
           position: absolute;
-          inset: 0;
-          width: 100%; height: 100%;
-          object-fit: cover;
+          top: -15%;
+          right: -10%;
+          width: 700px;
+          height: 700px;
+          background: radial-gradient(circle, rgba(46, 204, 64, 0.15) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(120px);
+          pointer-events: none;
           z-index: 0;
-          filter: saturate(1.1) contrast(1.05);
-          opacity: 0;
-          transition: opacity 0.8s ease-in-out;
-          will-change: opacity, transform;
-          transform: translateZ(0);
         }
-
-        .hero-video.active {
-          opacity: 1;
-        }
-
-        /* ── Color + vignette overlays ── */
-        .hero-overlay {
-          position: absolute; inset: 0; z-index: 1;
-          background: linear-gradient(
-            135deg,
-            rgba(59,173,176,0.32) 0%,
-            rgba(31,64,128,0.32) 48%,
-            rgba(27,46,94,0.42) 100%
-          );
+        .hero-blob-bottom {
+          position: absolute;
+          bottom: -10%;
+          left: -5%;
+          width: 500px;
+          height: 500px;
+          background: radial-gradient(circle, rgba(0, 32, 70, 0.08) 0%, transparent 70%);
+          border-radius: 50%;
+          filter: blur(100px);
           pointer-events: none;
-        }
-        .hero-vignette {
-          position: absolute; inset: 0; z-index: 2;
-          background: radial-gradient(
-            ellipse at center,
-            rgba(0,0,0,0.08) 0%,
-            rgba(0,0,0,0.28) 68%,
-            rgba(0,0,0,0.45) 100%
-          );
-          pointer-events: none;
+          z-index: 0;
         }
 
-        /* ── Content wrapper ── */
+        /* ── Content grid ── */
         .hero-inner {
-          position: relative; z-index: 3;
-          width: 100%; max-width: 1100px;
-          padding: 0 2rem;
-          text-align: center;
-          display: flex; flex-direction: column; align-items: center;
+          position: relative;
+          z-index: 1;
+          width: 100%;
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 5rem 40px 4rem;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+          align-items: center;
         }
 
-        /* ── Badge ── */
+        /* ── Left column ── */
+        .hero-left { display: flex; flex-direction: column; }
+
         .hero-badge {
-          display: inline-flex; align-items: center; gap: 0.45rem;
-          background: rgba(255,255,255,0.12);
-          border: 1px solid rgba(255,255,255,0.26);
-          border-radius: 100px;
-          padding: 6px 14px 6px 10px;
-          margin-bottom: 1.25rem;
-          backdrop-filter: blur(10px);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 6px 16px 6px 12px;
+          background: rgba(46, 204, 64, 0.1);
+          border: 1px solid rgba(46, 204, 64, 0.2);
+          border-radius: 9999px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.75rem;
+          font-weight: 600;
+          color: #2ECC40;
+          width: fit-content;
+          margin-bottom: 1.5rem;
+          letter-spacing: 0.02em;
         }
-        .badge-dot {
-          width: 22px; height: 22px; border-radius: 50%;
-          background: rgba(255,255,255,0.18);
-          display: flex; align-items: center; justify-content: center;
-        }
-        .badge-dot-inner {
-          width: 8px; height: 8px; border-radius: 50%;
-          background: #3BADB0;
-          box-shadow: 0 0 8px rgba(59,173,176,0.9);
-          animation: pulseDot 1.8s ease infinite;
-        }
-        @keyframes pulseDot {
-          0%,100% { transform: scale(1); opacity: 1; }
-          50%      { transform: scale(1.35); opacity: 0.65; }
-        }
-        .badge-label {
-          font-family: 'Oxanium', monospace;
-          font-size: 0.68rem; font-weight: 700;
-          letter-spacing: 0.12em; text-transform: uppercase;
-          color: rgba(255,255,255,0.92); white-space: nowrap;
+        .hero-badge-dot {
+          width: 8px; height: 8px;
+          background: #2ECC40;
+          border-radius: 50%;
+          flex-shrink: 0;
+          box-shadow: 0 0 10px rgba(46, 204, 64, 0.5);
         }
 
-        /* ── Heading ── */
         .hero-h1 {
-          font-family: 'Oxanium', monospace;
-          font-size: clamp(2.2rem, 4.6vw, 4rem);
-          font-weight: 900; line-height: 1.05;
-          margin: 0 0 1rem; color: #fff; letter-spacing: -0.02em;
+          font-family: 'Manrope', sans-serif;
+          font-size: clamp(2.8rem, 5vw, 4rem);
+          font-weight: 800;
+          line-height: 1.05;
+          letter-spacing: -0.03em;
+          color: #002046;
+          margin: 0;
         }
-        .w1,.w2,.w3,.w4,.w5,.w6,.w7 {
+        .hero-h1 .accent { 
+          background: linear-gradient(135deg, #2ECC40 0%, #3BADB0 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          background-clip: text; color: transparent;
-          filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
         }
-        .w1 { background-image: linear-gradient(135deg, #3BADB0 0%, #a7fff9 100%); }
-        .w2 { background-image: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.88) 100%); }
-        .w3 { background-image: linear-gradient(135deg, #a7fff9 0%, #3BADB0 100%); }
-        .w4 { background-image: linear-gradient(135deg, #ffffff 0%, #a7fff9 100%); }
-        .w5 { background-image: linear-gradient(135deg, #e0f2fe 0%, #3BADB0 100%); }
-        .w6 { background-image: linear-gradient(135deg, #c7d2fe 0%, #ffffff 100%); }
-        .w7 { background-image: linear-gradient(135deg, #ffffff 0%, #a7fff9 100%); }
 
-        /* ── Body ── */
         .hero-p {
-          font-size: 1.02rem; line-height: 1.85;
-          color: rgba(255,255,255,0.93);
-          text-shadow: 0 4px 16px rgba(0,0,0,0.55);
-          max-width: 700px; margin: 0 auto 1.75rem;
+          font-family: 'Inter', sans-serif;
+          font-size: 1.05rem;
+          line-height: 1.7;
+          color: #44474e;
+          max-width: 480px;
+          margin-top: 1.5rem;
         }
 
-        /* ── CTAs ── */
         .hero-ctas {
-          display: flex; align-items: center; justify-content: center;
-          gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1rem;
+          margin-top: 2.25rem;
         }
-        .cta-primary {
-          display: inline-flex; align-items: center; gap: 0.4rem;
-          font-family: 'Oxanium', monospace; font-size: 0.78rem;
-          font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
-          background: #fff; color: #1B2E5E; border: none;
-          padding: 13px 28px; border-radius: 100px; cursor: pointer;
-          transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-          box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+        .hero-btn-primary {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+          background: #002046;
+          color: #ffffff;
+          border: none;
+          padding: 18px 36px;
+          border-radius: 14px;
+          cursor: pointer;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          box-shadow: 0 10px 30px rgba(0,32,70,0.2);
         }
-        .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0,0,0,0.3); background: rgba(255,255,255,0.93); }
-        .cta-secondary {
-          display: inline-flex; align-items: center; gap: 0.4rem;
-          font-family: 'Oxanium', monospace; font-size: 0.78rem;
-          font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
-          background: rgba(255,255,255,0.06);
-          border: 1.5px solid rgba(255,255,255,0.4); color: #fff;
-          padding: 12px 24px; border-radius: 100px; cursor: pointer;
-          transition: background 0.2s, border-color 0.2s;
-          backdrop-filter: blur(10px);
+        .hero-btn-primary:hover {
+          transform: translateY(-4px) scale(1.02);
+          box-shadow: 0 15px 35px rgba(0,32,70,0.3), 0 0 15px rgba(46,204,64,0.3);
+          background: #002a5c;
         }
-        .cta-secondary:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.11); }
+        .hero-btn-primary:active { transform: scale(0.96); }
 
-        /* ── Slide dots ── */
-        .hero-dots {
-          display: flex; align-items: center; gap: 0.7rem;
+        .hero-btn-secondary {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+          background: transparent;
+          color: #002046;
+          border: 2px solid #e3e2e6;
+          padding: 16px 36px;
+          border-radius: 14px;
+          cursor: pointer;
+          transition: all 0.3s ease;
         }
-        .hero-dot-btn {
-          width: 36px; height: 4px; border-radius: 2px;
-          background: rgba(255,255,255,0.22);
-          border: none; padding: 0; cursor: pointer;
-          position: relative; overflow: hidden;
-          transition: background 0.3s;
+        .hero-btn-secondary:hover {
+          border-color: #2ECC40;
+          color: #2ECC40;
+          background: rgba(46,204,64,0.04);
+          transform: translateY(-2px);
         }
-        .hero-dot-btn.active { background: rgba(255,255,255,0.28); }
-        .hero-dot-fill {
-          position: absolute; top: 0; left: 0; height: 100%;
-          background: #3BADB0; border-radius: 2px;
-          transition: width 0.15s linear;
+        .hero-btn-secondary:active { transform: scale(0.96); }
+
+        /* ── Right column ── */
+        .hero-right {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
-        /* ── Bottom sweep progress bar ── */
-        .hero-progress {
-          position: absolute; bottom: 0; left: 0;
-          height: 3px; z-index: 5;
-          background: linear-gradient(90deg, #3BADB0, #a7fff9);
-          transition: width 0.15s linear;
+        .hero-card {
+          background: rgba(255, 255, 255, 0.6);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 24px;
+          padding: 12px;
+          transform: rotate(2deg);
+          box-shadow: 0 40px 100px rgba(0,32,70,0.15);
+          position: relative;
+          z-index: 1;
+        }
+        .hero-img {
+          display: block;
+          width: 100%;
+          height: auto;
+          border-radius: 10px;
+          object-fit: cover;
+        }
+
+        /* ── Stat widget ── */
+        .hero-stat-widget {
+          position: absolute;
+          bottom: -24px;
+          left: -24px;
+          z-index: 2;
+          background: rgba(255, 255, 255, 0.75);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          border-radius: 16px;
+          padding: 20px 24px;
+          box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+          max-width: 240px;
+        }
+        .hero-stat-top {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          margin-bottom: 12px;
+        }
+        .hero-stat-icon {
+          width: 48px; height: 48px;
+          background: #2ECC40;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          box-shadow: 0 8px 20px rgba(46,204,64,0.3);
+        }
+        .hero-stat-icon span {
+          font-size: 1.5rem;
+          color: white;
+        }
+        .hero-stat-label {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.72rem;
+          font-weight: 500;
+          color: #74777f;
+          margin-bottom: 2px;
+        }
+        .hero-stat-value {
+          font-family: 'Manrope', sans-serif;
+          font-size: 1.35rem;
+          font-weight: 700;
+          color: #002046;
+        }
+        .hero-stat-bar-bg {
+          width: 100%;
+          height: 4px;
+          background: #e3e2e6;
+          border-radius: 9999px;
+          overflow: hidden;
+        }
+        .hero-stat-bar-fill {
+          height: 100%;
+          width: 99.8%;
+          background: #2ECC40;
+          border-radius: 9999px;
         }
 
         /* ── Responsive ── */
+        @media (max-width: 1024px) {
+          .hero-inner {
+            grid-template-columns: 1fr;
+            padding: 4rem 24px 3rem;
+          }
+          .hero-right { margin-top: 2.5rem; }
+          .hero-stat-widget { bottom: -20px; left: -12px; }
+        }
         @media (max-width: 600px) {
-          #home.hero { padding-top: 72px; }
-          .hero-inner { padding: 0 1.25rem; }
-          .hero-h1 { font-size: clamp(1.9rem, 9vw, 2.5rem); }
-          .hero-p { font-size: 0.94rem; }
-          .cta-primary, .cta-secondary { width: 100%; justify-content: center; }
-          .hero-ctas { width: 100%; flex-direction: column; }
+          .hero-h1 { font-size: 2.1rem; }
+          .hero-p  { font-size: 0.96rem; }
+          .hero-ctas { flex-direction: column; }
+          .hero-btn-primary, .hero-btn-secondary { text-align: center; width: 100%; }
+          .hero-card { transform: none; }
+          .hero-stat-widget { position: static; margin-top: 1rem; max-width: 100%; }
         }
       `}</style>
 
-      {/* ── Videos — all autoplay and buffer to allow seamless crossfade ── */}
-      {VIDEOS.map((src, i) => (
-        <video
-          key={src}
-          className={`hero-video ${i === index ? "active" : ""}`}
-          autoPlay
-          muted
-          playsInline
-          loop
-          preload="auto"
-        >
-          <source src={src} type="video/mp4" />
-        </video>
-      ))}
+      {/* Background decorative blobs */}
+      <div className="hero-blob-top" />
+      <div className="hero-blob-bottom" />
 
-      <div className="hero-overlay" />
-      <div className="hero-vignette" />
-
-      {/* ── Content ── */}
       <div className="hero-inner">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={textIndex}
-            style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-          >
-            {/* Badge */}
-            <motion.div className="hero-badge" variants={textFade}>
-              <span className="badge-dot"><span className="badge-dot-inner" /></span>
-              <span className="badge-label">{slide.badge}</span>
-            </motion.div>
-
-            {/* Headline */}
-            <h1 className="hero-h1">
-              {slide.words.map((w, i) => (
-                <motion.span
-                  key={`${w.text}-${i}`}
-                  style={{ display: "inline-block", marginRight: "0.35em" }}
-                  custom={i}
-                  variants={wordFade}
-                  className={w.cls}
-                >
-                  {w.text}
-                </motion.span>
-              ))}
-            </h1>
-
-            {/* CTAs */}
-            <motion.div className="hero-ctas" variants={textFade}>
-              <button className="cta-primary" onClick={handleCta1}>{slide.cta1.label}</button>
-              <button className="cta-secondary" onClick={handleCta2}>{slide.cta2.label}</button>
-            </motion.div>
+        {/* ── Left column ── */}
+        <div className="hero-left">
+          <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show">
+            <div className="hero-badge">
+              <span className="hero-badge-dot" />
+              Now Scaling Enterprise AI
+            </div>
           </motion.div>
-        </AnimatePresence>
+
+          <motion.h1 className="hero-h1" custom={0.1} variants={fadeUp} initial="hidden" animate="show">
+            Precision in <br />
+            <span className="accent">Intelligence</span>
+          </motion.h1>
+
+          <motion.p className="hero-p" custom={0.2} variants={fadeUp} initial="hidden" animate="show">
+            Elite software services architecture for the AI-first world. We bridge the gap between
+            experimental research and scalable production software with surgical precision.
+          </motion.p>
+
+          <motion.div className="hero-ctas" custom={0.32} variants={fadeUp} initial="hidden" animate="show">
+            <button className="hero-btn-primary" onClick={handleConsult}>
+              Consult Our Experts
+            </button>
+            <button className="hero-btn-secondary" onClick={handleEcosystem}>
+              View Ecosystem
+            </button>
+          </motion.div>
+        </div>
+
+        {/* ── Right column ── */}
+        <motion.div
+          className="hero-right"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <motion.div 
+            className="hero-card"
+            animate={{ 
+              y: [0, -15, 0],
+              rotate: [2, 3, 2]
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <img
+              className="hero-img"
+              src="/hero_ai_architecture_1777929290313.png"
+              alt="Futuristic AI neural network architecture"
+            />
+          </motion.div>
+
+          {/* Stat widget */}
+          <motion.div 
+            className="hero-stat-widget"
+            animate={{ 
+              y: [0, 10, 0],
+              x: [0, -5, 0]
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+          >
+            <div className="hero-stat-top">
+              <div className="hero-stat-icon">
+                <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>analytics</span>
+              </div>
+              <div>
+                <p className="hero-stat-label">Model Accuracy</p>
+                <p className="hero-stat-value">99.8%</p>
+              </div>
+            </div>
+            <div className="hero-stat-bar-bg">
+              <div className="hero-stat-bar-fill" />
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

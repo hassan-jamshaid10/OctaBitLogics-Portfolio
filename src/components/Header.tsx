@@ -4,12 +4,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 const NAV_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about-split" },
-  { label: "Services", href: "#services" },
-  { label: "Projects", href: "/projects" },
-  { label: "Blogs", href: "#blogs" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home",       href: "#home" },
+  { label: "About",      href: "#about-split" },
+  { label: "Projects",   href: "/projects" },
+  { label: "Services",   href: "#services" },
+  { label: "Blogs",      href: "#blogs" },
+  { label: "Contact Us", href: "#contact" },
 ];
 
 interface NavbarProps {
@@ -19,16 +19,11 @@ interface NavbarProps {
 
 export default function Navbar({ activeSection = "home", onNavClick }: NavbarProps) {
   const pathname = usePathname();
-  const router = useRouter();
+  const router   = useRouter();
 
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
-  const [mounted, setMounted] = useState(false);
-
-  const indicatorRef = useRef<HTMLDivElement>(null);
-  const navLinksRef = useRef<(HTMLAnchorElement | null)[]>([]);
-  const pillRef = useRef<HTMLDivElement>(null);
+  const [scrolled,   setScrolled]   = useState(false);
+  const [menuOpen,   setMenuOpen]   = useState(false);
+  const [mounted,    setMounted]    = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
@@ -41,45 +36,20 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    let targetIdx = -1;
-    if (hoveredLink) {
-      targetIdx = NAV_LINKS.findIndex((l) => l.href === hoveredLink);
-    } else {
-      targetIdx = NAV_LINKS.findIndex((l) =>
-        l.href.startsWith('/') ? pathname === l.href : pathname === '/' && activeSection === l.href.slice(1)
-      );
-    }
-
-    const el = navLinksRef.current[targetIdx];
-    const ind = indicatorRef.current;
-    const pill = pillRef.current;
-    if (el && ind && pill) {
-      const eRect = el.getBoundingClientRect();
-      const pRect = pill.getBoundingClientRect();
-      ind.style.width = `${eRect.width}px`;
-      ind.style.left = `${eRect.left - pRect.left}px`;
-      ind.style.opacity = '1';
-    } else if (ind) {
-      ind.style.opacity = '0';
-    }
-  }, [hoveredLink, activeSection, pathname]);
-
   const navigateToSection = useCallback((sectionId: string) => {
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('scrollToSection', sectionId.replace('#', ''));
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("scrollToSection", sectionId.replace("#", ""));
     }
-    router.push('/');
+    router.push("/");
   }, [router]);
 
   const handleNav = useCallback((e: React.MouseEvent, href: string) => {
     e.preventDefault();
     setMenuOpen(false);
-
-    if (href.startsWith('/')) {
+    if (href.startsWith("/")) {
       router.push(href);
     } else {
-      if (pathname !== '/') {
+      if (pathname !== "/") {
         navigateToSection(href);
       } else {
         if (onNavClick) onNavClick(href);
@@ -88,331 +58,263 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
   }, [pathname, router, onNavClick, navigateToSection]);
 
   const handleLogoClick = useCallback(() => {
-    if (pathname !== '/') {
-      navigateToSection('home');
+    if (pathname !== "/") {
+      navigateToSection("home");
     } else {
-      if (onNavClick) onNavClick('#home');
+      if (onNavClick) onNavClick("#home");
     }
   }, [pathname, navigateToSection, onNavClick]);
 
   const handleCtaClick = useCallback(() => {
-    if (pathname !== '/') {
-      navigateToSection('contact');
+    if (pathname !== "/") {
+      navigateToSection("contact");
     } else {
-      if (onNavClick) onNavClick('#contact');
+      if (onNavClick) onNavClick("#contact");
     }
   }, [pathname, navigateToSection, onNavClick]);
+
+  const isActive = (href: string) =>
+    href.startsWith("/")
+      ? pathname === href
+      : pathname === "/" && activeSection === href.slice(1);
 
   return (
     <>
       <style>{`
-        .navbar {
+        /* ── Navbar ── */
+        .obl-nav {
           position: fixed;
           top: 0; left: 0; right: 0;
           z-index: 1000;
-          padding: 0 2.5rem;
-          height: 75px;
+          height: 80px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          background: transparent;
-          border-bottom: 1px solid transparent;
-          transition: all 0.4s cubic-bezier(.4,0,.2,1);
+          padding: 0 2rem 0 0;
+          background: #ffffff;
+          border-bottom: 1px solid rgba(0,0,0,0.08);
+          box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+          transition: box-shadow 0.4s cubic-bezier(.4,0,.2,1);
           opacity: 0;
           transform: translateY(-20px);
         }
-
-        .navbar.mounted {
+        .obl-nav.mounted {
           opacity: 1;
           transform: translateY(0);
         }
-
-        /* Scrolled state */
-        .navbar.scrolled {
-          background: rgba(11, 18, 36, 0.88);
-          backdrop-filter: blur(14px) saturate(180%);
-          -webkit-backdrop-filter: blur(14px) saturate(180%);
-          border-bottom: 1px solid rgba(59,173,176,0.15);
-          box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        .obl-nav.scrolled {
+          background: #ffffff;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.1);
         }
-
-        /* ── LOGO ── */
-        .logo {
+        .obl-nav-inner {
+          width: 100%;
+          max-width: 1280px;
+          margin: 0 auto;
           display: flex;
           align-items: center;
-          gap: 0.65rem;
+          justify-content: space-between;
+        }
+
+        /* ── Logo ── */
+        .obl-logo {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
           cursor: pointer;
           text-decoration: none;
-          animation: navItemIn 0.6s cubic-bezier(.4,0,.2,1) 0.15s both;
+          user-select: none;
+          margin-left: 1.5rem;
         }
-
-        .logo-img {
-          width: 50px;
-          height: 50px;
+        .obl-logo-img {
+          width: 200px;
+          height: 56px;
           object-fit: contain;
-          transition: transform 0.3s ease;
         }
+        .obl-logo:hover .obl-logo-img { transform: none; }
 
-        .logo:hover .logo-img {
-          transform: rotate(-6deg) scale(1.08);
-        }
-
-        .logo-text {
-          font-family: 'Oxanium', monospace;
-          font-weight: 800;
-          font-size: 1.1rem;
-          letter-spacing: 0.06em;
-          color: white;
-          line-height: 1;
-        }
-
-        .logo-text span {
-          display: block;
-          font-size: 0.55rem;
-          font-weight: 500;
-          letter-spacing: 0.18em;
-          color: rgba(255,255,255,0.65);
-          text-transform: uppercase;
-          margin-top: 1px;
-        }
-
-        /* ── NAV LINKS ── */
-        .nav-links {
+        /* ── Desktop links ── */
+        .obl-links {
           display: flex;
           align-items: center;
           gap: 2rem;
-          position: relative;
-          animation: navItemIn 0.6s cubic-bezier(.4,0,.2,1) 0.25s both;
         }
-
-        .nav-indicator {
-          position: absolute;
-          height: 2px;
-          bottom: -6px;
-          border-radius: 2px;
-          background: #a7fff9;
-          transition: left 0.35s cubic-bezier(.4,0,.2,1),
-                      width 0.35s cubic-bezier(.4,0,.2,1),
-                      opacity 0.3s ease;
-          pointer-events: none;
-          z-index: 0;
-          box-shadow: 0 0 10px rgba(167, 255, 249, 0.4);
-        }
-
-        .nav-link {
-          position: relative;
-          z-index: 1;
-          font-family: 'Oxanium', monospace;
-          font-size: 0.95rem; /* Increased from 0.76rem */
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
+        .obl-link {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 500;
           text-decoration: none;
-          color: rgba(255,255,255,0.65);
+          color: #44474e;
           transition: color 0.22s ease;
+          position: relative;
           white-space: nowrap;
         }
-
-        .nav-link.active,
-        .nav-link:hover { color: white; }
-
-        /* ── CTA ── */
-        .nav-cta {
-          font-family: 'Oxanium', monospace;
-          font-size: 0.88rem; /* Increased from 0.74rem to balance with nav links */
+        .obl-link.active {
+          color: #002046;
           font-weight: 700;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          background: white;
+          border-bottom: 2px solid #1b6d1e;
+          padding-bottom: 2px;
+        }
+        .obl-link:hover { color: #002046; }
+
+        /* ── CTA Button ── */
+        .obl-cta {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.85rem;
+          font-weight: 600;
+          letter-spacing: 0.03em;
+          background: #1b365d;
+          color: #87a0cd;
           border: none;
-          color: var(--teal);
-          padding: 9px 22px;
-          border-radius: 100px;
+          padding: 10px 24px;
+          border-radius: 8px;
           cursor: pointer;
           transition: all 0.25s ease;
-          box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-          animation: navItemIn 0.6s cubic-bezier(.4,0,.2,1) 0.35s both;
+          white-space: nowrap;
         }
-
-        .nav-cta:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-          background: rgba(255,255,255,0.92);
+        .obl-cta:hover {
+          opacity: 0.88;
+          transform: translateY(-1px);
+          box-shadow: 0 6px 20px rgba(27,54,93,0.25);
         }
+        .obl-cta:active { transform: scale(0.96); }
 
-        /* ── HAMBURGER ── */
-        .hamburger {
+        /* ── Hamburger ── */
+        .obl-hamburger {
           display: none;
           flex-direction: column;
           gap: 5px;
           cursor: pointer;
           padding: 6px 8px;
-          background: rgba(255,255,255,0.12);
-          border: 1px solid rgba(255,255,255,0.25);
-          border-radius: 10px;
-          animation: navItemIn 0.6s cubic-bezier(.4,0,.2,1) 0.2s both;
+          background: rgba(0,32,70,0.06);
+          border: 1px solid rgba(0,32,70,0.12);
+          border-radius: 8px;
         }
-
-        .hamburger span {
+        .obl-hamburger span {
           display: block;
-          width: 22px;
-          height: 2px;
-          background: white;
+          width: 22px; height: 2px;
+          background: #002046;
           border-radius: 2px;
           transition: all 0.3s cubic-bezier(.4,0,.2,1);
         }
+        .obl-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .obl-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .obl-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-        /* ── MOBILE DRAWER ── */
-        .mobile-menu {
+        /* ── Mobile drawer ── */
+        .obl-mobile-menu {
           position: fixed;
-          top: 72px; left: 0; right: 0;
-          background: rgba(8, 13, 30, 0.96);
+          top: 80px; left: 0; right: 0;
+          background: rgba(255,255,255,0.96);
           backdrop-filter: blur(24px);
           -webkit-backdrop-filter: blur(24px);
-          border-bottom: 1px solid rgba(255,255,255,0.08);
-          padding: 1.5rem 1.5rem 2rem;
+          border-bottom: 1px solid rgba(0,32,70,0.08);
+          padding: 1.25rem 1.5rem 1.75rem;
           display: flex;
           flex-direction: column;
-          gap: 0.6rem;
+          gap: 0.5rem;
           transform: translateY(-110%) scaleY(0.92);
           opacity: 0;
-          transition: transform 0.35s cubic-bezier(.4,0,.2,1),
-                      opacity   0.3s ease;
+          transition: transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.3s ease;
           transform-origin: top;
           z-index: 999;
-          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 10px 40px rgba(0,0,0,0.08);
         }
-
-        .mobile-menu.open {
+        .obl-mobile-menu.open {
           transform: translateY(0) scaleY(1);
           opacity: 1;
         }
-
-        .mobile-link {
-          font-family: 'Oxanium', monospace;
-          font-size: 0.88rem;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
+        .obl-mobile-link {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 500;
           text-decoration: none;
-          color: rgba(255,255,255,0.6);
-          padding: 14px 20px;
-          border-radius: 12px;
+          color: #44474e;
+          padding: 12px 16px;
+          border-radius: 10px;
           border: 1px solid transparent;
-          background: rgba(255,255,255,0.02);
+          background: transparent;
           transition: all 0.2s ease;
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: 0.6rem;
         }
-
-        .mobile-link::before {
-          content: '';
-          width: 5px; height: 5px;
-          border-radius: 50%;
-          background: #3badb0;
-          opacity: 0;
-          transition: opacity 0.2s ease, transform 0.2s ease;
-          transform: scale(0.5);
-          flex-shrink: 0;
-          box-shadow: 0 0 8px #3badb0;
+        .obl-mobile-link.active,
+        .obl-mobile-link:hover {
+          background: rgba(0,32,70,0.04);
+          color: #002046;
+          border-color: rgba(0,32,70,0.08);
         }
-
-        .mobile-link.active,
-        .mobile-link:hover {
-          background: rgba(59,173,176,0.1);
-          color: white;
-          border-color: rgba(59,173,176,0.25);
+        .obl-mobile-cta {
+          margin-top: 0.5rem;
+          background: #1b365d;
+          color: #87a0cd;
+          border: none;
+          padding: 12px 20px;
+          border-radius: 8px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: opacity 0.2s;
+          text-align: center;
         }
-
-        .mobile-link.active::before,
-        .mobile-link:hover::before { 
-          opacity: 1; 
-          transform: scale(1);
-        }
-
-        @keyframes navItemIn {
-          from { opacity: 0; transform: translateY(-12px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
+        .obl-mobile-cta:hover { opacity: 0.88; }
 
         @media (max-width: 900px) {
-          .nav-links, .nav-cta { display: none !important; }
-          .hamburger { display: flex; }
-          .navbar { padding: 0 1.25rem; }
+          .obl-links, .obl-cta { display: none !important; }
+          .obl-hamburger { display: flex; }
+          .obl-nav { padding: 0 1.25rem; }
         }
       `}</style>
 
-      <nav className={[
-        "navbar",
-        scrolled ? "scrolled" : "",
-        mounted ? "mounted" : "",
-      ].join(" ")}>
-
-        {/* Logo */}
-        <div className="logo" onClick={handleLogoClick}>
-          <img src="/octa.png" alt="OctaBitLogics Logo" className="logo-img" />
-          <div className="logo-text">
-            OctaBitLogics
-            <span>Software Studio</span>
+      <nav className={["obl-nav", scrolled ? "scrolled" : "", mounted ? "mounted" : ""].join(" ")}>
+        <div className="obl-nav-inner">
+          {/* Logo */}
+          <div className="obl-logo" onClick={handleLogoClick}>
+            <img src="/octabit final.png" alt="OctaBitLogics" className="obl-logo-img" />
           </div>
-        </div>
 
-        {/* Desktop pill */}
-        <div className="nav-links" ref={pillRef}>
-          <div className="nav-indicator" ref={indicatorRef} />
-          {NAV_LINKS.map((link, i) => {
-            const isActive = link.href.startsWith('/') ? pathname === link.href : pathname === '/' && activeSection === link.href.slice(1);
-            return (
+          {/* Desktop links */}
+          <div className="obl-links">
+            {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
-                ref={(el) => { navLinksRef.current[i] = el; }}
                 href={link.href}
-                className={`nav-link${isActive ? " active" : ""}`}
+                className={`obl-link${isActive(link.href) ? " active" : ""}`}
                 onClick={(e) => handleNav(e, link.href)}
-                onMouseEnter={() => setHoveredLink(link.href)}
-                onMouseLeave={() => setHoveredLink(null)}
               >
                 {link.label}
               </a>
-            );
-          })}
-        </div>
+            ))}
+          </div>
 
-        {/* CTA */}
-        <button className="nav-cta" onClick={handleCtaClick}>
-          Get Started
-        </button>
+          {/* CTA */}
+          <button className="obl-cta" onClick={handleCtaClick}>Get Started</button>
 
-        {/* Hamburger */}
-        <div
-          className={`hamburger${menuOpen ? " open" : ""}`}
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label="Toggle menu"
-        >
-          <span /><span /><span />
+          {/* Hamburger */}
+          <div
+            className={`obl-hamburger${menuOpen ? " open" : ""}`}
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label="Toggle menu"
+          >
+            <span /><span /><span />
+          </div>
         </div>
       </nav>
 
       {/* Mobile drawer */}
-      <div className={`mobile-menu${menuOpen ? " open" : ""}`}>
-        {NAV_LINKS.map((link) => {
-          const isActive = link.href.startsWith('/') ? pathname === link.href : pathname === '/' && activeSection === link.href.slice(1);
-          return (
-            <a
-              key={link.href}
-              href={link.href}
-              className={`mobile-link${isActive ? " active" : ""}`}
-              onClick={(e) => handleNav(e, link.href)}
-            >
-              {link.label}
-            </a>
-          );
-        })}
+      <div className={`obl-mobile-menu${menuOpen ? " open" : ""}`}>
+        {NAV_LINKS.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            className={`obl-mobile-link${isActive(link.href) ? " active" : ""}`}
+            onClick={(e) => handleNav(e, link.href)}
+          >
+            {link.label}
+          </a>
+        ))}
+        <button className="obl-mobile-cta" onClick={handleCtaClick}>Get Started</button>
       </div>
     </>
   );

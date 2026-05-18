@@ -46,19 +46,33 @@ export default function Contact() {
     <section id="contact" className="dr-container">
       <style>{`
         .dr-container {
-          background: linear-gradient(145deg, #0f1c3f 0%, #080d1e 48%, #03060e 100%);
+          background: #0A1628;
           padding: 8rem 0;
           position: relative;
           overflow: hidden;
           color: #ffffff;
-          font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+          font-family: 'Inter', sans-serif;
         }
 
-        /* Subtle animated mesh for Day-to-Night feel */
+        /* dot grid overlay */
         .dr-bg-mesh {
           position: absolute; inset: 0;
-          background: radial-gradient(at 0% 0%, rgba(59,173,176,0.15) 0%, transparent 50%),
-                      radial-gradient(at 100% 100%, rgba(31,64,128,0.1) 0%, transparent 50%);
+          background-image: radial-gradient(circle, rgba(0,32,70,0.7) 1px, transparent 1px);
+          background-size: 32px 32px;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        /* green glow at top-center */
+        .dr-bg-glow {
+          position: absolute;
+          top: -200px; left: 50%;
+          transform: translateX(-50%);
+          width: 900px; height: 700px;
+          background: radial-gradient(ellipse at center,
+            rgba(46,204,64,0.07) 0%,
+            rgba(0,32,70,0.1) 45%,
+            transparent 70%);
           pointer-events: none;
           z-index: 0;
         }
@@ -82,44 +96,67 @@ export default function Contact() {
         }
 
         .dr-heading {
-          font-family: 'DM Sans', sans-serif;
-          font-size: clamp(2.5rem, 5vw, 4rem);
-          font-weight: 700;
-          line-height: 1.1;
-          letter-spacing: -0.02em;
+          font-family: 'Manrope', sans-serif;
+          font-size: clamp(2.2rem, 4vw, 3.5rem);
+          font-weight: 800;
+          line-height: 1.15;
+          letter-spacing: -0.025em;
           color: #ffffff;
         }
 
+        .dr-heading .green-accent {
+          background: linear-gradient(135deg, #4ade80 0%, #3BADB0 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
         .dr-contact-box {
-          border: 1px solid rgba(255, 255, 255, 0.4);
-          border-radius: 32px;
+          background: rgba(0,32,70,0.5);
+          backdrop-filter: blur(16px);
+          border: 1px solid rgba(46,204,64,0.2);
+          border-radius: 24px;
           padding: 2.5rem;
           display: flex;
           flex-direction: column;
           gap: 2rem;
           max-width: 440px;
+          box-shadow: 0 0 40px rgba(46,204,64,0.05);
         }
 
         .dr-box-title {
-          font-weight: 500;
-          font-size: 1.1rem;
+          font-family: 'Inter', sans-serif;
+          font-weight: 600;
+          font-size: 1rem;
           margin-bottom: 0.5rem;
-          color: rgba(255, 255, 255, 0.9);
+          color: rgba(255,255,255,0.6);
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
+          font-size: 0.8rem;
         }
 
         .dr-contact-row {
           display: inline-flex;
           align-items: center;
           gap: 1rem;
-          border: 1px solid rgba(255, 255, 255, 1);
+          border: 1px solid rgba(46,204,64,0.25);
+          background: rgba(46,204,64,0.06);
           padding: 10px 20px;
           border-radius: 100px;
-          color: white;
+          color: #ffffff;
           font-size: 0.95rem;
           font-weight: 500;
           width: fit-content;
+          text-decoration: none;
+          transition: all 0.3s ease;
         }
-        .dr-contact-row svg { opacity: 0.9; }
+        .dr-contact-row:hover {
+          background: rgba(46,204,64,0.15);
+          border-color: rgba(46,204,64,0.5);
+          color: #4ade80;
+          box-shadow: 0 0 16px rgba(46,204,64,0.15);
+        }
+        .dr-contact-row svg { opacity: 0.8; color: #4ade80; }
 
         /* ── Right Side: Minimalist Form ── */
         .dr-form {
@@ -137,23 +174,28 @@ export default function Contact() {
         }
 
         .dr-label {
-          font-size: 0.95rem;
-          color: rgba(255, 255, 255, 0.8);
-          font-weight: 500;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.82rem;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.45);
         }
 
         .dr-input {
           background: transparent;
           border: none;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+          border-bottom: 1px solid rgba(255,255,255,0.15);
           padding: 10px 0;
-          color: white;
-          font-size: 1.1rem;
+          color: #ffffff;
+          font-family: 'Inter', sans-serif;
+          font-size: 1.05rem;
           outline: none;
           transition: border-color 0.3s ease;
         }
+        .dr-input::placeholder { color: rgba(255,255,255,0.2); }
         .dr-input:focus {
-          border-color: #3BADB0;
+          border-color: #4ade80;
         }
 
         .dr-btn-wrap {
@@ -161,27 +203,34 @@ export default function Contact() {
         }
 
         .dr-submit-btn {
-          background: transparent;
-          border: 1.5px solid white;
-          color: white;
-          padding: 12px 40px;
+          background: linear-gradient(135deg, #2ECC40 0%, #3BADB0 100%);
+          border: none;
+          color: #002046;
+          padding: 14px 44px;
           border-radius: 8px;
-          font-weight: 600;
-          font-size: 1.05rem;
+          font-family: 'Inter', sans-serif;
+          font-weight: 700;
+          font-size: 1rem;
+          letter-spacing: 0.03em;
           cursor: pointer;
-          transition: all 0.25s ease;
+          transition: all 0.3s ease;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 0.75rem;
-          min-width: 140px;
+          min-width: 160px;
+          box-shadow: 0 4px 20px rgba(46,204,64,0.25);
         }
         .dr-submit-btn:hover:not(:disabled) {
-          background: #ffffff;
-          color: #1B2E5E;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 28px rgba(46,204,64,0.4);
+          filter: brightness(1.1);
+        }
+        .dr-submit-btn:active:not(:disabled) {
+          transform: scale(0.97);
         }
         .dr-submit-btn:disabled {
-          opacity: 0.6;
+          opacity: 0.5;
           cursor: wait;
         }
 
@@ -210,12 +259,13 @@ export default function Contact() {
       `}</style>
 
       <div className="dr-bg-mesh" />
+      <div className="dr-bg-glow" />
 
       <div className="dr-inner">
         {/* Left Section */}
         <div className="dr-left">
           <ScrollReveal>
-            <h2 className="dr-heading">Ready to get<br />Started?</h2>
+            <h2 className="dr-heading">Ready to get<br /><span className="green-accent">Started?</span></h2>
           </ScrollReveal>
 
           <ScrollReveal delay={0.2} className="dr-contact-box">
@@ -272,7 +322,7 @@ export default function Contact() {
 
               <AnimatePresence>
                 {status === "success" && (
-                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="dr-status-msg" style={{ color: '#3BADB0' }}>
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="dr-status-msg" style={{ color: '#4ade80' }}>
                     <CheckCircle2 size={18} /> Message Sent Successfully!
                   </motion.div>
                 )}

@@ -126,9 +126,9 @@ export default function TechStack() {
           background: #ffffff;
           position: relative;
           overflow: hidden;
-          padding: 0 !important;
+          padding: 5rem 40px !important;
           margin: 0 !important;
-          font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+          font-family: 'Inter', sans-serif;
         }
 
         .tech-container {
@@ -140,29 +140,33 @@ export default function TechStack() {
           z-index: 1;
         }
 
-        /* Subtle background blob to maintain creative flair */
+        /* mesh grid overlay */
         .tech-stacks-section::before {
           content: '';
           position: absolute;
-          width: 600px; height: 600px;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(59,173,176,0.06) 0%, transparent 60%);
-          top: -200px; left: -200px;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(0,32,70,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,32,70,0.04) 1px, transparent 1px);
+          background-size: 56px 56px;
           pointer-events: none;
           z-index: 0;
         }
 
         .tech-title {
-          font-family: 'Oxanium', monospace;
-          font-size: clamp(2rem, 4vw, 2.8rem);
+          font-family: 'Manrope', sans-serif;
+          font-size: clamp(1.9rem, 3.5vw, 2.7rem);
           font-weight: 800;
-          color: #3badb0; 
-          margin-bottom: 2rem;
-          letter-spacing: -0.02em;
+          color: #002046;
+          margin-bottom: 0.75rem;
+          letter-spacing: -0.025em;
         }
 
         .tech-title span {
-          color: #1e293b; 
+          background: linear-gradient(135deg, #2ECC40 0%, #3BADB0 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         .tech-tabs {
@@ -176,12 +180,12 @@ export default function TechStack() {
         }
 
         .tech-tab {
-          font-family: 'Oxanium', monospace;
+          font-family: 'Inter', sans-serif;
           background: none;
           border: none;
-          font-size: 1.1rem;
-          font-weight: 700;
-          color: #94a3b8;
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: rgba(0,32,70,0.35);
           cursor: pointer;
           position: relative;
           padding: 0.5rem 0;
@@ -189,11 +193,11 @@ export default function TechStack() {
         }
 
         .tech-tab.active {
-          color: #3badb0;
+          color: #002046;
         }
 
         .tech-tab:hover:not(.active) {
-          color: #64748b;
+          color: rgba(0,32,70,0.65);
         }
 
         .tech-tab.active::after {
@@ -202,7 +206,7 @@ export default function TechStack() {
           left: 0; bottom: 0;
           width: 100%;
           height: 3px;
-          background: #3badb0;
+          background: linear-gradient(90deg, #2ECC40, #3BADB0);
           border-radius: 2px;
         }
 
@@ -216,22 +220,25 @@ export default function TechStack() {
         }
 
         .nav-btn {
-          background: none;
-          border: none;
-          color: #3badb0;
+          background: rgba(0,32,70,0.05);
+          border: 1px solid rgba(0,32,70,0.12);
+          color: rgba(0,32,70,0.45);
           font-size: 2rem;
           cursor: pointer;
           padding: 1rem;
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: transform 0.2s ease, opacity 0.2s ease;
+          transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
           z-index: 2;
         }
 
         .nav-btn:hover {
+          background: rgba(46,204,64,0.1);
+          color: #2ECC40;
           transform: scale(1.1);
-          opacity: 0.8;
+          border-color: rgba(46,204,64,0.3);
         }
 
         .tech-grid {
@@ -269,11 +276,17 @@ export default function TechStack() {
           max-width: 100%;
           max-height: 100%;
           object-fit: contain;
-          filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+          filter: none;
+          opacity: 0.75;
+          transition: opacity 0.3s ease, filter 0.3s ease;
+        }
+        .tech-logo-wrapper:hover .tech-logo {
+          opacity: 1;
+          filter: drop-shadow(0 4px 12px rgba(46,204,64,0.3));
         }
 
         @media (max-width: 768px) {
-          .tech-stacks-section { padding: 0 !important; }
+          .tech-stacks-section { padding: 4rem 20px !important; }
           .tech-tabs { 
             justify-content: center;
             padding: 0 1.25rem 0rem;
@@ -282,15 +295,16 @@ export default function TechStack() {
             border-bottom: none;
           }
           .tech-tab { 
-            font-size: 0.85rem;
-            padding: 8px 18px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
+            font-size: 0.78rem;
+            padding: 7px 14px;
+            background: rgba(0,32,70,0.05);
+            border: 1px solid rgba(0,32,70,0.12);
             border-radius: 100px;
           }
           .tech-tab.active {
-            background: rgba(59,173,176,0.1);
-            border-color: #3badb0;
+            background: rgba(46,204,64,0.1);
+            border-color: #2ECC40;
+            color: #002046;
           }
           .tech-tab.active::after { display: none; }
           .tech-content-area { flex-direction: column; min-height: auto; }

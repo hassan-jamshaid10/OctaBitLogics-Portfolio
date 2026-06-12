@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 const NAV_LINKS = [
@@ -21,9 +21,9 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
   const pathname = usePathname();
   const router   = useRouter();
 
-  const [scrolled,   setScrolled]   = useState(false);
-  const [menuOpen,   setMenuOpen]   = useState(false);
-  const [mounted,    setMounted]    = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted,  setMounted]  = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
@@ -66,6 +66,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
   }, [pathname, navigateToSection, onNavClick]);
 
   const handleCtaClick = useCallback(() => {
+    setMenuOpen(false);
     if (pathname !== "/") {
       navigateToSection("contact");
     } else {
@@ -81,7 +82,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
   return (
     <>
       <style>{`
-        /* ── Navbar ── */
+        /* ══ Navbar — matches the hero ══ */
         .obl-nav {
           position: fixed;
           top: 0; left: 0; right: 0;
@@ -89,189 +90,182 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           height: 80px;
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          padding: 0 2rem 0 0;
-          background: #ffffff;
-          border-bottom: 1px solid rgba(0,0,0,0.08);
-          box-shadow: 0 1px 8px rgba(0,0,0,0.06);
-          transition: box-shadow 0.4s cubic-bezier(.4,0,.2,1);
+          background: transparent;
+          border-bottom: 1px solid transparent;
           opacity: 0;
-          transform: translateY(-20px);
+          transform: translateY(-16px);
+          transition:
+            background 0.4s ease, border-color 0.4s ease,
+            box-shadow 0.4s ease, backdrop-filter 0.4s ease,
+            opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .obl-nav.mounted {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        .obl-nav.mounted { opacity: 1; transform: translateY(0); }
         .obl-nav.scrolled {
-          background: #ffffff;
-          box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+          background: rgba(250, 249, 253, 0.78);
+          backdrop-filter: blur(18px) saturate(1.4);
+          -webkit-backdrop-filter: blur(18px) saturate(1.4);
+          border-bottom: 1px solid rgba(0, 32, 70, 0.07);
+          box-shadow: 0 8px 32px rgba(0, 32, 70, 0.06);
         }
         .obl-nav-inner {
-          width: 100%;
-          max-width: 1280px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+          width: 100%; max-width: 1280px;
+          margin: 0 auto; padding: 0 32px;
+          display: flex; align-items: center;
+          justify-content: space-between; gap: 24px;
         }
 
         /* ── Logo ── */
         .obl-logo {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          cursor: pointer;
-          text-decoration: none;
-          user-select: none;
-          margin-left: 1.5rem;
+          display: flex; align-items: center;
+          cursor: pointer; user-select: none;
         }
-        .obl-logo-img {
-          width: 200px;
-          height: 56px;
-          object-fit: contain;
-        }
-        .obl-logo:hover .obl-logo-img { transform: none; }
+        .obl-logo-img { width: 188px; height: 52px; object-fit: contain; display: block; }
 
-        /* ── Desktop links ── */
-        .obl-links {
-          display: flex;
-          align-items: center;
-          gap: 2rem;
-        }
+        /* ── Desktop links: green gradient underline ── */
+        .obl-links { display: flex; align-items: center; gap: 6px; }
         .obl-link {
-          font-family: 'Inter', sans-serif;
-          font-size: 0.9rem;
-          font-weight: 500;
-          text-decoration: none;
-          color: #44474e;
-          transition: color 0.22s ease;
           position: relative;
-          white-space: nowrap;
-        }
-        .obl-link.active {
-          color: #002046;
-          font-weight: 700;
-          border-bottom: 2px solid #1b6d1e;
-          padding-bottom: 2px;
-        }
-        .obl-link:hover { color: #002046; }
-
-        /* ── CTA Button ── */
-        .obl-cta {
           font-family: 'Inter', sans-serif;
-          font-size: 0.85rem;
-          font-weight: 600;
-          letter-spacing: 0.03em;
-          background: #1b365d;
-          color: #87a0cd;
-          border: none;
-          padding: 10px 24px;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.25s ease;
+          font-size: 0.88rem; font-weight: 500;
+          text-decoration: none; color: #44474e;
+          padding: 9px 14px; border-radius: 10px;
+          transition: color 0.25s ease, background 0.25s ease;
           white-space: nowrap;
+        }
+        .obl-link::after {
+          content: ''; position: absolute;
+          left: 14px; right: 14px; bottom: 4px;
+          height: 2px; border-radius: 2px;
+          background: linear-gradient(90deg, #2ECC40, #3BADB0);
+          transform: scaleX(0); transform-origin: left;
+          transition: transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        .obl-link:hover { color: #002046; background: rgba(0, 32, 70, 0.04); }
+        .obl-link:hover::after { transform: scaleX(1); }
+        .obl-link.active { color: #002046; font-weight: 700; }
+        .obl-link.active::after { transform: scaleX(1); }
+
+        /* ── CTA: brand arrow-chip language ── */
+        .obl-cta {
+          display: inline-flex; align-items: center; gap: 10px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.84rem; font-weight: 700; letter-spacing: 0.01em;
+          color: #ffffff; background: #002046;
+          border: none; cursor: pointer;
+          padding: 7px 7px 7px 18px; border-radius: 12px;
+          box-shadow: 0 6px 18px rgba(0, 32, 70, 0.18);
+          white-space: nowrap;
+          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+            box-shadow 0.3s ease, background 0.3s ease;
+        }
+        .obl-cta .obl-cta-chip {
+          width: 28px; height: 28px; border-radius: 9px;
+          background: #2ECC40; color: #002046;
+          display: inline-flex; align-items: center; justify-content: center;
+          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-radius 0.3s ease;
         }
         .obl-cta:hover {
-          opacity: 0.88;
-          transform: translateY(-1px);
-          box-shadow: 0 6px 20px rgba(27,54,93,0.25);
+          transform: translateY(-2px); background: #002a5c;
+          box-shadow: 0 10px 24px rgba(0, 32, 70, 0.25), 0 0 14px rgba(46, 204, 64, 0.22);
         }
+        .obl-cta:hover .obl-cta-chip { border-radius: 50%; transform: rotate(-8deg); }
         .obl-cta:active { transform: scale(0.96); }
 
         /* ── Hamburger ── */
         .obl-hamburger {
-          display: none;
-          flex-direction: column;
-          gap: 5px;
-          cursor: pointer;
-          padding: 6px 8px;
-          background: rgba(0,32,70,0.06);
-          border: 1px solid rgba(0,32,70,0.12);
-          border-radius: 8px;
+          display: none; flex-direction: column;
+          justify-content: center; align-items: center; gap: 5px;
+          cursor: pointer; width: 42px; height: 42px;
+          background: rgba(0, 32, 70, 0.05);
+          border: 1px solid rgba(0, 32, 70, 0.1);
+          border-radius: 12px;
         }
         .obl-hamburger span {
-          display: block;
-          width: 22px; height: 2px;
-          background: #002046;
-          border-radius: 2px;
-          transition: all 0.3s cubic-bezier(.4,0,.2,1);
+          display: block; width: 20px; height: 2px;
+          background: #002046; border-radius: 2px;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .obl-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .obl-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
         .obl-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        /* ── Mobile drawer ── */
+        /* ── Mobile drawer: floating glass card ── */
         .obl-mobile-menu {
-          position: fixed;
-          top: 80px; left: 0; right: 0;
-          background: rgba(255,255,255,0.96);
-          backdrop-filter: blur(24px);
-          -webkit-backdrop-filter: blur(24px);
-          border-bottom: 1px solid rgba(0,32,70,0.08);
-          padding: 1.25rem 1.5rem 1.75rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          transform: translateY(-110%) scaleY(0.92);
-          opacity: 0;
-          transition: transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.3s ease;
-          transform-origin: top;
+          position: fixed; top: 88px; left: 14px; right: 14px;
           z-index: 999;
-          box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+          background: rgba(250, 249, 253, 0.92);
+          backdrop-filter: blur(24px) saturate(1.4);
+          -webkit-backdrop-filter: blur(24px) saturate(1.4);
+          border: 1px solid rgba(0, 32, 70, 0.08);
+          border-radius: 20px;
+          padding: 12px;
+          display: flex; flex-direction: column; gap: 4px;
+          box-shadow: 0 24px 60px rgba(0, 32, 70, 0.14);
+          transform: translateY(-12px) scale(0.98);
+          opacity: 0; pointer-events: none;
+          transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
         }
         .obl-mobile-menu.open {
-          transform: translateY(0) scaleY(1);
-          opacity: 1;
+          transform: translateY(0) scale(1);
+          opacity: 1; pointer-events: auto;
         }
         .obl-mobile-link {
+          position: relative;
           font-family: 'Inter', sans-serif;
-          font-size: 0.95rem;
-          font-weight: 500;
-          text-decoration: none;
-          color: #44474e;
-          padding: 12px 16px;
-          border-radius: 10px;
-          border: 1px solid transparent;
-          background: transparent;
+          font-size: 0.95rem; font-weight: 500;
+          text-decoration: none; color: #44474e;
+          padding: 13px 16px; border-radius: 12px;
+          display: flex; align-items: center;
           transition: all 0.2s ease;
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
+        }
+        .obl-mobile-link::before {
+          content: ''; width: 6px; height: 6px; border-radius: 50%;
+          background: #2ECC40; margin-right: 12px;
+          opacity: 0; transform: scale(0);
+          transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .obl-mobile-link.active,
         .obl-mobile-link:hover {
-          background: rgba(0,32,70,0.04);
-          color: #002046;
-          border-color: rgba(0,32,70,0.08);
+          background: rgba(0, 32, 70, 0.05); color: #002046;
         }
+        .obl-mobile-link.active { font-weight: 700; }
+        .obl-mobile-link.active::before,
+        .obl-mobile-link:hover::before { opacity: 1; transform: scale(1); }
+
         .obl-mobile-cta {
-          margin-top: 0.5rem;
-          background: #1b365d;
-          color: #87a0cd;
-          border: none;
-          padding: 12px 20px;
-          border-radius: 8px;
+          margin-top: 8px;
+          display: inline-flex; align-items: center;
+          justify-content: space-between; gap: 10px;
           font-family: 'Inter', sans-serif;
-          font-size: 0.9rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: opacity 0.2s;
-          text-align: center;
+          font-size: 0.92rem; font-weight: 700;
+          color: #ffffff; background: #002046;
+          border: none; cursor: pointer;
+          padding: 9px 9px 9px 18px; border-radius: 14px;
+          box-shadow: 0 8px 22px rgba(0, 32, 70, 0.2);
+          transition: background 0.25s ease, transform 0.25s ease;
         }
-        .obl-mobile-cta:hover { opacity: 0.88; }
+        .obl-mobile-cta:hover { background: #002a5c; }
+        .obl-mobile-cta:active { transform: scale(0.98); }
+        .obl-mobile-cta .obl-cta-chip {
+          width: 34px; height: 34px; border-radius: 11px;
+          background: #2ECC40; color: #002046;
+          display: inline-flex; align-items: center; justify-content: center;
+        }
 
         @media (max-width: 900px) {
           .obl-links, .obl-cta { display: none !important; }
           .obl-hamburger { display: flex; }
-          .obl-nav { padding: 0 1.25rem; }
+          .obl-nav-inner { padding: 0 20px; }
+          .obl-logo-img { width: 164px; height: 46px; }
         }
       `}</style>
 
       <nav className={["obl-nav", scrolled ? "scrolled" : "", mounted ? "mounted" : ""].join(" ")}>
         <div className="obl-nav-inner">
-          {/* Logo */}
+          {/* Logo — use the transparent-background PNG so it sits cleanly on the glass nav */}
           <div className="obl-logo" onClick={handleLogoClick}>
-            <img src="/octabit final.png" alt="OctaBitLogics" className="obl-logo-img" />
+            <img src="/octabit-logo-transparent.png" alt="OctaBitLogics" className="obl-logo-img" />
           </div>
 
           {/* Desktop links */}
@@ -289,7 +283,14 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           </div>
 
           {/* CTA */}
-          <button className="obl-cta" onClick={handleCtaClick}>Get Started</button>
+          <button className="obl-cta" onClick={handleCtaClick}>
+            Get Started
+            <span className="obl-cta-chip">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                <path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </button>
 
           {/* Hamburger */}
           <div
@@ -314,7 +315,14 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
             {link.label}
           </a>
         ))}
-        <button className="obl-mobile-cta" onClick={handleCtaClick}>Get Started</button>
+        <button className="obl-mobile-cta" onClick={handleCtaClick}>
+          Get Started
+          <span className="obl-cta-chip">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+        </button>
       </div>
     </>
   );

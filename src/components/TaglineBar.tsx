@@ -2,10 +2,32 @@
 
 import React from "react";
 
-const LOGOS = ["VERTEX", "QUANTUM", "NEXUS", "CORELINE", "LUMINA"];
+/*
+ * Technology marquee — real logos served from the Simple Icons CDN
+ * (https://cdn.simpleicons.org/{slug} returns the official brand-color SVG).
+ * Logos sit grayscale at rest and bloom into brand color on hover.
+ *
+ * To add/remove a logo: find its slug at https://simpleicons.org and add
+ * { name, slug } below. When you land real clients, the same structure
+ * takes client logos — just point `src` at your own assets.
+ */
+const TECH = [
+  { name: "React",        slug: "react" },
+  { name: "Next.js",      slug: "nextdotjs" },
+  { name: "TypeScript",   slug: "typescript" },
+  { name: "Node.js",      slug: "nodedotjs" },
+  { name: "Python",       slug: "python" },
+  { name: "Tailwind CSS", slug: "tailwindcss" },
+  { name: "PostgreSQL",   slug: "postgresql" },
+  { name: "MongoDB",      slug: "mongodb" },
+  { name: "Docker",       slug: "docker" },
+  { name: "SpringBoot",       slug: "springboot" },
+  { name: "Flutter",      slug: "flutter" },
+  { name: "Firebase",     slug: "firebase" },
+];
 
 export default function TaglineBar() {
-  const items = [...LOGOS, ...LOGOS]; // doubled for seamless loop
+  const items = [...TECH, ...TECH]; // doubled for seamless loop
 
   return (
     <section style={{ minHeight: "unset", display: "block", padding: 0 }}>
@@ -56,15 +78,12 @@ export default function TaglineBar() {
           display: flex;
           align-items: center;
           width: max-content;
-          animation: logoSlide 24s linear infinite;
-          gap: 5rem;
+          animation: logoSlide 30s linear infinite;
+          gap: 4.5rem;
           padding: 0.5rem 0;
-          opacity: 0.6;
-          transition: opacity 0.4s ease;
         }
         .trusted-logos-track:hover {
           animation-play-state: paused;
-          opacity: 1;
         }
 
         @keyframes logoSlide {
@@ -72,32 +91,67 @@ export default function TaglineBar() {
           to   { transform: translateX(-50%); }
         }
 
-        .trusted-logo-item {
+        /* logo + name: grayscale at rest, brand color on hover */
+        .tech-logo {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          cursor: default;
+        }
+        .tech-logo img {
+          width: 34px; height: 34px;
+          display: block;
+          filter: grayscale(1) opacity(0.45);
+          transition: filter 0.35s ease, transform 0.35s ease;
+        }
+        .tech-logo span {
           font-family: 'Manrope', sans-serif;
-          font-size: 1.6rem;
-          font-weight: 900;
+          font-size: 1.15rem;
+          font-weight: 700;
           color: #002046;
-          letter-spacing: -0.02em;
+          opacity: 0.45;
+          letter-spacing: -0.01em;
           white-space: nowrap;
           user-select: none;
-          transition: color 0.3s ease;
+          transition: opacity 0.35s ease;
         }
-        .trusted-logo-item:hover {
-          color: #2ECC40;
+        .tech-logo:hover img {
+          filter: grayscale(0) opacity(1);
+          transform: scale(1.12);
+        }
+        .tech-logo:hover span {
+          opacity: 1;
         }
 
         @media (max-width: 600px) {
           .trusted-bar { padding: 2.5rem 16px; }
-          .trusted-logo-item { font-size: 1.2rem; }
+          .trusted-logos-track { gap: 2.75rem; }
+          .tech-logo { gap: 10px; }
+          .tech-logo img { width: 26px; height: 26px; }
+          .tech-logo span { font-size: 0.95rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .trusted-logos-track { animation: none; }
         }
       `}</style>
 
       <div className="trusted-bar">
-        <p className="trusted-label">Trusted by Global Innovators</p>
+        <p className="trusted-label">Engineering With World-Class Technology</p>
         <div className="trusted-logos-wrap">
           <div className="trusted-logos-track">
-            {items.map((logo, i) => (
-              <span key={i} className="trusted-logo-item">{logo}</span>
+            {items.map((tech, i) => (
+              <span key={i} className="tech-logo">
+                <img
+                  src={`https://cdn.simpleicons.org/${tech.slug}`}
+                  alt={tech.name}
+                  width={34}
+                  height={34}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span>{tech.name}</span>
+              </span>
             ))}
           </div>
         </div>

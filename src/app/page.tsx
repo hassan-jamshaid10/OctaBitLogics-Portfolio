@@ -12,6 +12,7 @@ const StatementBanner = lazy(() => import("../components/statementBanner"));
 const ExpertiseDomains = lazy(() => import("../components/ExpertiseDomains"));
 const Services = lazy(() => import("../components/services"));
 const Blogs = lazy(() => import("../components/Blogs"));
+const Newsletter = lazy(() => import("../components/Newsletter"));
 const TechStack = lazy(() => import("../components/Techstack"));
 const Testimonials = lazy(() => import("../components/Testimonials"));
 const Contact = lazy(() => import("../components/contact"));
@@ -90,14 +91,18 @@ export default function Home() {
           <Hero onNavClick={scrollTo} />
           <TaglineBar />
           <CaseStudies />
-          <About />
           <StatementBanner />
+          {/* <About /> */}
+
           <ExpertiseDomains />
-          <Services />
-          <TechStack />
-          <Blogs />
-          <Testimonials />
+          <Newsletter />
+          {/* <Services /> */}
+          {/* <TechStack /> */}
+        
+
+          {/* <Testimonials /> */}
           <Contact />
+          <Blogs />
         </Suspense>
       </main>
 

@@ -1,290 +1,277 @@
 "use client";
-//fix
-const PILLARS = [
+
+import { motion } from "framer-motion";
+
+const PRINCIPLES = [
   "Precision Engineering",
   "Technology Partner",
   "Built to Scale",
   "Agile & Transparent",
 ];
-//fix
-import BackgroundNightfall from "./BackgroundNightfall";
-import ScrollReveal from "./ScrollReveal";
+
+const STATS = [
+  { value: "100", unit: "%", label: "Client-first, transparent delivery" },
+  { value: "2026", unit: "",  label: "Established · working globally" },
+  { value: "∞",    unit: "",  label: "Built to scale, end to end" },
+];
+
+const TAGS = [
+  { text: "Product Studio",  type: "industry" as const },
+  { text: "Custom Software", type: "service" as const },
+  { text: "AI Solutions",    type: "service" as const },
+];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+};
 
 export default function AboutSplit() {
   return (
     <section id="about-split">
       <style>{`
+        /* ── Section — light, same as case studies ── */
         #about-split {
-          background: #ffffff;
-          padding: 3.5rem 2rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
           position: relative;
+          padding: 6rem 40px;
+          background: #faf9fd;
           overflow: hidden;
         }
-
-        /* dot-grid ambient bg */
         #about-split::before {
           content: '';
           position: absolute; inset: 0;
-          background-image: radial-gradient(circle, rgba(59,173,176,0.12) 1px, transparent 1px);
+          background-image: radial-gradient(rgba(0, 32, 70, 0.06) 1px, transparent 1px);
           background-size: 32px 32px;
           pointer-events: none;
-          z-index: 0;
         }
-
-        .as-wrap {
-          position: relative; z-index: 1;
-          width: 100%; max-width: 1100px;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          border-radius: 4px;
-          overflow: hidden;
-          box-shadow: 0 30px 80px rgba(27,46,94,0.10), 0 8px 24px rgba(59,173,176,0.08);
-        }
-
-        /* ── LEFT PANEL ── */
-        .as-left {
-          background: linear-gradient(145deg,
-            rgba(0,32,70,0.03) 0%,
-            rgba(0,32,70,0.01) 100%
-          );
-          border: 1px solid rgba(0,32,70,0.08);
-          border-right: none;
-          padding: 2.5rem 3rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          position: relative;
-          overflow: hidden;
-          min-height: 380px;
-          height: 100%;
-          box-sizing: border-box;
-        }
-
-        /* corner glow */
-        .as-left::after {
+        #about-split::after {
           content: '';
-          position: absolute; top: -80px; right: -80px;
-          width: 260px; height: 260px; border-radius: 50%;
-          background: radial-gradient(circle, rgba(59,173,176,0.14) 0%, transparent 70%);
+          position: absolute; top: -10%; left: -10%;
+          width: 700px; height: 700px;
+          background: radial-gradient(circle, rgba(46, 204, 64, 0.08) 0%, transparent 70%);
+          filter: blur(80px);
           pointer-events: none;
         }
+        .about-wrap {
+          position: relative;
+          max-width: 1280px;
+          margin: 0 auto;
+          z-index: 1;
+        }
 
-        .as-est {
+        /* ── Header ── */
+        .about-eyebrow {
+          display: flex; align-items: center; gap: 14px;
           font-family: 'Inter', sans-serif;
-          font-size: 0.65rem; font-weight: 700;
-          letter-spacing: 0.2em; text-transform: uppercase;
-          color: #2ECC40;
-          display: flex; align-items: center; gap: 0.5rem;
-          margin-bottom: 1.6rem;
+          font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em;
+          color: rgba(0, 32, 70, 0.55);
+          margin: 0 0 1.25rem;
         }
-        .as-est::before {
-          content: '';
-          display: inline-block; width: 18px; height: 1px;
-          background: #2ECC40;
+        .eyebrow-rule {
+          display: inline-block; width: 36px; height: 1px;
+          background: linear-gradient(90deg, transparent, #2ECC40);
         }
-
-        .as-left h2 {
+        .about-title {
           font-family: 'Manrope', sans-serif;
-          font-size: clamp(1.6rem, 2.5vw, 2.25rem);
-          font-weight: 800; line-height: 1.15;
+          font-size: clamp(2.4rem, 5vw, 3.6rem);
+          font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+          margin: 0 0 3rem;
+          max-width: 900px;
           color: #002046;
-          letter-spacing: -0.02em;
         }
-        .as-left h2 span {
-          background: linear-gradient(135deg, #4ade80 0%, #3BADB0 100%);
-          -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .as-left-body {
-          margin-top: auto;
-          padding-top: 1.5rem;
+        .about-title .accent {
+          background: linear-gradient(135deg, #2ECC40 0%, #3BADB0 100%);
+          -webkit-background-clip: text; background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
-        .as-left-body p {
-          font-family: 'Inter', sans-serif;
-          font-size: 0.9rem; line-height: 1.8; color: #44474e;
-          border-top: 1px solid rgba(0,32,70,0.08);
-          padding-top: 1.25rem;
-          margin-bottom: 1.25rem;
-        }
-
-        .as-pills {
-          display: flex; flex-wrap: wrap; gap: 0.5rem;
-        }
-        .as-pill {
-          font-family: 'Inter', sans-serif;
-          font-size: 0.6rem; font-weight: 700;
-          letter-spacing: 0.08em; text-transform: uppercase;
-          color: #2ECC40;
-          border: 1px solid rgba(46,204,64,0.25);
-          background: rgba(46,204,64,0.06);
-          padding: 5px 12px; border-radius: 100px;
-          transition: all 0.3s ease;
-        }
-        .as-pill:hover {
-          background: rgba(46,204,64,0.12);
-          border-color: rgba(46,204,64,0.5);
-          transform: translateY(-1px);
-        }
-
-        /* ── RIGHT PANEL ── */
-        .as-right {
-          background: linear-gradient(145deg, #002046 0%, #001530 100%);
-          padding: 2.5rem 3rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
+        /* ── Single flat white card — everything lives inside it ── */
+        .company-card {
           position: relative;
-          overflow: hidden;
-          min-height: 380px;
-          height: 100%;
-          box-sizing: border-box;
+          background: #ffffff;
+          border: 1px solid rgba(0, 32, 70, 0.1);
+          border-radius: 4px; overflow: hidden;
+          padding: 3.5rem;
+          box-shadow: 0 30px 80px rgba(0, 32, 70, 0.1);
         }
-
-        /* decorative octagon shapes */
-        .as-right::before {
+        .company-card::after {
           content: '';
-          position: absolute; bottom: -60px; right: -60px;
-          width: 280px; height: 280px;
-          background: rgba(255,255,255,0.04);
-          clip-path: polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);
-          pointer-events: none;
-        }
-        .as-right::after {
-          content: '';
-          position: absolute; top: -40px; left: -40px;
-          width: 180px; height: 180px;
-          background: rgba(255,255,255,0.03);
-          clip-path: polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);
+          position: absolute; top: -60px; right: -60px;
+          width: 240px; height: 240px;
+          background: radial-gradient(circle, rgba(46, 204, 64, 0.1) 0%, transparent 70%);
           pointer-events: none;
         }
 
-        .as-mission-tag {
-          font-family: 'Inter', sans-serif;
-          font-size: 0.65rem; font-weight: 700;
-          letter-spacing: 0.2em; text-transform: uppercase;
-          color: rgba(255,255,255,0.5);
-          display: flex; align-items: center; gap: 0.5rem;
-          margin-bottom: 1.6rem;
+        .cc-label {
+          font-family: 'JetBrains Mono', ui-monospace, monospace;
+          font-size: 0.68rem; font-weight: 600;
+          color: #2ECC40; letter-spacing: 0.15em;
+          text-transform: uppercase;
+          margin-bottom: 1.5rem;
+          position: relative; z-index: 1;
         }
-        .as-mission-tag::before {
-          content: '';
-          display: inline-block; width: 18px; height: 1px;
-          background: rgba(255,255,255,0.4);
-        }
-
-        .as-right h2 {
+        .cc-headline {
           font-family: 'Manrope', sans-serif;
-          font-size: clamp(1.6rem, 2.5vw, 2.25rem);
-          font-weight: 800; line-height: 1.15;
-          color: #ffffff;
-          letter-spacing: -0.02em;
+          font-size: clamp(1.8rem, 3vw, 2.6rem);
+          font-weight: 800; letter-spacing: -0.025em; line-height: 1.12;
+          color: #002046; margin: 0 0 1.75rem;
+          max-width: 760px;
+          position: relative; z-index: 1;
         }
-        .as-right h2 em {
+        .cc-headline em {
           font-style: normal;
-          color: #2ECC40;
+          background: linear-gradient(135deg, #2ECC40 0%, #3BADB0 100%);
+          -webkit-background-clip: text; background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
-
-        .as-right-body {
-          margin-top: auto;
-          padding-top: 1.5rem;
-        }
-
-        .as-right-body p {
-          font-size: 0.875rem; line-height: 1.88;
-          color: rgba(255,255,255,0.7);
-          padding-top: 1rem;
-          margin-bottom: 1rem;
-        }
-
-        .as-loc {
-          display: inline-flex; align-items: center; gap: 0.45rem;
+        .cc-body {
           font-family: 'Inter', sans-serif;
-          font-size: 0.65rem; font-weight: 700;
-          letter-spacing: 0.13em; text-transform: uppercase;
-          color: rgba(255,255,255,0.6);
-          border: 1px solid rgba(255,255,255,0.18);
-          background: rgba(255,255,255,0.06);
-          padding: 6px 14px; border-radius: 100px;
-        }
-        .as-loc-dot {
-          width: 6px; height: 6px; border-radius: 50%;
-          background: #2ECC40;
-          animation: asBlip 1.8s ease infinite;
-          box-shadow: 0 0 8px rgba(46,204,64,0.6);
-        }
-        @keyframes asBlip {
-          0%,100% { opacity:1; transform:scale(1); }
-          50% { opacity:.3; transform:scale(.5); }
+          font-size: 1.05rem; line-height: 1.8;
+          color: rgba(0, 32, 70, 0.7);
+          margin: 0 0 2.5rem;
+          max-width: 740px;
+          position: relative; z-index: 1;
         }
 
-        /* responsive */
-        @media (max-width: 860px) {
-          .as-wrap { grid-template-columns: 1fr; }
-          .as-left { border-right: none; border-bottom: 1px solid rgba(59,173,176,0.18); }
-          .as-left, .as-right { min-height: auto; padding: 3rem 2.25rem; }
+        /* tags */
+        .cc-tags {
+          display: flex; flex-wrap: wrap; gap: 0.6rem;
+          margin-bottom: 3rem;
+          position: relative; z-index: 1;
         }
-        @media (max-width: 480px) {
-          #about-split { padding: 2rem 1rem; }
-          .as-left, .as-right { padding: 2rem 1.25rem; }
+        .cc-tag {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.72rem; font-weight: 600;
+          padding: 8px 16px; border-radius: 4px; white-space: nowrap;
+        }
+        .cc-tag.industry { color: #002046; background: transparent; border: 1.5px solid rgba(0, 32, 70, 0.18); }
+        .cc-tag.service { color: #2ECC40; background: rgba(46, 204, 64, 0.1); border: 1px solid rgba(46, 204, 64, 0.25); }
+
+        /* stats row — same card, separated by a thin rule */
+        .cc-stats {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2.5rem;
+          padding-top: 2.5rem;
+          border-top: 1px solid rgba(0, 32, 70, 0.1);
+          position: relative; z-index: 1;
+        }
+        .cc-stat { display: flex; flex-direction: column; }
+        .cc-stat-num {
+          font-family: 'Manrope', sans-serif;
+          font-size: 2.4rem; font-weight: 800; letter-spacing: -0.02em;
+          color: #002046; line-height: 1;
+          margin-bottom: 0.6rem;
+        }
+        .cc-stat-num span { color: #2ECC40; }
+        .cc-stat-label {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.82rem; font-weight: 500;
+          color: rgba(0, 32, 70, 0.6);
+          letter-spacing: 0.02em; line-height: 1.5;
+        }
+
+        /* principles row — also inside the card */
+        .cc-principles {
+          display: flex; flex-wrap: wrap; align-items: center;
+          margin-top: 2.5rem;
+          padding-top: 2.5rem;
+          border-top: 1px solid rgba(0, 32, 70, 0.1);
+          position: relative; z-index: 1;
+          font-family: 'Manrope', sans-serif;
+          font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+          font-weight: 700; color: #002046;
+          letter-spacing: -0.01em;
+        }
+        .cc-principles .p-label {
+          font-family: 'JetBrains Mono', ui-monospace, monospace;
+          font-size: 0.68rem; font-weight: 600;
+          color: #2ECC40; letter-spacing: 0.15em;
+          text-transform: uppercase;
+          margin-right: 1.5rem;
+        }
+        .cc-principles .item { white-space: nowrap; }
+        .cc-principles .item:not(:last-child)::after {
+          content: '·';
+          margin: 0 12px;
+          color: #2ECC40;
+          font-weight: 800;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+          #about-split { padding: 4rem 20px; }
+          .about-title { margin-bottom: 2rem; }
+          .company-card { padding: 2.25rem; }
+          .cc-stats { grid-template-columns: 1fr; gap: 1.75rem; }
+          .cc-principles { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+          .cc-principles .p-label { margin-right: 0; }
+          .cc-principles .item:not(:last-child)::after { display: none; }
         }
       `}</style>
 
-      <div className="as-wrap">
-        {/* LEFT */}
-        <ScrollReveal y={20} duration={0.5} delay={0} style={{ height: '100%' }}>
-          <div className="as-left">
-            <div>
-              <div className="as-est">Est. 2025</div>
-              <h2>
-                OctaBitLogics is a team of{" "}
-                <span>creative minds</span>{" "}
-                bridging fresh tech with professional rigor.
-              </h2>
-            </div>
+      <div className="about-wrap">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={fadeUp}
+        >
+          <p className="about-eyebrow">
+            <span className="eyebrow-rule" />
+            ABOUT THE STUDIO
+          </p>
+          <h2 className="about-title">
+            A software studio{" "}
+            <span className="accent">
+              bridging fresh tech<br />with professional rigor.
+            </span>
+          </h2>
+        </motion.div>
 
-            <div className="as-left-body">
-              <p>
-                We are a young generation of tech enthusiasts who believe in blending out-of-the-box creativity with deep experience. Our dynamic Gen-Z mindset fuels innovation, while our professional background ensures every solution is robust, scalable, and built for the long haul.
-              </p>
-              <div className="as-pills">
-                {PILLARS.map((p) => (
-                  <span key={p} className="as-pill">{p}</span>
-                ))}
-              </div>
-            </div>
+        <motion.div
+          className="company-card"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className="cc-label">— Who we are</span>
+          <h3 className="cc-headline">
+            We design, build &amp; ship <em>platforms that inspire.</em>
+          </h3>
+          <p className="cc-body">
+            OctaBitLogics is a software company crafting products and services for the
+            AI-first world. We make powerful, enterprise-grade technology accessible
+            through creative problem-solving and honest collaboration &mdash; combining
+            refined engineering, modern architecture, and a deep understanding of
+            emerging tech to deliver solutions that look stunning and scale flawlessly.
+          </p>
+
+          <div className="cc-tags">
+            {TAGS.map((t) => (
+              <span key={t.text} className={`cc-tag ${t.type}`}>{t.text}</span>
+            ))}
           </div>
-        </ScrollReveal>
 
-        {/* RIGHT */}
-        <ScrollReveal y={20} duration={0.5} delay={0.15} style={{ height: '100%' }}>
-          <div className="as-right">
-            <BackgroundNightfall nightGradient="linear-gradient(135deg, #0f1c3f 0%, #080d1e 45%, #03060e 100%)" />
-            <div style={{ position: "relative", zIndex: 10, display: "flex", flexDirection: "column", height: "100%", justifyContent: "space-between" }}>
-              <div>
-                <div className="as-mission-tag">Our Mission</div>
-                <h2>
-                  We love technology and build platforms{" "}
-                  <em>that inspire.</em>
-                </h2>
+          <div className="cc-stats">
+            {STATS.map((s) => (
+              <div className="cc-stat" key={s.label}>
+                <span className="cc-stat-num">
+                  {s.value}{s.unit && <span>{s.unit}</span>}
+                </span>
+                <span className="cc-stat-label">{s.label}</span>
               </div>
-
-              <div className="as-right-body">
-                <p>
-                  To make powerful, enterprise-grade technology accessible through true creative problem-solving and honest collaboration. We combine the fearless energy of a modern mindset with refined engineering, modern architecture, and a deep understanding of emerging tech to deliver solutions that look stunning and scale flawlessly.
-                </p>
-                <div className="as-loc">
-                  <span className="as-loc-dot" />
-                  Based in Lahore · Working Globally
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
-        </ScrollReveal>
+
+          <div className="cc-principles">
+            <span className="p-label">— How we work</span>
+            {PRINCIPLES.map((p) => (
+              <span key={p} className="item">{p}</span>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

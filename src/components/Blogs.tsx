@@ -1,346 +1,289 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
 import Link from "next/link";
-import BackgroundNightfall from "./BackgroundNightfall";
 
 export const BLOGS = [
   {
     slug: "nextjs-15-react-server-components",
-    title: "The Future of Web Development: Next.js 15 & React Server Components",
-    excerpt: "Explore how React Server Components are fundamentally changing how we build, ship, and scale web applications in 2026, delivering zero-bundle-size React to the edge.",
+    title: "An Executive Guide to Cloud Cost Optimization for Businesses",
+    excerpt: "Cloud spend is one of the fastest-growing line items for modern enterprises. This guide breaks down proven strategies—from right-sizing workloads to leveraging spot instances—that help CTOs and CFOs reclaim budget without sacrificing reliability.",
     date: "April 12, 2026",
     readTime: "6 min read",
-    category: "Frontend Engineering",
-    imgUrl: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=1000&auto=format&fit=crop",
+    category: "White Paper",
+    imgUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
   },
   {
     slug: "scaling-rag-pipelines",
-    title: "Scaling RAG Pipelines: Going Beyond Basic Vector Search",
-    excerpt: "Basic semantic search isn't enough for production AI. Discover advanced patterns like hybrid search, query rewriting, and LLM-evals to build production-grade RAG systems.",
+    title: "How Agentic AI is Changing Business Workflows",
+    excerpt: "Agentic AI systems don't just answer questions—they reason, plan, and act autonomously across complex multi-step tasks. Discover how forward-thinking organisations are deploying AI agents to automate workflows, reduce operational overhead, and unlock entirely new business models.",
     date: "April 5, 2026",
     readTime: "8 min read",
-    category: "AI & Machine Learning",
-    imgUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop",
+    category: "Webinar",
+    imgUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop",
   },
   {
     slug: "go-microservices-high-performance",
-    title: "Why Go is the Default for High-Performance Microservices",
-    excerpt: "A deep dive into Go's concurrency model, garbage collector improvements, and why it outperforms Rust for 90% of enterprise web microservices.",
+    title: "The Ultimate Guide to Boost Application Performance",
+    excerpt: "Slow applications bleed users and revenue. This deep-dive covers the full performance stack—from database query optimisation and caching layers to CDN configuration and server-side rendering strategies—giving engineering teams a practical playbook for sub-second load times.",
     date: "March 28, 2026",
     readTime: "5 min read",
-    category: "Backend Architecture",
-    imgUrl: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=1000&auto=format&fit=crop",
-  }
+    category: "Article",
+    imgUrl: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    slug: "ai-for-businesses-2026",
+    title: "C-Suite Guide to AI for Businesses in 2026",
+    excerpt: "AI adoption has moved from a competitive edge to a baseline expectation. This executive briefing distils the most impactful use-cases across industries, outlines the governance frameworks boards need to consider, and maps out a realistic 12-month AI roadmap for mid-market and enterprise organisations.",
+    date: "March 15, 2026",
+    readTime: "7 min read",
+    category: "White Paper",
+    imgUrl: "https://images.unsplash.com/photo-1677756119517-756a188d2d94?q=80&w=1200&auto=format&fit=crop",
+  },
 ];
 
-const BlogCard = ({ blog, index }: { blog: typeof BLOGS[0], index: number }) => {
-  return (
-    <motion.div
-      className="blg-card"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
-    >
-      <Link href={`/blogs/${blog.slug}`} className="blg-card-inner">
-        <div className="blg-img-wrap">
-          <img src={blog.imgUrl} alt={blog.title} loading="lazy" />
-          <div className="blg-cat">{blog.category}</div>
-        </div>
-        <div className="blg-content">
-          <div className="blg-meta">
-            <span>{blog.date}</span>
-            <span className="blg-dot" />
-            <span>{blog.readTime}</span>
-          </div>
-          <h3 className="blg-title">{blog.title}</h3>
-          <p className="blg-excerpt">{blog.excerpt}</p>
-          <div className="blg-read-more">
-            Read Article
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-            </svg>
-          </div>
-        </div>
-      </Link>
-    </motion.div>
-  );
-};
-
 export default function Blogs() {
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (dir: "left" | "right") => {
+    const track = trackRef.current;
+    if (!track) return;
+    const cardW = track.querySelector<HTMLElement>(".blg-card")?.offsetWidth ?? 340;
+    track.scrollBy({ left: dir === "right" ? cardW + 24 : -(cardW + 24), behavior: "smooth" });
+  };
+
   return (
     <section id="blogs">
       <style>{`
+        /* ── Section ── */
         #blogs {
-          position: relative;
-          background: #0A1628;
-          padding: 8rem 3rem;
-          font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-          overflow: hidden;
-        }
-
-        #blogs::before {
-          content: '';
-          position: absolute; inset: 0;
-          background-image: radial-gradient(circle, rgba(0,32,70,0.6) 1px, transparent 1px);
-          background-size: 30px 30px;
-          pointer-events: none;
-        }
-
-        #blogs::after {
-          content: '';
-          position: absolute;
-          top: -250px; left: 50%;
-          transform: translateX(-50%);
-          width: 900px; height: 900px;
-          background: radial-gradient(ellipse at center,
-            rgba(46,204,64,0.07) 0%,
-            rgba(0,32,70,0.12) 45%,
-            transparent 70%);
-          pointer-events: none;
+          padding: 5rem 40px;
+          background: #faf9fd;
+          font-family: 'Inter', sans-serif;
         }
 
         .blg-inner {
-          position: relative;
-          z-index: 1;
-          max-width: 1200px;
+          max-width: 1280px;
           margin: 0 auto;
         }
 
+        /* ── Header row ── */
         .blg-header {
-          text-align: center;
-          margin-bottom: 5rem;
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          margin-bottom: 2.5rem;
+          gap: 1.5rem;
         }
 
-        .blg-tag {
+        .blg-h2 {
+          font-family: 'Manrope', sans-serif;
+          font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          line-height: 1.15;
+          color: #002046;
+          margin: 0;
+        }
+
+        .blg-header-actions {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex-shrink: 0;
+          padding-top: 6px;
+        }
+
+        .blg-all-btn {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: #002046;
+          background: transparent;
+          border: 1px solid rgba(0, 32, 70, 0.2);
+          padding: 10px 20px;
+          border-radius: 0;
+          cursor: pointer;
+          text-decoration: none;
+          transition: all 0.25s ease;
+          white-space: nowrap;
+        }
+        .blg-all-btn:hover {
+          border-color: #002046;
+          background: rgba(0, 32, 70, 0.04);
+        }
+
+        .blg-arrow-btn {
+          width: 40px;
+          height: 40px;
           display: inline-flex;
           align-items: center;
-          gap: 0.6rem;
-          font-family: 'Inter', sans-serif;
-          font-size: 0.7rem;
-          font-weight: 700;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
-          color: #2ECC40;
-          background: rgba(46,204,64,0.1);
-          border: 1px solid rgba(46,204,64,0.25);
-          padding: 6px 14px;
-          border-radius: 100px;
-          margin-bottom: 1.2rem;
+          justify-content: center;
+          border: 1px solid rgba(0, 32, 70, 0.2);
+          background: transparent;
+          border-radius: 0;
+          cursor: pointer;
+          color: #002046;
+          transition: all 0.25s ease;
         }
-        .blg-tag::before {
-          content: '';
-          width: 6px; height: 6px;
-          background: #2ECC40;
-          border-radius: 50%;
-          box-shadow: 0 0 6px rgba(46,204,64,0.7);
+        .blg-arrow-btn:hover {
+          border-color: #002046;
+          background: rgba(0, 32, 70, 0.04);
         }
 
-        .blg-header h2 {
-          font-family: 'Manrope', sans-serif;
-          font-size: clamp(1.9rem, 3.5vw, 2.7rem);
-          font-weight: 800;
-          color: #ffffff;
-          letter-spacing: -0.025em;
-          line-height: 1.2;
-          margin-bottom: 0.75rem;
-        }
-
-        .blg-header h2 .green-accent {
-          background: linear-gradient(135deg, #4ade80 0%, #3BADB0 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .blg-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 2.5rem;
-        }
-
-        .blg-card {
+        /* ── Scrollable track ── */
+        .blg-track {
           display: flex;
+          gap: 24px;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+          padding-bottom: 4px;
         }
+        .blg-track::-webkit-scrollbar { display: none; }
 
-        .blg-card-inner {
+        /* ── Card ── */
+        .blg-card {
+          flex: 0 0 calc(25% - 18px);
+          min-width: 260px;
+          scroll-snap-align: start;
           display: flex;
           flex-direction: column;
-          background: rgba(0,32,70,0.5);
-          backdrop-filter: blur(16px);
-          border-radius: 16px;
-          border: 1px solid rgba(255,255,255,0.08);
-          overflow: hidden;
           text-decoration: none;
-          transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease, background 0.4s ease;
-          width: 100%;
-          position: relative;
+          color: inherit;
+          transition: transform 0.35s ease;
         }
+        .blg-card:hover { transform: translateY(-4px); }
 
-        .blg-card-inner::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 3px;
-          background: linear-gradient(90deg, #002046, #2ECC40, #002046);
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
-
-        .blg-card-inner:hover::before {
-          opacity: 1;
-        }
-
-        .blg-card-inner:hover {
-          transform: translateY(-8px);
-          background: rgba(0,32,70,0.75);
-          box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(46,204,64,0.25);
-          border-color: rgba(46,204,64,0.3);
-        }
-
+        /* Image */
         .blg-img-wrap {
           position: relative;
           width: 100%;
-          aspect-ratio: 16/10;
+          aspect-ratio: 4 / 3;
           overflow: hidden;
-          background: #080d1e;
+          border-radius: 0;
+          background: #e3e6eb;
         }
-
         .blg-img-wrap img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-          will-change: transform;
-          transform: translateZ(0);
+          transition: transform 0.5s ease;
+        }
+        .blg-card:hover .blg-img-wrap img {
+          transform: scale(1.05);
         }
 
-        .blg-card-inner:hover .blg-img-wrap img {
-          transform: scale(1.05) translateZ(0);
-        }
-
-        .blg-cat {
-          position: absolute;
-          top: 1rem;
-          left: 1rem;
-          background: rgba(0,32,70,0.88);
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(46,204,64,0.35);
-          color: #2ECC40;
-          font-family: 'Oxanium', monospace;
-          font-size: 0.65rem;
+        /* Badge below image */
+        .blg-badge {
+          display: inline-block;
+          width: fit-content;
+          margin-top: 1rem;
+          margin-bottom: 0.6rem;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.68rem;
           font-weight: 700;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          padding: 6px 12px;
-          border-radius: 100px;
-          box-shadow: 0 0 12px rgba(46,204,64,0.15);
+          padding: 5px 12px;
+          border-radius: 0;
         }
 
-        .blg-content {
-          padding: 2rem;
-          display: flex;
-          flex-direction: column;
-          flex: 1;
+        /* Badge colors by type */
+        .blg-badge--whitepaper {
+          background: #002046;
+          color: #ffffff;
+        }
+        .blg-badge--webinar {
+          background: #e74c6f;
+          color: #ffffff;
+        }
+        .blg-badge--article {
+          background: #7c3aed;
+          color: #ffffff;
         }
 
-        .blg-meta {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          font-family: 'Inter', sans-serif;
-          font-size: 0.75rem;
-          color: rgba(255,255,255,0.45);
-          font-weight: 600;
-          margin-bottom: 1rem;
-        }
-
-        .blg-dot {
-          width: 4px; height: 4px;
-          background: rgba(255,255,255,0.25);
-          border-radius: 50%;
-        }
-
+        /* Title */
         .blg-title {
           font-family: 'Manrope', sans-serif;
-          font-size: 1.15rem;
-          font-weight: 800;
-          color: #ffffff;
-          letter-spacing: -0.015em;
-          line-height: 1.35;
-          margin-bottom: 1rem;
-          transition: color 0.3s ease;
-        }
-
-        .blg-card-inner:hover .blg-title {
-          color: #4ade80;
-        }
-
-        .blg-excerpt {
-          font-family: 'Inter', sans-serif;
-          font-size: 0.95rem;
-          line-height: 1.7;
-          color: rgba(255,255,255,0.55);
-          margin-bottom: 2rem;
-          flex: 1;
-        }
-
-        .blg-read-more {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-family: 'Inter', sans-serif;
-          font-size: 0.8rem;
+          font-size: 1.05rem;
           font-weight: 700;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.6);
-          transition: color 0.3s ease;
-          margin-top: auto;
-          padding-top: 1rem;
-          border-top: 1px solid rgba(255,255,255,0.07);
+          color: #002046;
+          line-height: 1.4;
+          letter-spacing: -0.01em;
+          margin: 0;
+          transition: color 0.25s ease;
+        }
+        .blg-card:hover .blg-title {
+          color: #0a5c50;
         }
 
-        .blg-read-more svg {
-          transition: transform 0.3s ease;
+        /* ── Responsive ── */
+        @media (max-width: 1100px) {
+          .blg-card { flex: 0 0 calc(33.333% - 16px); }
         }
-
-        .blg-card-inner:hover .blg-read-more {
-          color: #4ade80;
-        }
-
-        .blg-card-inner:hover .blg-read-more svg {
-          transform: translateX(4px);
-        }
-
-        @media (max-width: 1024px) {
-          .blg-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
         @media (max-width: 768px) {
-          #blogs { padding: 5rem 1.5rem; }
-          .blg-grid { grid-template-columns: 1fr; }
+          #blogs { padding: 3.5rem 20px; }
+          .blg-card { flex: 0 0 calc(50% - 12px); min-width: 220px; }
+          .blg-header { flex-direction: column; gap: 1rem; }
+        }
+        @media (max-width: 480px) {
+          .blg-card { flex: 0 0 85%; }
         }
       `}</style>
 
       <div className="blg-inner">
-        <motion.div
-          className="blg-header"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="blg-tag">Tech & Engineering</div>
-          <h2>Latest <span className="green-accent">Insights</span></h2>
-        </motion.div>
 
-        <div className="blg-grid">
-          {BLOGS.map((blog, idx) => (
-            <BlogCard key={blog.slug} blog={blog} index={idx} />
-          ))}
+        {/* Header */}
+        <div className="blg-header">
+          <h2 className="blg-h2">Latest insights &amp; resources</h2>
+
+          <div className="blg-header-actions">
+            <Link href="/blogs" className="blg-all-btn">All insights</Link>
+            <button
+              className="blg-arrow-btn"
+              onClick={() => scroll("left")}
+              aria-label="Scroll left"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 12H5" /><polyline points="12 19 5 12 12 5" />
+              </svg>
+            </button>
+            <button
+              className="blg-arrow-btn"
+              onClick={() => scroll("right")}
+              aria-label="Scroll right"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14" /><polyline points="12 5 19 12 12 19" />
+              </svg>
+            </button>
+          </div>
         </div>
+
+        {/* Scrollable cards */}
+        <div className="blg-track" ref={trackRef}>
+          {BLOGS.map((blog) => {
+            const badgeClass =
+              blog.category === "Webinar"
+                ? "blg-badge--webinar"
+                : blog.category === "Article"
+                ? "blg-badge--article"
+                : "blg-badge--whitepaper";
+
+            return (
+              <Link href={`/blogs/${blog.slug}`} className="blg-card" key={blog.slug}>
+                <div className="blg-img-wrap">
+                  <img src={blog.imgUrl} alt={blog.title} loading="lazy" />
+                </div>
+                <span className={`blg-badge ${badgeClass}`}>{blog.category}</span>
+                <h3 className="blg-title">{blog.title}</h3>
+              </Link>
+            );
+          })}
+        </div>
+
       </div>
     </section>
   );

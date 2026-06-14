@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 
 interface HeroProps {
@@ -13,9 +13,9 @@ interface HeroProps {
  *  0.3 – 2.0   hexagon "O" + node mark wire up
  *  0.5 – 3.0   CTABIT → LO → GICS draw stroke-by-stroke
  *  2.2 – 3.2   letters fill SOLID brand colors (the real logo)
- *  2.9 – 3.8   growth arrow completes the logo
+ *  2.9 – 3.8   growth arrow completes the logo (pierces the green O)
  *  4.5 – 5.5   logo dissolves upward
- *  4.7 +       taglines & CTAs rise in
+ *  4.7 +       taglines rise in
  */
 const CONTENT_DELAY = 4.7;
 
@@ -32,6 +32,69 @@ const fadeUp = {
 /* onNavClick is kept in the props interface so existing <Hero onNavClick={...} />
    call sites don't break, but the hero no longer renders CTAs of its own. */
 export default function Hero(_props: HeroProps) {
+  // Refs to the green "O" glyph and the three arrow paths so we can anchor
+  // the growth arrow to the O's *measured* position — keeping it locked through
+  // the letter at every viewport width (no more drifting on resize).
+  const oRef = useRef<SVGTSpanElement>(null);
+  const casingRef = useRef<SVGPathElement>(null);
+  const lineRef = useRef<SVGPathElement>(null);
+  const headRef = useRef<SVGPathElement>(null);
+  const [, force] = useState(0);
+
+  const placeArrow = useCallback(() => {
+    const o = oRef.current;
+    if (!o) return;
+    let cx: number, top: number, bot: number;
+    try {
+      const start = o.getStartPositionOfChar(0);
+      const end = o.getEndPositionOfChar(0);
+      const ext = o.getExtentOfChar(0);
+      cx = (start.x + end.x) / 2;
+      top = ext.y;
+      bot = ext.y + ext.height;
+    } catch {
+      const b = o.getBBox();
+      cx = b.x + b.width / 2;
+      top = b.y;
+      bot = b.y + b.height;
+    }
+
+    // Diagonal growth arrow: starts lower-left just below the O,
+    // rises up-right to just above it — piercing the glyph.
+    const x1 = cx - 26, y1 = bot + 4;
+    const x2 = cx + 30, y2 = top - 26;
+    const d = `M${x1} ${y1} L ${x2} ${y2}`;
+
+    casingRef.current?.setAttribute("d", d);
+    lineRef.current?.setAttribute("d", d);
+
+    // Arrowhead: two short strokes back from the tip, along the arrow's angle.
+    const ang = Math.atan2(y2 - y1, x2 - x1);
+    const len = 26;
+    const a1 = ang + Math.PI * 0.78;
+    const a2 = ang - Math.PI * 0.78;
+    const hx1 = x2 + len * Math.cos(a1), hy1 = y2 + len * Math.sin(a1);
+    const hx2 = x2 + len * Math.cos(a2), hy2 = y2 + len * Math.sin(a2);
+    headRef.current?.setAttribute("d", `M${x2} ${y2} L ${hx1} ${hy1} M${x2} ${y2} L ${hx2} ${hy2}`);
+  }, []);
+
+  useEffect(() => {
+    // Place once fonts are ready (glyph metrics need the loaded font), then on resize.
+    const run = () => { placeArrow(); force((n: number) => n + 1); };
+    run();
+    // Re-measure after webfont loads (Manrope) — metrics shift once it swaps in.
+    if (typeof document !== "undefined" && (document as Document & { fonts?: FontFaceSet }).fonts) {
+      (document as Document & { fonts: FontFaceSet }).fonts.ready.then(run).catch(() => {});
+    }
+    const t1 = setTimeout(run, 300);
+    const t2 = setTimeout(run, 1200);
+    window.addEventListener("resize", placeArrow, { passive: true });
+    return () => {
+      window.removeEventListener("resize", placeArrow);
+      clearTimeout(t1); clearTimeout(t2);
+    };
+  }, [placeArrow]);
+
   return (
     <section id="home">
       <style>{`
@@ -42,7 +105,7 @@ export default function Hero(_props: HeroProps) {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding-top: 80px;
+          padding-top: 72px;
           overflow: hidden;
           background: #faf9fd;
         }
@@ -70,8 +133,6 @@ export default function Hero(_props: HeroProps) {
           perspective: 1200px;
           perspective-origin: 50% 28%;
         }
-
-        /* PCB dot-grid floor, tilted into depth */
         .circuit-grid {
           position: absolute; inset: -20% -10%;
           background-image: radial-gradient(rgba(0, 32, 70, 0.10) 1.2px, transparent 1.2px);
@@ -81,8 +142,6 @@ export default function Hero(_props: HeroProps) {
           -webkit-mask-image: radial-gradient(ellipse 75% 62% at 50% 52%, black 30%, transparent 72%);
           mask-image: radial-gradient(ellipse 75% 62% at 50% 52%, black 30%, transparent 72%);
         }
-
-        /* Tilted plane holding the circuit + wordmark */
         .circuit-plane {
           position: absolute; inset: 0;
           display: flex; align-items: center; justify-content: center;
@@ -106,7 +165,6 @@ export default function Hero(_props: HeroProps) {
         .trace.green { stroke: #2ECC40; stroke-opacity: 0.38; }
         @keyframes draw { to { stroke-dashoffset: 0; } }
 
-        /* Solder-point nodes */
         .node {
           fill: #2ECC40; opacity: 0;
           transform-box: fill-box; transform-origin: center;
@@ -128,8 +186,9 @@ export default function Hero(_props: HeroProps) {
         @keyframes drawword { to { stroke-dashoffset: 0; } }
         @keyframes fillfull { to { fill-opacity: 1; stroke-opacity: 0; } }
         .word .t1 { animation-delay: 0.5s, 2.2s; }
-        .word .t2 { animation-delay: 0.9s, 2.5s; }
-        .word .t3 { animation-delay: 1.3s, 2.8s; }
+        .word .t2 { animation-delay: 0.9s, 2.5s; }   /* L */
+        .word .t3 { animation-delay: 1.0s, 2.6s; }   /* O (green, arrow pierces this) */
+        .word .t4 { animation-delay: 1.3s, 2.8s; }   /* GICS */
 
         /* ── Hexagon "O" + circuit-node mark ── */
         .hex {
@@ -145,7 +204,7 @@ export default function Hero(_props: HeroProps) {
           animation: draw 0.6s ease forwards;
         }
 
-        /* ── Growth arrow — the final stroke. White casing lets it weave over the O ── */
+        /* ── Growth arrow — pierces the green O. White casing lets it weave over. ── */
         .arrow, .arrowhead-line {
           fill: none; stroke: #2ECC40; stroke-opacity: 0.8; stroke-width: 7;
           stroke-linecap: round; stroke-linejoin: round;
@@ -170,7 +229,7 @@ export default function Hero(_props: HeroProps) {
         .hero-inner {
           position: relative; z-index: 1;
           width: 100%; max-width: 960px;
-          margin: 0 auto; padding: 4rem 40px;
+          margin: 0 auto; padding: 1.5rem 40px;
           display: flex; flex-direction: column;
           align-items: center; text-align: center;
         }
@@ -180,7 +239,7 @@ export default function Hero(_props: HeroProps) {
           font-family: 'Inter', sans-serif;
           font-size: 0.72rem; font-weight: 600;
           letter-spacing: 0.22em; color: #74777f;
-          margin-bottom: 2rem; white-space: nowrap;
+          margin-bottom: 1.75rem; white-space: nowrap;
         }
         .eyebrow-rule {
           display: inline-block; width: 44px; height: 1px;
@@ -222,14 +281,27 @@ export default function Hero(_props: HeroProps) {
             0%, 100% { transform: rotateX(10deg) translateY(0); }
             50%      { transform: rotateX(11deg) translateY(-10px); }
           }
+          .hero-inner { max-width: 760px; }
+        }
+        @media (max-width: 768px) {
+          .hero-inner { padding: 1.25rem 28px; }
+          .circuit-svg { width: 140%; }
         }
         @media (max-width: 600px) {
-          .hero-inner { padding: 3rem 24px; }
-          .hero-h1 { font-size: 2.5rem; }
-          .hero-eyebrow { font-size: 0.6rem; gap: 10px; letter-spacing: 0.16em; }
+          #home { padding-top: 64px; }
+          .hero-inner { padding: 1rem 22px; }
+          .hero-h1 { font-size: clamp(2.2rem, 9vw, 3rem); }
+          .hero-eyebrow {
+            font-size: 0.6rem; gap: 10px; letter-spacing: 0.16em;
+            margin-bottom: 1.25rem; white-space: normal; justify-content: center;
+          }
           .eyebrow-rule { width: 22px; }
-          .circuit-svg { width: 160%; }
+          .circuit-svg { width: 150%; }
           .circuit-grid { background-size: 26px 26px; }
+        }
+        @media (max-width: 400px) {
+          .hero-h1 { font-size: 2rem; }
+          .hero-eyebrow { font-size: 0.54rem; letter-spacing: 0.12em; }
         }
 
         /* ── Accessibility: skip the intro for reduced motion ── */
@@ -270,7 +342,7 @@ export default function Hero(_props: HeroProps) {
               <path className="trace green" pathLength={1} style={{ animationDelay: "1.05s" }} d="M620 840 V 660 L 580 620 V 520" />
             </g>
 
-            {/* Solder nodes at trace terminals (stay as ambient bg) */}
+            {/* Solder nodes at trace terminals */}
             <g>
               <circle className="node navy" cx={700} cy={200} r={4} style={{ animationDelay: "1.5s, 2.4s" }} />
               <circle className="node navy" cx={780} cy={210} r={4} style={{ animationDelay: "1.7s, 2.6s" }} />
@@ -309,17 +381,18 @@ export default function Hero(_props: HeroProps) {
                   <circle className="node" cx={38} cy={48} r={4.5} style={{ animationDelay: "2.2s, 3.1s" }} />
                 </g>
 
-                {/* Wordmark — drawn, then filled solid */}
+                {/* Wordmark — the green "O" (t3) is measured so the arrow locks to it */}
                 <text className="word" x={206} y={438} fontSize={132}>
                   <tspan className="t1">CTABIT</tspan>
-                  <tspan className="t2 green">LO</tspan>
-                  <tspan className="t3">GICS</tspan>
+                  <tspan className="t2 green">L</tspan>
+                  <tspan className="t3 green" ref={oRef}>O</tspan>
+                  <tspan className="t4">GICS</tspan>
                 </text>
 
-                {/* Growth arrow weaves over the green O — logo complete */}
-                <path className="arrow-casing" pathLength={1} d="M762 470 L 892 320" />
-                <path className="arrow" pathLength={1} d="M762 470 L 892 320" />
-                <path className="arrowhead-line" pathLength={1} d="M892 320 L 861 327 M892 320 L 884 350" />
+                {/* Growth arrow — d attributes set at runtime, anchored to the O */}
+                <path className="arrow-casing" ref={casingRef} pathLength={1} d="" />
+                <path className="arrow" ref={lineRef} pathLength={1} d="" />
+                <path className="arrowhead-line" ref={headRef} pathLength={1} d="" />
               </g>
             </g>
           </svg>
@@ -336,7 +409,7 @@ export default function Hero(_props: HeroProps) {
           animate="show"
         >
           <span className="eyebrow-rule" />
-          OCTABIT LOGICS&nbsp;&nbsp;·&nbsp;&nbsp;GEN-Z SOFTWARE STUDIO
+          OCTABIT LOGICS&nbsp;&nbsp;·&nbsp;&nbsp;SOFTWARE STUDIO
           <span className="eyebrow-rule" />
         </motion.div>
 
@@ -358,10 +431,7 @@ export default function Hero(_props: HeroProps) {
             </span>
           </span>
         </motion.h1>
-
-
       </div>
-
     </section>
   );
 }

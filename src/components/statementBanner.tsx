@@ -33,39 +33,18 @@ const STATS = [
   { value: 3, suffix: "×", label: "Avg. ROI for Clients" },
 ];
 
-const PILLARS = [
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2L2 7l10 5 10-5-10-5z" />
-        <path d="M2 17l10 5 10-5" />
-        <path d="M2 12l10 5 10-5" />
-      </svg>
-    ),
-    title: "Precision Engineering",
-    desc: "Every line of code and data pipeline is crafted with obsessive attention to quality, performance, and maintainability.",
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-        <line x1="9" y1="9" x2="9.01" y2="9" />
-        <line x1="15" y1="9" x2="15.01" y2="9" />
-      </svg>
-    ),
-    title: "Client-First Culture",
-    desc: "We embed ourselves in your business goals, not just your tech stack — delivering real outcomes, not just deliverables.",
-  },
-  {
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-      </svg>
-    ),
-    title: "Gen‑Z Speed, Enterprise Rigor",
-    desc: "Fearless creativity meets battle-tested standards. We ship fast without cutting corners — ever.",
-  },
+// Cloud infrastructure logos — loaded from the Simple Icons CDN.
+// slug = simpleicons.org identifier; name shown next to the mark.
+// If your CSP restricts images, allow https://cdn.simpleicons.org in img-src.
+const LOGOS = [
+  { slug: "amazonwebservices", url: "https://cdn.worldvectorlogo.com/logos/aws-2.svg" },
+  { slug: "googlecloud", name: "Google Cloud" },
+  { slug: "microsoftazure", url: "https://cdn.worldvectorlogo.com/logos/microsoft-azure-2.svg" },
+  { slug: "digitalocean", name: "DigitalOcean" },
+  { slug: "cloudflare", name: "Cloudflare" },
+  { slug: "vercel", name: "Vercel" },
+  { slug: "kubernetes", name: "Kubernetes" },
+  { slug: "docker", name: "Docker" },
 ];
 
 export default function StatementBanner() {
@@ -90,310 +69,207 @@ export default function StatementBanner() {
   return (
     <section id="statement-banner" ref={ref}>
       <style>{`
-        /* ─── Section shell ──────────────────────────────────────────────── */
+        /* Section: blue -> green gradient (the app's text gradient, as background) */
         #statement-banner {
-          background: #002046;
-          padding: 6rem 40px;
           position: relative;
           overflow: hidden;
+          padding: 5rem 40px 3rem;
+          background:
+            radial-gradient(ellipse 80% 60% at 70% 0%, rgba(46, 204, 64, 0.18) 0%, transparent 55%),
+            linear-gradient(135deg, #002046 0%, #013a6b 45%, #0a5c50 100%);
         }
-
-        /* subtle mesh grid overlay */
         #statement-banner::before {
           content: '';
-          position: absolute; inset: 0;
-          background-image:
-            linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px);
-          background-size: 56px 56px;
+          position: absolute; top: -30%; right: 5%;
+          width: 55%; height: 160%;
+          background: linear-gradient(115deg, transparent 40%, rgba(46, 204, 64, 0.12) 50%, transparent 60%);
+          transform: rotate(8deg);
           pointer-events: none;
         }
-
-        /* teal glow blob top-right */
-        #statement-banner::after {
-          content: '';
-          position: absolute; top: -180px; right: -180px;
-          width: 520px; height: 520px; border-radius: 50%;
-          background: radial-gradient(circle, rgba(74,222,128,0.08) 0%, transparent 65%);
-          pointer-events: none;
+        .sb-inner {
+          position: relative; z-index: 2;
+          max-width: 1280px; margin: 0 auto;
         }
 
-        /* second glow blob bottom-left */
-        .sb2-blob2 {
-          position: absolute; bottom: -200px; left: -150px;
-          width: 480px; height: 480px; border-radius: 50%;
-          background: radial-gradient(circle, rgba(59,173,176,0.07) 0%, transparent 65%);
-          pointer-events: none;
-        }
-
-        /* ─── Layout ─────────────────────────────────────────────────────── */
-        .sb2-inner {
-          max-width: 1280px;
-          margin: 0 auto;
-          position: relative;
-          z-index: 2;
-        }
-
-        /* ─── Top: headline + sub ────────────────────────────────────────── */
-        .sb2-top {
+        /* Top: headline left, sub + button right */
+        .sb-top {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1.4fr 1fr;
           gap: 3rem;
-          align-items: end;
+          align-items: start;
           margin-bottom: 4rem;
         }
-
-        .sb2-eyebrow {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.55rem;
-          font-family: 'Inter', sans-serif;
-          font-size: 0.72rem;
-          font-weight: 600;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: #4ade80;
-          margin-bottom: 1.25rem;
-        }
-        .sb2-eyebrow::before {
-          content: '';
-          display: block;
-          width: 28px; height: 1.5px;
-          background: #2ECC40;
-          border-radius: 2px;
-        }
-
-        .sb2-h2 {
+        .sb-h2 {
           font-family: 'Manrope', sans-serif;
-          font-size: clamp(2rem, 3.5vw, 2.9rem);
-          font-weight: 800;
-          letter-spacing: -0.025em;
-          line-height: 1.1;
-          color: #ffffff;
-          margin: 0;
+          font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+          font-weight: 800; letter-spacing: -0.03em; line-height: 1.08;
+          color: #ffffff; margin: 0; max-width: 680px;
         }
+        .sb-h2 .dot { color: #2ECC40; }
 
-        .sb2-h2 .hl-teal {
-          background: linear-gradient(135deg, #2ECC40 0%, #3BADB0 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+        .sb-right {
+          display: flex; flex-direction: column; align-items: flex-end;
+          gap: 1.5rem; padding-top: 0.5rem;
         }
-
-        .sb2-right-col {
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          gap: 1.5rem;
-        }
-
-        .sb2-sub {
+        .sb-sub {
           font-family: 'Inter', sans-serif;
-          font-size: 0.95rem;
-          line-height: 1.78;
-          color: rgba(255,255,255,0.6);
-          margin: 0;
-          max-width: 480px;
+          font-size: 1rem; line-height: 1.7;
+          color: rgba(255, 255, 255, 0.75);
+          margin: 0; max-width: 340px; text-align: left;
         }
-
-        .sb2-cta {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.6rem;
+        .sb-cta {
+          display: inline-flex; align-items: center; gap: 0.7rem;
           font-family: 'Inter', sans-serif;
-          font-size: 0.85rem;
-          font-weight: 700;
-          letter-spacing: 0.02em;
-          color: #002046;
-          background: #2ECC40;
-          padding: 14px 28px;
-          border-radius: 9999px;
-          text-decoration: none;
-          transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          width: fit-content;
-          box-shadow: 0 8px 20px rgba(46,204,64,0.3);
+          font-size: 0.92rem; font-weight: 700;
+          color: #002046; background: #ffffff;
+          padding: 14px 26px; border-radius: 4px;
+          text-decoration: none; white-space: nowrap;
+          transition: all 0.3s ease;
         }
-        .sb2-cta:hover {
-          background: #39e64e;
-          transform: translateY(-3px) scale(1.02);
-          box-shadow: 0 12px 32px rgba(46,204,64,0.4);
-        }
-        .sb2-cta svg { transition: transform 0.22s ease; }
-        .sb2-cta:hover svg { transform: translateX(3px); }
+        .sb-cta:hover { background: #2ECC40; transform: translateY(-2px); }
+        .sb-cta svg { transition: transform 0.25s ease; }
+        .sb-cta:hover svg { transform: translateX(3px); }
 
-        /* ─── Stats strip ────────────────────────────────────────────────── */
-        .sb2-stats {
+        /* Stats row: big numbers + thin vertical dividers */
+        .sb-stats {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 0;
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(46,204,64,0.15);
-          border-radius: 24px;
-          overflow: hidden;
+          border-top: 1px solid rgba(255, 255, 255, 0.18);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+          padding: 2.5rem 0;
           margin-bottom: 3.5rem;
         }
-
-        .sb2-stat {
-          padding: 2rem 1.75rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.35rem;
-          border-right: 1px solid rgba(74,222,128,0.1);
-          transition: background 0.3s ease;
-        }
-        .sb2-stat:last-child { border-right: none; }
-        .sb2-stat:hover { background: rgba(74,222,128,0.05); }
-
-        .sb2-stat-num {
-          font-family: 'Manrope', sans-serif;
-          font-size: 2.6rem;
-          font-weight: 800;
-          letter-spacing: -0.04em;
-          line-height: 1;
-          color: #2ECC40;
-        }
-        .sb2-stat-suffix {
-          font-size: 1.6rem;
-          font-weight: 700;
-          color: rgba(74,222,128,0.7);
-        }
-        .sb2-stat-label {
-          font-family: 'Inter', sans-serif;
-          font-size: 0.78rem;
-          color: rgba(255,255,255,0.45);
-          letter-spacing: 0.02em;
-          margin-top: 0.15rem;
-        }
-
-        /* ─── Pillars ────────────────────────────────────────────────────── */
-        .sb2-pillars {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.25rem;
-        }
-
-        .sb2-pillar {
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.07);
-          border-radius: 18px;
-          padding: 1.75rem;
-          position: relative;
-          overflow: hidden;
-          transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
-        }
-        .sb2-pillar::before {
+        .sb-stat { padding: 0 2rem; position: relative; }
+        .sb-stat:not(:last-child)::after {
           content: '';
-          position: absolute;
-          inset: 0 0 auto 0;
-          height: 3px;
-          background: linear-gradient(90deg, #2ECC40, #3BADB0);
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 0.35s ease;
+          position: absolute; right: 0; top: 0; bottom: 0;
+          width: 1px; background: rgba(255, 255, 255, 0.18);
         }
-        .sb2-pillar:hover {
-          border-color: rgba(74,222,128,0.25);
-          background: rgba(74,222,128,0.04);
-          transform: translateY(-4px);
-        }
-        .sb2-pillar:hover::before { transform: scaleX(1); }
-
-        .sb2-pillar-ico {
-          width: 44px; height: 44px;
-          border-radius: 12px;
-          background: rgba(46,204,64,0.1);
-          display: flex; align-items: center; justify-content: center;
-          color: #2ECC40;
-          margin-bottom: 1.1rem;
-          transition: background 0.3s ease, color 0.3s ease;
-        }
-        .sb2-pillar:hover .sb2-pillar-ico {
-          background: rgba(74,222,128,0.18);
-        }
-
-        .sb2-pillar-title {
+        .sb-stat-num {
           font-family: 'Manrope', sans-serif;
-          font-size: 1rem;
-          font-weight: 700;
+          font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+          font-weight: 800; letter-spacing: -0.04em; line-height: 1;
           color: #ffffff;
-          margin: 0 0 0.55rem;
-          letter-spacing: -0.01em;
+          display: flex; align-items: flex-start;
+          margin-bottom: 1.25rem;
         }
-        .sb2-pillar-desc {
-          font-family: 'Inter', sans-serif;
-          font-size: 0.84rem;
-          line-height: 1.65;
-          color: rgba(255,255,255,0.5);
-          margin: 0;
+        .sb-stat-suffix {
+          font-size: 0.5em; font-weight: 700;
+          color: #2ECC40;
+          margin-top: 0.3em; margin-left: 2px;
+        }
+        .sb-stat-label {
+          font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+          font-size: 0.74rem; font-weight: 500;
+          letter-spacing: 0.06em; text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.6); line-height: 1.5;
         }
 
-        /* ─── Responsive ─────────────────────────────────────────────────── */
+        /* Logo strip — scrolling cloud-provider marquee */
+        .sb-logos-head {
+          font-family: 'JetBrains Mono', ui-monospace, monospace;
+          font-size: 0.72rem; font-weight: 500;
+          letter-spacing: 0.14em; text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.5);
+          text-align: center; margin-bottom: 1.75rem;
+        }
+        .sb-logos-track {
+          position: relative; overflow: hidden;
+          -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        }
+        .sb-logos-row {
+          display: flex; align-items: center; gap: 4rem;
+          width: max-content;
+          animation: sb-scroll 30s linear infinite;
+        }
+        .sb-logos-track:hover .sb-logos-row { animation-play-state: paused; }
+        @keyframes sb-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        .sb-logo {
+          display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+          filter: grayscale(1) brightness(0) invert(1);
+          opacity: 0.55;
+          transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
+        }
+        .sb-logo:hover { filter: none; opacity: 1; transform: scale(1.08); }
+        .sb-logo img { height: 32px; width: auto; display: block; }
+        .sb-logo span {
+          font-family: 'Manrope', sans-serif;
+          font-weight: 700; font-size: 1.05rem;
+          color: #ffffff; white-space: nowrap;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .sb-logos-row { animation: none; flex-wrap: wrap; justify-content: center; }
+        }
+
+        /* Responsive */
         @media (max-width: 960px) {
-          .sb2-top { grid-template-columns: 1fr; gap: 1.5rem; }
-          .sb2-stats { grid-template-columns: repeat(2, 1fr); }
-          .sb2-stat { border-bottom: 1px solid rgba(74,222,128,0.1); }
-          .sb2-stat:nth-child(2), .sb2-stat:nth-child(4) { border-right: none; }
-          .sb2-stat:nth-child(3), .sb2-stat:nth-child(4) { border-bottom: none; }
-          .sb2-pillars { grid-template-columns: 1fr 1fr; }
+          .sb-top { grid-template-columns: 1fr; gap: 2rem; }
+          .sb-right { align-items: flex-start; }
+          .sb-stats { grid-template-columns: repeat(2, 1fr); gap: 2rem 0; }
+          .sb-stat:nth-child(2)::after { display: none; }
+          .sb-stat { padding: 1rem 1.5rem; }
+          .sb-logos { justify-content: center; gap: 1.5rem; }
         }
         @media (max-width: 600px) {
-          #statement-banner { padding: 4.5rem 20px; }
-          .sb2-stats { grid-template-columns: 1fr 1fr; }
-          .sb2-pillars { grid-template-columns: 1fr; }
-          .sb2-stat-num { font-size: 2rem; }
+          #statement-banner { padding: 4rem 20px 2.5rem; }
+          .sb-stats { grid-template-columns: 1fr 1fr; }
+          .sb-logo { font-size: 1rem; }
         }
       `}</style>
 
-      <div className="sb2-blob2" />
+      <div className="sb-inner">
 
-      <div className="sb2-inner">
-
-        {/* ── Top: headline + CTA ── */}
-        <div className="sb2-top">
-          <div>
-            <div className="sb2-eyebrow">Why OctaBit</div>
-            <h2 className="sb2-h2">
-              Built for teams that{" "}
-              <span className="hl-teal">refuse to settle</span>
-            </h2>
-          </div>
-          <div className="sb2-right-col">
-            <p className="sb2-sub">
-              We pair the fearless creativity of a Gen‑Z studio with
-              battle-tested engineering standards — so you get products that
-              look extraordinary, perform flawlessly, and scale without limits.
+        {/* Top: headline + CTA */}
+        <div className="sb-top">
+          <h2 className="sb-h2">
+            We&rsquo;re committed to lead your digital journey to success
+            <span className="dot">.</span>
+          </h2>
+          <div className="sb-right">
+            <p className="sb-sub">
+              We have a proven track record of building scalable software
+              solutions for businesses.
             </p>
-            <Link href="/engineering-approach" className="sb2-cta">
-              Our engineering approach
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
+            <Link href="/contact" className="sb-cta">
+              Work with us
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
           </div>
         </div>
 
-        {/* ── Stats strip ── */}
-        <div className="sb2-stats">
+        {/* Stats row */}
+        <div className="sb-stats">
           {STATS.map((s, i) => (
-            <div className="sb2-stat" key={s.label}>
-              <div className="sb2-stat-num">
-                {counts[i]}<span className="sb2-stat-suffix">{s.suffix}</span>
+            <div className="sb-stat" key={s.label}>
+              <div className="sb-stat-num">
+                {counts[i]}<span className="sb-stat-suffix">{s.suffix}</span>
               </div>
-              <div className="sb2-stat-label">{s.label}</div>
+              <div className="sb-stat-label">{s.label}</div>
             </div>
           ))}
         </div>
 
-        {/* ── Pillars ── */}
-        <div className="sb2-pillars">
-          {PILLARS.map((p) => (
-            <div className="sb2-pillar" key={p.title}>
-              <div className="sb2-pillar-ico">{p.icon}</div>
-              <h3 className="sb2-pillar-title">{p.title}</h3>
-              <p className="sb2-pillar-desc">{p.desc}</p>
-            </div>
-          ))}
+        {/* Logo strip — cloud providers marquee */}
+        <p className="sb-logos-head">Engineered on world-class cloud infrastructure</p>
+        <div className="sb-logos-track">
+          <div className="sb-logos-row">
+            {[...LOGOS, ...LOGOS].map((l, i) => (
+              <div className="sb-logo" key={`${l.slug}-${i}`}>
+                <img
+                  src={l.url || `https://cdn.simpleicons.org/${l.slug}`}
+                  alt={l.name}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span>{l.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>

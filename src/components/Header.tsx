@@ -4,12 +4,11 @@ import { useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 const NAV_LINKS = [
-  { label: "Home",       href: "#home" },
-  { label: "About",      href: "#about-split" },
-  { label: "Projects",   href: "/projects" },
+  { label: "Company",    href: "#about-split" },
+  { label: "Industries", href: "#industries" },
   { label: "Services",   href: "#services" },
-  { label: "Blogs",      href: "#blogs" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "Projects",   href: "/projects" },
+  { label: "Contact",    href: "#contact" },
 ];
 
 interface NavbarProps {
@@ -82,7 +81,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
   return (
     <>
       <style>{`
-        /* ══ Navbar — matches the hero ══ */
+        /* ══ Navbar ══ */
         .obl-nav {
           position: fixed;
           top: 0; left: 0; right: 0;
@@ -113,6 +112,20 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           margin: 0 auto; padding: 0 32px;
           display: flex; align-items: center;
           justify-content: space-between; gap: 24px;
+          height: 100%;
+        }
+
+        /* ── Layout ── */
+        .obl-left {
+          display: flex;
+          align-items: center;
+          gap: 40px;
+          height: 100%;
+        }
+        .obl-right {
+          display: flex;
+          align-items: center;
+          gap: 16px;
         }
 
         /* ── Logo ── */
@@ -122,8 +135,16 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
         }
         .obl-logo-img { width: 188px; height: 52px; object-fit: contain; display: block; }
 
-        /* ── Desktop links: green gradient underline ── */
-        .obl-links { display: flex; align-items: center; gap: 6px; }
+        /* ── Desktop links ── */
+        .obl-links { display: flex; align-items: center; gap: 4px; height: 100%; }
+        
+        .obl-link-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+          height: 100%; /* Important for hover bridge */
+        }
+
         .obl-link {
           position: relative;
           font-family: 'Inter', sans-serif;
@@ -146,6 +167,72 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
         .obl-link.active { color: #002046; font-weight: 700; }
         .obl-link.active::after { transform: scaleX(1); }
 
+        /* ── Hover Subtab (Square Card) ── */
+        .obl-subtab {
+          position: absolute;
+          top: 70px;
+          left: 50%;
+          transform: translateX(-50%) translateY(15px);
+          width: 250px;
+          height: 250px;
+          border-radius: 16px;
+          /* Statement banner gradient */
+          background: radial-gradient(ellipse 80% 60% at 70% 0%, rgba(46, 204, 64, 0.18) 0%, transparent 55%),
+                      linear-gradient(135deg, #002046 0%, #013a6b 45%, #0a5c50 100%);
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+          padding: 24px;
+          box-shadow: 0 20px 40px rgba(0, 32, 70, 0.2);
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          color: #fff;
+          pointer-events: none;
+        }
+        .obl-link-wrapper:hover .obl-subtab {
+          opacity: 1;
+          visibility: visible;
+          transform: translateX(-50%) translateY(0);
+          pointer-events: auto;
+        }
+        /* Invisible bridge so mouse doesn't fall off */
+        .obl-subtab::before {
+          content: '';
+          position: absolute;
+          top: -20px;
+          left: 0;
+          right: 0;
+          height: 20px;
+        }
+        .obl-subtab-inner h4 {
+          font-family: 'Manrope', sans-serif;
+          font-size: 1.25rem;
+          font-weight: 800;
+          margin: 0 0 0.5rem 0;
+          color: #fff;
+        }
+        .obl-subtab-inner p {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.85rem;
+          line-height: 1.5;
+          color: rgba(255,255,255,0.7);
+          margin: 0 0 1.5rem 0;
+        }
+        .obl-subtab-link {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.85rem;
+          font-weight: 700;
+          color: #2ECC40;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          transition: transform 0.2s ease;
+        }
+        .obl-link-wrapper:hover .obl-subtab-link:hover {
+          transform: translateX(4px);
+        }
+
         /* ── CTA: brand arrow-chip language ── */
         .obl-cta {
           display: inline-flex; align-items: center; gap: 10px;
@@ -153,23 +240,23 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           font-size: 0.84rem; font-weight: 700; letter-spacing: 0.01em;
           color: #ffffff; background: #002046;
           border: none; cursor: pointer;
-          padding: 7px 7px 7px 18px; border-radius: 12px;
+          padding: 7px 7px 7px 18px; border-radius: 4px;
           box-shadow: 0 6px 18px rgba(0, 32, 70, 0.18);
           white-space: nowrap;
           transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
             box-shadow 0.3s ease, background 0.3s ease;
         }
         .obl-cta .obl-cta-chip {
-          width: 28px; height: 28px; border-radius: 9px;
+          width: 28px; height: 28px; border-radius: 2px;
           background: #2ECC40; color: #002046;
           display: inline-flex; align-items: center; justify-content: center;
-          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-radius 0.3s ease;
+          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .obl-cta:hover {
           transform: translateY(-2px); background: #002a5c;
           box-shadow: 0 10px 24px rgba(0, 32, 70, 0.25), 0 0 14px rgba(46, 204, 64, 0.22);
         }
-        .obl-cta:hover .obl-cta-chip { border-radius: 50%; transform: rotate(-8deg); }
+        .obl-cta:hover .obl-cta-chip { transform: rotate(-8deg); }
         .obl-cta:active { transform: scale(0.96); }
 
         /* ── Hamburger ── */
@@ -190,7 +277,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
         .obl-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
         .obl-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        /* ── Mobile drawer: floating glass card ── */
+        /* ── Mobile drawer ── */
         .obl-mobile-menu {
           position: fixed; top: 88px; left: 14px; right: 14px;
           z-index: 999;
@@ -241,14 +328,14 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           font-size: 0.92rem; font-weight: 700;
           color: #ffffff; background: #002046;
           border: none; cursor: pointer;
-          padding: 9px 9px 9px 18px; border-radius: 14px;
+          padding: 9px 9px 9px 18px; border-radius: 4px;
           box-shadow: 0 8px 22px rgba(0, 32, 70, 0.2);
           transition: background 0.25s ease, transform 0.25s ease;
         }
         .obl-mobile-cta:hover { background: #002a5c; }
         .obl-mobile-cta:active { transform: scale(0.98); }
         .obl-mobile-cta .obl-cta-chip {
-          width: 34px; height: 34px; border-radius: 11px;
+          width: 34px; height: 34px; border-radius: 2px;
           background: #2ECC40; color: #002046;
           display: inline-flex; align-items: center; justify-content: center;
         }
@@ -257,49 +344,68 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           .obl-links, .obl-cta { display: none !important; }
           .obl-hamburger { display: flex; }
           .obl-nav-inner { padding: 0 20px; }
+          .obl-left { gap: 10px; }
           .obl-logo-img { width: 164px; height: 46px; }
         }
       `}</style>
 
       <nav className={["obl-nav", scrolled ? "scrolled" : "", mounted ? "mounted" : ""].join(" ")}>
         <div className="obl-nav-inner">
-          {/* Logo — use the transparent-background PNG so it sits cleanly on the glass nav */}
-          <div className="obl-logo" onClick={handleLogoClick}>
-            <img src="/octabit-logo-transparent.png" alt="OctaBitLogics" className="obl-logo-img" />
+          
+          <div className="obl-left">
+            {/* Logo */}
+            <div className="obl-logo" onClick={handleLogoClick}>
+              <img src="/octabit-logo-transparent.png" alt="OctaBitLogics" className="obl-logo-img" />
+            </div>
+
+            {/* Desktop links */}
+            <div className="obl-links">
+              {NAV_LINKS.map((link) => (
+                <div key={link.href} className="obl-link-wrapper">
+                  <a
+                    href={link.href}
+                    className={`obl-link${isActive(link.href) ? " active" : ""}`}
+                    onClick={(e) => handleNav(e, link.href)}
+                  >
+                    {link.label}
+                  </a>
+                  
+                  {/* Square Hover Card */}
+                  <div className="obl-subtab">
+                    <div className="obl-subtab-inner">
+                      <h4>{link.label}</h4>
+                      <p>Discover our {link.label.toLowerCase()} tailored for your business needs.</p>
+                      <div className="obl-subtab-link">
+                        Explore <span style={{ fontSize: "1rem" }}>→</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Desktop links */}
-          <div className="obl-links">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`obl-link${isActive(link.href) ? " active" : ""}`}
-                onClick={(e) => handleNav(e, link.href)}
-              >
-                {link.label}
-              </a>
-            ))}
+          <div className="obl-right">
+            {/* CTA */}
+            <button className="obl-cta" onClick={handleCtaClick}>
+              Get Started
+              <span className="obl-cta-chip">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+                  <path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+            </button>
+
+            {/* Hamburger */}
+            <div
+              className={`obl-hamburger${menuOpen ? " open" : ""}`}
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label="Toggle menu"
+            >
+              <span /><span /><span />
+            </div>
           </div>
 
-          {/* CTA */}
-          <button className="obl-cta" onClick={handleCtaClick}>
-            Get Started
-            <span className="obl-cta-chip">
-              <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-                <path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </button>
-
-          {/* Hamburger */}
-          <div
-            className={`obl-hamburger${menuOpen ? " open" : ""}`}
-            onClick={() => setMenuOpen((o) => !o)}
-            aria-label="Toggle menu"
-          >
-            <span /><span /><span />
-          </div>
         </div>
       </nav>
 

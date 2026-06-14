@@ -3,7 +3,6 @@
 import { useState, useCallback } from "react";
 import { Send, CheckCircle2, AlertCircle, Loader2, Mail, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import ScrollReveal from "./ScrollReveal";
 import { sendEmail } from "../app/actions/sendEmail";
 
 export default function Contact() {
@@ -43,298 +42,299 @@ export default function Contact() {
   }, []);
 
   return (
-    <section id="contact" className="dr-container">
+    <section id="contact">
       <style>{`
-        .dr-container {
-          background: #0A1628;
-          padding: 8rem 0;
+        /* ── Section — full-bleed gradient ── */
+        #contact {
+          padding: 5rem 40px;
+          background:
+            radial-gradient(ellipse 80% 60% at 70% 0%, rgba(46, 204, 64, 0.14) 0%, transparent 55%),
+            linear-gradient(135deg, #002046 0%, #013a6b 45%, #0a5c50 100%);
+          font-family: 'Inter', sans-serif;
           position: relative;
           overflow: hidden;
-          color: #ffffff;
-          font-family: 'Inter', sans-serif;
         }
-
-        /* dot grid overlay */
-        .dr-bg-mesh {
-          position: absolute; inset: 0;
-          background-image: radial-gradient(circle, rgba(0,32,70,0.7) 1px, transparent 1px);
-          background-size: 32px 32px;
+        /* Diagonal light streak */
+        #contact::before {
+          content: '';
+          position: absolute; top: -30%; right: 5%;
+          width: 55%; height: 160%;
+          background: linear-gradient(115deg, transparent 40%, rgba(46, 204, 64, 0.08) 50%, transparent 60%);
+          transform: rotate(8deg);
           pointer-events: none;
-          z-index: 0;
         }
 
-        /* green glow at top-center */
-        .dr-bg-glow {
-          position: absolute;
-          top: -200px; left: 50%;
-          transform: translateX(-50%);
-          width: 900px; height: 700px;
-          background: radial-gradient(ellipse at center,
-            rgba(46,204,64,0.07) 0%,
-            rgba(0,32,70,0.1) 45%,
-            transparent 70%);
-          pointer-events: none;
-          z-index: 0;
-        }
-
-        .dr-inner {
-          position: relative; z-index: 1;
-          max-width: 1200px;
+        .ct-inner {
+          max-width: 1280px;
           margin: 0 auto;
-          padding: 0 2.5rem;
           display: grid;
-          grid-template-columns: 1fr 1.5fr;
-          gap: 6rem;
-          align-items: center;
+          grid-template-columns: 1fr 1.4fr;
+          gap: 4rem;
+          position: relative;
+          z-index: 2;
         }
 
-        /* ── Left Side: Heading + Contact Box ── */
-        .dr-left {
+        /* ── Left Panel ── */
+        .ct-left {
           display: flex;
           flex-direction: column;
-          gap: 3rem;
+          justify-content: center;
         }
 
-        .dr-heading {
+        .ct-heading {
           font-family: 'Manrope', sans-serif;
-          font-size: clamp(2.2rem, 4vw, 3.5rem);
+          font-size: clamp(2rem, 3.5vw, 2.8rem);
           font-weight: 800;
-          line-height: 1.15;
-          letter-spacing: -0.025em;
+          line-height: 1.12;
+          letter-spacing: -0.03em;
           color: #ffffff;
+          margin: 0 0 1rem 0;
+        }
+        .ct-heading .green-accent {
+          color: #2ECC40;
         }
 
-        .dr-heading .green-accent {
-          background: linear-gradient(135deg, #4ade80 0%, #3BADB0 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .dr-contact-box {
-          background: rgba(0,32,70,0.5);
-          backdrop-filter: blur(16px);
-          border: 1px solid rgba(46,204,64,0.2);
-          border-radius: 24px;
-          padding: 2.5rem;
-          display: flex;
-          flex-direction: column;
-          gap: 2rem;
-          max-width: 440px;
-          box-shadow: 0 0 40px rgba(46,204,64,0.05);
-        }
-
-        .dr-box-title {
+        .ct-sub {
           font-family: 'Inter', sans-serif;
-          font-weight: 600;
-          font-size: 1rem;
-          margin-bottom: 0.5rem;
-          color: rgba(255,255,255,0.6);
-          letter-spacing: 0.02em;
-          text-transform: uppercase;
-          font-size: 0.8rem;
-        }
-
-        .dr-contact-row {
-          display: inline-flex;
-          align-items: center;
-          gap: 1rem;
-          border: 1px solid rgba(46,204,64,0.25);
-          background: rgba(46,204,64,0.06);
-          padding: 10px 20px;
-          border-radius: 100px;
-          color: #ffffff;
           font-size: 0.95rem;
-          font-weight: 500;
-          width: fit-content;
-          text-decoration: none;
-          transition: all 0.3s ease;
-        }
-        .dr-contact-row:hover {
-          background: rgba(46,204,64,0.15);
-          border-color: rgba(46,204,64,0.5);
-          color: #4ade80;
-          box-shadow: 0 0 16px rgba(46,204,64,0.15);
-        }
-        .dr-contact-row svg { opacity: 0.8; color: #4ade80; }
-
-        /* ── Right Side: Minimalist Form ── */
-        .dr-form {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 2.5rem 2rem;
+          line-height: 1.7;
+          color: rgba(255, 255, 255, 0.6);
+          margin: 0 0 2.5rem 0;
+          max-width: 360px;
         }
 
-        .dr-span { grid-column: 1 / -1; }
-
-        .dr-group {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        .dr-label {
-          font-family: 'Inter', sans-serif;
-          font-size: 0.82rem;
-          font-weight: 600;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.45);
-        }
-
-        .dr-input {
-          background: transparent;
-          border: none;
-          border-bottom: 1px solid rgba(255,255,255,0.15);
-          padding: 10px 0;
-          color: #ffffff;
-          font-family: 'Inter', sans-serif;
-          font-size: 1.05rem;
-          outline: none;
-          transition: border-color 0.3s ease;
-        }
-        .dr-input::placeholder { color: rgba(255,255,255,0.2); }
-        .dr-input:focus {
-          border-color: #4ade80;
-        }
-
-        .dr-btn-wrap {
-          margin-top: 1rem;
-        }
-
-        .dr-submit-btn {
-          background: linear-gradient(135deg, #2ECC40 0%, #3BADB0 100%);
-          border: none;
-          color: #002046;
-          padding: 14px 44px;
-          border-radius: 8px;
+        /* Contact info rows */
+        .ct-info-label {
           font-family: 'Inter', sans-serif;
           font-weight: 700;
-          font-size: 1rem;
-          letter-spacing: 0.03em;
-          cursor: pointer;
-          transition: all 0.3s ease;
+          font-size: 0.7rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.45);
+          margin-bottom: 1rem;
+        }
+
+        .ct-info-list {
           display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .ct-info-row {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          color: rgba(255, 255, 255, 0.85);
+          font-size: 0.92rem;
+          font-weight: 500;
+          text-decoration: none;
+          padding: 10px 18px;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 0;
+          width: fit-content;
+          transition: all 0.3s ease;
+        }
+        .ct-info-row:hover {
+          border-color: #2ECC40;
+          color: #2ECC40;
+          background: rgba(46, 204, 64, 0.06);
+        }
+        .ct-info-row svg {
+          color: #2ECC40;
+          opacity: 0.8;
+        }
+
+        /* ── Right Panel: Form ── */
+        .ct-right {
+          border-left: 1px solid rgba(255, 255, 255, 0.08);
+          padding-left: 4rem;
+        }
+
+        .ct-form {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem 1.5rem;
+        }
+
+        .ct-span { grid-column: 1 / -1; }
+
+        .ct-group {
+          display: flex;
+          flex-direction: column;
+          gap: 0.6rem;
+        }
+
+        .ct-label {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.4);
+        }
+
+        .ct-input {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 0;
+          padding: 13px 16px;
+          color: #ffffff;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.92rem;
+          outline: none;
+          transition: border-color 0.3s ease, background 0.3s ease;
+          box-sizing: border-box;
+          width: 100%;
+        }
+        .ct-input::placeholder {
+          color: rgba(255, 255, 255, 0.2);
+        }
+        .ct-input:focus {
+          border-color: rgba(46, 204, 64, 0.6);
+          background: rgba(255, 255, 255, 0.08);
+        }
+
+        .ct-textarea {
+          resize: vertical;
+          min-height: 100px;
+        }
+
+        /* Submit button */
+        .ct-btn-wrap {
+          margin-top: 0.5rem;
+        }
+
+        .ct-submit {
+          display: inline-flex;
           align-items: center;
           justify-content: center;
-          gap: 0.75rem;
-          min-width: 160px;
-          box-shadow: 0 4px 20px rgba(46,204,64,0.25);
+          gap: 10px;
+          background: #2ECC40;
+          color: #002046;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 700;
+          padding: 14px 32px;
+          border: none;
+          border-radius: 0;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          min-width: 140px;
         }
-        .dr-submit-btn:hover:not(:disabled) {
+        .ct-submit:hover:not(:disabled) {
+          background: #27b837;
           transform: translateY(-2px);
-          box-shadow: 0 8px 28px rgba(46,204,64,0.4);
-          filter: brightness(1.1);
+          box-shadow: 0 8px 20px rgba(46, 204, 64, 0.35);
         }
-        .dr-submit-btn:active:not(:disabled) {
+        .ct-submit:active:not(:disabled) {
           transform: scale(0.97);
         }
-        .dr-submit-btn:disabled {
+        .ct-submit:disabled {
           opacity: 0.5;
           cursor: wait;
         }
 
-        .dr-status-msg {
-          margin-top: 1.5rem;
-          font-weight: 500;
+        .ct-status {
+          margin-top: 1.25rem;
+          font-weight: 600;
+          font-size: 0.88rem;
           display: flex;
           align-items: center;
           gap: 0.5rem;
         }
 
-        @media (max-width: 1024px) {
-          .dr-inner { grid-template-columns: 1fr; gap: 4rem; text-align: center; }
-          .dr-left { align-items: center; }
-          .dr-contact-box { width: 100%; max-width: 500px; padding: 2rem; }
-          .dr-group { align-items: center; }
-          .dr-input { width: 100%; text-align: center; }
-          .dr-btn-wrap { display: flex; justify-content: center; }
+        /* ── Responsive ── */
+        @media (max-width: 960px) {
+          #contact { padding: 3.5rem 20px; }
+          .ct-inner { grid-template-columns: 1fr; gap: 3rem; }
+          .ct-right { border-left: none; border-top: 1px solid rgba(255,255,255,0.08); padding-left: 0; padding-top: 3rem; }
         }
-
         @media (max-width: 600px) {
-          .dr-form { grid-template-columns: 1fr; gap: 2rem; }
-          .dr-container { padding: 4rem 0 6rem; }
-          .dr-inner { padding: 0 1.5rem; }
+          .ct-form { grid-template-columns: 1fr; }
         }
       `}</style>
 
-      <div className="dr-bg-mesh" />
-      <div className="dr-bg-glow" />
+      <div className="ct-inner">
 
-      <div className="dr-inner">
-        {/* Left Section */}
-        <div className="dr-left">
-          <ScrollReveal>
-            <h2 className="dr-heading">Ready to get<br /><span className="green-accent">Started?</span></h2>
-          </ScrollReveal>
+          {/* ── Left: Info ── */}
+          <div className="ct-left">
+            <h2 className="ct-heading">
+              Ready to get<br /><span className="green-accent">Started?</span>
+            </h2>
+            <p className="ct-sub">
+              Let&rsquo;s discuss how we can help bring your next project to life
+              with precision engineering.
+            </p>
 
-          <ScrollReveal delay={0.2} className="dr-contact-box">
-            <div>
-              <p className="dr-box-title">Sale and general inquiries</p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1.5rem' }}>
-                <a href="tel:+14154063053" className="dr-contact-row">
-                  <Phone size={18} /> +92 321 5353105
-                </a>
-                <a href="mailto:info@octabitlogics.com" className="dr-contact-row">
-                  <Mail size={18} /> info@octabitlogics.com
-                </a>
+            <p className="ct-info-label">Sales &amp; general inquiries</p>
+            <div className="ct-info-list">
+              <a href="tel:+923215353105" className="ct-info-row">
+                <Phone size={16} /> +92 321 5353105
+              </a>
+              <a href="mailto:info@octabitlogics.com" className="ct-info-row">
+                <Mail size={16} /> info@octabitlogics.com
+              </a>
+            </div>
+          </div>
+
+          {/* ── Right: Form ── */}
+          <div className="ct-right">
+            <form className="ct-form" onSubmit={handleSubmit}>
+              <div className="ct-group">
+                <label className="ct-label">Full Name *</label>
+                <input name="name" className="ct-input" type="text" required disabled={isSubmitting} />
               </div>
-            </div>
-          </ScrollReveal>
-        </div>
 
-        {/* Right Section: Form */}
-        <ScrollReveal delay={0.3} className="dr-right">
-          <form className="dr-form" onSubmit={handleSubmit}>
-            <div className="dr-group">
-              <label className="dr-label">Full Name *</label>
-              <input name="name" className="dr-input" type="text" placeholder="" required disabled={isSubmitting} />
-            </div>
+              <div className="ct-group">
+                <label className="ct-label">Work Email *</label>
+                <input name="email" className="ct-input" type="email" required disabled={isSubmitting} />
+              </div>
 
-            <div className="dr-group">
-              <label className="dr-label">Work Email *</label>
-              <input name="email" className="dr-input" type="email" placeholder="" required disabled={isSubmitting} />
-            </div>
+              <div className="ct-group">
+                <label className="ct-label">Phone Number</label>
+                <input name="subject" className="ct-input" type="text" disabled={isSubmitting} />
+              </div>
 
-            <div className="dr-group">
-              <label className="dr-label">Phone Number</label>
-              <input name="subject" className="dr-input" type="text" placeholder="" disabled={isSubmitting} />
-            </div>
+              <div className="ct-group">
+                <label className="ct-label">Organization</label>
+                <input className="ct-input" type="text" disabled={isSubmitting} />
+              </div>
 
-            <div className="dr-group">
-              <label className="dr-label">Organization</label>
-              <input className="dr-input" type="text" placeholder="" disabled={isSubmitting} />
-            </div>
+              <div className="ct-group ct-span">
+                <label className="ct-label">Project Description</label>
+                <textarea name="message" className="ct-input ct-textarea" required disabled={isSubmitting} />
+              </div>
 
-            <div className="dr-group dr-span">
-              <label className="dr-label">Project Description</label>
-              <input name="message" className="dr-input" type="text" placeholder="" required disabled={isSubmitting} />
-            </div>
+              <div className="ct-span ct-btn-wrap">
+                <button
+                  type="submit"
+                  className="ct-submit"
+                  disabled={isSubmitting || status === "success"}
+                >
+                  {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : (
+                    <>
+                      Send Message
+                      <Send size={15} />
+                    </>
+                  )}
+                </button>
 
-            <div className="dr-span dr-btn-wrap">
-              <button
-                type="submit"
-                className="dr-submit-btn"
-                disabled={isSubmitting || status === "success"}
-              >
-                {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : "Send"}
-              </button>
+                <AnimatePresence>
+                  {status === "success" && (
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="ct-status" style={{ color: '#2ECC40' }}>
+                      <CheckCircle2 size={18} /> Message Sent Successfully!
+                    </motion.div>
+                  )}
+                  {status === "error" && (
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="ct-status" style={{ color: '#ef4444' }}>
+                      <AlertCircle size={18} /> {errorMessage}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </form>
+          </div>
 
-              <AnimatePresence>
-                {status === "success" && (
-                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="dr-status-msg" style={{ color: '#4ade80' }}>
-                    <CheckCircle2 size={18} /> Message Sent Successfully!
-                  </motion.div>
-                )}
-                {status === "error" && (
-                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="dr-status-msg" style={{ color: '#ef4444' }}>
-                    <AlertCircle size={18} /> {errorMessage}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </form>
-        </ScrollReveal>
       </div>
     </section>
   );

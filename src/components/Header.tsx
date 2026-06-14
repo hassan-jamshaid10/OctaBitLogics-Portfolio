@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 const NAV_LINKS = [
-  { label: "Company",    href: "#about-split" },
+  { label: "Company",    href: "/company" },
   { label: "Industries", href: "#industries" },
   { label: "Services",   href: "#services" },
   { label: "Projects",   href: "/projects" },

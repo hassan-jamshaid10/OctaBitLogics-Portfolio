@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 const NAV_LINKS = [
-  { label: "Company", href: "#about-split" },
+  { label: "Company", href: "/company" },
   { label: "Industries", href: "#expertise" },
   { label: "Services", href: "#services" },
   { label: "Projects", href: "/projects" },

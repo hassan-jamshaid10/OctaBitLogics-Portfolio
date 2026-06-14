@@ -86,7 +86,7 @@ export default function Home() {
     <>
       <Navbar activeSection={activeSection} onNavClick={scrollTo} />
 
-      <main>
+      <main style={{ overflowX: "hidden", width: "100%" }}>
         <Suspense fallback={<div style={{ minHeight: '100vh', width: '100%' }}></div>}>
           <Hero onNavClick={scrollTo} />
           <TaglineBar />

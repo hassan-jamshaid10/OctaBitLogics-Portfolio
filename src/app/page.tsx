@@ -10,6 +10,7 @@ const CaseStudies = lazy(() => import("../components/CaseStudies"));
 const About = lazy(() => import("../components/about"));
 const StatementBanner = lazy(() => import("../components/statementBanner"));
 const ExpertiseDomains = lazy(() => import("../components/ExpertiseDomains"));
+const OurServices = lazy(() => import("../components/OurServices"));
 const Services = lazy(() => import("../components/services"));
 const Blogs = lazy(() => import("../components/Blogs"));
 const Newsletter = lazy(() => import("../components/Newsletter"));
@@ -95,6 +96,7 @@ export default function Home() {
           {/* <About /> */}
 
           <ExpertiseDomains />
+          <OurServices />
           <Newsletter />
           {/* <Services /> */}
           {/* <TechStack /> */}

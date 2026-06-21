@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const NAV_LINKS = [
   { label: "Company", href: "/company" },
-  { label: "Industries", href: "#expertise" },
+  { label: "Industries", href: "/industries" },
   { label: "Services", href: "#services" },
   { label: "Projects", href: "/projects" },
   { label: "Contact", href: "#contact" },
@@ -307,6 +307,16 @@ export default function Footer() {
               <img
                 src="https://flagcdn.com/w80/pk.png"
                 alt="Pakistan"
+                className="ftr-flag"
+              />
+              <img
+                src="https://flagcdn.com/w80/us.png"
+                alt="USA"
+                className="ftr-flag"
+              />
+              <img
+                src="https://flagcdn.com/w80/eu.png"
+                alt="European Union"
                 className="ftr-flag"
               />
               Lahore, Pakistan · Working Globally

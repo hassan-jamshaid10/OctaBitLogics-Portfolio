@@ -5,8 +5,8 @@ import { usePathname, useRouter } from "next/navigation";
 
 const NAV_LINKS = [
   { label: "Company",    href: "/company" },
-  { label: "Industries", href: "#industries" },
-  { label: "Services",   href: "#services" },
+  { label: "Industries", href: "/industries" },
+  { label: "Services",   href: "/services" },
   { label: "Projects",   href: "/projects" },
   { label: "Contact",    href: "#contact" },
 ];

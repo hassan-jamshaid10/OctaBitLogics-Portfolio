@@ -78,8 +78,8 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
       ? pathname === href
       : pathname === "/" && activeSection === href.slice(1);
 
-  // When on the projects page and at the top, force white text/logo to contrast with dark hero
-  const isHeroDark = pathname === "/projects" && !scrolled;
+  // When on any projects page (list or detail) and at the top, force white text/logo
+  const isHeroDark = pathname.startsWith("/projects") && !scrolled;
 
   return (
     <>

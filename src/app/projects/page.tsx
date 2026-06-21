@@ -5,6 +5,9 @@ import Footer from "../../components/Footer";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import BackgroundNightfall from "../../components/BackgroundNightfall";
+import ProjectsHero from "@/src/components/ProjectsHero";
+import ProjectsGrid from "@/src/components/ProjectsGrid";
+import Contact from "@/src/components/contact";
 
 const PROJECTS = [
   {
@@ -58,7 +61,7 @@ const PROJECTS = [
     name: "LaunchPulse AI",
     category: "AI & BIG DATA",
     tagline: "AI Powered Startup Evaluation",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&fit=crop",
+    image: "/l1.png",
     desc: "A comprehensive platform that combines modern web technologies with machine learning to help founders and investors make data driven decisions.",
     features: [
       {
@@ -89,7 +92,6 @@ function ProductCard({
 
   return (
     <section className={`prd-section ${isEven ? "prd-bg-white" : "prd-bg-dark"}`}>
-      {/* If it's dark, optionally embed BackgroundNightfall just for that block */}
       {!isEven && <BackgroundNightfall nightGradient="transparent" />}
 
       <div className={`prd-inner prd-card ${isEven ? "prd-even" : "prd-odd"}`}>
@@ -155,219 +157,13 @@ export default function Projects() {
             min-height: 100vh;
           }
 
-          /* ── 1. HERO SECTION ── */
-          .prj-hero {
-            position: relative;
-            background: linear-gradient(135deg, #0f1c3f 0%, #080d1e 45%, #03060e 100%);
-            padding: 7rem 2rem 3rem;
-            text-align: center;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-          }
-          .prj-hero::before {
-            content: '';
-            position: absolute; inset: 0;
-            background: radial-gradient(ellipse at 30% 20%, rgba(59,173,176,0.12) 0%, transparent 55%),
-                        radial-gradient(ellipse at 70% 80%, rgba(167,255,249,0.08) 0%, transparent 50%);
-            pointer-events: none; z-index: 0;
-          }
-
-          .prj-hero-inner {
-            position: relative; z-index: 2;
-            max-width: 900px;
-            display: flex; flex-direction: column; align-items: center;
-          }
-
-          /* Animated Rocket Icon */
-          .prj-icon-wrap {
-            margin-bottom: 2.5rem;
-            position: relative;
-            animation: heroIconFloat 4s ease-in-out infinite;
-          }
-          .prj-icon-ring {
-            width: 120px; height: 120px;
-            border-radius: 50%;
-            border: 2px solid rgba(59,173,176,0.25);
-            display: flex; align-items: center; justify-content: center;
-            position: relative;
-            background: rgba(59,173,176,0.04);
-            backdrop-filter: blur(8px);
-          }
-          .prj-icon-ring::before {
-            content: '';
-            position: absolute; inset: -8px;
-            border-radius: 50%;
-            border: 1px solid rgba(59,173,176,0.12);
-            animation: heroPulseRing 3s ease-in-out infinite;
-          }
-          .prj-icon-ring::after {
-            content: '';
-            position: absolute; inset: -18px;
-            border-radius: 50%;
-            border: 1px solid rgba(59,173,176,0.06);
-            animation: heroPulseRing 3s ease-in-out 0.5s infinite;
-          }
-          @keyframes heroIconFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
-          }
-          @keyframes heroPulseRing {
-            0%, 100% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.15); opacity: 0; }
-          }
-
-          .prj-icon-svg {
-            width: 48px; height: 48px;
-            color: #a7fff9;
-            filter: drop-shadow(0 0 15px rgba(167,255,249,0.4));
-          }
-
-          /* Exhaust particles */
-          .prj-exhaust {
-            position: absolute;
-            bottom: -30px; left: 50%;
-            transform: translateX(-50%);
-            display: flex; gap: 6px;
-          }
-          .prj-exhaust span {
-            width: 3px;
-            border-radius: 3px;
-            background: linear-gradient(to bottom, rgba(59,173,176,0.8), transparent);
-            animation: exhaustFlicker 0.8s ease-in-out infinite alternate;
-          }
-          .prj-exhaust span:nth-child(1) { height: 18px; animation-delay: 0s; }
-          .prj-exhaust span:nth-child(2) { height: 26px; animation-delay: 0.15s; }
-          .prj-exhaust span:nth-child(3) { height: 14px; animation-delay: 0.3s; }
-          @keyframes exhaustFlicker {
-            0% { opacity: 0.4; transform: scaleY(0.8); }
-            100% { opacity: 1; transform: scaleY(1.2); }
-          }
-
-          /* Badge */
-          .prd-badge {
-            position: relative; z-index: 1;
-            display: inline-flex;
-            align-items: center;
-            font-family: 'Oxanium', monospace;
-            font-size: 0.68rem; font-weight: 700;
-            letter-spacing: 0.12em; text-transform: uppercase;
-            color: rgba(255,255,255,0.7);
-            background: rgba(255,255,255,0.06);
-            border: 1.5px solid rgba(255,255,255,0.25);
-            padding: 6px 16px; border-radius: 100px;
-            margin-bottom: 1rem;
-            backdrop-filter: blur(10px);
-          }
-          .prd-badge::before {
-             content: ''; display: inline-block; width: 12px; height: 1px; background: rgba(255,255,255,0.5); margin-right: 8px;
-          }
-
-          /* Heading */
-          .prd-heading {
-            position: relative; z-index: 1;
-            font-family: 'Oxanium', monospace;
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            font-weight: 900;
-            color: #ffffff;
-            letter-spacing: -0.02em;
-            line-height: 1.08;
-            margin-bottom: 1rem;
-          }
-          .prd-heading span {
-            color: rgba(255,255,255,0.55);
-            font-style: normal;
-          }
-
-          .prj-subtitle {
-            position: relative; z-index: 1;
-            font-size: 1rem;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.6);
-            max-width: 600px;
-            margin-bottom: 2.5rem;
-          }
-
-          /* Stats Row */
-          .prj-stats {
-            position: relative; z-index: 1;
-            display: flex;
-            gap: 0;
-            margin-bottom: 2rem;
-          }
-          .prj-stat {
-            padding: 0 2.5rem;
-            border-right: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-          }
-          .prj-stat:last-child { border-right: none; }
-          .prj-stat-num {
-            font-family: 'Oxanium', monospace;
-            font-size: 2.2rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #a7fff9, #3BADB0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1;
-            margin-bottom: 0.4rem;
-          }
-          .prj-stat-label {
-            font-family: 'Oxanium', monospace;
-            font-size: 0.62rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.4);
-          }
-
-          /* Scroll Indicator */
-          .prj-scroll-indicator {
-            position: relative; z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.6rem;
-            color: rgba(255,255,255,0.35);
-            animation: heroScrollBounce 2s ease-in-out infinite;
-          }
-          .prj-scroll-indicator span {
-            font-family: 'Oxanium', monospace;
-            font-size: 0.6rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-          }
-          .prj-scroll-line {
-            width: 1px;
-            height: 28px;
-            background: linear-gradient(to bottom, rgba(59,173,176,0.6), transparent);
-          }
-          @keyframes heroScrollBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(8px); }
-          }
-
-          @media (max-width: 768px) {
-            .prj-hero { min-height: auto; padding: 10rem 1.5rem 5rem; }
-            .prj-icon-ring { width: 90px; height: 90px; }
-            .prj-icon-svg { width: 36px; height: 36px; }
-            .prj-stats { flex-direction: column; gap: 1.5rem; }
-            .prj-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 0 0 1.5rem; }
-            .prj-stat:last-child { border-bottom: none; padding-bottom: 0; }
-            .prj-stat-num { font-size: 2rem; }
-          }
-
-          /* ── 2. Card Layout ── */
+          /* ── Card Layout ── */
           .prd-section {
              padding: 8rem 0;
              position: relative;
              overflow: hidden;
           }
 
-          /* White Section Modifiers */
           .prd-bg-white {
              background: #ffffff;
              color: #1B2E5E;
@@ -380,7 +176,6 @@ export default function Projects() {
              pointer-events: none; z-index: 0;
           }
 
-          /* Dark Section Modifiers */
           .prd-bg-dark {
              background: linear-gradient(135deg, #0f1c3f 0%, #080d1e 45%, #03060e 100%);
              color: #ffffff;
@@ -407,7 +202,7 @@ export default function Projects() {
           }
           .prd-even .prd-content-col { order: 1; }
           .prd-even .prd-img-col { order: 2; }
-          
+
           .prd-odd .prd-img-col { order: 1; }
           .prd-odd .prd-content-col { order: 2; }
 
@@ -415,15 +210,17 @@ export default function Projects() {
           .prd-img-wrap {
             position: relative;
             width: 100%;
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 16 / 9;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 40px 80px rgba(0,0,0,0.6);
             border: 1px solid rgba(59,173,176,0.2);
+            background: rgba(0, 0, 0, 0.15);
           }
           .prd-img {
             width: 100%; height: 100%;
             object-fit: cover;
+            object-position: top center;
             transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
           }
           .prd-img-wrap:hover .prd-img {
@@ -451,8 +248,7 @@ export default function Projects() {
             flex-direction: column;
             position: relative;
           }
-          
-          /* Number Watermark */
+
           .prd-number {
             font-family: 'Oxanium', monospace;
             font-size: 7rem;
@@ -465,8 +261,7 @@ export default function Projects() {
           }
           .prd-bg-white .prd-number { color: rgba(27,46,94,0.03); }
           .prd-bg-dark .prd-number  { color: rgba(255,255,255,0.03); }
-          
-          /* Category */
+
           .prd-category-tag {
              position: relative; z-index: 1;
              font-family: 'Oxanium', monospace;
@@ -484,7 +279,6 @@ export default function Projects() {
              content: ''; display: inline-block; width: 18px; height: 1px; background: rgba(255,255,255,0.4);
           }
 
-          /* Titles */
           .prd-name {
             font-family: 'Oxanium', monospace;
             font-size: clamp(2rem, 3.5vw, 2.8rem);
@@ -504,7 +298,6 @@ export default function Projects() {
           .prd-bg-white .prd-tagline { color: #3BADB0; font-weight: 600; }
           .prd-bg-dark .prd-tagline  { color: rgba(255,255,255,0.55); font-weight: 400; }
 
-          /* Pills */
           .prd-tech-pills {
             display: flex; flex-wrap: wrap; gap: 0.5rem;
             margin-bottom: 1.8rem;
@@ -523,7 +316,6 @@ export default function Projects() {
           .prd-bg-white .prd-tech-pill::before {
              content: ''; width: 4px; height: 4px; border-radius: 50%; background: #3BADB0;
           }
-
           .prd-bg-dark .prd-tech-pill {
              color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06);
           }
@@ -531,7 +323,6 @@ export default function Projects() {
              content: ''; width: 4px; height: 4px; border-radius: 50%; background: #3BADB0;
           }
 
-          /* Desc */
           .prd-desc {
             font-size: 0.95rem;
             line-height: 1.88;
@@ -541,7 +332,6 @@ export default function Projects() {
           .prd-bg-white .prd-desc { color: #4e6070; }
           .prd-bg-dark .prd-desc  { color: rgba(255,255,255,0.7); }
 
-          /* Features */
           .prd-features {
             display: flex; flex-direction: column; gap: 1.25rem;
             position: relative; z-index: 1;
@@ -553,7 +343,6 @@ export default function Projects() {
             display: flex; align-items: center; justify-content: center;
             margin-top: 4px; position: relative;
           }
-          
           .prd-feat-title {
             font-family: 'Oxanium', monospace; font-size: 0.95rem; font-weight: 700;
             margin-bottom: 0.3rem;
@@ -566,7 +355,6 @@ export default function Projects() {
           .prd-bg-dark .prd-feat-title { color: #ffffff; }
           .prd-bg-dark .prd-feat-detail { color: rgba(255,255,255,0.6); }
 
-          /* Button */
           .read-case-study-btn {
             display: inline-flex; align-items: center; gap: 0.4rem;
             font-family: 'Oxanium', monospace; font-size: 0.78rem;
@@ -575,14 +363,12 @@ export default function Projects() {
             transition: background 0.2s, border-color 0.2s, transform 0.2s, color 0.2s;
             text-decoration: none;
           }
-          
           .prd-bg-white .read-case-study-btn {
             background: transparent; border: 1.5px solid #3BADB0; color: #1B2E5E;
           }
           .prd-bg-white .read-case-study-btn:hover {
             border-color: #3BADB0; background: #3BADB0; color: #ffffff; transform: translateY(-2px);
           }
-
           .prd-bg-dark .read-case-study-btn {
             background: transparent; border: 1.5px solid rgba(255,255,255,0.55); color: #fff;
           }
@@ -599,57 +385,19 @@ export default function Projects() {
           @media (max-width: 600px) {
             .prd-inner { padding: 0 1.25rem; }
             .prd-section { padding: 5rem 0; }
-            .prj-hero { padding: 10rem 1rem 4rem; }
             .prd-number { font-size: 4.5rem; top: -2.5rem; left: 0; }
           }
         `}</style>
 
-        {/* ── 1. Hero Block (Dark) ── */}
-        <header className="prj-hero">
-          <BackgroundNightfall />
-          <div className="prj-hero-inner">
+        {/* ── 1. Hero ── */}
+        <ProjectsHero />
 
-            <div className="prd-badge">Curated Work</div>
-            <h2 className="prd-heading">
-              Engineering <span>Excellence,</span><br />
-              Delivered <span>At Scale.</span>
-            </h2>
-            <p className="prj-subtitle">
-              From autonomous defense systems to AI powered startup platforms, we architect solutions that push boundaries and deliver measurable impact.
-            </p>
-
-            {/* Stats */}
-            <div className="prj-stats">
-              <div className="prj-stat">
-                <div className="prj-stat-num">3+</div>
-                <div className="prj-stat-label">Live Products</div>
-              </div>
-              <div className="prj-stat">
-                <div className="prj-stat-num">12+</div>
-                <div className="prj-stat-label">Technologies</div>
-              </div>
-              <div className="prj-stat">
-                <div className="prj-stat-num">100%</div>
-                <div className="prj-stat-label">Client Retention</div>
-              </div>
-            </div>
-
-            {/* Scroll Indicator */}
-            <div className="prj-scroll-indicator">
-              <span>Explore Projects</span>
-              <div className="prj-scroll-line" />
-            </div>
-
-          </div>
-        </header>
-
-        {/* ── 2. Alternating Sections ── */}
-        <div>
-          {PROJECTS.map((prod, index) => (
-            <ProductCard key={prod.id} product={prod} index={index} />
-          ))}
+        {/* ── 2. 2-Column Grid (Matches Reference) ── */}
+        <div id="work">
+          <ProjectsGrid />
         </div>
       </main>
+      <Contact />
 
       <Footer />
     </>

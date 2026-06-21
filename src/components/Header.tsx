@@ -4,11 +4,11 @@ import { useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 const NAV_LINKS = [
-  { label: "Company",    href: "/company" },
+  { label: "Company", href: "/company" },
   { label: "Industries", href: "/industries" },
-  { label: "Services",   href: "/services" },
-  { label: "Projects",   href: "/projects" },
-  { label: "Contact",    href: "#contact" },
+  { label: "Services", href: "/services" },
+  { label: "Our Work", href: "/projects" },
+  { label: "Contact", href: "#contact" },
 ];
 
 interface NavbarProps {
@@ -18,11 +18,11 @@ interface NavbarProps {
 
 export default function Navbar({ activeSection = "home", onNavClick }: NavbarProps) {
   const pathname = usePathname();
-  const router   = useRouter();
+  const router = useRouter();
 
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [mounted,  setMounted]  = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
@@ -78,6 +78,9 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
       ? pathname === href
       : pathname === "/" && activeSection === href.slice(1);
 
+  // When on the projects page and at the top, force white text/logo to contrast with dark hero
+  const isHeroDark = pathname === "/projects" && !scrolled;
+
   return (
     <>
       <style>{`
@@ -107,6 +110,15 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           border-bottom: 1px solid rgba(0, 32, 70, 0.07);
           box-shadow: 0 8px 32px rgba(0, 32, 70, 0.06);
         }
+        
+        /* ── Hero Dark Mode (Projects Page) ── */
+        .obl-nav.hero-dark .obl-link { color: rgba(255, 255, 255, 0.85); }
+        .obl-nav.hero-dark .obl-link.active { color: #ffffff; }
+        .obl-nav.hero-dark .obl-link:hover { color: #ffffff; background: rgba(255, 255, 255, 0.1); }
+        .obl-nav.hero-dark .obl-logo-img { filter: brightness(0) invert(1); }
+        .obl-nav.hero-dark .obl-hamburger span { background: #ffffff; }
+        .obl-nav.hero-dark .obl-hamburger { border-color: rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.05); }
+
         .obl-nav-inner {
           width: 100%; max-width: 1280px;
           margin: 0 auto; padding: 0 32px;
@@ -349,9 +361,9 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
         }
       `}</style>
 
-      <nav className={["obl-nav", scrolled ? "scrolled" : "", mounted ? "mounted" : ""].join(" ")}>
+      <nav className={["obl-nav", scrolled ? "scrolled" : "", mounted ? "mounted" : "", isHeroDark ? "hero-dark" : ""].join(" ")}>
         <div className="obl-nav-inner">
-          
+
           <div className="obl-left">
             {/* Logo */}
             <div className="obl-logo" onClick={handleLogoClick}>
@@ -369,7 +381,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
                   >
                     {link.label}
                   </a>
-                  
+
                   {/* Square Hover Card */}
                   <div className="obl-subtab">
                     <div className="obl-subtab-inner">

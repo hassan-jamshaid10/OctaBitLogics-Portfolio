@@ -17,28 +17,28 @@ const PROJECTS: ProjectType[] = [
     clientName: "TACT EVAC",
     category: "DEFENCE TECHNOLOGY",
     headline: "Deployed an autonomous evacuation command center for military airbases",
-    image: "l2.jpeg",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=85&auto=format&fit=crop",
   },
   {
     id: "launchpulse",
     clientName: "LaunchPulse",
-    category: "AI & Web",
+    category: "AI & BIG DATA",
     headline: "AI-powered startup evaluation platform to predict success probability",
-    image: "/l3.png",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=85&auto=format&fit=crop",
   },
   {
     id: "sporttek",
     clientName: "SportTek",
     category: "MOBILE PLATFORM",
     headline: "Dual-sided sports venue booking platform bridging players and owners",
-    image: "/s2.png",
+    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1200&q=85&auto=format&fit=crop",
   },
   {
     id: "pulseai",
     clientName: "Pulse AI",
     category: "HEALTHCARE TECH",
     headline: "Hospital management platform with AI diagnosis support and EHR integration",
-    image: "/pulse.png",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=85&auto=format&fit=crop",
   }
 ];
 
@@ -73,17 +73,19 @@ export default function ProjectsGrid() {
 
         .pg-img-wrap {
           width: 100%;
+          aspect-ratio: 4 / 3;
           overflow: hidden;
           margin-bottom: 1.25rem;
-          background: #f8f9fa;
-          border: 1px solid rgba(0,0,0,0.04);
+          background: #f0f0f0;
+          border: 1px solid rgba(0,0,0,0.06);
         }
 
         .pg-img {
           width: 100%;
-          height: auto;
+          height: 100%;
           display: block;
-          object-fit: contain;
+          object-fit: cover;
+          object-position: center;
           transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
 

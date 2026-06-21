@@ -10,149 +10,208 @@ export default function ProjectsCTA() {
     <section id="projects-cta">
       <style>{`
         #projects-cta {
-          padding: 8rem 40px;
+          padding: 4rem 40px 5rem;
           background: #ffffff;
           font-family: 'Inter', sans-serif;
-          position: relative;
-          display: flex;
-          justify-content: center;
         }
 
         .cta-box {
           position: relative;
           width: 100%;
-          max-width: 1100px;
-          border-radius: 4px;
+          max-width: 1280px;
+          margin: 0 auto;
           overflow: hidden;
-          padding: 5rem 3rem;
-          text-align: center;
-          /* Premium gradient background */
-          background: linear-gradient(135deg, #002046 0%, #013a6b 40%, #0a5c50 100%);
-          box-shadow: 0 20px 50px rgba(0, 32, 70, 0.2);
+          padding: 3.5rem 2rem 3.5rem 3rem;
+          background: linear-gradient(120deg, #002046 0%, #013a6b 35%, #0a5c50 70%, #1a8a60 100%);
           display: flex;
-          flex-direction: column;
           align-items: center;
+          gap: 2.5rem;
           color: #ffffff;
         }
 
-        /* Abstract radial glows to make it dynamic */
+        /* soft backlight behind the window */
         .cta-box::before {
           content: '';
           position: absolute;
-          top: -50%;
-          left: -10%;
+          top: 50%;
+          right: 14%;
           width: 500px;
           height: 500px;
-          background: radial-gradient(ellipse at center, rgba(46, 204, 64, 0.25) 0%, transparent 60%);
-          filter: blur(40px);
+          transform: translateY(-50%);
+          background: radial-gradient(circle at center, rgba(120,220,180,0.15) 0%, transparent 62%);
+          filter: blur(45px);
           pointer-events: none;
         }
 
-        .cta-box::after {
-          content: '';
-          position: absolute;
-          bottom: -40%;
-          right: -10%;
-          width: 500px;
-          height: 500px;
-          background: radial-gradient(ellipse at center, rgba(59, 173, 176, 0.2) 0%, transparent 60%);
-          filter: blur(40px);
-          pointer-events: none;
-        }
-
-        .cta-content {
-          position: relative;
-          z-index: 2;
-        }
+        /* ── LEFT TEXT ── */
+        .cta-left { position: relative; z-index: 3; flex: 1 1 400px; max-width: 460px; }
 
         .cta-eyebrow {
-          font-size: 0.8rem;
+          font-size: 0.78rem;
           font-weight: 700;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.22em;
           text-transform: uppercase;
-          color: #2ECC40;
-          margin-bottom: 1rem;
+          color: rgba(255,255,255,0.55);
+          margin-bottom: 1.2rem;
         }
 
         .cta-h2 {
           font-family: 'Manrope', sans-serif;
-          font-size: clamp(2.2rem, 4vw, 3.5rem);
+          font-size: clamp(1.8rem, 3vw, 2.8rem);
           font-weight: 800;
           letter-spacing: -0.02em;
-          line-height: 1.1;
-          margin: 0 0 1.5rem;
+          line-height: 1.15;
+          margin: 0 0 1rem;
         }
 
         .cta-desc {
-          font-size: 1.05rem;
+          font-size: 1rem;
           line-height: 1.6;
-          color: rgba(255,255,255,0.8);
-          max-width: 600px;
-          margin: 0 auto 2.5rem;
+          color: rgba(255,255,255,0.65);
+          max-width: 400px;
+          margin: 0 0 2rem;
         }
 
-        /* CTA Button */
         .cta-btn {
           display: inline-flex;
           align-items: center;
-          gap: 12px;
-          padding: 1rem 2.5rem;
-          background: #2ECC40;
-          color: #002046;
-          font-size: 0.95rem;
-          font-weight: 800;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          text-decoration: none;
-          border: 2px solid #2ECC40;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-          box-shadow: 0 8px 24px rgba(46, 204, 64, 0.25);
-        }
-
-        .cta-btn:hover {
+          gap: 10px;
+          padding: 0.75rem 1.8rem;
           background: transparent;
-          color: #2ECC40;
-          transform: translateY(-3px);
-          box-shadow: 0 12px 32px rgba(46, 204, 64, 0.35);
+          color: #ffffff;
+          font-size: 0.92rem;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+          border: 1.5px solid rgba(255,255,255,0.6);
+          cursor: pointer;
+          transition: all 0.25s ease;
+          font-family: 'Inter', sans-serif;
+        }
+        .cta-btn:hover { background: rgba(255,255,255,0.1); border-color: #fff; transform: translateX(3px); }
+        .cta-btn svg { transition: transform 0.25s ease; }
+        .cta-btn:hover svg { transform: translateX(4px); }
+
+        /* ════════════════════════════════════
+           DESKTOP APP WINDOW — fully visible
+        ════════════════════════════════════ */
+        .cta-window {
+          position: relative;
+          z-index: 2;
+          flex: 1 1 640px;
+          max-width: 760px;
+          display: flex;
+          flex-direction: column;
+          background: #0a0f1e;
+          border-radius: 14px;
+          border: 1px solid rgba(255,255,255,0.10);
+          box-shadow: 0 30px 70px rgba(0,0,15,0.45),
+                      0 12px 24px rgba(0,0,15,0.30),
+                      inset 0 1px 0 rgba(255,255,255,0.08);
+          overflow: hidden;
         }
 
-        .cta-btn svg {
-          transition: transform 0.3s ease;
+        /* light frosted header — sits ABOVE the screenshot (does not cover it) */
+        .win-bar {
+          flex-shrink: 0;
+          height: 34px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 0 16px;
+          background: linear-gradient(to bottom, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .win-dot { width: 10px; height: 10px; border-radius: 50%; opacity: 0.85; }
+        .win-dot.r { background: #ff5f57; }
+        .win-dot.y { background: #febc2e; }
+        .win-dot.g { background: #28c840; }
+
+        /* full screenshot, shown at its natural ratio (no cropping) */
+        .win-screen {
+          position: relative;
+          overflow: hidden;
+          background: #0a0f1e;
+        }
+        .win-screen img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+        /* subtle glass sheen */
+        .win-screen::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(118deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 30%);
+          pointer-events: none;
         }
 
-        .cta-btn:hover svg {
-          transform: translateX(4px);
-        }
+        @media (max-width: 1100px) {
+          #projects-cta { padding: 3rem 20px 4rem; }
+          .cta-box {
+            flex-direction: column;
+            align-items: stretch;
+            text-align: center;
+            padding: 3rem 2rem 0;
+            gap: 0;
+          }
+          .cta-left { max-width: 100%; margin: 0 auto; }
+          .cta-desc { margin-left: auto; margin-right: auto; }
+          .cta-box::before { display: none; }
 
-        @media (max-width: 768px) {
-          #projects-cta { padding: 4rem 20px; }
-          .cta-box { padding: 4rem 2rem; }
+          /* window drops below text, rises flush from the bottom edge */
+          .cta-window {
+            width: 100%;
+            max-width: 640px;
+            margin: 2.5rem auto 0;
+            border-radius: 14px 14px 0 0;
+            border-bottom: none;
+          }
         }
       `}</style>
 
-      <motion.div 
+      <motion.div
         className="cta-box"
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="cta-content">
-          <div className="cta-eyebrow">Proven Results</div>
-          <h2 className="cta-h2">Ready to see our work?</h2>
+        {/* Left: Text */}
+        <div className="cta-left">
+          <div className="cta-eyebrow">Our Work</div>
+          <h2 className="cta-h2">Explore the projects that define us</h2>
           <p className="cta-desc">
-            Explore our portfolio of AI-driven platforms, enterprise web applications, 
-            and scalable mobile experiences delivered for global clients.
+            From AI-powered platforms to enterprise-grade web apps — see the real work we've shipped for global clients across industries.
           </p>
           <button onClick={() => router.push('/projects')} className="cta-btn">
-            View Projects
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
+            Explore Our Work
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </button>
         </div>
+
+        {/* Right: Desktop window (fully visible) */}
+        <motion.div
+          className="cta-window"
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="win-bar">
+            <span className="win-dot r" />
+            <span className="win-dot y" />
+            <span className="win-dot g" />
+          </div>
+          <div className="win-screen">
+            {/* ↓ Desktop screenshot */}
+            <img src="/l1.png" alt="Project desktop" />
+          </div>
+        </motion.div>
       </motion.div>
     </section>
   );

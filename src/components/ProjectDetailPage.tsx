@@ -19,6 +19,7 @@ export type Metric = {
 export type Feature = {
   title: string;
   detail: string;
+  icon?: string;
 };
 
 export type ProjectDetailProps = {

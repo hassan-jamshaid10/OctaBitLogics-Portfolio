@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { label: "Industries", href: "/industries" },
   { label: "Services", href: "/services" },
   { label: "Our Work", href: "/projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 interface NavbarProps {
@@ -66,20 +66,16 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
 
   const handleCtaClick = useCallback(() => {
     setMenuOpen(false);
-    if (pathname !== "/") {
-      navigateToSection("contact");
-    } else {
-      if (onNavClick) onNavClick("#contact");
-    }
-  }, [pathname, navigateToSection, onNavClick]);
+    router.push("/contact");
+  }, [router]);
 
   const isActive = (href: string) =>
     href.startsWith("/")
       ? pathname === href
       : pathname === "/" && activeSection === href.slice(1);
 
-  // When on any projects page (list or detail) and at the top, force white text/logo
-  const isHeroDark = pathname.startsWith("/projects") && !scrolled;
+  // Force white nav text when hero background is dark (projects & contact)
+  const isHeroDark = (pathname.startsWith("/projects") || pathname === "/contact") && !scrolled;
 
   return (
     <>

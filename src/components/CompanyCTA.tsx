@@ -131,10 +131,13 @@ export default function CompanyCTA() {
         }
 
         @media (max-width: 900px) {
-          .cta-grid { grid-template-columns: 1fr; }
+          #company-cta { padding: 5rem 40px; }
+          .cta-h2 { margin-bottom: 2.5rem; }
+          .cta-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        @media (max-width: 600px) {
-          #company-cta { padding: 5rem 20px; }
+        @media (max-width: 640px) {
+          #company-cta { padding: 4rem 20px; }
+          .cta-grid { grid-template-columns: 1fr; }
         }
       `}</style>
 

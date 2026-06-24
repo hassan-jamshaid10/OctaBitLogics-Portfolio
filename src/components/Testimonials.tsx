@@ -363,16 +363,22 @@ export default function Testimonials() {
 
         /* ── Responsive ── */
         @media (max-width: 768px) {
+          #testimonials { padding: 4rem 0 5rem; }
           .tm-track { height: 440px; }
           .tm-card { padding: 2.5rem 2rem; }
           .tm-quote { font-size: 1rem; }
         }
         @media (max-width: 500px) {
           .tm-inner { padding: 0 1.25rem; }
-          #testimonials { padding: 4rem 0 5rem; }
-          .tm-track { height: 480px; }
-          .tm-card { padding: 2rem 1.5rem; }
-          .tm-heading { font-size: 2rem; }
+          #testimonials { padding: 3.5rem 0 4rem; }
+          .tm-track { height: auto; min-height: 420px; position: relative; }
+          .tm-card { padding: 1.75rem 1.25rem; position: relative; height: auto; min-height: 420px; }
+          .tm-heading { font-size: 1.7rem; }
+          .tm-avatar { width: 50px; height: 50px; }
+        }
+        @media (max-width: 380px) {
+          .tm-card { padding: 1.5rem 1rem; }
+          .tm-quote { font-size: 0.92rem; line-height: 1.65; }
         }
       `}</style>
 

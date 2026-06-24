@@ -161,7 +161,6 @@ export default function ProjectsCTA() {
           .cta-desc { margin-left: auto; margin-right: auto; }
           .cta-box::before { display: none; }
 
-          /* window drops below text, rises flush from the bottom edge */
           .cta-window {
             width: 100%;
             max-width: 640px;
@@ -169,6 +168,13 @@ export default function ProjectsCTA() {
             border-radius: 14px 14px 0 0;
             border-bottom: none;
           }
+        }
+        @media (max-width: 560px) {
+          #projects-cta { padding: 2rem 16px 3rem; }
+          .cta-box { padding: 2.5rem 1.25rem 0; }
+          .cta-h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
+          .cta-desc { font-size: 0.9rem; }
+          .cta-btn { padding: 0.7rem 1.4rem; font-size: 0.88rem; }
         }
       `}</style>
 

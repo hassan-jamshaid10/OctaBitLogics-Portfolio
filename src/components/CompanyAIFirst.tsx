@@ -109,14 +109,15 @@ export default function CompanyAIFirst() {
         }
 
         @media (max-width: 1024px) {
-          .ai-inner {
-            grid-template-columns: 1fr;
-            gap: 3rem;
-          }
+          #company-aifirst { padding: 5rem 40px; }
+          .ai-inner { grid-template-columns: 1fr; gap: 3rem; }
+        }
+        @media (max-width: 768px) {
+          #company-aifirst { padding: 4rem 20px; }
         }
         @media (max-width: 600px) {
-          #company-aifirst { padding: 5rem 20px; }
           .ai-p { font-size: 1rem; }
+          .ai-h2 { margin-bottom: 2rem; }
         }
       `}</style>
 

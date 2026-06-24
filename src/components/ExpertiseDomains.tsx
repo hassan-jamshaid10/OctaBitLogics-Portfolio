@@ -342,9 +342,15 @@ export default function ExpertiseDomains() {
           .exp-body { grid-template-columns: 1fr; gap: 2rem; padding-left: 2rem; }
         }
         @media (max-width: 600px) {
-          .exp-row-head { gap: 1rem; padding: 1.2rem 1rem 1.2rem 1.5rem; }
+          .exp-row-head { gap: 0.75rem; padding: 1.2rem 1rem 1.2rem 1.25rem; }
           .exp-tag { display: none; }
-          .exp-body { padding: 0 1rem 1.5rem 1.5rem; }
+          .exp-body { padding: 0 1rem 1.5rem 1.25rem; }
+          .exp-stat-val { font-size: 1.6rem; }
+        }
+        @media (max-width: 400px) {
+          .exp-row-head { gap: 0.5rem; padding: 1rem 0.75rem; }
+          .exp-row-title { font-size: 1.1rem; }
+          .exp-body { padding: 0 0.75rem 1.25rem; }
         }
       `}</style>
 

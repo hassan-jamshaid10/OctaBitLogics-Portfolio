@@ -203,10 +203,15 @@ export default function AboutSplit() {
           #about-split { padding: 4rem 20px; }
           .about-title { margin-bottom: 2rem; }
           .company-card { padding: 2.25rem; }
-          .cc-stats { grid-template-columns: 1fr; gap: 1.75rem; }
+          .cc-stats { grid-template-columns: repeat(2, 1fr); gap: 1.75rem; }
           .cc-principles { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
           .cc-principles .p-label { margin-right: 0; }
           .cc-principles .item:not(:last-child)::after { display: none; }
+        }
+        @media (max-width: 480px) {
+          .company-card { padding: 1.5rem; }
+          .cc-stats { grid-template-columns: 1fr; gap: 1.5rem; }
+          .cc-stat-num { font-size: 2rem; }
         }
       `}</style>
 

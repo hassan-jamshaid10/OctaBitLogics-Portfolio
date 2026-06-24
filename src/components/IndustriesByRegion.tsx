@@ -90,7 +90,7 @@ const REGIONS = [
         tag: "Dev Hub",
         tagColor: "#2ECC40",
         desc: "Core engineering, AI research, and product development",
-        image: "https://images.unsplash.com/photo-1567507938618-7be70e4e02eb?q=80&w=600&auto=format&fit=crop",
+        image: "https://t4.ftcdn.net/jpg/04/15/05/17/360_F_415051795_wKolxKkPr2tS7fnMKOQouqUecOHMuAjh.jpg",
         flag: "https://flagcdn.com/w80/pk.png",
       },
       {

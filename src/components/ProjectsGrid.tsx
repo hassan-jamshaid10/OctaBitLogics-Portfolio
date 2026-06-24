@@ -149,13 +149,17 @@ export default function ProjectsGrid() {
         }
 
         @media (max-width: 850px) {
-          .pg-grid {
-            grid-template-columns: 1fr;
-            gap: 3rem;
-          }
-          .pg-headline {
-            font-size: 1.15rem;
-          }
+          .pg-grid { grid-template-columns: 1fr; gap: 3rem; }
+          .pg-headline { font-size: 1.15rem; }
+        }
+        @media (max-width: 600px) {
+          .pg-section { padding: 4rem 20px; }
+          .pg-grid { gap: 2.5rem; }
+        }
+        @media (max-width: 400px) {
+          .pg-section { padding: 3rem 16px; }
+          .pg-category { font-size: 0.58rem; padding: 5px 10px; }
+          .pg-client-text { font-size: 1rem; }
         }
       `}</style>
 

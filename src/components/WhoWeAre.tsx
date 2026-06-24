@@ -148,6 +148,7 @@ export default function WhoWeAre() {
         }
 
         @media (max-width: 1024px) {
+          .wwa-h2 { margin: 0 auto 4rem; }
           .wwa-stats-grid {
             grid-template-columns: repeat(2, 1fr);
             gap: 3rem 0;
@@ -155,6 +156,11 @@ export default function WhoWeAre() {
           .wwa-stat-col:nth-child(3)::before {
             display: none;
           }
+        }
+
+        @media (max-width: 768px) {
+          #who-we-are { padding: 4.5rem 20px; }
+          .wwa-h2 { margin: 0 auto 3rem; }
         }
 
         @media (max-width: 600px) {
@@ -165,7 +171,7 @@ export default function WhoWeAre() {
           }
           .wwa-stat-col { padding: 0 1rem; }
           .wwa-stat-col::before { display: none !important; }
-          .wwa-h2 { font-size: 1.5rem; line-height: 1.5; }
+          .wwa-h2 { font-size: 1.5rem; line-height: 1.5; margin: 0 auto 2.5rem; }
         }
       `}</style>
 

@@ -176,17 +176,21 @@ export default function ServiceSections() {
           }
         }
 
+        @media (max-width: 1024px) {
+          #service-sections { padding: 4.5rem 20px; }
+          .ss-card { padding: 2.5rem 2rem; }
+        }
         @media (max-width: 600px) {
-          .ss-grid {
-            grid-template-columns: 1fr;
-          }
+          #service-sections { padding: 3.5rem 16px; }
+          .ss-grid { grid-template-columns: 1fr; }
           .ss-card {
             border-right: none !important;
             border-bottom: 1px solid rgba(0, 32, 70, 0.1) !important;
+            padding: 2rem 1.5rem;
           }
-          .ss-card:last-child {
-            border-bottom: none !important;
-          }
+          .ss-card:last-child { border-bottom: none !important; }
+          .icon-svg { width: 80px; height: 80px; }
+          .ss-card-icon { margin-bottom: 2rem; }
         }
       `}</style>
 

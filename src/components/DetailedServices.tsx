@@ -610,16 +610,16 @@ export default function DetailedServices() {
         }
 
         @media (max-width: 600px) {
-          .det-svc-offer-grid {
-            grid-template-columns: 1fr;
-          }
-          .det-svc-watermark {
-            width: 140px;
-            height: 140px;
-          }
-          .det-svc-tech {
-            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-          }
+          .det-svc-offer-grid { grid-template-columns: 1fr; }
+          .det-svc-watermark { width: 140px; height: 140px; }
+          .det-svc-tech { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+          .det-svc-intro { font-size: 0.95rem; }
+          .det-svc-subtitle { font-size: 1.25rem; }
+        }
+        @media (max-width: 400px) {
+          .det-svc-section { padding: 3rem 16px; }
+          .det-svc-tech { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+          .det-svc-title { font-size: clamp(1.6rem, 8vw, 2rem); }
         }
       `}</style>
       <ProductDevComponent />

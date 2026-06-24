@@ -291,6 +291,17 @@ export default function ProjectDetailPage(p: ProjectDetailProps) {
             .pd-tech-outer { padding: 4rem 1.5rem; }
             .pd-features-outer { padding: 4rem 1.5rem 5rem; }
           }
+          @media (max-width: 560px) {
+            .pd-hero-content { padding: 0 1rem 3rem; }
+            .pd-body { padding: 3rem 1rem; }
+            .pd-metrics { padding: 2rem 1rem; }
+            .pd-metrics-inner { gap: 1.25rem; }
+            .pd-metric-val { font-size: 2rem; }
+            .pd-tech-outer { padding: 3rem 1rem; }
+            .pd-features-outer { padding: 3rem 1rem 4rem; }
+            .pd-features-grid { grid-template-columns: 1fr; }
+            .pd-feature-card { padding: 1.5rem; }
+          }
         `}</style>
 
         {/* ── HERO ── */}

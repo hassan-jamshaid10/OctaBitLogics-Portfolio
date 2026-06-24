@@ -67,7 +67,7 @@ const REGIONS = [
         name: "Saudi Arabia",
         tag: null,
         desc: "Regional presence supporting Middle East clients",
-        image: "https://tkxel.com/wp-content/uploads/al_opt_content/IMAGE/tkxel.com/wp-content/uploads/2026/02/saudia-.webp.bv.webp?bv_host=tkxel.com",
+        image: "https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?q=80&w=600&auto=format&fit=crop",
         flag: "https://flagcdn.com/w80/sa.png",
       },
       {
@@ -90,7 +90,7 @@ const REGIONS = [
         tag: "Dev Hub",
         tagColor: "#2ECC40",
         desc: "Core engineering, AI research, and product development",
-        image: "https://tkxel.com/wp-content/uploads/al_opt_content/IMAGE/tkxel.com/wp-content/uploads/2026/02/pk-2.webp.bv.webp?bv_host=tkxel.com",
+        image: "https://images.unsplash.com/photo-1567507938618-7be70e4e02eb?q=80&w=600&auto=format&fit=crop",
         flag: "https://flagcdn.com/w80/pk.png",
       },
       {

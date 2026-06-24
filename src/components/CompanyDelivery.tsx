@@ -182,13 +182,16 @@ export default function CompanyDelivery() {
         }
 
         @media (max-width: 1024px) {
+          #company-delivery { padding: 5rem 40px; }
           .cd-header { grid-template-columns: 1fr; gap: 2rem; }
           .cd-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
           #company-delivery { padding: 4rem 20px; }
+        }
+        @media (max-width: 600px) {
           .cd-grid { grid-template-columns: 1fr; }
+          .cd-card { padding: 2rem 1.5rem; }
         }
       `}</style>
 

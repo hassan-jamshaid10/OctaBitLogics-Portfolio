@@ -349,6 +349,13 @@ export default function Services() {
           .srv-bento { grid-template-columns: 1fr; }
           .srv-card-lg, .srv-card-sm { grid-column: 1 / -1; }
           .srv-header-row { flex-direction: column; align-items: flex-start; }
+          .srv-header-row { margin-bottom: 2.5rem; }
+        }
+        @media (max-width: 480px) {
+          #services { padding: 3rem 16px; }
+          .srv-card-lg .srv-card-img-wrap { height: 160px; }
+          .srv-card-sm .srv-card-img-wrap { height: 110px; }
+          .srv-card-lg, .srv-card-sm { padding: 1.5rem; }
         }
       `}</style>
 

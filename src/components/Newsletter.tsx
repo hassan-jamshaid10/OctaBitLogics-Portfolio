@@ -285,22 +285,24 @@ export default function Newsletter() {
         /* ── Responsive ── */
         @media (max-width: 900px) {
           #newsletter { padding: 3.5rem 20px; }
-          .nl-card {
-            grid-template-columns: 1fr;
-          }
+          .nl-card { grid-template-columns: 1fr; }
           .nl-left { padding: 2.5rem 2rem; }
-          .nl-right {
-            padding: 3rem 2rem;
-            min-height: 320px;
-          }
+          .nl-right { padding: 3rem 2rem; min-height: 320px; }
           .nl-doc-stack { width: 220px; height: 290px; }
           .nl-doc-front, .nl-doc-back { width: 200px; height: 260px; }
         }
-        @media (max-width: 500px) {
+        @media (max-width: 640px) {
           .nl-left { padding: 2rem 1.5rem; }
+          .nl-right { min-height: 260px; }
+          .nl-doc-stack { width: 180px; height: 240px; }
+          .nl-doc-front, .nl-doc-back { width: 160px; height: 210px; }
+        }
+        @media (max-width: 500px) {
+          .nl-left { padding: 1.75rem 1.25rem; }
           .nl-input { max-width: 100%; }
           .nl-btns { flex-direction: column; align-items: stretch; }
           .nl-btn-primary, .nl-btn-secondary { justify-content: center; }
+          .nl-right { display: none; }
         }
       `}</style>
 

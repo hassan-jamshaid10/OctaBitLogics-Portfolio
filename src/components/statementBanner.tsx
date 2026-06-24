@@ -218,6 +218,11 @@ export default function StatementBanner() {
           .sb-stats { grid-template-columns: 1fr 1fr; }
           .sb-logo { font-size: 1rem; }
         }
+        @media (max-width: 420px) {
+          .sb-stats { grid-template-columns: 1fr; }
+          .sb-stat:not(:last-child)::after { display: none; }
+          .sb-stat { padding: 0.75rem 0; }
+        }
       `}</style>
 
       <div className="sb-inner">

@@ -392,6 +392,11 @@ export default function CaseStudies() {
           .cs-head { flex-direction: column; gap: 1.5rem; }
           .cs-card { flex: 0 0 86%; width: 86%; }
         }
+        @media (max-width: 400px) {
+          #case-studies { padding: 3.5rem 16px; }
+          .cs-card { flex: 0 0 92%; width: 92%; }
+          .cs-card-headline { font-size: 1.1rem; }
+        }
 
         @media (prefers-reduced-motion: reduce) {
           .cs-track, .cs-card { transition: none; }

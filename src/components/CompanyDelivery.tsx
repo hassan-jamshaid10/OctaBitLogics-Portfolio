@@ -73,11 +73,14 @@ export default function CompanyDelivery() {
           padding: 8rem 40px;
           font-family: 'Inter', sans-serif;
           width: 100%;
+          overflow: hidden;
+          box-sizing: border-box;
         }
 
         .cd-inner {
           max-width: 1280px;
           margin: 0 auto;
+          width: 100%;
         }
 
         .cd-header {
@@ -90,12 +93,14 @@ export default function CompanyDelivery() {
 
         .cd-h2 {
           font-family: 'Manrope', sans-serif;
-          font-size: clamp(2rem, 4vw, 3rem);
+          font-size: clamp(1.5rem, 4vw, 3rem);
           font-weight: 800;
           color: #002046;
-          line-height: 1.15;
+          line-height: 1.2;
           letter-spacing: -0.02em;
           margin: 0;
+          word-break: break-word;
+          overflow-wrap: break-word;
         }
 
         .cd-header-right {
@@ -153,6 +158,8 @@ export default function CompanyDelivery() {
           flex-direction: column;
           background: #ffffff;
           transition: background 0.3s ease;
+          box-sizing: border-box;
+          min-width: 0;
         }
 
         .cd-card:hover {
@@ -188,10 +195,26 @@ export default function CompanyDelivery() {
         }
         @media (max-width: 768px) {
           #company-delivery { padding: 4rem 20px; }
+          .cd-h2 br { display: none; }
         }
         @media (max-width: 600px) {
           .cd-grid { grid-template-columns: 1fr; }
           .cd-card { padding: 2rem 1.5rem; }
+          .cd-card-title { margin-bottom: 1.5rem; }
+        }
+        @media (max-width: 480px) {
+          .cd-h2 { font-size: 1.5rem; }
+        }
+        @media (max-width: 400px) {
+          #company-delivery { padding: 3.5rem 16px; }
+          .cd-h2 { font-size: 1.3rem; }
+          .cd-card { padding: 1.75rem 1.25rem; }
+          .cd-header { gap: 1.5rem; }
+        }
+        @media (max-width: 360px) {
+          #company-delivery { padding: 3rem 14px; }
+          .cd-h2 { font-size: 1.15rem; }
+          .cd-card { padding: 1.5rem 1rem; }
         }
       `}</style>
 
@@ -218,7 +241,7 @@ export default function CompanyDelivery() {
               From onboarding and project chartering to phased execution and governance,
               we prioritise transparency and shared ownership.
             </p>
-            <Link href="#contact" className="cd-btn">
+            <Link href="/how-we-deliver" className="cd-btn">
               Learn how we deliver
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
                 <path d="M5 12h14M12 5l7 7-7 7" />
@@ -242,9 +265,6 @@ export default function CompanyDelivery() {
               <p className="cd-card-desc">{model.desc}</p>
             </motion.div>
           ))}
-          {/* Empty cells to complete the 3-column grid for the bottom row */}
-          <div className="cd-card" style={{ visibility: 'hidden' }}></div>
-          <div className="cd-card" style={{ visibility: 'hidden' }}></div>
         </div>
       </div>
     </section>

@@ -3,127 +3,114 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const REGIONS = [
+const COUNTRIES = [
   {
-    id: "north-america",
-    label: "North America",
-    flag: "https://flagcdn.com/w80/us.png",
-    flagAlt: "USA",
-    countries: [
-      {
-        name: "United States",
-        tag: "HQ",
-        tagColor: "#2ECC40",
-        desc: "Client partnerships, strategy, and leadership presence",
-        image: "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=600&auto=format&fit=crop",
-        flag: "https://flagcdn.com/w80/us.png",
-      },
-      {
-        name: "Canada",
-        tag: null,
-        desc: "Regional tech partnerships and enterprise delivery",
-        image: "https://images.unsplash.com/photo-1517935706615-2717063c2225?q=80&w=600&auto=format&fit=crop",
-        flag: "https://flagcdn.com/w80/ca.png",
-      },
-    ],
-  },
-  {
-    id: "europe",
-    label: "Europe",
-    flag: "https://flagcdn.com/w80/eu.png",
-    flagAlt: "EU",
-    countries: [
-      {
-        name: "United Kingdom",
-        tag: null,
-        desc: "Technology consulting and delivery hub for UK clients",
-        image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=600&auto=format&fit=crop",
-        flag: "https://flagcdn.com/w80/gb.png",
-      },
-      {
-        name: "Germany",
-        tag: null,
-        desc: "Engineering and AI solutions for European enterprises",
-        image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=600&auto=format&fit=crop",
-        flag: "https://flagcdn.com/w80/de.png",
-      },
-      {
-        name: "Portugal",
-        tag: "EU Hub",
-        tagColor: "#3BADB0",
-        desc: "European delivery and engineering hub",
-        image: "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?q=80&w=600&auto=format&fit=crop",
-        flag: "https://flagcdn.com/w80/pt.png",
-      },
-    ],
-  },
-  {
-    id: "middle-east",
-    label: "Middle East",
-    flag: "https://flagcdn.com/w80/ae.png",
-    flagAlt: "UAE",
-    countries: [
-      {
-        name: "Saudi Arabia",
-        tag: null,
-        desc: "Regional presence supporting Middle East clients",
-        image: "https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?q=80&w=600&auto=format&fit=crop",
-        flag: "https://flagcdn.com/w80/sa.png",
-      },
-      {
-        name: "UAE",
-        tag: null,
-        desc: "Digital transformation and fintech innovation hub",
-        image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=600&auto=format&fit=crop",
-        flag: "https://flagcdn.com/w80/ae.png",
-      },
-    ],
-  },
-  {
-    id: "asia",
-    label: "Asia",
+    name: "Pakistan",
+    region: "Asia",
+    tag: "Dev Hub",
+    tagColor: "#2ECC40",
+    desc: "Core engineering, AI research, and product development",
+    image: "https://t4.ftcdn.net/jpg/04/15/05/17/360_F_415051795_wKolxKkPr2tS7fnMKOQouqUecOHMuAjh.jpg",
     flag: "https://flagcdn.com/w80/pk.png",
-    flagAlt: "Asia",
-    countries: [
-      {
-        name: "Pakistan",
-        tag: "Dev Hub",
-        tagColor: "#2ECC40",
-        desc: "Core engineering, AI research, and product development",
-        image: "https://t4.ftcdn.net/jpg/04/15/05/17/360_F_415051795_wKolxKkPr2tS7fnMKOQouqUecOHMuAjh.jpg",
-        flag: "https://flagcdn.com/w80/pk.png",
-      },
-      {
-        name: "India",
-        tag: null,
-        desc: "Enterprise SaaS and technology solutions",
-        image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=600&auto=format&fit=crop",
-        flag: "https://flagcdn.com/w80/in.png",
-      },
-      {
-        name: "Singapore",
-        tag: null,
-        desc: "Asia-Pacific delivery and fintech partnerships",
-        image: "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?q=80&w=600&auto=format&fit=crop",
-        flag: "https://flagcdn.com/w80/sg.png",
-      },
-    ],
+  },
+  {
+    name: "United States",
+    region: "North America",
+    tag: "HQ",
+    tagColor: "#2ECC40",
+    desc: "Client partnerships, strategy, and leadership presence",
+    image: "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?q=80&w=600&auto=format&fit=crop",
+    flag: "https://flagcdn.com/w80/us.png",
+  },
+  {
+    name: "Saudi Arabia",
+    region: "Middle East",
+    tag: null,
+    tagColor: null,
+    desc: "Regional presence supporting Middle East clients",
+    image: "https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?q=80&w=600&auto=format&fit=crop",
+    flag: "https://flagcdn.com/w80/sa.png",
+  },
+  {
+    name: "UAE",
+    region: "Middle East",
+    tag: null,
+    tagColor: null,
+    desc: "Digital transformation and fintech innovation hub",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=600&auto=format&fit=crop",
+    flag: "https://flagcdn.com/w80/ae.png",
+  },
+  {
+    name: "United Kingdom",
+    region: "Europe",
+    tag: null,
+    tagColor: null,
+    desc: "Technology consulting and delivery hub for UK clients",
+    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=600&auto=format&fit=crop",
+    flag: "https://flagcdn.com/w80/gb.png",
+  },
+  {
+    name: "Canada",
+    region: "North America",
+    tag: null,
+    tagColor: null,
+    desc: "Regional tech partnerships and enterprise delivery",
+    image: "https://images.unsplash.com/photo-1517935706615-2717063c2225?q=80&w=600&auto=format&fit=crop",
+    flag: "https://flagcdn.com/w80/ca.png",
+  },
+  {
+    name: "Germany",
+    region: "Europe",
+    tag: null,
+    tagColor: null,
+    desc: "Engineering and AI solutions for European enterprises",
+    image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=600&auto=format&fit=crop",
+    flag: "https://flagcdn.com/w80/de.png",
+  },
+  {
+    name: "Portugal",
+    region: "Europe",
+    tag: "EU Hub",
+    tagColor: "#3BADB0",
+    desc: "European delivery and engineering hub",
+    image: "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?q=80&w=600&auto=format&fit=crop",
+    flag: "https://flagcdn.com/w80/pt.png",
+  },
+  {
+    name: "India",
+    region: "Asia",
+    tag: null,
+    tagColor: null,
+    desc: "Enterprise SaaS and technology solutions",
+    image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=600&auto=format&fit=crop",
+    flag: "https://flagcdn.com/w80/in.png",
+  },
+  {
+    name: "Singapore",
+    region: "Asia",
+    tag: null,
+    tagColor: null,
+    desc: "Asia-Pacific delivery and fintech partnerships",
+    image: "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?q=80&w=600&auto=format&fit=crop",
+    flag: "https://flagcdn.com/w80/sg.png",
   },
 ];
 
+const PER_PAGE = 3;
+const MAX_INDEX = COUNTRIES.length - PER_PAGE;
+
 export default function IndustriesByRegion() {
-  const [activeRegion, setActiveRegion] = useState("north-america");
-  const [cardIndex, setCardIndex] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [dir, setDir] = useState<1 | -1>(1);
 
-  const region = REGIONS.find((r) => r.id === activeRegion)!;
-  const visibleCount = 3;
-  const cards = region.countries;
-  const maxIndex = Math.max(0, cards.length - visibleCount);
-
-  const handleRegionChange = (id: string) => {
-    setActiveRegion(id);
-    setCardIndex(0);
+  const prev = () => {
+    if (index > 0) { setDir(-1); setIndex((i) => i - 1); }
   };
+  const next = () => {
+    if (index < MAX_INDEX) { setDir(1); setIndex((i) => i + 1); }
+  };
+
+  const visible = COUNTRIES.slice(index, index + PER_PAGE);
 
   return (
     <section id="industries-regions">
@@ -133,6 +120,8 @@ export default function IndustriesByRegion() {
           padding: 8rem 40px;
           font-family: 'Inter', sans-serif;
           width: 100%;
+          overflow: hidden;
+          box-sizing: border-box;
         }
 
         .ir-inner {
@@ -151,12 +140,14 @@ export default function IndustriesByRegion() {
 
         .ir-h2 {
           font-family: 'Manrope', sans-serif;
-          font-size: clamp(2rem, 4vw, 3rem);
+          font-size: clamp(1.5rem, 4vw, 3rem);
           font-weight: 800;
           color: #002046;
           line-height: 1.15;
           letter-spacing: -0.02em;
           margin: 0;
+          word-break: break-word;
+          overflow-wrap: break-word;
         }
 
         .ir-h2 span {
@@ -166,11 +157,18 @@ export default function IndustriesByRegion() {
           background-clip: text;
         }
 
-        .ir-nav-arrows {
+        /* ── Nav controls ── */
+        .ir-controls {
           display: flex;
-          gap: 10px;
+          align-items: center;
+          gap: 16px;
           flex-shrink: 0;
           padding-top: 8px;
+        }
+
+        .ir-arrows {
+          display: flex;
+          gap: 8px;
         }
 
         .ir-arrow-btn {
@@ -182,7 +180,7 @@ export default function IndustriesByRegion() {
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: all 0.25s ease;
           color: #002046;
           border-radius: 0;
         }
@@ -198,48 +196,7 @@ export default function IndustriesByRegion() {
           cursor: not-allowed;
         }
 
-        /* ── Region Tabs ── */
-        .ir-tabs {
-          display: flex;
-          gap: 0;
-          margin-bottom: 3rem;
-          border-bottom: 1px solid rgba(0, 32, 70, 0.1);
-        }
-
-        .ir-tab {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 1rem 1.5rem;
-          font-size: 0.9rem;
-          font-weight: 600;
-          color: #74777f;
-          background: transparent;
-          border: none;
-          border-bottom: 2px solid transparent;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          margin-bottom: -1px;
-          white-space: nowrap;
-        }
-
-        .ir-tab:hover {
-          color: #002046;
-        }
-
-        .ir-tab.active {
-          color: #002046;
-          border-bottom-color: #002046;
-        }
-
-        .ir-tab-flag {
-          width: 22px;
-          height: 16px;
-          object-fit: cover;
-          border-radius: 2px;
-        }
-
-        /* ── Cards Grid ── */
+        /* ── Cards ── */
         .ir-cards-wrapper {
           overflow: hidden;
         }
@@ -254,6 +211,8 @@ export default function IndustriesByRegion() {
           display: flex;
           flex-direction: column;
           cursor: default;
+          min-width: 0;
+          box-sizing: border-box;
         }
 
         .ir-card-img-wrap {
@@ -261,7 +220,6 @@ export default function IndustriesByRegion() {
           overflow: hidden;
           height: 240px;
           margin-bottom: 1.25rem;
-          border-radius: 2px;
         }
 
         .ir-card-img {
@@ -284,6 +242,15 @@ export default function IndustriesByRegion() {
           object-fit: cover;
           border-radius: 3px;
           box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .ir-card-region {
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #3BADB0;
+          margin: 0 0 0.3rem 0;
         }
 
         .ir-card-meta {
@@ -317,6 +284,30 @@ export default function IndustriesByRegion() {
           margin: 0;
         }
 
+        /* ── Dots ── */
+        .ir-dots {
+          display: flex;
+          gap: 6px;
+          margin-top: 2.5rem;
+        }
+
+        .ir-dot {
+          width: 6px;
+          height: 6px;
+          background: rgba(0, 32, 70, 0.15);
+          border-radius: 50%;
+          transition: all 0.25s ease;
+          cursor: pointer;
+          border: none;
+          padding: 0;
+        }
+
+        .ir-dot.active {
+          background: #002046;
+          width: 24px;
+          border-radius: 3px;
+        }
+
         /* ── Responsive ── */
         @media (max-width: 1024px) {
           .ir-cards { grid-template-columns: repeat(2, 1fr); }
@@ -324,9 +315,24 @@ export default function IndustriesByRegion() {
         @media (max-width: 700px) {
           #industries-regions { padding: 5rem 20px; }
           .ir-cards { grid-template-columns: 1fr; }
-          .ir-header { flex-direction: column; }
-          .ir-tabs { overflow-x: auto; }
-          .ir-tab { padding: 0.75rem 1rem; font-size: 0.82rem; }
+          .ir-header { flex-direction: column; gap: 1.5rem; }
+          .ir-h2 br { display: none; }
+          .ir-card-img-wrap { height: 220px; }
+        }
+        @media (max-width: 480px) {
+          #industries-regions { padding: 4rem 16px; }
+          .ir-h2 { font-size: 1.4rem; }
+          .ir-card-img-wrap { height: 195px; }
+          .ir-controls { gap: 10px; }
+          .ir-arrow-btn { width: 40px; height: 40px; }
+          .ir-card-name { font-size: 1rem; }
+          .ir-card-desc { font-size: 0.84rem; }
+        }
+        @media (max-width: 360px) {
+          #industries-regions { padding: 3rem 12px; }
+          .ir-h2 { font-size: 1.2rem; }
+          .ir-card-img-wrap { height: 170px; }
+          .ir-dots { gap: 5px; }
         }
       `}</style>
 
@@ -337,67 +343,58 @@ export default function IndustriesByRegion() {
             Where We Operate —<br />
             <span>Regions We Serve</span>
           </h2>
-          <div className="ir-nav-arrows">
-            <button
-              className="ir-arrow-btn"
-              onClick={() => setCardIndex((i) => Math.max(0, i - 1))}
-              disabled={cardIndex === 0}
-              aria-label="Previous"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
-                <path d="M19 12H5M12 5l-7 7 7 7" />
-              </svg>
-            </button>
-            <button
-              className="ir-arrow-btn"
-              onClick={() => setCardIndex((i) => Math.min(maxIndex, i + 1))}
-              disabled={cardIndex >= maxIndex}
-              aria-label="Next"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </button>
+
+          <div className="ir-controls">
+            <div className="ir-arrows">
+              <button
+                className="ir-arrow-btn"
+                onClick={prev}
+                disabled={index === 0}
+                aria-label="Previous"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
+                  <path d="M19 12H5M12 5l-7 7 7 7" />
+                </svg>
+              </button>
+              <button
+                className="ir-arrow-btn"
+                onClick={next}
+                disabled={index >= MAX_INDEX}
+                aria-label="Next"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Region Tabs */}
-        <div className="ir-tabs">
-          {REGIONS.map((r) => (
-            <button
-              key={r.id}
-              className={`ir-tab${activeRegion === r.id ? " active" : ""}`}
-              onClick={() => handleRegionChange(r.id)}
-            >
-              <img src={r.flag} alt={r.flagAlt} className="ir-tab-flag" />
-              {r.label}
-            </button>
-          ))}
-        </div>
-
         {/* Cards */}
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" custom={dir}>
           <motion.div
-            key={activeRegion}
+            key={index}
             className="ir-cards-wrapper"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.4 }}
+            custom={dir}
+            initial={{ opacity: 0, x: dir * 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: dir * -40 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
           >
             <div className="ir-cards">
-              {cards.slice(cardIndex, cardIndex + visibleCount).map((country, i) => (
+              {visible.map((country, i) => (
                 <motion.div
                   key={country.name}
                   className="ir-card"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  transition={{ duration: 0.35, delay: i * 0.07 }}
                 >
                   <div className="ir-card-img-wrap">
                     <img src={country.image} alt={country.name} className="ir-card-img" loading="lazy" />
                     <img src={country.flag} alt={country.name} className="ir-card-flag-badge" />
                   </div>
+                  <p className="ir-card-region">{country.region}</p>
                   <div className="ir-card-meta">
                     <h3 className="ir-card-name">{country.name}</h3>
                     {country.tag && (
@@ -405,7 +402,7 @@ export default function IndustriesByRegion() {
                         className="ir-card-tag"
                         style={{
                           background: `${country.tagColor}18`,
-                          color: country.tagColor,
+                          color: country.tagColor as string,
                           border: `1px solid ${country.tagColor}40`,
                         }}
                       >
@@ -419,6 +416,18 @@ export default function IndustriesByRegion() {
             </div>
           </motion.div>
         </AnimatePresence>
+
+        {/* Progress dots */}
+        <div className="ir-dots">
+          {COUNTRIES.map((_, i) => (
+            <button
+              key={i}
+              className={`ir-dot${i === index ? " active" : ""}`}
+              onClick={() => { setDir(i > index ? 1 : -1); setIndex(i); }}
+              aria-label={`Go to ${COUNTRIES[i].name}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -39,7 +39,35 @@ const PROJECTS: ProjectType[] = [
     category: "HEALTHCARE TECH",
     headline: "Hospital management platform with AI diagnosis support and EHR integration",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=85&auto=format&fit=crop",
-  }
+  },
+  {
+    id: "dataflow",
+    clientName: "DataFlow",
+    category: "DATA ENGINEERING",
+    headline: "Real-time financial transaction pipeline processing 4M+ events per day with sub-second latency",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=85&auto=format&fit=crop",
+  },
+  {
+    id: "novasight",
+    clientName: "NovaSight",
+    category: "DATA ENGINEERING",
+    headline: "Unified retail data lakehouse consolidating POS, inventory, and customer signals across 200+ stores",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=85&auto=format&fit=crop",
+  },
+  {
+    id: "bridge-crack",
+    clientName: "Bridge Crack AI",
+    category: "COMPUTER VISION",
+    headline: "Dual-stage drone inspection pipeline detecting and grading structural cracks in real time",
+    image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=1200&q=85&auto=format&fit=crop",
+  },
+  {
+    id: "resume-parser",
+    clientName: "CareerMap AI",
+    category: "AI & LLM",
+    headline: "Multi-LLM resume parser that maps skill gaps and generates a structured 6-month career roadmap",
+    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=1200&q=85&auto=format&fit=crop",
+  },
 ];
 
 export default function ProjectsGrid() {

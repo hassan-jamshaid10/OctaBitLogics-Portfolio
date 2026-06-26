@@ -1,165 +1,570 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import Navbar from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import BackgroundNightfall from "../../../components/BackgroundNightfall";
-import SectionLink from "../../../components/SectionLink";
-import { ArrowLeft } from "lucide-react";
-import { BLOGS } from "../../../components/Blogs";
-import { useEffect, useState } from "react";
+import { BLOGS } from "../../../data/blogs";
+import { useCallback } from "react";
 
-export default function BlogPost() {
-    const params = useParams();
-    const slug = params.slug as string;
-    const [blog, setBlog] = useState<typeof BLOGS[0] | null>(null);
+function badgeClass(category: string) {
+  if (category === "Webinar") return "bd-badge--webinar";
+  if (category === "Article") return "bd-badge--article";
+  return "bd-badge--whitepaper";
+}
 
-    useEffect(() => {
-        const foundBlog = BLOGS.find((b) => b.slug === slug);
-        if (foundBlog) {
-            setBlog(foundBlog);
-        }
-    }, [slug]);
+export default function BlogDetailPage() {
+  const params = useParams();
+  const router = useRouter();
+  const slug = params.slug as string;
 
-    if (!blog) {
-        return (
-            <div style={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#0a1128", color: "white" }}>
-                <p>Loading post...</p>
-            </div>
-        );
-    }
+  const handleNavClick = useCallback(
+    (href: string) => {
+      if (href.startsWith("/")) {
+        router.push(href);
+      } else {
+        sessionStorage.setItem("scrollToSection", href.replace("#", ""));
+        router.push("/");
+      }
+    },
+    [router]
+  );
 
+  const blog = BLOGS.find((b) => b.slug === slug);
+  const related = BLOGS.filter((b) => b.slug !== slug).slice(0, 3);
+
+  if (!blog) {
     return (
-        <>
-            <Navbar activeSection="" />
-            <main className="bp-page">
-                <style>{`
-          .bp-page { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; overflow-x: hidden; background: #ffffff; }
+      <>
+        <Navbar activeSection="" onNavClick={handleNavClick} />
+        <main style={{ minHeight: "60vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#faf9fd" }}>
+          <div style={{ textAlign: "center", fontFamily: "'Inter', sans-serif" }}>
+            <p style={{ fontSize: "0.85rem", color: "#74777f", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "1rem" }}>404</p>
+            <h1 style={{ fontFamily: "'Manrope', sans-serif", fontSize: "2rem", fontWeight: 800, color: "#002046", marginBottom: "1rem" }}>Article not found</h1>
+            <Link href="/blogs" style={{ color: "#3BADB0", fontWeight: 600, fontSize: "0.9rem" }}>← Back to all articles</Link>
+          </div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
 
-          .bp-hero { position: relative; padding: 12rem 2rem 7rem; color: #ffffff; }
-          .bp-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 20%, rgba(59,173,176,0.1) 0%, transparent 55%); pointer-events: none; z-index: 0; }
-          .bp-hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
+  return (
+    <>
+      <Navbar activeSection="" onNavClick={handleNavClick} />
+      <main style={{ overflowX: "hidden", width: "100%" }}>
+        <style>{`
+          /* ── Hero ── */
+          .bd-hero {
+            position: relative;
+            padding: 9rem 40px 5rem;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background: #ffffff;
+          }
+          .bd-hero-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+          }
+          .bd-hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+              to bottom,
+              rgba(0, 18, 42, 0.78) 0%,
+              rgba(0, 18, 42, 0.88) 60%,
+              rgba(0, 18, 42, 0.96) 100%
+            );
+          }
+          .bd-hero-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 860px;
+            margin: 0 auto;
+          }
+          .bd-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: color 0.25s;
+            letter-spacing: 0.02em;
+          }
+          .bd-back:hover { color: #2ECC40; }
+          .bd-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            margin-bottom: 1.25rem;
+          }
+          .bd-badge--whitepaper { background: #2ECC40; color: #002046; }
+          .bd-badge--webinar { background: #e74c6f; color: #ffffff; }
+          .bd-badge--article { background: #7c3aed; color: #ffffff; }
 
-          .bp-back { position: absolute; top: -4rem; left: 0; display: inline-flex; align-items: center; gap: 0.5rem; color: #a7fff9; font-family: 'Oxanium', monospace; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s, transform 0.2s; background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(167,255,249,0.3); backdrop-filter: blur(10px); }
-          .bp-back:hover { color: #ffffff; border-color: #ffffff; transform: translateX(-4px); background: rgba(255,255,255,0.1); }
+          .bd-hero-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin: 0 0 1.5rem 0;
+          }
+          .bd-hero-meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.55);
+          }
+          .bd-hero-meta-dot {
+            width: 3px; height: 3px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+          }
+          .bd-hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 1.5rem;
+          }
+          .bd-hero-tag {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.55);
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 4px 12px;
+            letter-spacing: 0.04em;
+          }
 
-          .bp-badge { display: inline-flex; align-items: center; font-family: 'Oxanium', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #a7fff9; background: rgba(59,173,176,0.15); border: 1px solid rgba(167,255,249,0.3); padding: 6px 16px; border-radius: 100px; margin-bottom: 1.5rem; backdrop-filter: blur(10px); }
+          /* ── Article body ── */
+          .bd-body {
+            background: #ffffff;
+            padding: 5rem 40px;
+          }
+          .bd-body-inner {
+            max-width: 760px;
+            margin: 0 auto;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: #44474e;
+          }
 
-          .bp-title { font-family: 'Oxanium', monospace; font-size: clamp(2.2rem, 4.5vw, 3.5rem); font-weight: 900; color: #ffffff; line-height: 1.15; margin-bottom: 2rem; }
+          /* Cover image */
+          .bd-cover {
+            width: 100%;
+            aspect-ratio: 16/7;
+            object-fit: cover;
+            display: block;
+            margin-bottom: 3rem;
+          }
 
-          .bp-meta { display: flex; align-items: center; justify-content: center; gap: 1rem; font-family: 'Oxanium', monospace; font-size: 0.9rem; color: rgba(255,255,255,0.7); }
-          .bp-meta-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 50%; }
+          /* Rich typography */
+          .bd-body-inner h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 800;
+            color: #002046;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            margin: 3rem 0 1.25rem 0;
+          }
+          .bd-body-inner h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #002046;
+            margin: 2.5rem 0 1rem 0;
+          }
+          .bd-body-inner p { margin-bottom: 1.6rem; }
+          .bd-body-inner strong { color: #002046; font-weight: 700; }
+          .bd-body-inner blockquote {
+            border-left: 3px solid #2ECC40;
+            padding: 1rem 0 1rem 1.75rem;
+            margin: 2.5rem 0;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #002046;
+            font-weight: 600;
+            line-height: 1.6;
+            background: rgba(46,204,64,0.04);
+          }
+          .bd-body-inner code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.88em;
+            background: rgba(0,32,70,0.06);
+            color: #002046;
+            padding: 2px 6px;
+            border-radius: 3px;
+          }
+          .bd-body-inner pre {
+            background: #002046;
+            color: #a7fff9;
+            padding: 1.75rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin: 2rem 0;
+            border-left: 3px solid #2ECC40;
+          }
+          .bd-body-inner pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+          }
 
+          /* ── Divider ── */
+          .bd-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #2ECC40 0%, #3BADB0 100%);
+            margin: 3rem 0;
+          }
 
+          /* ── Author strip ── */
+          .bd-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(0,32,70,0.08);
+            border-bottom: 1px solid rgba(0,32,70,0.08);
+            margin-bottom: 4rem;
+          }
+          .bd-author-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #2ECC40 0%, #3BADB0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Manrope', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: #ffffff;
+            flex-shrink: 0;
+          }
+          .bd-author-name {
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #002046;
+          }
+          .bd-author-role {
+            font-size: 0.78rem;
+            color: #74777f;
+            margin-top: 2px;
+          }
 
-          .bp-body { position: relative; background: #ffffff; padding: 6rem 2rem 8rem; color: #4e6070; }
-          .bp-content { max-width: 760px; margin: 0 auto; font-size: 1.15rem; line-height: 1.9; }
+          /* ── Related ── */
+          .bd-related {
+            background: #faf9fd;
+            padding: 5rem 40px;
+          }
+          .bd-related-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+          }
+          .bd-related-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #74777f;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          }
+          .bd-related-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(0,32,70,0.1);
+          }
+          .bd-related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+          }
+          .bd-rel-card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            background: #ffffff;
+            border: 1px solid rgba(0,32,70,0.07);
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.3s;
+          }
+          .bd-rel-card:hover {
+            box-shadow: 0 10px 36px rgba(0,32,70,0.1);
+            transform: translateY(-3px);
+          }
+          .bd-rel-img {
+            aspect-ratio: 16/9;
+            overflow: hidden;
+          }
+          .bd-rel-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+            display: block;
+          }
+          .bd-rel-card:hover .bd-rel-img img { transform: scale(1.05); }
+          .bd-rel-body { padding: 1.25rem; }
+          .bd-rel-badge {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            margin-bottom: 0.6rem;
+          }
+          .bd-badge--whitepaper { background: #002046; color: #ffffff; }
+          .bd-badge--webinar { background: #e74c6f; color: #ffffff; }
+          .bd-badge--article { background: #7c3aed; color: #ffffff; }
+          .bd-rel-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #002046;
+            line-height: 1.4;
+            margin: 0 0 0.5rem;
+            transition: color 0.25s;
+          }
+          .bd-rel-card:hover .bd-rel-title { color: #3BADB0; }
+          .bd-rel-meta {
+            font-size: 0.75rem;
+            color: #74777f;
+          }
 
-          .bp-content h2 { font-family: 'Oxanium', monospace; font-size: 2rem; color: #1B2E5E; margin: 3rem 0 1.5rem; font-weight: 800; line-height: 1.2; }
-          .bp-content h3 { font-family: 'Oxanium', monospace; font-size: 1.5rem; color: #3BADB0; margin: 2.5rem 0 1.2rem; font-weight: 700; }
-          .bp-content p { margin-bottom: 1.8rem; }
-          .bp-content img { width: 100%; border-radius: 12px; margin: 2.5rem 0; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.05); }
+          /* ── CTA ── */
+          .bd-cta {
+            position: relative;
+            padding: 6rem 40px;
+            overflow: hidden;
+            background:
+              radial-gradient(ellipse 80% 60% at 70% 0%, rgba(46,204,64,0.14) 0%, transparent 55%),
+              linear-gradient(135deg, #002046 0%, #013a6b 45%, #0a5c50 100%);
+          }
+          .bd-cta-inner {
+            max-width: 680px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+          }
+          .bd-cta-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #2ECC40;
+            margin-bottom: 1.25rem;
+          }
+          .bd-cta-h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin: 0 0 1rem 0;
+          }
+          .bd-cta-p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.7;
+            margin: 0 0 2.5rem 0;
+          }
+          .bd-cta-btns {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+          }
+          .bd-cta-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: #2ECC40;
+            color: #002046;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.3s;
+          }
+          .bd-cta-btn-primary:hover {
+            background: #27b837;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46,204,64,0.35);
+          }
+          .bd-cta-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 24px;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.85);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+          }
+          .bd-cta-btn-secondary:hover {
+            border-color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.06);
+            color: #ffffff;
+          }
 
-          .bp-content blockquote { border-left: 4px solid #3BADB0; padding-left: 1.5rem; margin: 2.5rem 0; font-size: 1.3rem; font-style: italic; color: #1B2E5E; font-weight: 600; line-height: 1.6; }
-
-          .bp-content pre { background: #0f1c3f; color: #a7fff9; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.95rem; margin: 2rem 0; border: 1px solid rgba(59,173,176,0.3); }
-
-          .bp-cta { position: relative; background: linear-gradient(135deg, #3BADB0 0%, #1f4080 45%, #1B2E5E 100%); padding: 5rem 2rem; text-align: center; overflow: hidden; margin-top: 4rem; }
-          .bp-cta::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 30px 30px; pointer-events: none; }
-          .bp-cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
-          .bp-cta h2 { font-family: 'Oxanium', monospace; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; color: #ffffff; margin-bottom: 1rem; }
-          .bp-cta p { font-size: 1rem; color: rgba(255,255,255,0.7); margin-bottom: 2rem; line-height: 1.7; }
-          .bp-cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Oxanium', monospace; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: #1B2E5E; background: #ffffff; border: none; padding: 14px 28px; border-radius: 100px; text-decoration: none; cursor: pointer; transition: background 0.25s, transform 0.2s, box-shadow 0.2s; }
-          .bp-cta-btn:hover { background: #e8f8f8; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-
+          /* ── Responsive ── */
+          @media (max-width: 1024px) {
+            .bd-hero { padding: 8rem 20px 4rem; }
+            .bd-body { padding: 4rem 20px; }
+            .bd-related { padding: 4rem 20px; }
+            .bd-cta { padding: 5rem 20px; }
+          }
           @media (max-width: 768px) {
-            .bp-hero { padding: 9rem 1.5rem 5rem; }
-            .bp-back { top: -3rem; }
-            .bp-body { padding: 4rem 1.5rem 4rem; }
+            .bd-related-grid { grid-template-columns: repeat(2, 1fr); }
+          }
+          @media (max-width: 560px) {
+            .bd-hero { padding: 7rem 16px 3.5rem; }
+            .bd-body { padding: 3rem 16px; }
+            .bd-related { padding: 3.5rem 16px; }
+            .bd-cta { padding: 4rem 16px; }
+            .bd-related-grid { grid-template-columns: 1fr; }
+            .bd-hero-title { font-size: 1.8rem; }
+            .bd-body-inner { font-size: 1rem; }
+            .bd-cta-btns { flex-direction: column; align-items: stretch; }
+            .bd-cta-btn-primary, .bd-cta-btn-secondary { justify-content: center; }
           }
         `}</style>
 
-                <header
-                    className="bp-hero"
-                    style={{
-                        backgroundImage: `linear-gradient(to bottom, rgba(8, 13, 30, 0.7), rgba(8, 13, 30, 0.95)), url(${blog.imgUrl})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                    }}
-                >
-                    <div className="bp-hero-inner">
-                        <SectionLink section="blogs" className="bp-back"><ArrowLeft size={16} /> Back to Blog</SectionLink>
-                        <div className="bp-badge">{blog.category}</div>
-                        <h1 className="bp-title">{blog.title}</h1>
-                        <div className="bp-meta">
-                            <span>{blog.date}</span>
-                            <span className="bp-meta-dot" />
-                            <span>{blog.readTime}</span>
-                        </div>
-                    </div>
-                </header>
+        {/* ── Hero ── */}
+        <header className="bd-hero">
+          <div
+            className="bd-hero-bg"
+            style={{ backgroundImage: `url(${blog.imgUrl})` }}
+          />
+          <div className="bd-hero-inner">
+            <Link href="/blogs" className="bd-back">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
+                <path d="M19 12H5M12 5l-7 7 7 7" />
+              </svg>
+              Back to all articles
+            </Link>
+            <div className={`bd-badge ${badgeClass(blog.category)}`}>{blog.category}</div>
+            <h1 className="bd-hero-title">{blog.title}</h1>
+            <div className="bd-hero-meta">
+              <span>{blog.date}</span>
+              <span className="bd-hero-meta-dot" />
+              <span>{blog.readTime}</span>
+              <span className="bd-hero-meta-dot" />
+              <span>{blog.author}</span>
+            </div>
+            <div className="bd-hero-tags">
+              {blog.tags.map((t) => (
+                <span key={t} className="bd-hero-tag">{t}</span>
+              ))}
+            </div>
+          </div>
+        </header>
 
+        {/* ── Article body ── */}
+        <section className="bd-body">
+          <div className="bd-body-inner">
+            <img
+              src={blog.imgUrl}
+              alt={blog.title}
+              className="bd-cover"
+              loading="lazy"
+            />
 
-                <section className="bp-body">
-                    <article className="bp-content">
-                        <p><strong>{blog.excerpt}</strong></p>
+            {/* Author strip */}
+            <div className="bd-author">
+              <div className="bd-author-avatar">
+                {blog.author.charAt(0)}
+              </div>
+              <div>
+                <div className="bd-author-name">{blog.author}</div>
+                <div className="bd-author-role">OctaBitLogics · {blog.date}</div>
+              </div>
+            </div>
 
-                        <p>
-                            In the fast-paced world of technology, staying ahead of architectural paradigms is crucial for maintaining competitive velocity. The concepts we implement today will become the standard foundation for systems built over the next decade.
-                        </p>
+            <div dangerouslySetInnerHTML={{ __html: blog.content }} />
 
-                        <h2>The Shift in Paradigm</h2>
-                        <p>
-                            For the past few years, the industry has heavily relied on established patterns which, while robust, introduced significant overhead as applications scaled. Client-side bundles bloated, hydration times increased, and time-to-interactive suffered on low-end devices.
-                        </p>
+            <div className="bd-divider" />
+          </div>
+        </section>
 
-                        <blockquote>
-                            "The cost of abstraction should not be paid by the end-user. The future of architecture shifts the computational burden back to where it belongs: the edge and the server."
-                        </blockquote>
+        {/* ── Related articles ── */}
+        <section className="bd-related">
+          <div className="bd-related-inner">
+            <div className="bd-related-label">More Articles</div>
+            <div className="bd-related-grid">
+              {related.map((r) => (
+                <Link href={`/blogs/${r.slug}`} key={r.slug} className="bd-rel-card">
+                  <div className="bd-rel-img">
+                    <img src={r.imgUrl} alt={r.title} loading="lazy" />
+                  </div>
+                  <div className="bd-rel-body">
+                    <span className={`bd-rel-badge ${badgeClass(r.category)}`}>{r.category}</span>
+                    <h3 className="bd-rel-title">{r.title}</h3>
+                    <div className="bd-rel-meta">{r.date} · {r.readTime}</div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                        <p>
-                            By moving compute back to the server while retaining the developer experience of modern component models, we can achieve the best of both worlds: zero bundle size for static components and highly interactive client logic only where absolutely necessary.
-                        </p>
+        {/* ── CTA ── */}
+        <section className="bd-cta">
+          <div className="bd-cta-inner">
+            <div className="bd-cta-eyebrow">Work With Us</div>
+            <h2 className="bd-cta-h2">Ready to build something remarkable?</h2>
+            <p className="bd-cta-p">
+              Our engineering and AI teams help ambitious organisations design, build, and
+              scale intelligent systems. Let's talk about your next challenge.
+            </p>
+            <div className="bd-cta-btns">
+              <Link href="/contact" className="bd-cta-btn-primary">
+                Start a Conversation
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link href="/blogs" className="bd-cta-btn-secondary">
+                Browse all articles
+              </Link>
+            </div>
+          </div>
+        </section>
 
-                        <h2>Implementation Strategy</h2>
-                        <p>
-                            When implementing this approach in production, it is important to strictly define component boundaries. A common anti-pattern is leaking server state into client bundles unnecessarily.
-                        </p>
-
-                        <pre><code>{`// A clean boundary example
-export default async function DataView() {
-  const data = await db.query('SELECT * FROM insights');
-  
-  return (
-    <div className="grid">
-      {data.map(item => (
-        <InteractiveWidget key={item.id} initialData={item} />
-      ))}
-    </div>
+      </main>
+      <Footer />
+    </>
   );
-}`}</code></pre>
-
-                        <p>
-                            By clearly delineating the boundary, the client is only responsible for parsing the specific JavaScript required for the <code>&lt;InteractiveWidget&gt;</code>, while the heavy data fetching and structural rendering is resolved before bytes even hit the wire.
-                        </p>
-
-                        <h3>Key Takeaways</h3>
-                        <p>
-                            The transition isn't just a framework upgrade; it's an architectural paradigm shift. It requires teams to rethink data flow, caching strategies, and where state truly lives. However, the performance benefits—especially for users on constrained networks—make the transition incredibly worthwhile.
-                        </p>
-                    </article>
-                </section>
-
-                <section className="bp-cta">
-                    <div className="bp-cta-inner">
-                        <h2>Need expert engineering for your next project?</h2>
-                        <p>Our team builds high-performance, scalable platforms using the exact strategies outlined in our research.</p>
-                        <SectionLink section="contact" className="bp-cta-btn">Start a Conversation →</SectionLink>
-                    </div>
-                </section>
-
-            </main>
-            <Footer />
-        </>
-    );
 }

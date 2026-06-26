@@ -21,79 +21,63 @@ type CaseStudy = {
   clientName?: string;     // text wordmark fallback if no logo image
   clientLogo?: string;     // path to client logo (preferred)
   caseImage?: string;      // optional building/product image (top-right) with a "View case study" overlay
-  testimonial?: {
-    type: "text";
-    quote: string;
-    photo: string;
-    name: string;
-    role: string;
-  };
-  video?: {
-    type: "video";
-    thumb: string;
-    href: string;
-    name: string;
-    role: string;
-  };
+  tech: string[];
 };
 
 const CASES: CaseStudy[] = [
   {
-    slug: "abb-cloud",
-    headline: "Streamlined **ABB's operations** with cloud integration",
-    industry: "Manufacturing & Industrial",
-    service: "Cloud Implementation",
-    clientName: "ABB",
-    testimonial: {
-      type: "text",
-      quote: "They shared our vision right from the get go, and helped us achieve the unthinkable. Highly professional.",
-      photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80&auto=format&fit=crop",
-      name: "Pam Chitwood",
-      role: "Product Manager, ABB",
-    },
-  },
-  {
-    slug: "knowles-csr",
-    headline: "**23% increase** in sales team productivity",
-    industry: "Manufacturing & Industrial",
-    service: "Engineering",
-    clientName: "Knowles",
-    caseImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&q=80&auto=format&fit=crop",
-    video: {
-      type: "video",
-      thumb: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop",
-      href: "#",
-      name: "Nick Drogo",
-      role: "Global Director IT, Knowles",
-    },
-  },
-  {
-    slug: "brewtech-commerce",
-    headline: "Drives **5X revenue** through digital transformation",
-    industry: "Food & Beverage",
-    service: "Digital Commerce",
-    clientName: "Brewtech",
-    testimonial: {
-      type: "text",
-      quote: "Reduced our online stockouts to near zero and transformed how customers reach us.",
-      photo: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&q=80&auto=format&fit=crop",
-      name: "Sarah Lin",
-      role: "Director of Ops, Brewtech",
-    },
-  },
-  {
-    slug: "optiscan-vision",
-    headline: "**94% accuracy** in AI diagnostic imaging",
-    industry: "Healthcare",
+    slug: "tact-evac",
+    headline: "Deployed **autonomous evacuation AI** for a strategic military airbase",
+    industry: "Defence Technology",
     service: "Computer Vision",
-    clientName: "OptiScan",
-    testimonial: {
-      type: "text",
-      quote: "The detection speed changed how our radiologists work day to day. Remarkable engineering.",
-      photo: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&q=80&auto=format&fit=crop",
-      name: "Dr. James Okafor",
-      role: "Chief Radiologist, OptiScan",
-    },
+    clientName: "TACT EVAC",
+    caseImage: "https://res.cloudinary.com/ddcblcups/image/upload/v1775429456/WhatsApp_Image_2026-04-06_at_3.50.07_AM_mliq6b.jpg",
+    tech: ["YOLOv8", "OpenCV", "Django", "React", "PostGIS"],
+  },
+  {
+    slug: "sporttek",
+    headline: "Eliminated **WhatsApp booking chaos** across 50+ sports venues",
+    industry: "Sports & Recreation",
+    service: "Mobile Platform",
+    clientName: "SportTek",
+    caseImage: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=500&q=80&auto=format&fit=crop",
+    tech: ["React Native", "Node.js", "MongoDB", "Firebase", "Stripe"],
+  },
+  {
+    slug: "launchpulse",
+    headline: "**ML-powered scoring** replaced gut instinct with data-driven conviction",
+    industry: "AI & Big Data",
+    service: "Machine Learning",
+    clientName: "LaunchPulse AI",
+    caseImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&q=80&auto=format&fit=crop",
+    tech: ["Next.js", "Python", "TensorFlow", "PostgreSQL", "AWS"],
+  },
+  {
+    slug: "pulseai",
+    headline: "**AI diagnosis support** unified patient care across every department",
+    industry: "Healthcare",
+    service: "Healthcare Technology",
+    clientName: "Pulse AI",
+    caseImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=500&q=80&auto=format&fit=crop",
+    tech: ["React", "React Native", "Node.js", "MongoDB", "TensorFlow"],
+  },
+  {
+    slug: "dataflow",
+    headline: "Cut **fraud detection latency** from 4 hours to under 800ms",
+    industry: "Fintech",
+    service: "Data Engineering",
+    clientName: "DataFlow",
+    caseImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=80&auto=format&fit=crop",
+    tech: ["Apache Kafka", "Apache Spark", "dbt", "Snowflake", "Airflow"],
+  },
+  {
+    slug: "novasight",
+    headline: "Unified **200+ retail stores** into a single real-time data lakehouse",
+    industry: "Retail & Commerce",
+    service: "Data Engineering",
+    clientName: "NovaSight",
+    caseImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&q=80&auto=format&fit=crop",
+    tech: ["Apache Flink", "Delta Lake", "dbt", "BigQuery", "Terraform"],
   },
 ];
 
@@ -326,47 +310,38 @@ export default function CaseStudies() {
         /* divider */
         .cs-divider { height: 1px; background: rgba(0, 32, 70, 0.08); margin: 0 1.75rem; }
 
-        /* BOTTOM half */
+        /* BOTTOM half — tech stack */
         .cs-bottom {
-          padding: 1.5rem 1.75rem;
-          display: flex; align-items: flex-start; gap: 1rem;
+          padding: 1.25rem 1.75rem 1.5rem;
         }
-        .cs-person-img {
-          width: 72px; height: 86px; border-radius: 4px;
-          object-fit: cover; flex-shrink: 0;
-          background: rgba(0, 32, 70, 0.06);
-        }
-        .cs-quote-block { display: flex; flex-direction: column; justify-content: center; }
-        .cs-quote {
+        .cs-tech-label {
           font-family: 'Inter', sans-serif;
-          font-size: 0.85rem; font-weight: 600; line-height: 1.5;
-          color: #002046; margin: 0 0 0.85rem;
-          display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: rgba(0, 32, 70, 0.35);
+          margin-bottom: 0.65rem;
         }
-        .cs-person-name { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 700; color: #002046; margin-bottom: 2px; }
-        .cs-person-role { font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 400; color: #44474e; }
-
-        /* video variant */
-        .cs-video {
-          position: relative; width: 72px; height: 86px;
-          border-radius: 4px; overflow: hidden; flex-shrink: 0;
-          background: linear-gradient(135deg, #1a3556, #0a1f3d);
+        .cs-tech-pills {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
         }
-        .cs-video img { width: 100%; height: 100%; object-fit: cover; }
-        .cs-video-play {
-          position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-          width: 36px; height: 36px; border-radius: 50%;
-          background: rgba(255, 255, 255, 0.9);
-          display: flex; align-items: center; justify-content: center;
-          cursor: pointer; border: none;
-          transition: all 0.3s ease;
-        }
-        .cs-video-play:hover { background: #2ECC40; transform: translate(-50%, -50%) scale(1.1); }
-        .cs-video-label {
+        .cs-tech-pill {
           font-family: 'Inter', sans-serif;
-          font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em;
-          text-transform: uppercase; color: #44474e; opacity: 0.7;
-          margin-bottom: 0.75rem;
+          font-size: 0.72rem;
+          font-weight: 600;
+          color: #002046;
+          background: rgba(0, 32, 70, 0.05);
+          border: 1px solid rgba(0, 32, 70, 0.1);
+          padding: 4px 10px;
+          transition: background 0.2s, border-color 0.2s, color 0.2s;
+        }
+        .cs-card:hover .cs-tech-pill {
+          background: rgba(46, 204, 64, 0.07);
+          border-color: rgba(46, 204, 64, 0.25);
+          color: #002046;
         }
 
         /* dots */
@@ -467,36 +442,14 @@ export default function CaseStudies() {
 
                 <div className="cs-divider" />
 
-                {/* BOTTOM */}
+                {/* BOTTOM — tech stack */}
                 <div className="cs-bottom">
-                  {c.testimonial && (
-                    <>
-                      <img className="cs-person-img" src={c.testimonial.photo} alt={c.testimonial.name} loading="lazy" />
-                      <div className="cs-quote-block">
-                        <p className="cs-quote">&ldquo;{c.testimonial.quote}&rdquo;</p>
-                        <div className="cs-person-name">{c.testimonial.name}</div>
-                        <div className="cs-person-role">{c.testimonial.role}</div>
-                      </div>
-                    </>
-                  )}
-
-                  {c.video && (
-                    <>
-                      <div className="cs-video">
-                        <img src={c.video.thumb} alt={c.video.name} loading="lazy" />
-                        <Link href={c.video.href} className="cs-video-play" aria-label={`Watch ${c.video.name}'s testimonial`}>
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                            <path d="M3 2l7 4-7 4V2z" fill="#002046" />
-                          </svg>
-                        </Link>
-                      </div>
-                      <div className="cs-quote-block">
-                        <div className="cs-video-label">Watch Testimonial</div>
-                        <div className="cs-person-name">{c.video.name}</div>
-                        <div className="cs-person-role">{c.video.role}</div>
-                      </div>
-                    </>
-                  )}
+                  <div className="cs-tech-label">Built with</div>
+                  <div className="cs-tech-pills">
+                    {c.tech.map((t) => (
+                      <span key={t} className="cs-tech-pill">{t}</span>
+                    ))}
+                  </div>
                 </div>
               </article>
             ))}

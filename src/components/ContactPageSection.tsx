@@ -47,9 +47,14 @@ export default function ContactPageSection() {
     const budget  = fd.get("budget")  as string;
     const message = fd.get("message") as string;
 
+    const phone   = fd.get("phone")   as string;
+    const company = fd.get("company") as string;
+
     const data = {
       name:    fd.get("name")  as string,
       email:   fd.get("email") as string,
+      phone:   phone   || undefined,
+      company: company || undefined,
       subject: `[${service || "General"}] New Project Inquiry`,
       message: `Service: ${service || "N/A"}\nBudget: ${budget || "N/A"}\n\n${message}`,
     };

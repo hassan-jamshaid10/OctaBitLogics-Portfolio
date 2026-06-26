@@ -13,6 +13,9 @@ export default function ProjectsCTA() {
           padding: 4rem 40px 5rem;
           background: #ffffff;
           font-family: 'Inter', sans-serif;
+          overflow: hidden;
+          box-sizing: border-box;
+          width: 100%;
         }
 
         .cta-box {
@@ -27,6 +30,7 @@ export default function ProjectsCTA() {
           align-items: center;
           gap: 2.5rem;
           color: #ffffff;
+          box-sizing: border-box;
         }
 
         /* soft backlight behind the window */
@@ -44,7 +48,7 @@ export default function ProjectsCTA() {
         }
 
         /* ── LEFT TEXT ── */
-        .cta-left { position: relative; z-index: 3; flex: 1 1 400px; max-width: 460px; }
+        .cta-left { position: relative; z-index: 3; flex: 1 1 400px; max-width: 460px; min-width: 0; box-sizing: border-box; }
 
         .cta-eyebrow {
           font-size: 0.78rem;
@@ -57,11 +61,12 @@ export default function ProjectsCTA() {
 
         .cta-h2 {
           font-family: 'Manrope', sans-serif;
-          font-size: clamp(1.8rem, 3vw, 2.8rem);
+          font-size: clamp(1.5rem, 3vw, 2.8rem);
           font-weight: 800;
           letter-spacing: -0.02em;
           line-height: 1.15;
           margin: 0 0 1rem;
+          word-break: break-word;
         }
 
         .cta-desc {
@@ -70,6 +75,7 @@ export default function ProjectsCTA() {
           color: rgba(255,255,255,0.65);
           max-width: 400px;
           margin: 0 0 2rem;
+          word-break: break-word;
         }
 
         .cta-btn {
@@ -149,32 +155,55 @@ export default function ProjectsCTA() {
         }
 
         @media (max-width: 1100px) {
-          #projects-cta { padding: 3rem 20px 4rem; }
+          #projects-cta { padding: 3rem 20px 0; }
           .cta-box {
             flex-direction: column;
             align-items: stretch;
             text-align: center;
             padding: 3rem 2rem 0;
             gap: 0;
-          }
-          .cta-left { max-width: 100%; margin: 0 auto; }
-          .cta-desc { margin-left: auto; margin-right: auto; }
-          .cta-box::before { display: none; }
-
-          .cta-window {
             width: 100%;
-            max-width: 640px;
-            margin: 2.5rem auto 0;
+          }
+          .cta-left { flex: none; width: 100%; max-width: 100%; margin: 0 auto; box-sizing: border-box; }
+          .cta-desc { max-width: 100%; margin-left: auto; margin-right: auto; }
+          .cta-btn { margin: 0 auto; display: inline-flex; }
+          .cta-box::before { display: none; }
+          .cta-window {
+            flex: none;
+            width: 100%;
+            max-width: 100%;
+            margin: 2.5rem 0 0;
             border-radius: 14px 14px 0 0;
             border-bottom: none;
+            box-sizing: border-box;
           }
         }
-        @media (max-width: 560px) {
-          #projects-cta { padding: 2rem 16px 3rem; }
-          .cta-box { padding: 2.5rem 1.25rem 0; }
-          .cta-h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
-          .cta-desc { font-size: 0.9rem; }
-          .cta-btn { padding: 0.7rem 1.4rem; font-size: 0.88rem; }
+        @media (max-width: 768px) {
+          #projects-cta { padding: 2.5rem 16px 0; }
+          .cta-box { padding: 2.5rem 1.5rem 0; }
+          .cta-h2 { font-size: 1.5rem; }
+          .cta-desc { font-size: 0.92rem; }
+          .cta-btn { padding: 0.7rem 1.4rem; font-size: 0.85rem; }
+          .cta-window { margin-top: 2rem; }
+        }
+        @media (max-width: 480px) {
+          #projects-cta { padding: 2rem 12px 0; }
+          .cta-box { padding: 2rem 1.1rem 0; }
+          .cta-h2 { font-size: 1.3rem; }
+          .cta-eyebrow { font-size: 0.68rem; margin-bottom: 0.8rem; letter-spacing: 0.16em; }
+          .cta-desc { font-size: 0.86rem; margin-bottom: 1.4rem; }
+          .cta-btn { padding: 0.6rem 1.2rem; font-size: 0.8rem; gap: 7px; }
+          .cta-window { margin-top: 1.5rem; border-radius: 10px 10px 0 0; }
+          .win-bar { height: 28px; }
+          .win-dot { width: 8px; height: 8px; }
+        }
+        @media (max-width: 360px) {
+          #projects-cta { padding: 1.75rem 10px 0; }
+          .cta-box { padding: 1.75rem 1rem 0; }
+          .cta-h2 { font-size: 1.15rem; }
+          .cta-desc { font-size: 0.82rem; }
+          .cta-btn { padding: 0.55rem 1rem; font-size: 0.76rem; width: 100%; justify-content: center; }
+          .cta-window { margin-top: 1.25rem; }
         }
       `}</style>
 

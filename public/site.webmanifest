@@ -1,0 +1,23 @@
+{
+  "name": "OctaBitLogics",
+  "short_name": "OctaBitLogics",
+  "description": "AI-Powered Software Engineering — precision-built for ambitious businesses.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#002046",
+  "theme_color": "#002046",
+  "icons": [
+    {
+      "src": "/octabit-logo-transparent.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/octabit-logo-transparent.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

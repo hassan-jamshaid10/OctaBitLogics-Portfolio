@@ -79,6 +79,98 @@ const PROJECTS = [
     ],
     tech: ["Next.js", "tRPC", "PostgreSQL", "Machine Learning"],
   },
+  {
+    id: "dataflow",
+    name: "DataFlow",
+    category: "DATA ENGINEERING",
+    tagline: "Real-Time Financial Transaction Pipeline",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&fit=crop",
+    desc: "A high-throughput, fault-tolerant streaming data pipeline for a leading fintech company, ingesting over 4 million financial events per day with end-to-end latency under 800ms — replacing a legacy batch system that caused 4-hour fraud detection delays.",
+    features: [
+      {
+        title: "Streaming Ingestion Layer",
+        detail: "Apache Kafka cluster with 24 partitions handles 50,000+ events per second from payment gateways, ATMs, and mobile apps with guaranteed exactly-once delivery.",
+      },
+      {
+        title: "Real-Time Transformation",
+        detail: "Apache Spark Structured Streaming applies enrichment, deduplication, and schema validation within 400ms, feeding the fraud detection model before transactions settle.",
+      },
+      {
+        title: "Lakehouse & Orchestration",
+        detail: "Transformed data lands in Snowflake via dbt models with full lineage. Airflow DAGs manage backfill, SLA monitoring, and alerting for any pipeline degradation.",
+      },
+    ],
+    tech: ["Apache Kafka", "Apache Spark", "dbt", "Snowflake", "Airflow"],
+  },
+  {
+    id: "novasight",
+    name: "NovaSight",
+    category: "DATA ENGINEERING",
+    tagline: "Unified Retail Data Lakehouse Platform",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80&fit=crop",
+    desc: "A cloud-native data lakehouse built on GCP for a national retail chain with 200+ stores, consolidating fragmented POS, inventory, e-commerce, and loyalty data into a single governed platform powering real-time inventory decisions and customer analytics.",
+    features: [
+      {
+        title: "Multi-Source Ingestion",
+        detail: "Apache Flink CDC pipelines capture changes from 200+ store POS systems, 3 e-commerce platforms, and 12 ERP modules in real time — eliminating overnight batch reconciliation.",
+      },
+      {
+        title: "Delta Lake Lakehouse",
+        detail: "Open-format Delta Lake on GCS provides ACID transactions, time-travel queries, and schema evolution across 15TB of retail data — with dbt transforming raw events into business-ready models.",
+      },
+      {
+        title: "Self-Serve Analytics",
+        detail: "BigQuery semantic layer with Looker dashboards gives merchandising, supply chain, and finance teams self-serve access to unified data without touching raw pipelines.",
+      },
+    ],
+    tech: ["Apache Flink", "Delta Lake", "dbt", "BigQuery", "GCP", "Terraform"],
+  },
+  {
+    id: "bridge-crack",
+    name: "Bridge Crack AI",
+    category: "COMPUTER VISION",
+    tagline: "Automated Drone-Based Bridge Crack Assessment System",
+    image: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=900&q=80&fit=crop",
+    desc: "An end-to-end automated bridge inspection system combining a Unity 3D drone simulation with a dual-stage deep learning pipeline. A lightweight TFLite classifier gates every frame before a PyTorch U-Net performs pixel-level crack segmentation, with real-time severity scoring and automated PDF report generation.",
+    features: [
+      {
+        title: "Dual-Stage Detection Pipeline",
+        detail: "A fast TFLite classification model screens every frame first. Only frames containing cracks proceed to the heavy U-Net segmentation model, cutting compute cost by over 80% on healthy concrete frames.",
+      },
+      {
+        title: "Pixel-Level Severity Assessment",
+        detail: "The U-Net model highlights exact crack pixels. The system calculates crack-to-total pixel ratio and classifies severity: Minor below 2%, Moderate between 2-5%, and Severe above 5% surface area.",
+      },
+      {
+        title: "Real-Time Reporting",
+        detail: "Analyzed frames return to the Unity dashboard as red-highlighted overlays with live metadata. At mission end, ReportLab compiles a full PDF with telemetry, crack counts, severity points, and visual overlays.",
+      },
+    ],
+    tech: ["Unity", "PyTorch", "TFLite", "U-Net", "FastAPI", "OpenCV"],
+  },
+  {
+    id: "resume-parser",
+    name: "CareerMap AI",
+    category: "AI & LLM",
+    tagline: "AI Resume Parser & 6-Month Career Roadmapper",
+    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=900&q=80&fit=crop",
+    desc: "An intelligent career coaching web application that takes a user's PDF resume and target job title, performs a structured skill gap analysis using multi-LLM backends, recommends specific certifications and portfolio projects, and generates a chronological 6-month learning roadmap.",
+    features: [
+      {
+        title: "Multi-LLM Skill Gap Analysis",
+        detail: "Supports Google Gemini, OpenAI GPT-4o-mini, and Groq Llama-3.3 as interchangeable backends. Pydantic schema validation enforces structured JSON responses regardless of the model used.",
+      },
+      {
+        title: "Curated Recommendations",
+        detail: "Recommends targeted certifications mapped to real providers and custom portfolio projects with specific tech stacks — not generic advice, but actionable steps a hiring manager will recognise.",
+      },
+      {
+        title: "6-Month Chronological Roadmap",
+        detail: "Breaks the candidate's upskilling path into monthly milestones and weekly tasks. Users can view the roadmap interactively in the Streamlit dashboard or export it as a markdown file.",
+      },
+    ],
+    tech: ["Streamlit", "FastAPI", "Google Gemini", "OpenAI", "Groq", "Pydantic"],
+  },
 ];
 
 function ProductCard({

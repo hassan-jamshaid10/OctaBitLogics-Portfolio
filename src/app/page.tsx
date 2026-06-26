@@ -8,7 +8,7 @@ const Hero = lazy(() => import("../components/hero"));
 const TaglineBar = lazy(() => import("../components/TaglineBar"));
 const CaseStudies = lazy(() => import("../components/CaseStudies"));
 const About = lazy(() => import("../components/about"));
-const StatementBanner = lazy(() => import("../components/statementBanner"));
+const StatementBanner = lazy(() => import("../components/StatementBanner"));
 const ExpertiseDomains = lazy(() => import("../components/ExpertiseDomains"));
 const OurServices = lazy(() => import("../components/OurServices"));
 const Services = lazy(() => import("../components/services"));

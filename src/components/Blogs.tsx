@@ -2,45 +2,8 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-
-export const BLOGS = [
-  {
-    slug: "nextjs-15-react-server-components",
-    title: "An Executive Guide to Cloud Cost Optimization for Businesses",
-    excerpt: "Cloud spend is one of the fastest-growing line items for modern enterprises. This guide breaks down proven strategies—from right-sizing workloads to leveraging spot instances—that help CTOs and CFOs reclaim budget without sacrificing reliability.",
-    date: "April 12, 2026",
-    readTime: "6 min read",
-    category: "White Paper",
-    imgUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    slug: "scaling-rag-pipelines",
-    title: "How Agentic AI is Changing Business Workflows",
-    excerpt: "Agentic AI systems don't just answer questions—they reason, plan, and act autonomously across complex multi-step tasks. Discover how forward-thinking organisations are deploying AI agents to automate workflows, reduce operational overhead, and unlock entirely new business models.",
-    date: "April 5, 2026",
-    readTime: "8 min read",
-    category: "Webinar",
-    imgUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    slug: "go-microservices-high-performance",
-    title: "The Ultimate Guide to Boost Application Performance",
-    excerpt: "Slow applications bleed users and revenue. This deep-dive covers the full performance stack—from database query optimisation and caching layers to CDN configuration and server-side rendering strategies—giving engineering teams a practical playbook for sub-second load times.",
-    date: "March 28, 2026",
-    readTime: "5 min read",
-    category: "Article",
-    imgUrl: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    slug: "ai-for-businesses-2026",
-    title: "C-Suite Guide to AI for Businesses in 2026",
-    excerpt: "AI adoption has moved from a competitive edge to a baseline expectation. This executive briefing distils the most impactful use-cases across industries, outlines the governance frameworks boards need to consider, and maps out a realistic 12-month AI roadmap for mid-market and enterprise organisations.",
-    date: "March 15, 2026",
-    readTime: "7 min read",
-    category: "White Paper",
-    imgUrl: "https://images.unsplash.com/photo-1677756119517-756a188d2d94?q=80&w=1200&auto=format&fit=crop",
-  },
-];
+import { BLOGS } from "../data/blogs";
+export { BLOGS };
 
 export default function Blogs() {
   const trackRef = useRef<HTMLDivElement>(null);

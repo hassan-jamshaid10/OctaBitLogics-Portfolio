@@ -5,20 +5,20 @@ import { motion } from "framer-motion";
 
 const STATS = [
   {
-    value: "17+",
-    label: "YEARS IN BUSINESS AND COUNTING"
+    value: "6",
+    label: "PROJECTS DELIVERED ACROSS\nOUR PORTFOLIO"
   },
   {
-    value: "73%",
-    label: "OF CLIENTS RETURN FOR LONG-TERM\nPARTNERSHIPS"
+    value: "5",
+    label: "CORE SERVICE AREAS WE\nSPECIALISE IN"
   },
   {
-    value: "800+",
-    label: "PROFESSIONALS ON BOARD"
+    value: "20+",
+    label: "TECHNOLOGIES ACROSS OUR\nENGINEERING STACK"
   },
   {
-    value: "10+",
-    label: "YEARS OF LAUNCHING AND BUILDING AI\nPRODUCTS"
+    value: "6",
+    label: "INDUSTRIES SERVED ACROSS\nOUR WORK"
   }
 ];
 
@@ -70,7 +70,7 @@ export default function WhoWeAre() {
 
         .wwa-h2 {
           font-family: 'Manrope', sans-serif;
-          font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+          font-size: clamp(1.4rem, 3.5vw, 2.5rem);
           font-weight: 800;
           color: #002046;
           line-height: 1.4;
@@ -78,6 +78,8 @@ export default function WhoWeAre() {
           max-width: 1000px;
           margin: 0 auto 6rem auto;
           letter-spacing: -0.02em;
+          word-break: break-word;
+          overflow-wrap: break-word;
         }
 
         .wwa-highlight {
@@ -165,13 +167,23 @@ export default function WhoWeAre() {
 
         @media (max-width: 600px) {
           #who-we-are { padding: 4rem 20px; }
-          .wwa-stats-grid {
-            grid-template-columns: 1fr;
-            gap: 2.5rem 0;
-          }
+          .wwa-stats-grid { grid-template-columns: 1fr; gap: 2.5rem 0; }
           .wwa-stat-col { padding: 0 1rem; }
           .wwa-stat-col::before { display: none !important; }
-          .wwa-h2 { font-size: 1.5rem; line-height: 1.5; margin: 0 auto 2.5rem; }
+          .wwa-h2 { font-size: 1.35rem; line-height: 1.5; margin: 0 auto 2.5rem; }
+          .wwa-h2 br { display: none; }
+          .wwa-icon-box { width: 28px; height: 28px; }
+        }
+        @media (max-width: 420px) {
+          #who-we-are { padding: 3.5rem 16px; }
+          .wwa-h2 { font-size: 1.2rem; margin: 0 auto 2rem; }
+          .wwa-icon-box { width: 24px; height: 24px; }
+          .wwa-stat-val { font-size: 2.5rem; }
+          .wwa-stat-label { font-size: 0.7rem; }
+        }
+        @media (max-width: 360px) {
+          #who-we-are { padding: 3rem 14px; }
+          .wwa-h2 { font-size: 1.1rem; }
         }
       `}</style>
 

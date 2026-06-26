@@ -108,6 +108,7 @@ export default function IndustriesWeServe() {
           overflow: hidden;
           font-family: 'Inter', sans-serif;
           width: 100%;
+          box-sizing: border-box;
         }
 
         /* Subtle diagonal line texture (matches region section) */
@@ -179,12 +180,14 @@ export default function IndustriesWeServe() {
 
         .iws-h2 {
           font-family: 'Manrope', sans-serif;
-          font-size: clamp(2rem, 4vw, 3rem);
+          font-size: clamp(1.5rem, 4vw, 3rem);
           font-weight: 800;
           color: #002046;
           line-height: 1.1;
           letter-spacing: -0.02em;
           margin: 0;
+          word-break: break-word;
+          overflow-wrap: break-word;
         }
         .iws-h2 span {
           background: linear-gradient(135deg, #2ECC40 0%, #3BADB0 100%);
@@ -224,6 +227,8 @@ export default function IndustriesWeServe() {
           border-radius: 2px;
           box-shadow: 0 2px 12px rgba(0, 32, 70, 0.08);
           transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.22,1,0.36,1);
+          min-width: 0;
+          box-sizing: border-box;
         }
         .iws-card:hover {
           box-shadow: 0 16px 48px rgba(0, 32, 70, 0.18);
@@ -429,6 +434,7 @@ export default function IndustriesWeServe() {
           white-space: nowrap;
           flex-shrink: 0;
           text-transform: uppercase;
+          align-self: flex-start;
         }
         .iws-cta-btn:hover {
           background: transparent;
@@ -443,21 +449,37 @@ export default function IndustriesWeServe() {
         }
         @media (max-width: 768px) {
           #industries-we-serve { padding: 5rem 20px; }
-          .iws-header { flex-direction: column; align-items: flex-start; }
-          .iws-header-right { max-width: 100%; }
-          .iws-grid {
-            grid-template-columns: repeat(2, 1fr);
-            grid-auto-rows: 240px;
-          }
-          .iws-card.large {
-            grid-column: span 2;
-            grid-row: span 1;
-          }
-          .iws-cta { flex-direction: column; align-items: flex-start; }
+          .iws-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2.5rem; }
+          .iws-header-right { max-width: 100%; font-size: 0.9rem; }
+          .iws-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 240px; }
+          .iws-card.large { grid-column: span 2; grid-row: span 1; }
+          .iws-cta { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+          .iws-h2 br { display: none; }
+          .iws-cta-btn { padding: 0.7rem 1.4rem; font-size: 0.78rem; letter-spacing: 0.04em; gap: 8px; flex-shrink: unset; align-self: flex-start; }
         }
         @media (max-width: 500px) {
-          .iws-grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
+          #industries-we-serve { padding: 4rem 16px; }
+          .iws-grid { grid-template-columns: 1fr; grid-auto-rows: 210px; gap: 12px; }
           .iws-card.large { grid-column: span 1; }
+          .iws-cta { padding: 1.25rem; }
+          .iws-cta-btn { padding: 0.65rem 1.2rem; font-size: 0.74rem; gap: 6px; }
+          .iws-h2 { font-size: 1.5rem; }
+          .iws-card-content { padding: 1.2rem 1rem; }
+        }
+        @media (max-width: 400px) {
+          #industries-we-serve { padding: 3.5rem 14px; }
+          .iws-grid { grid-auto-rows: 185px; gap: 10px; }
+          .iws-h2 { font-size: 1.3rem; }
+          .iws-cta { gap: 0.9rem; padding: 1.1rem; }
+          .iws-cta-text { font-size: 0.9rem; }
+          .iws-cta-sub { font-size: 0.78rem; }
+          .iws-cta-btn { font-size: 0.7rem; padding: 0.6rem 1rem; }
+        }
+        @media (max-width: 360px) {
+          #industries-we-serve { padding: 3rem 12px; }
+          .iws-grid { grid-auto-rows: 170px; }
+          .iws-h2 { font-size: 1.15rem; }
+          .iws-card-title { font-size: 0.95rem; }
         }
       `}</style>
 
@@ -541,7 +563,7 @@ export default function IndustriesWeServe() {
               Tell us your challenge — we&apos;ll engineer the solution.
             </p>
           </div>
-          <a href="#contact" className="iws-cta-btn">
+          <a href="/contact" className="iws-cta-btn">
             Start a Conversation
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
               <path

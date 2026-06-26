@@ -5,24 +5,16 @@ import Link from "next/link";
 const NAV_LINKS = [
   { label: "Company", href: "/company" },
   { label: "Industries", href: "/industries" },
-  { label: "Services", href: "#services" },
+  { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
+  { label: "Blogs", href: "/blogs" },
   { label: "Contact", href: "/contact" },
 ];
 
 const CLOUD_PARTNERS = [
-  {
-    name: "Google Cloud",
-    url: "https://cdn.simpleicons.org/googlecloud",
-  },
-  {
-    // name: "Microsoft Azure",
-    url: "https://cdn.worldvectorlogo.com/logos/microsoft-azure-2.svg",
-  },
-  {
-    // name: "AWS",
-    url: "https://cdn.worldvectorlogo.com/logos/aws-2.svg",
-  },
+  { name: "Google Cloud", url: "https://cdn.simpleicons.org/googlecloud" },
+  { name: "Microsoft Azure", url: "https://cdn.worldvectorlogo.com/logos/microsoft-azure-2.svg" },
+  { name: "AWS", url: "https://cdn.worldvectorlogo.com/logos/aws-2.svg" },
 ];
 
 const SOCIALS = [
@@ -260,18 +252,26 @@ export default function Footer() {
           color: rgba(255,255,255,0.3);
           margin: 0;
         }
-        .ftr-legal {
-          display: flex;
-          gap: 1.5rem;
-          flex-wrap: wrap;
+        .ftr-cookie-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.78rem;
+          font-weight: 600;
+          color: rgba(255,255,255,0.35);
+          background: transparent;
+          border: 1px solid rgba(255,255,255,0.1);
+          padding: 6px 14px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          white-space: nowrap;
         }
-        .ftr-legal a {
-          font-size: 0.8rem;
-          color: rgba(255,255,255,0.3);
-          text-decoration: none;
-          transition: color 0.2s;
+        .ftr-cookie-btn:hover {
+          color: rgba(255,255,255,0.7);
+          border-color: rgba(255,255,255,0.3);
+          background: rgba(255,255,255,0.04);
         }
-        .ftr-legal a:hover { color: rgba(255,255,255,0.7); }
 
         /* Responsive */
         @media (max-width: 960px) {
@@ -352,8 +352,8 @@ export default function Footer() {
             <ul className="ftr-nav-list">
               <li><a href="mailto:info@octabitlogics.com">info@octabitlogics.com</a></li>
               <li><a href="tel:+923215353105">+92 321 535 3105</a></li>
-              <li><a href="#contact">Start a Project</a></li>
-              <li><a href="#contact">Request a Quote</a></li>
+              <li><Link href="/contact">Start a Project</Link></li>
+              <li><Link href="/contact">Request a Quote</Link></li>
             </ul>
           </div>
 
@@ -375,11 +375,15 @@ export default function Footer() {
         {/* ── Bottom bar ── */}
         <div className="ftr-bottom">
           <p className="ftr-copy">© {YEAR} OctaBitLogics. All rights reserved.</p>
-          <nav className="ftr-legal">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookies</a>
-          </nav>
+          <button
+            className="ftr-cookie-btn"
+            onClick={() => window.dispatchEvent(new Event("openCookieSettings"))}
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"/><circle cx="12" cy="8" r="1" fill="currentColor" stroke="none"/><circle cx="8" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+            Cookie Preferences
+          </button>
         </div>
 
       </div>

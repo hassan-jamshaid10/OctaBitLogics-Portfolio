@@ -74,8 +74,8 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
       ? pathname === href
       : pathname === "/" && activeSection === href.slice(1);
 
-  // Force white nav text when hero background is dark (projects & contact)
-  const isHeroDark = (pathname.startsWith("/projects") || pathname === "/contact") && !scrolled;
+  // Force white nav text when hero background is dark (projects, blog detail & contact)
+  const isHeroDark = (pathname.startsWith("/projects") || pathname.startsWith("/blogs/") || pathname === "/contact") && !scrolled;
 
   return (
     <>

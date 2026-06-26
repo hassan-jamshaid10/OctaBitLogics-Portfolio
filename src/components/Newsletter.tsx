@@ -1,9 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { subscribeNewsletter } from "../app/actions/subscribeNewsletter";
 
 export default function Newsletter() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail]   = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleSubscribe = useCallback(async () => {
+    if (!email.trim()) return;
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      const res = await subscribeNewsletter(email.trim());
+      if (res.success) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setErrorMsg(res.error || "Subscription failed.");
+        setTimeout(() => setStatus("idle"), 5000);
+      }
+    } catch {
+      setStatus("error");
+      setErrorMsg("Something went wrong. Please try again.");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
+  }, [email]);
 
   return (
     <section id="newsletter">
@@ -273,6 +297,11 @@ export default function Newsletter() {
           margin-top: 16px;
         }
 
+        /* ── Spinner ── */
+        @keyframes nl-spin {
+          to { transform: rotate(360deg); }
+        }
+
         /* ── Floating animation ── */
         @keyframes nl-float {
           0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -320,27 +349,59 @@ export default function Newsletter() {
                 transformation — delivered straight to your inbox.
               </p>
 
-              <div className="nl-input-wrap">
-                <input
-                  type="email"
-                  className="nl-input"
-                  placeholder="Work email *"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
+              {status === "success" ? (
+                <div style={{ background: "rgba(46,204,64,0.12)", border: "1px solid rgba(46,204,64,0.35)", borderRadius: "6px", padding: "18px 20px", marginTop: "0.5rem" }}>
+                  <p style={{ color: "#2ECC40", fontWeight: 700, fontSize: "0.95rem", margin: "0 0 4px 0" }}>✓ Subscribed successfully!</p>
+                  <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.85rem", margin: 0 }}>Check your inbox — a confirmation email is on its way.</p>
+                </div>
+              ) : (
+                <>
+                  <div className="nl-input-wrap">
+                    <input
+                      type="email"
+                      className="nl-input"
+                      placeholder="Work email *"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && handleSubscribe()}
+                      disabled={status === "loading"}
+                    />
+                    {status === "error" && (
+                      <p style={{ color: "#ef4444", fontSize: "0.8rem", margin: "6px 0 0 2px" }}>{errorMsg}</p>
+                    )}
+                  </div>
 
-              <div className="nl-btns">
-                <button className="nl-btn-primary" type="button">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 2 11 13" /><path d="m22 2-7 20-4-9-9-4 20-7z" />
-                  </svg>
-                  Subscribe now
-                </button>
-                <a href="#blogs" className="nl-btn-secondary">
-                  Browse all blogs
-                </a>
-              </div>
+                  <div className="nl-btns">
+                    <button
+                      className="nl-btn-primary"
+                      type="button"
+                      onClick={handleSubscribe}
+                      disabled={status === "loading" || !email.trim()}
+                      style={{ opacity: status === "loading" || !email.trim() ? 0.6 : 1, cursor: status === "loading" ? "wait" : "pointer" }}
+                    >
+                      {status === "loading" ? (
+                        <>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" style={{ animation: "nl-spin 0.8s linear infinite" }}>
+                            <circle cx="12" cy="12" r="10" strokeOpacity="0.25" />
+                            <path d="M12 2a10 10 0 0 1 10 10" />
+                          </svg>
+                          Subscribing...
+                        </>
+                      ) : (
+                        <>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M22 2 11 13" /><path d="m22 2-7 20-4-9-9-4 20-7z" />
+                          </svg>
+                          Subscribe now
+                        </>
+                      )}
+                    </button>
+                    <a href="/blogs" className="nl-btn-secondary">
+                      Browse all blogs
+                    </a>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 

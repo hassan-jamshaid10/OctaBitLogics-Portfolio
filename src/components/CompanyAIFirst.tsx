@@ -15,6 +15,7 @@ export default function CompanyAIFirst() {
           overflow: hidden;
           font-family: 'Inter', sans-serif;
           width: 100%;
+          box-sizing: border-box;
         }
 
         /* We'll keep a subtle glow effect on the right as a nod to the reference image, but adapted for light mode */
@@ -113,11 +114,26 @@ export default function CompanyAIFirst() {
           .ai-inner { grid-template-columns: 1fr; gap: 3rem; }
         }
         @media (max-width: 768px) {
-          #company-aifirst { padding: 4rem 20px; }
+          #company-aifirst { padding: 4rem 24px; }
+          .ai-h2 { font-size: clamp(1.5rem, 5vw, 2.2rem); }
         }
         @media (max-width: 600px) {
-          .ai-p { font-size: 1rem; }
-          .ai-h2 { margin-bottom: 2rem; }
+          #company-aifirst { padding: 4rem 20px; }
+          .ai-p { font-size: 0.95rem; }
+          .ai-h2 { margin-bottom: 2rem; font-size: 1.5rem; }
+          .ai-inner { gap: 2rem; }
+        }
+        @media (max-width: 480px) {
+          #company-aifirst { padding: 3.5rem 16px; }
+          .ai-h2 { font-size: 1.3rem; margin-bottom: 1.5rem; }
+          .ai-btn { padding: 12px 20px; font-size: 0.85rem; }
+          .ai-right { gap: 1rem; }
+          .ai-p { font-size: 0.9rem; line-height: 1.65; }
+        }
+        @media (max-width: 360px) {
+          #company-aifirst { padding: 3rem 14px; }
+          .ai-h2 { font-size: 1.15rem; }
+          .ai-btn { padding: 10px 16px; font-size: 0.8rem; }
         }
       `}</style>
 
@@ -134,7 +150,7 @@ export default function CompanyAIFirst() {
           <h2 className="ai-h2">
             We're <span className="ai-highlight">AI-first</span>, built with responsibility
           </h2>
-          <Link href="/engineering-approach" className="ai-btn">
+          <Link href="/ai-first" className="ai-btn">
             Our AI-first approach
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter">
               <path d="M5 12h14M12 5l7 7-7 7" />

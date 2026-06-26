@@ -9,13 +9,13 @@ const CARDS = [
     title: "What we help organizations build",
     desc: "Explore our capabilities across engineering, AI, and digital systems.",
     linkText: "View our services",
-    href: "#services"
+    href: "/services"
   },
   {
     title: "How we work",
     desc: "Understand our delivery model, engagement approaches, and governance.",
     linkText: "See our approach",
-    href: "#company-delivery"
+    href: "/how-we-deliver"
   },
   {
     title: "Our thinking",
@@ -70,11 +70,12 @@ export default function CompanyCTA() {
 
         .cta-h2 {
           font-family: 'Manrope', sans-serif;
-          font-size: clamp(2rem, 4vw, 3rem);
+          font-size: clamp(1.5rem, 4vw, 3rem);
           font-weight: 800;
           color: #ffffff;
           margin: 0 0 4rem 0;
           letter-spacing: -0.02em;
+          word-break: break-word;
         }
 
         .cta-grid {
@@ -138,6 +139,17 @@ export default function CompanyCTA() {
         @media (max-width: 640px) {
           #company-cta { padding: 4rem 20px; }
           .cta-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+          #company-cta { padding: 3.5rem 16px; }
+          .cta-h2 { margin-bottom: 2rem; }
+          .cta-card { padding: 2rem 1.5rem; }
+          .cta-card-desc { margin-bottom: 2rem; }
+        }
+        @media (max-width: 360px) {
+          #company-cta { padding: 3rem 14px; }
+          .cta-h2 { font-size: 1.3rem; }
+          .cta-card { padding: 1.5rem 1rem; }
         }
       `}</style>
 

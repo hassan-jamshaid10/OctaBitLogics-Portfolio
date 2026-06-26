@@ -27,10 +27,10 @@ function useCountUp(target: number, duration = 1800, started = false) {
 }
 
 const STATS = [
-  { value: 50, suffix: "+", label: "Projects Delivered" },
-  { value: 98, suffix: "%", label: "Client Satisfaction" },
-  { value: 12, suffix: "+", label: "Industries Served" },
-  { value: 3, suffix: "×", label: "Avg. ROI for Clients" },
+  { value: 5,  suffix: "",   label: "Core Service Areas" },
+  { value: 20, suffix: "+",  label: "Technologies We Ship With" },
+  { value: 6,  suffix: "",   label: "Industries Served" },
+  { value: 48, suffix: "hr", label: "Response Commitment" },
 ];
 
 // Cloud infrastructure logos — loaded from the Simple Icons CDN.
@@ -230,13 +230,12 @@ export default function StatementBanner() {
         {/* Top: headline + CTA */}
         <div className="sb-top">
           <h2 className="sb-h2">
-            We&rsquo;re committed to lead your digital journey to success
+            Serious engineering from a team that owns every detail
             <span className="dot">.</span>
           </h2>
           <div className="sb-right">
             <p className="sb-sub">
-              We have a proven track record of building scalable software
-              solutions for businesses.
+              A focused studio built by experienced engineers. Every project gets our full attention, from architecture to launch and beyond.
             </p>
             <Link href="/contact" className="sb-cta">
               Work with us

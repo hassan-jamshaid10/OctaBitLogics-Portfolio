@@ -141,7 +141,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           display: flex; align-items: center;
           cursor: pointer; user-select: none;
         }
-        .obl-logo-img { width: 188px; height: 52px; object-fit: contain; display: block; }
+        .obl-logo-img { height: 58px; width: auto; max-width: 240px; object-fit: contain; display: block; }
 
         /* ── Desktop links ── */
         .obl-links { display: flex; align-items: center; gap: 4px; height: 100%; }
@@ -353,7 +353,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           .obl-hamburger { display: flex; }
           .obl-nav-inner { padding: 0 20px; }
           .obl-left { gap: 10px; }
-          .obl-logo-img { width: 164px; height: 46px; }
+          .obl-logo-img { height: 46px; width: auto; max-width: 200px; }
         }
       `}</style>
 
@@ -363,7 +363,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           <div className="obl-left">
             {/* Logo */}
             <div className="obl-logo" onClick={handleLogoClick}>
-              <img src="/octabit-logo-transparent.png" alt="OctaBitLogics" className="obl-logo-img" />
+              <img src="/sitelogo.png" alt="OctaBitLogics" className="obl-logo-img" />
             </div>
 
             {/* Desktop links */}

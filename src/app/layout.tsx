@@ -93,12 +93,12 @@ export const metadata: Metadata = {
 
   icons: {
     icon: [
-      { url: "/sitelogo.png", type: "image/png" },
+      { url: "/sitelogo-transparent.png", type: "image/png" },
     ],
     apple: [
-      { url: "/sitelogo.png", sizes: "180x180", type: "image/png" },
+      { url: "/sitelogo-transparent.png", sizes: "180x180", type: "image/png" },
     ],
-    shortcut: "/sitelogo.png",
+    shortcut: "/sitelogo-transparent.png",
   },
 
   manifest: "/site.webmanifest",

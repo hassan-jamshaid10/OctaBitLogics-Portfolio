@@ -363,7 +363,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           <div className="obl-left">
             {/* Logo */}
             <div className="obl-logo" onClick={handleLogoClick}>
-              <img src="/sitelogo.png" alt="OctaBitLogics" className="obl-logo-img" />
+              <img src="/octabit-logo-transparent.png" alt="OctaBitLogics" className="obl-logo-img" />
             </div>
 
             {/* Desktop links */}

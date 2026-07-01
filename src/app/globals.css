@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+/* ── Design tokens ───────────────────────────────────────────────── */
+:root {
+  /* Brand palette */
+  --primary:                    #002046;
+  --primary-container:          #1b365d;
+  --on-primary:                 #fff;
+  --on-primary-container:       #87a0cd;
+  --primary-fixed:              #d6e3ff;
+  --primary-fixed-dim:          #aec7f7;
+  --inverse-primary:            #aec7f7;
+  --on-primary-fixed:           #001b3d;
+  --on-primary-fixed-variant:   #2e476f;
+  --secondary:                  #1b6d1e;
+  --secondary-container:        #a2f796;
+  --on-secondary:               #fff;
+  --on-secondary-container:     #237324;
+  --secondary-fixed:            #a2f796;
+  --secondary-fixed-dim:        #87da7d;
+  --on-secondary-fixed:         #002202;
+  --on-secondary-fixed-variant: #00530b;
+  --tertiary:                   #19231a;
+  --tertiary-container:         #2e392f;
+  --on-tertiary:                #fff;
+  --on-tertiary-container:      #97a295;
+  --tertiary-fixed:             #dae6d7;
+  --tertiary-fixed-dim:         #becabc;
+  --on-tertiary-fixed:          #141e15;
+  --on-tertiary-fixed-variant:  #3f4a3f;
+  --background:                 #faf9fd;
+  --on-background:              #1a1b1e;
+  --surface:                    #faf9fd;
+  --surface-dim:                #dad9dd;
+  --surface-bright:             #faf9fd;
+  --surface-container-lowest:   #fff;
+  --surface-container-low:      #f4f3f7;
+  --surface-container:          #efedf1;
+  --surface-container-high:     #e9e7eb;
+  --surface-container-highest:  #e3e2e6;
+  --surface-variant:            #e3e2e6;
+  --surface-tint:               #465f88;
+  --inverse-surface:            #2f3033;
+  --on-surface:                 #1a1b1e;
+  --on-surface-variant:         #44474e;
+  --inverse-on-surface:         #f1f0f4;
+  --outline:                    #74777f;
+  --outline-variant:            #c4c6cf;
+  --error:                      #ba1a1a;
+  --on-error:                   #fff;
+  --error-container:            #ffdad6;
+  --on-error-container:         #93000a;
+
+  /* Accent */
+  --teal:             #3badb0;
+  --teal-light:       #54c5c8;
+  --teal-dark:        #2a8f92;
+  --teal-glow:        #3badb02e;
+  --teal-glow-strong: #3badb059;
+  --navy:             #1b2e5e;
+  --navy-light:       #2a4080;
+  --navy-glow:        #1b2e5e26;
+  --white:            #fff;
+  --off-white:        #f4fafb;
+  --text-muted:       #6b8a8b;
+  --border:           #3badb033;
+  --border-strong:    #3badb059;
+
+  /* Layout */
+  --margin-desktop: 40px;
+  --margin-mobile:  16px;
+  --gutter:         24px;
+  --container-max:  1280px;
+}
+
+/* ── Reset ───────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Base typography ─────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--on-surface);
+  font-family: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Utility classes ─────────────────────────────────────────────── */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 24;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+section {
+  position: relative;
+}
+
+.section-inner {
+  text-align: center;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.section-tag::before,
+.section-tag::after {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--teal);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.75rem 1.5rem;
+  text-align: left;
+  cursor: default;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(59, 173, 176, 0.13);
+}
+
+.card-icon {
+  margin-bottom: 0.75rem;
+  font-size: 1.75rem;
+}
+
+.card h3 {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.4rem;
+}
+
+.card p {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+/* ── Animations ──────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

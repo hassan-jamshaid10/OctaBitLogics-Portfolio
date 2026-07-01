@@ -133,7 +133,7 @@ export default function Services() {
           display: inline-flex;
           align-items: center;
           gap: 0.55rem;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.72rem;
           font-weight: 700;
           letter-spacing: 0.14em;
@@ -152,7 +152,7 @@ export default function Services() {
         }
 
         .srv-section-h2 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(1.8rem, 3.5vw, 2.6rem);
           font-weight: 800;
           color: #ffffff;
@@ -167,7 +167,7 @@ export default function Services() {
           background-clip: text;
         }
         .srv-section-p {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.95rem;
           line-height: 1.7;
           color: rgba(255,255,255,0.6);
@@ -176,7 +176,7 @@ export default function Services() {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.85rem;
           font-weight: 600;
           color: #4ade80;
@@ -300,7 +300,7 @@ export default function Services() {
 
         /* Card text */
         .srv-card-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.15rem;
           font-weight: 700;
           color: #ffffff;
@@ -309,7 +309,7 @@ export default function Services() {
         }
         .srv-card-sm .srv-card-title { font-size: 1.05rem; }
         .srv-card-desc {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.9rem;
           line-height: 1.65;
           color: rgba(255,255,255,0.55);
@@ -332,7 +332,7 @@ export default function Services() {
           display: flex;
           align-items: center;
           gap: 0.5rem;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.82rem;
           font-weight: 500;
           color: rgba(255,255,255,0.75);

@@ -52,7 +52,7 @@ export default function WhoWeAre() {
         #who-we-are {
           background: #faf9fd;
           padding: 6rem 40px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -69,7 +69,7 @@ export default function WhoWeAre() {
         }
 
         .wwa-h2 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(1.4rem, 3.5vw, 2.5rem);
           font-weight: 800;
           color: #002046;
@@ -130,7 +130,7 @@ export default function WhoWeAre() {
         }
 
         .wwa-stat-val {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(3rem, 5vw, 4.5rem);
           font-weight: 800;
           color: #002046;
@@ -190,7 +190,7 @@ export default function WhoWeAre() {
       <div className="wwa-eyebrow">WHO WE ARE</div>
       
       <h2 className="wwa-h2">
-        We're an AI-first engineering partner<br />
+        We're an AI first engineering partner<br />
         helping organizations{" "}
         <span className="wwa-highlight">
           design <span className="wwa-icon-box"><DesignIcon /></span>

@@ -106,7 +106,7 @@ export default function IndustriesWeServe() {
           padding: 8rem 40px;
           position: relative;
           overflow: hidden;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           width: 100%;
           box-sizing: border-box;
         }
@@ -131,7 +131,7 @@ export default function IndustriesWeServe() {
           position: absolute;
           bottom: -3rem;
           right: -1rem;
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(5rem, 14vw, 13rem);
           font-weight: 900;
           color: rgba(0, 32, 70, 0.04);
@@ -170,16 +170,12 @@ export default function IndustriesWeServe() {
           margin-bottom: 1rem;
         }
         .iws-label::before {
-          content: '';
-          display: inline-block;
-          width: 24px;
-          height: 2px;
-          background: #2ECC40;
+          content: none;
           flex-shrink: 0;
         }
 
         .iws-h2 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(1.5rem, 4vw, 3rem);
           font-weight: 800;
           color: #002046;
@@ -288,7 +284,7 @@ export default function IndustriesWeServe() {
           position: absolute;
           top: 1.1rem;
           right: 1.1rem;
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 0.65rem;
           font-weight: 900;
           letter-spacing: 0.12em;
@@ -313,7 +309,7 @@ export default function IndustriesWeServe() {
         }
 
         .iws-card-num {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 0.7rem;
           font-weight: 800;
           letter-spacing: 0.14em;
@@ -345,7 +341,7 @@ export default function IndustriesWeServe() {
         }
 
         .iws-card-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-weight: 800;
           color: #ffffff;
           letter-spacing: -0.02em;
@@ -397,7 +393,7 @@ export default function IndustriesWeServe() {
         }
 
         .iws-cta-text {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(1.05rem, 2vw, 1.3rem);
           font-weight: 800;
           color: #002046;
@@ -505,7 +501,7 @@ export default function IndustriesWeServe() {
           <p className="iws-header-right">
             From fintech to healthcare, we pair precision engineering with
             sector-specific knowledge to deliver AI-powered solutions that
-            move the needle — not just the metrics.
+            move the needle not just the metrics.
           </p>
         </motion.div>
 
@@ -560,7 +556,7 @@ export default function IndustriesWeServe() {
               <span>We build for every sector.</span>
             </p>
             <p className="iws-cta-sub">
-              Tell us your challenge — we&apos;ll engineer the solution.
+              Tell us your challenge, we&apos;ll engineer the solution.
             </p>
           </div>
           <a href="/contact" className="iws-cta-btn">

@@ -100,7 +100,7 @@ export default function StatementBanner() {
           margin-bottom: 4rem;
         }
         .sb-h2 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(2.2rem, 4.2vw, 3.4rem);
           font-weight: 800; letter-spacing: -0.03em; line-height: 1.08;
           color: #ffffff; margin: 0; max-width: 680px;
@@ -112,14 +112,14 @@ export default function StatementBanner() {
           gap: 1.5rem; padding-top: 0.5rem;
         }
         .sb-sub {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 1rem; line-height: 1.7;
           color: rgba(255, 255, 255, 0.75);
           margin: 0; max-width: 340px; text-align: left;
         }
         .sb-cta {
           display: inline-flex; align-items: center; gap: 0.7rem;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.92rem; font-weight: 700;
           color: #002046; background: #ffffff;
           padding: 14px 26px; border-radius: 4px;
@@ -146,7 +146,7 @@ export default function StatementBanner() {
           width: 1px; background: rgba(255, 255, 255, 0.18);
         }
         .sb-stat-num {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(2.6rem, 4.5vw, 3.8rem);
           font-weight: 800; letter-spacing: -0.04em; line-height: 1;
           color: #ffffff;
@@ -195,7 +195,7 @@ export default function StatementBanner() {
         .sb-logo:hover { filter: none; opacity: 1; transform: scale(1.08); }
         .sb-logo img { height: 32px; width: auto; display: block; }
         .sb-logo span {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-weight: 700; font-size: 1.05rem;
           color: #ffffff; white-space: nowrap;
         }

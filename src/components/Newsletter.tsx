@@ -80,7 +80,7 @@ export default function Newsletter() {
         }
 
         .nl-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(1.9rem, 3.5vw, 2.6rem);
           font-weight: 800;
           letter-spacing: -0.03em;
@@ -90,7 +90,7 @@ export default function Newsletter() {
         }
 
         .nl-sub {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.95rem;
           line-height: 1.7;
           color: rgba(255, 255, 255, 0.7);
@@ -110,7 +110,7 @@ export default function Newsletter() {
           border: 1px solid rgba(255, 255, 255, 0.15);
           background: rgba(255, 255, 255, 0.06);
           color: #ffffff;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.9rem;
           outline: none;
           transition: border-color 0.3s ease, background 0.3s ease;
@@ -136,7 +136,7 @@ export default function Newsletter() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.88rem;
           font-weight: 700;
           color: #002046;
@@ -159,7 +159,7 @@ export default function Newsletter() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.88rem;
           font-weight: 600;
           color: rgba(255, 255, 255, 0.85);
@@ -252,7 +252,7 @@ export default function Newsletter() {
         }
 
         .nl-doc-logo {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 0.65rem;
           font-weight: 800;
           color: #002046;
@@ -267,7 +267,7 @@ export default function Newsletter() {
           width: fit-content;
           background: rgba(0, 80, 200, 0.1);
           color: #0050c8;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.55rem;
           font-weight: 700;
           letter-spacing: 0.12em;
@@ -278,7 +278,7 @@ export default function Newsletter() {
         }
 
         .nl-doc-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.4rem;
           font-weight: 800;
           color: #002046;
@@ -288,7 +288,7 @@ export default function Newsletter() {
         }
 
         .nl-doc-footer {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.72rem;
           color: #74777f;
           line-height: 1.5;

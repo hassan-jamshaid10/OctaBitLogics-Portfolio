@@ -50,7 +50,7 @@ export default function FintechPipelineCaseStudy() {
             align-items: center;
             gap: 0.5rem;
             color: #a7fff9;
-            font-family: 'Oxanium', monospace;
+            font-family: inherit;
             font-size: 0.8rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -71,7 +71,7 @@ export default function FintechPipelineCaseStudy() {
           }
 
           .cs-category {
-            font-family: 'Oxanium', monospace;
+            font-family: inherit;
             font-size: 0.8rem;
             color: #a7fff9;
             letter-spacing: 0.1em;
@@ -81,7 +81,7 @@ export default function FintechPipelineCaseStudy() {
           }
 
           .cs-title {
-            font-family: 'Oxanium', monospace;
+            font-family: inherit;
             font-size: clamp(2.5rem, 5vw, 4.5rem);
             font-weight: 900;
             color: #ffffff;
@@ -109,7 +109,7 @@ export default function FintechPipelineCaseStudy() {
           }
 
           .meta-item h4 {
-            font-family: 'Oxanium', monospace;
+            font-family: inherit;
             font-size: 0.8rem;
             color: #a7fff9;
             text-transform: uppercase;
@@ -153,7 +153,7 @@ export default function FintechPipelineCaseStudy() {
           }
 
           .cs-content h2 {
-            font-family: 'Oxanium', monospace;
+            font-family: inherit;
             font-size: 2.2rem;
             color: #1B2E5E;
             margin-bottom: 1.5rem;
@@ -162,7 +162,7 @@ export default function FintechPipelineCaseStudy() {
           }
 
           .cs-content h3 {
-            font-family: 'Oxanium', monospace;
+            font-family: inherit;
             font-size: 1.4rem;
             color: #3BADB0;
             margin-bottom: 1.2rem;
@@ -203,7 +203,7 @@ export default function FintechPipelineCaseStudy() {
             left: 0;
             color: #3BADB0;
             font-weight: 900;
-            font-family: 'Oxanium', monospace;
+            font-family: inherit;
             font-size: 1.2rem;
             top: 2px;
           }
@@ -229,7 +229,7 @@ export default function FintechPipelineCaseStudy() {
 
           .cs-table th {
             background: rgba(59,173,176,0.06);
-            font-family: 'Oxanium', monospace;
+            font-family: inherit;
             color: #1B2E5E;
             font-weight: 800;
             text-transform: uppercase;
@@ -242,7 +242,7 @@ export default function FintechPipelineCaseStudy() {
             color: #4e6070;
           }
           .cs-table td:first-child {
-             font-family: 'Oxanium', monospace;
+             font-family: inherit;
              font-weight: 700;
              color: #3BADB0;
           }

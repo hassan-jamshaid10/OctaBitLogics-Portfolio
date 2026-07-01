@@ -171,7 +171,7 @@ export default function CaseStudies() {
           gap: 2rem; margin-bottom: 2.5rem;
         }
         .cs-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(2.2rem, 4.8vw, 3.4rem);
           font-weight: 800; letter-spacing: -0.03em; line-height: 1;
           color: #002046;
@@ -183,7 +183,7 @@ export default function CaseStudies() {
         }
         .cs-view-all {
           display: inline-flex; align-items: center; gap: 10px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.85rem; font-weight: 700;
           color: #002046; text-decoration: none;
           padding: 11px 22px;
@@ -245,7 +245,7 @@ export default function CaseStudies() {
           flex: 1;
         }
         .cs-card-headline {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.18;
           background: linear-gradient(135deg, #002046 0%, #1a4a80 100%);
           -webkit-background-clip: text;
@@ -265,7 +265,7 @@ export default function CaseStudies() {
 
         .cs-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: auto; }
         .cs-tag {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.72rem; font-weight: 600;
           padding: 6px 12px; border-radius: 4px; white-space: nowrap;
         }
@@ -275,7 +275,7 @@ export default function CaseStudies() {
         .cs-client { margin-top: 1.25rem; height: 32px; display: flex; align-items: center; }
         .cs-client img { max-height: 38px; max-width: 150px; object-fit: contain; }
         .cs-client-text {
-          font-family: 'Manrope', sans-serif; font-weight: 800;
+          font-family: inherit; font-weight: 800;
           font-size: 1.25rem; color: #002046; letter-spacing: -0.01em;
         }
 
@@ -296,7 +296,7 @@ export default function CaseStudies() {
         .cs-view-case {
           position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
           display: inline-flex; align-items: center; gap: 8px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.8rem; font-weight: 700;
           color: #002046; text-decoration: none;
           background: #fff; padding: 9px 15px; border-radius: 4px;
@@ -315,7 +315,7 @@ export default function CaseStudies() {
           padding: 1.25rem 1.75rem 1.5rem;
         }
         .cs-tech-label {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.65rem;
           font-weight: 700;
           letter-spacing: 0.14em;
@@ -329,7 +329,7 @@ export default function CaseStudies() {
           gap: 6px;
         }
         .cs-tech-pill {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.72rem;
           font-weight: 600;
           color: #002046;

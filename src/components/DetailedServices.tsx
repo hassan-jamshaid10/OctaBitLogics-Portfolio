@@ -44,7 +44,7 @@ export function ProductDevComponent() {
         </motion.div>
         
         <motion.div className="det-svc-right" initial={{opacity:0, x:20}} whileInView={{opacity:1, x:0}} viewport={{once:true}} transition={{duration: 0.6}}>
-          <h3 className="det-svc-subtitle"><span>/</span> What We Offer</h3>
+          <h3 className="det-svc-subtitle"> What We Offer</h3>
           <div className="det-svc-offer-grid">
             <div className="det-svc-offer-box">
               <h4 className="det-svc-offer-title">MVP Creation</h4>
@@ -64,7 +64,7 @@ export function ProductDevComponent() {
             </div>
           </div>
 
-          <h3 className="det-svc-subtitle"><span>/</span> Technologies We Use</h3>
+          <h3 className="det-svc-subtitle"> Technologies We Use</h3>
           <div className="det-svc-tech">
             <TechIcon name="Jira" slug="jira" />
             <TechIcon name="Figma" slug="figma" />
@@ -100,7 +100,7 @@ export function WebDevComponent() {
         </motion.div>
         
         <motion.div className="det-svc-right" initial={{opacity:0, x:20}} whileInView={{opacity:1, x:0}} viewport={{once:true}} transition={{duration: 0.6}}>
-          <h3 className="det-svc-subtitle"><span>/</span> What We Offer</h3>
+          <h3 className="det-svc-subtitle"> What We Offer</h3>
           <div className="det-svc-offer-grid">
             <div className="det-svc-offer-box">
               <h4 className="det-svc-offer-title">Single Page Apps</h4>
@@ -120,7 +120,7 @@ export function WebDevComponent() {
             </div>
           </div>
 
-          <h3 className="det-svc-subtitle"><span>/</span> Technologies We Use</h3>
+          <h3 className="det-svc-subtitle"> Technologies We Use</h3>
           <div className="det-svc-tech">
             <TechIcon name="React" slug="react" />
             <TechIcon name="Next.js" slug="nextdotjs" />
@@ -160,7 +160,7 @@ export function MobileDevComponent() {
         </motion.div>
         
         <motion.div className="det-svc-right" initial={{opacity:0, x:20}} whileInView={{opacity:1, x:0}} viewport={{once:true}} transition={{duration: 0.6}}>
-          <h3 className="det-svc-subtitle"><span>/</span> What We Offer</h3>
+          <h3 className="det-svc-subtitle"> What We Offer</h3>
           <div className="det-svc-offer-grid">
             <div className="det-svc-offer-box">
               <h4 className="det-svc-offer-title">Native iOS & Android</h4>
@@ -180,7 +180,7 @@ export function MobileDevComponent() {
             </div>
           </div>
 
-          <h3 className="det-svc-subtitle"><span>/</span> Technologies We Use</h3>
+          <h3 className="det-svc-subtitle">Technologies We Use</h3>
           <div className="det-svc-tech">
             <TechIcon name="React Native" slug="react" />
             <TechIcon name="Flutter" slug="flutter" />
@@ -217,7 +217,7 @@ export function DevOpsComponent() {
         </motion.div>
         
         <motion.div className="det-svc-right" initial={{opacity:0, x:20}} whileInView={{opacity:1, x:0}} viewport={{once:true}} transition={{duration: 0.6}}>
-          <h3 className="det-svc-subtitle"><span>/</span> What We Offer</h3>
+          <h3 className="det-svc-subtitle"> What We Offer</h3>
           <div className="det-svc-offer-grid">
             <div className="det-svc-offer-box">
               <h4 className="det-svc-offer-title">CI/CD Automation</h4>
@@ -237,7 +237,7 @@ export function DevOpsComponent() {
             </div>
           </div>
 
-          <h3 className="det-svc-subtitle"><span>/</span> Technologies We Use</h3>
+          <h3 className="det-svc-subtitle"> Technologies We Use</h3>
           <div className="det-svc-tech">
             <TechIcon name="AWS" customSrc="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" />
             <TechIcon name="Azure" customSrc="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg" />
@@ -275,7 +275,7 @@ export function AiMlComponent() {
         </motion.div>
         
         <motion.div className="det-svc-right" initial={{opacity:0, x:20}} whileInView={{opacity:1, x:0}} viewport={{once:true}} transition={{duration: 0.6}}>
-          <h3 className="det-svc-subtitle"><span>/</span> What We Offer</h3>
+          <h3 className="det-svc-subtitle"> What We Offer</h3>
           <div className="det-svc-offer-grid">
             <div className="det-svc-offer-box">
               <h4 className="det-svc-offer-title">LLM Integration</h4>
@@ -295,7 +295,7 @@ export function AiMlComponent() {
             </div>
           </div>
 
-          <h3 className="det-svc-subtitle"><span>/</span> Technologies We Use</h3>
+          <h3 className="det-svc-subtitle">Technologies We Use</h3>
           <div className="det-svc-tech">
             <TechIcon name="Python" slug="python" />
             <TechIcon name="TensorFlow" slug="tensorflow" />
@@ -335,7 +335,7 @@ export function DataEngComponent() {
         </motion.div>
         
         <motion.div className="det-svc-right" initial={{opacity:0, x:20}} whileInView={{opacity:1, x:0}} viewport={{once:true}} transition={{duration: 0.6}}>
-          <h3 className="det-svc-subtitle"><span>/</span> What We Offer</h3>
+          <h3 className="det-svc-subtitle">What We Offer</h3>
           <div className="det-svc-offer-grid">
             <div className="det-svc-offer-box">
               <h4 className="det-svc-offer-title">ETL Pipelines</h4>
@@ -355,7 +355,7 @@ export function DataEngComponent() {
             </div>
           </div>
 
-          <h3 className="det-svc-subtitle"><span>/</span> Technologies We Use</h3>
+          <h3 className="det-svc-subtitle">Technologies We Use</h3>
           <div className="det-svc-tech">
             <TechIcon name="Python" slug="python" />
             <TechIcon name="Apache Kafka" slug="apachekafka" />
@@ -390,7 +390,7 @@ export function UiUxComponent() {
         </motion.div>
         
         <motion.div className="det-svc-right" initial={{opacity:0, x:20}} whileInView={{opacity:1, x:0}} viewport={{once:true}} transition={{duration: 0.6}}>
-          <h3 className="det-svc-subtitle"><span>/</span> What We Offer</h3>
+          <h3 className="det-svc-subtitle">What We Offer</h3>
           <div className="det-svc-offer-grid">
             <div className="det-svc-offer-box">
               <h4 className="det-svc-offer-title">User Research</h4>
@@ -410,7 +410,7 @@ export function UiUxComponent() {
             </div>
           </div>
 
-          <h3 className="det-svc-subtitle"><span>/</span> Technologies We Use</h3>
+          <h3 className="det-svc-subtitle">Technologies We Use</h3>
           <div className="det-svc-tech">
             <TechIcon name="Figma" slug="figma" />
             <TechIcon name="Adobe XD" customSrc="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/xd/xd-plain.svg" />
@@ -476,7 +476,7 @@ export default function DetailedServices() {
         }
 
         .det-svc-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(2rem, 3.5vw, 3.5rem);
           font-weight: 800;
           color: #002046;
@@ -495,7 +495,7 @@ export default function DetailedServices() {
 
         /* Upgraded Subtitle Design */
         .det-svc-subtitle {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.5rem; /* Reduced font size to fit tighter */
           font-weight: 800;
           color: #002046;
@@ -534,7 +534,7 @@ export default function DetailedServices() {
         }
 
         .det-svc-offer-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.1rem;
           font-weight: 800;
           color: #002046;
@@ -571,7 +571,7 @@ export default function DetailedServices() {
           display: flex;
           align-items: center;
           gap: 10px;
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 0.95rem;
           font-weight: 700;
           color: #002046;
@@ -612,13 +612,17 @@ export default function DetailedServices() {
         @media (max-width: 600px) {
           .det-svc-offer-grid { grid-template-columns: 1fr; }
           .det-svc-watermark { width: 140px; height: 140px; }
-          .det-svc-tech { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+          .det-svc-tech { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+          .det-tech-item { padding: 0.6rem 0.5rem; font-size: 0.8rem; gap: 7px; }
+          .det-tech-icon { width: 18px; height: 18px; }
           .det-svc-intro { font-size: 0.95rem; }
           .det-svc-subtitle { font-size: 1.25rem; }
         }
         @media (max-width: 400px) {
           .det-svc-section { padding: 3rem 16px; }
-          .det-svc-tech { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+          .det-svc-tech { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+          .det-tech-item { padding: 0.5rem; font-size: 0.75rem; }
+          .det-tech-icon { width: 16px; height: 16px; }
           .det-svc-title { font-size: clamp(1.6rem, 8vw, 2rem); }
         }
       `}</style>

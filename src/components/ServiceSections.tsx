@@ -76,7 +76,7 @@ export default function ServiceSections() {
         #service-sections {
           background: #faf9fd;
           padding: 6rem 40px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           position: relative;
         }
 
@@ -124,7 +124,7 @@ export default function ServiceSections() {
         }
 
         .ss-card-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.35rem;
           font-weight: 800;
           color: #002046;
@@ -222,12 +222,19 @@ export default function ServiceSections() {
           </svg>
 
           {SERVICES.map((srv) => (
-            <motion.div 
+            <motion.div
               key={srv.id}
-              className="ss-card" 
-              variants={{ 
-                hidden: { opacity: 0, y: 20 }, 
-                show: { opacity: 1, y: 0, transition: { duration: 0.6 } } 
+              className="ss-card"
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+              }}
+              onClick={() => {
+                const el = document.getElementById(srv.id);
+                if (!el) return;
+                const offset = 80;
+                const top = el.getBoundingClientRect().top + window.scrollY - offset;
+                window.scrollTo({ top, behavior: "smooth" });
               }}
             >
               <div className="ss-card-icon">

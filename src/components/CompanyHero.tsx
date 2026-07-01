@@ -34,7 +34,7 @@ export default function CompanyHero() {
           padding-bottom: 4rem;
           background: #ffffff;
           overflow: hidden;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           min-height: 80vh;
           display: flex;
           flex-direction: column;
@@ -67,7 +67,7 @@ export default function CompanyHero() {
         }
 
         .ch-eyebrow {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.75rem;
           font-weight: 600;
           letter-spacing: 0.2em;
@@ -77,7 +77,7 @@ export default function CompanyHero() {
         }
 
         .ch-h1 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(2.5rem, 5vw, 4rem);
           font-weight: 800;
           background: linear-gradient(135deg, #002046 0%, #1a4a80 100%);

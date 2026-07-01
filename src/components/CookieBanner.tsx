@@ -81,7 +81,7 @@ export default function CookieBanner() {
           z-index: 9999;
           background: #001530;
           border-top: 1px solid rgba(255,255,255,0.1);
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           padding: 20px 40px;
           display: flex;
           align-items: center;
@@ -99,7 +99,7 @@ export default function CookieBanner() {
           min-width: 0;
         }
         .ck-banner-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 0.92rem;
           font-weight: 800;
           color: #ffffff;
@@ -119,7 +119,7 @@ export default function CookieBanner() {
           align-items: center;
         }
         .ck-btn-accept {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.82rem;
           font-weight: 700;
           background: #2ECC40;
@@ -132,7 +132,7 @@ export default function CookieBanner() {
         }
         .ck-btn-accept:hover { background: #27b837; }
         .ck-btn-manage {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.82rem;
           font-weight: 600;
           background: transparent;
@@ -145,7 +145,7 @@ export default function CookieBanner() {
         }
         .ck-btn-manage:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
         .ck-btn-reject {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.78rem;
           font-weight: 500;
           background: transparent;
@@ -182,7 +182,7 @@ export default function CookieBanner() {
           max-height: 90vh;
           overflow-y: auto;
           border-radius: 0;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           animation: ck-pop 0.3s cubic-bezier(0.22,1,0.36,1);
         }
         @keyframes ck-pop {
@@ -199,7 +199,7 @@ export default function CookieBanner() {
           gap: 12px;
         }
         .ck-modal-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.1rem;
           font-weight: 800;
           color: #ffffff;
@@ -301,7 +301,7 @@ export default function CookieBanner() {
         }
         .ck-modal-btn-save {
           flex: 1;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.85rem;
           font-weight: 700;
           background: #002046;
@@ -314,7 +314,7 @@ export default function CookieBanner() {
         .ck-modal-btn-save:hover { background: #013a6b; }
         .ck-modal-btn-all {
           flex: 1;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.85rem;
           font-weight: 700;
           background: #2ECC40;

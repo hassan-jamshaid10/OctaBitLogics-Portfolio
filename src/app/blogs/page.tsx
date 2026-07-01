@@ -89,7 +89,7 @@ export default function BlogsPage() {
             padding-bottom: 4rem;
             background: #ffffff;
             overflow: hidden;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             min-height: 80vh;
             display: flex;
             flex-direction: column;
@@ -122,7 +122,7 @@ export default function BlogsPage() {
           }
 
           .blp-eyebrow {
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.2em;
@@ -132,7 +132,7 @@ export default function BlogsPage() {
           }
 
           .blp-h1 {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             background: linear-gradient(135deg, #002046 0%, #1a4a80 100%);
@@ -236,7 +236,7 @@ export default function BlogsPage() {
             border: none;
             outline: none;
             padding: 12px 14px 12px 0;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 0.88rem;
             color: #002046;
           }
@@ -251,7 +251,7 @@ export default function BlogsPage() {
           }
           .blp-filter-btn {
             padding: 0.75rem 1.5rem;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 0.85rem;
             font-weight: 600;
             color: #74777f;
@@ -320,7 +320,7 @@ export default function BlogsPage() {
             background: #ffffff;
           }
           .blp-featured-title {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(1.4rem, 2.5vw, 2rem);
             font-weight: 800;
             color: #002046;
@@ -446,7 +446,7 @@ export default function BlogsPage() {
             letter-spacing: 0.04em;
           }
           .blp-card-title {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 1rem;
             font-weight: 800;
             color: #002046;
@@ -529,7 +529,7 @@ export default function BlogsPage() {
             color: #74777f;
           }
           .blp-empty h3 {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 1.25rem;
             font-weight: 700;
             color: #002046;

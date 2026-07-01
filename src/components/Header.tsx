@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { label: "Industries", href: "/industries" },
   { label: "Services", href: "/services" },
   { label: "Our Work", href: "/projects" },
-  { label: "Contact", href: "/contact" },
+  { label: "News & insights", href: "/blog" },
 ];
 
 interface NavbarProps {
@@ -74,8 +74,8 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
       ? pathname === href
       : pathname === "/" && activeSection === href.slice(1);
 
-  // Force white nav text when hero background is dark (projects, blog detail & contact)
-  const isHeroDark = (pathname.startsWith("/projects") || pathname.startsWith("/blogs/") || pathname === "/contact") && !scrolled;
+  // Force white nav text when hero background is dark (project detail pages, blog detail pages)
+  const isHeroDark = (pathname.startsWith("/projects/") || pathname.startsWith("/blogs/")) && !scrolled;
 
   return (
     <>
@@ -155,7 +155,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
 
         .obl-link {
           position: relative;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.88rem; font-weight: 500;
           text-decoration: none; color: #44474e;
           padding: 9px 14px; border-radius: 10px;
@@ -214,21 +214,21 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           height: 20px;
         }
         .obl-subtab-inner h4 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.25rem;
           font-weight: 800;
           margin: 0 0 0.5rem 0;
           color: #fff;
         }
         .obl-subtab-inner p {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.85rem;
           line-height: 1.5;
           color: rgba(255,255,255,0.7);
           margin: 0 0 1.5rem 0;
         }
         .obl-subtab-link {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.85rem;
           font-weight: 700;
           color: #2ECC40;
@@ -244,7 +244,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
         /* ── CTA: brand arrow-chip language ── */
         .obl-cta {
           display: inline-flex; align-items: center; gap: 10px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.84rem; font-weight: 700; letter-spacing: 0.01em;
           color: #ffffff; background: #002046;
           border: none; cursor: pointer;
@@ -307,7 +307,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
         }
         .obl-mobile-link {
           position: relative;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.95rem; font-weight: 500;
           text-decoration: none; color: #44474e;
           padding: 13px 16px; border-radius: 12px;
@@ -332,7 +332,7 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
           margin-top: 8px;
           display: inline-flex; align-items: center;
           justify-content: space-between; gap: 10px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.92rem; font-weight: 700;
           color: #ffffff; background: #002046;
           border: none; cursor: pointer;

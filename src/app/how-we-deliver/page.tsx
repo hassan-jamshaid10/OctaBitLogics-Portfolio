@@ -188,7 +188,7 @@ export default function HowWeDeliverPage() {
             padding-top: 150px;
             padding-bottom: 6rem;
             overflow: hidden;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
           }
           .hwd-glow {
             position: absolute;
@@ -218,7 +218,7 @@ export default function HowWeDeliverPage() {
             margin-bottom: 1.5rem;
           }
           .hwd-h1 {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(2.4rem, 4.5vw, 3.6rem);
             font-weight: 800;
             color: #002046;
@@ -245,7 +245,7 @@ export default function HowWeDeliverPage() {
             padding: 14px 28px;
             background: #002046;
             color: #ffffff;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 0.88rem;
             font-weight: 700;
             text-decoration: none;
@@ -269,7 +269,7 @@ export default function HowWeDeliverPage() {
             padding: 2rem 1.75rem;
           }
           .hwd-stat-val {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(2rem, 3.5vw, 2.8rem);
             font-weight: 800;
             color: #002046;
@@ -288,7 +288,7 @@ export default function HowWeDeliverPage() {
           /* ── Shared section styles ── */
           .hwd-section {
             padding: 6rem 40px;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
           }
           .hwd-inner { max-width: 1280px; margin: 0 auto; }
           .hwd-section-eyebrow {
@@ -309,7 +309,7 @@ export default function HowWeDeliverPage() {
             background: #2ECC40;
           }
           .hwd-h2 {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(1.9rem, 3.5vw, 2.8rem);
             font-weight: 800;
             color: #002046;
@@ -347,7 +347,7 @@ export default function HowWeDeliverPage() {
             align-items: flex-start;
             justify-content: center;
             padding: 2.5rem 0;
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 0.65rem;
             font-weight: 800;
             letter-spacing: 0.12em;
@@ -366,7 +366,7 @@ export default function HowWeDeliverPage() {
             margin-bottom: 0.5rem;
           }
           .hwd-model-title {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 1.2rem;
             font-weight: 800;
             color: #002046;
@@ -472,7 +472,7 @@ export default function HowWeDeliverPage() {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 0.65rem;
             font-weight: 800;
             color: #ffffff;
@@ -486,7 +486,7 @@ export default function HowWeDeliverPage() {
             gap: 4px;
           }
           .hwd-phase-title {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 1.1rem;
             font-weight: 800;
             color: #ffffff;
@@ -549,7 +549,7 @@ export default function HowWeDeliverPage() {
             margin-bottom: 1.25rem;
           }
           .hwd-principle-title {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 1rem;
             font-weight: 800;
             color: #002046;
@@ -569,7 +569,7 @@ export default function HowWeDeliverPage() {
               linear-gradient(135deg, #002046 0%, #013a6b 45%, #0a5c50 100%);
             padding: 7rem 40px;
             text-align: center;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
           }
           .hwd-cta-inner { max-width: 660px; margin: 0 auto; }
           .hwd-cta-eyebrow {
@@ -581,7 +581,7 @@ export default function HowWeDeliverPage() {
             margin-bottom: 1.25rem;
           }
           .hwd-cta-h2 {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 800;
             color: #ffffff;

@@ -46,7 +46,7 @@ export default function PartnersBar() {
         }
 
         .partners-label {
-          font-family: 'Oxanium', monospace;
+          font-family: inherit;
           font-size: 0.62rem;
           font-weight: 700;
           letter-spacing: 0.18em;

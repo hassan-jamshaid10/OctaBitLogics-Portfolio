@@ -74,7 +74,7 @@ export default function LivingCharacter() {
         .window-title {
           flex: 1;
           text-align: center;
-          font-family: 'DM Sans', sans-serif;
+          font-family: inherit;
           font-size: 0.72rem;
           color: rgba(255,255,255,0.35);
           letter-spacing: 0.03em;
@@ -164,7 +164,7 @@ export default function LivingCharacter() {
         }
 
         .hud-title {
-          font-family: 'Oxanium', monospace;
+          font-family: inherit;
           color: #ffffff;
           font-size: 0.78rem;
           font-weight: 700;
@@ -172,7 +172,7 @@ export default function LivingCharacter() {
         }
 
         .hud-desc {
-          font-family: 'DM Sans', sans-serif;
+          font-family: inherit;
           color: rgba(167, 255, 249, 0.75);
           font-size: 0.65rem;
         }

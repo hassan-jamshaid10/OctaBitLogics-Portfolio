@@ -72,7 +72,7 @@ export default function ExpertiseDomains() {
           padding: 6rem 40px;
           position: relative;
           overflow: hidden;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
         }
 
         /* animated diagonal line pattern */
@@ -97,7 +97,7 @@ export default function ExpertiseDomains() {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(6rem, 15vw, 14rem);
           font-weight: 900;
           color: rgba(0, 32, 70, 0.03);
@@ -125,7 +125,7 @@ export default function ExpertiseDomains() {
         }
 
         .exp-h2 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(2.2rem, 4.5vw, 3.5rem);
           font-weight: 800;
           color: #002046;
@@ -192,7 +192,7 @@ export default function ExpertiseDomains() {
         }
 
         .exp-num {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 0.8rem;
           font-weight: 800;
           letter-spacing: 0.1em;
@@ -206,7 +206,7 @@ export default function ExpertiseDomains() {
         }
 
         .exp-tag {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.7rem;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -225,7 +225,7 @@ export default function ExpertiseDomains() {
         }
 
         .exp-row-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(1.35rem, 2.5vw, 1.75rem);
           font-weight: 800;
           color: #002046;
@@ -310,7 +310,7 @@ export default function ExpertiseDomains() {
         }
 
         .exp-stat-val {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 2rem;
           font-weight: 900;
           color: #002046;
@@ -417,7 +417,7 @@ export default function ExpertiseDomains() {
                       <div className="exp-body">
                         <div>
                           <p className="exp-desc">{d.description}</p>
-                          <a href="#contact" className="exp-link">
+                          <a href="/contact" className="exp-link">
                             Start a project
                             <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                               <path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="round"/>

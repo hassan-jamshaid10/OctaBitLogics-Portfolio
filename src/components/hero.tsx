@@ -175,7 +175,7 @@ export default function Hero(_props: HeroProps) {
         @keyframes nodepulse { 0%, 100% { opacity: 0.8; } 50% { opacity: 0.25; } }
 
         /* ── Wordmark: stroke-drawn, then fills SOLID brand colors ── */
-        .word { font-family: 'Manrope', sans-serif; font-weight: 800; letter-spacing: 2px; }
+        .word { font-family: inherit; font-weight: 800; letter-spacing: 2px; }
         .word tspan {
           fill: #002046; fill-opacity: 0;
           stroke: #002046; stroke-opacity: 0.55; stroke-width: 1.5;
@@ -236,7 +236,7 @@ export default function Hero(_props: HeroProps) {
 
         .hero-eyebrow {
           display: flex; align-items: center; gap: 18px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.72rem; font-weight: 600;
           letter-spacing: 0.22em; color: #74777f;
           margin-bottom: 1.75rem; white-space: nowrap;
@@ -248,7 +248,7 @@ export default function Hero(_props: HeroProps) {
         .eyebrow-rule:last-child { background: linear-gradient(90deg, #2ECC40, transparent); }
 
         .hero-h1 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(2.9rem, 6.6vw, 5.4rem);
           font-weight: 800; line-height: 1.08;
           letter-spacing: -0.03em; color: #002046; margin: 0;

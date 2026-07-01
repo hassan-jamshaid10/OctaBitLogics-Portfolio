@@ -50,7 +50,7 @@ export default function Contact() {
           background:
             radial-gradient(ellipse 80% 60% at 70% 0%, rgba(46, 204, 64, 0.14) 0%, transparent 55%),
             linear-gradient(135deg, #002046 0%, #013a6b 45%, #0a5c50 100%);
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           position: relative;
           overflow: hidden;
         }
@@ -82,7 +82,7 @@ export default function Contact() {
         }
 
         .ct-heading {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(2rem, 3.5vw, 2.8rem);
           font-weight: 800;
           line-height: 1.12;
@@ -95,7 +95,7 @@ export default function Contact() {
         }
 
         .ct-sub {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.95rem;
           line-height: 1.7;
           color: rgba(255, 255, 255, 0.6);
@@ -105,7 +105,7 @@ export default function Contact() {
 
         /* Contact info rows */
         .ct-info-label {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-weight: 700;
           font-size: 0.7rem;
           letter-spacing: 0.12em;
@@ -165,7 +165,7 @@ export default function Contact() {
         }
 
         .ct-label {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.78rem;
           font-weight: 700;
           letter-spacing: 0.08em;
@@ -179,7 +179,7 @@ export default function Contact() {
           border-radius: 0;
           padding: 13px 16px;
           color: #ffffff;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.92rem;
           outline: none;
           transition: border-color 0.3s ease, background 0.3s ease;
@@ -211,7 +211,7 @@ export default function Contact() {
           gap: 10px;
           background: #2ECC40;
           color: #002046;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.9rem;
           font-weight: 700;
           padding: 14px 32px;

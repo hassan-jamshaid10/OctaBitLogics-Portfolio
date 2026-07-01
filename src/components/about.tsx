@@ -62,7 +62,7 @@ export default function AboutSplit() {
         /* ── Header ── */
         .about-eyebrow {
           display: flex; align-items: center; gap: 14px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em;
           color: rgba(0, 32, 70, 0.55);
           margin: 0 0 1.25rem;
@@ -72,7 +72,7 @@ export default function AboutSplit() {
           background: linear-gradient(90deg, transparent, #2ECC40);
         }
         .about-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(2.4rem, 5vw, 3.6rem);
           font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
           margin: 0 0 3rem;
@@ -111,7 +111,7 @@ export default function AboutSplit() {
           position: relative; z-index: 1;
         }
         .cc-headline {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(1.8rem, 3vw, 2.6rem);
           font-weight: 800; letter-spacing: -0.025em; line-height: 1.12;
           color: #002046; margin: 0 0 1.75rem;
@@ -125,7 +125,7 @@ export default function AboutSplit() {
           -webkit-text-fill-color: transparent;
         }
         .cc-body {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 1.05rem; line-height: 1.8;
           color: rgba(0, 32, 70, 0.7);
           margin: 0 0 2.5rem;
@@ -140,7 +140,7 @@ export default function AboutSplit() {
           position: relative; z-index: 1;
         }
         .cc-tag {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.72rem; font-weight: 600;
           padding: 8px 16px; border-radius: 4px; white-space: nowrap;
         }
@@ -158,14 +158,14 @@ export default function AboutSplit() {
         }
         .cc-stat { display: flex; flex-direction: column; }
         .cc-stat-num {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 2.4rem; font-weight: 800; letter-spacing: -0.02em;
           color: #002046; line-height: 1;
           margin-bottom: 0.6rem;
         }
         .cc-stat-num span { color: #2ECC40; }
         .cc-stat-label {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.82rem; font-weight: 500;
           color: rgba(0, 32, 70, 0.6);
           letter-spacing: 0.02em; line-height: 1.5;
@@ -178,7 +178,7 @@ export default function AboutSplit() {
           padding-top: 2.5rem;
           border-top: 1px solid rgba(0, 32, 70, 0.1);
           position: relative; z-index: 1;
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(0.95rem, 1.4vw, 1.15rem);
           font-weight: 700; color: #002046;
           letter-spacing: -0.01em;

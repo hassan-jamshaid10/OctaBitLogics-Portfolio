@@ -15,7 +15,7 @@ export default function TechPartnersBar() {
       boxShadow: "0 4px 24px rgba(27,46,94,0.07)",
     }}>
       <span style={{
-        fontFamily: "'Oxanium', monospace",
+        fontFamily: "inherit",
         fontSize: "clamp(1.4rem, 3vw, 2rem)",
         fontWeight: 800,
         letterSpacing: "0.04em",

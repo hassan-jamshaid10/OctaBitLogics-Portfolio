@@ -8,13 +8,13 @@
   "theme_color": "#002046",
   "icons": [
     {
-      "src": "/octabit-logo-transparent.png",
+      "src": "/octabit final.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/octabit-logo-transparent.png",
+      "src": "/octabit final.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

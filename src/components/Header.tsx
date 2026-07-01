@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { label: "Industries", href: "/industries" },
   { label: "Services", href: "/services" },
   { label: "Our Work", href: "/projects" },
-  { label: "News & insights", href: "/blog" },
+  { label: "News & insights", href: "/blogs" },
 ];
 
 interface NavbarProps {

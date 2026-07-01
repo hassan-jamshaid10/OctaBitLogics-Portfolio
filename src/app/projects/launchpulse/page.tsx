@@ -6,7 +6,7 @@ export default function LaunchPulsePage() {
     <ProjectDetailPage
       category="AI & Big Data"
       name="LaunchPulse"
-      tagline="AI-powered startup evaluation engine — giving investors and founders data-driven confidence."
+      tagline="AI-powered startup evaluation engine giving investors and founders data-driven confidence."
       heroImage="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&q=90&auto=format&fit=crop"
       description="LaunchPulse is a comprehensive platform combining modern web technologies with machine learning to help founders and investors make data-driven decisions. It analyzes startup metrics, market signals, and document intelligence to predict success probability and surface risk factors before capital is committed."
       metrics={[
@@ -29,7 +29,7 @@ export default function LaunchPulsePage() {
         { icon: "📈", title: "Success Prediction Engine",  detail: "ML models analyze startup metrics across team quality, market size, traction, and financials to generate a calibrated success probability score." },
         { icon: "⚠️", title: "Risk Factor Analysis",       detail: "Automated risk scanning surfaces red flags across regulatory exposure, market saturation, burn rate, and competitive landscape." },
         { icon: "🎯", title: "Market Fit Scoring",         detail: "Proprietary algorithm cross-references product-market indicators against verified industry benchmarks to score fit across verticals." },
-        { icon: "📄", title: "Document Intelligence",      detail: "Secure vault with intelligent parsing for pitch decks, financial models, and business plans — automatically extracting key metrics." },
+        { icon: "📄", title: "Document Intelligence",      detail: "Secure vault with intelligent parsing for pitch decks, financial models, and business plans automatically extracting key metrics." },
         { icon: "📊", title: "Growth Potential Mapping",   detail: "Multi-dimensional growth assessment models project revenue trajectories, customer acquisition curves, and expansion scenarios." },
         { icon: "🔐", title: "Investor Portal",            detail: "Role-based access control allows deal leads, analysts, and LPs to collaborate on evaluations with granular permission levels." },
       ]}

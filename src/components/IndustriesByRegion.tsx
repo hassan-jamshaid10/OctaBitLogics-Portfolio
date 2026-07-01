@@ -118,7 +118,7 @@ export default function IndustriesByRegion() {
         #industries-regions {
           background: #faf9fd;
           padding: 8rem 40px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           width: 100%;
           overflow: hidden;
           box-sizing: border-box;
@@ -139,7 +139,7 @@ export default function IndustriesByRegion() {
         }
 
         .ir-h2 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(1.5rem, 4vw, 3rem);
           font-weight: 800;
           color: #002046;
@@ -261,7 +261,7 @@ export default function IndustriesByRegion() {
         }
 
         .ir-card-name {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.1rem;
           font-weight: 700;
           color: #002046;
@@ -340,7 +340,7 @@ export default function IndustriesByRegion() {
         {/* Header */}
         <div className="ir-header">
           <h2 className="ir-h2">
-            Where We Operate —<br />
+            Where We Operate<br />
             <span>Regions We Serve</span>
           </h2>
 

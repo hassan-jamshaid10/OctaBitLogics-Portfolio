@@ -182,7 +182,7 @@ export default function AIFirstPage() {
             padding-top: 150px;
             padding-bottom: 6rem;
             overflow: hidden;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
           }
           .aif-hero-glow {
             position: absolute;
@@ -212,7 +212,7 @@ export default function AIFirstPage() {
             margin-bottom: 1.5rem;
           }
           .aif-hero-h1 {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(2.4rem, 4.5vw, 3.6rem);
             font-weight: 800;
             color: #002046;
@@ -239,7 +239,7 @@ export default function AIFirstPage() {
             padding: 14px 28px;
             background: #002046;
             color: #ffffff;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 0.88rem;
             font-weight: 700;
             text-decoration: none;
@@ -265,7 +265,7 @@ export default function AIFirstPage() {
             padding: 2rem 1.75rem;
           }
           .aif-hero-stat-val {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(2rem, 3.5vw, 2.8rem);
             font-weight: 800;
             color: #002046;
@@ -284,7 +284,7 @@ export default function AIFirstPage() {
           /* ── Section shared ── */
           .aif-section {
             padding: 6rem 40px;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
           }
           .aif-inner { max-width: 1280px; margin: 0 auto; }
           .aif-eyebrow {
@@ -305,7 +305,7 @@ export default function AIFirstPage() {
             background: #2ECC40;
           }
           .aif-h2 {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(1.9rem, 3.5vw, 2.8rem);
             font-weight: 800;
             color: #002046;
@@ -338,7 +338,7 @@ export default function AIFirstPage() {
           }
           .aif-principle-card:hover { background: rgba(46,204,64,0.03); }
           .aif-principle-num {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 0.65rem;
             font-weight: 800;
             letter-spacing: 0.15em;
@@ -346,7 +346,7 @@ export default function AIFirstPage() {
             margin-bottom: 1.25rem;
           }
           .aif-principle-title {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 1.05rem;
             font-weight: 800;
             color: #002046;
@@ -402,7 +402,7 @@ export default function AIFirstPage() {
             align-items: center;
             justify-content: center;
             padding: 2.25rem 0;
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 0.7rem;
             font-weight: 800;
             letter-spacing: 0.12em;
@@ -418,7 +418,7 @@ export default function AIFirstPage() {
             gap: 4px;
           }
           .aif-step-title {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 1.2rem;
             font-weight: 800;
             color: #ffffff;
@@ -468,7 +468,7 @@ export default function AIFirstPage() {
             margin-bottom: 1.25rem;
           }
           .aif-domain-title {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 1rem;
             font-weight: 800;
             color: #002046;
@@ -504,7 +504,7 @@ export default function AIFirstPage() {
             margin-bottom: 1.5rem;
           }
           .aif-gov-title {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 1.1rem;
             font-weight: 800;
             color: #002046;
@@ -524,7 +524,7 @@ export default function AIFirstPage() {
               linear-gradient(135deg, #002046 0%, #013a6b 45%, #0a5c50 100%);
             padding: 7rem 40px;
             text-align: center;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             position: relative;
             overflow: hidden;
           }
@@ -538,7 +538,7 @@ export default function AIFirstPage() {
             margin-bottom: 1.25rem;
           }
           .aif-cta-h2 {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 800;
             color: #ffffff;

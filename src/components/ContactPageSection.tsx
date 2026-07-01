@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import {
   Send, CheckCircle2, AlertCircle, Loader2,
-  Mail, Phone, MapPin, Clock, ExternalLink,
+  Mail, Phone, MapPin,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { sendEmail } from "../app/actions/sendEmail";
@@ -12,7 +12,7 @@ const CONTACT_INFO = [
   { icon: Mail,   label: "Email",        value: "info@octabitlogics.com", href: "mailto:info@octabitlogics.com" },
   { icon: Phone,  label: "Phone",        value: "+92 321 5353105",        href: "tel:+923215353105" },
   { icon: MapPin, label: "Location",     value: "Lahore, Pakistan",       href: null },
-  { icon: Clock,  label: "Office Hours", value: "Mon–Fri, 9AM–6PM PKT",  href: null },
+  // { icon: Clock,  label: "Office Hours", value: "Mon–Fri, 9AM–6PM PKT",  href: null },
 ];
 
 const SERVICES = [
@@ -25,12 +25,6 @@ const SERVICES = [
   "Other",
 ];
 
-const NEXT_STEPS = [
-  { num: "01", title: "We Review",      desc: "Our team reviews your inquiry within 24 hours." },
-  { num: "02", title: "Discovery Call", desc: "We schedule a call to understand your requirements in depth." },
-  { num: "03", title: "Proposal",       desc: "We craft a tailored proposal with timeline and cost breakdown." },
-  { num: "04", title: "Kick-off",       desc: "Project begins with dedicated engineers assigned to your team." },
-];
 
 export default function ContactPageSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -85,20 +79,10 @@ export default function ContactPageSection() {
           /* === MAIN CONTACT === */
           #cps-main {
             padding: 5rem 40px;
-            background:
-              radial-gradient(ellipse 80% 60% at 70% 0%, rgba(46, 204, 64, 0.12) 0%, transparent 55%),
-              linear-gradient(135deg, #002046 0%, #013a6b 45%, #0a5c50 100%);
-            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            font-family: inherit;
             position: relative;
             overflow: hidden;
-          }
-          #cps-main::before {
-            content: '';
-            position: absolute; top: -30%; right: 5%;
-            width: 55%; height: 160%;
-            background: linear-gradient(115deg, transparent 40%, rgba(46,204,64,0.07) 50%, transparent 60%);
-            transform: rotate(8deg);
-            pointer-events: none;
           }
 
           .cps-inner {
@@ -119,7 +103,7 @@ export default function ContactPageSection() {
             font-weight: 700;
             letter-spacing: 0.14em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.38);
+            color: #74777f;
             margin-bottom: 0.75rem;
           }
 
@@ -130,14 +114,14 @@ export default function ContactPageSection() {
             align-items: center;
             gap: 14px;
             padding: 14px 18px;
-            border: 1px solid rgba(255,255,255,0.09);
-            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0,32,70,0.1);
+            background: #faf9fd;
             text-decoration: none;
             transition: all 0.3s ease;
           }
           .cps-info-card:hover {
             border-color: rgba(46,204,64,0.45);
-            background: rgba(46,204,64,0.05);
+            background: rgba(46,204,64,0.04);
           }
 
           .cps-info-card-icon {
@@ -153,13 +137,13 @@ export default function ContactPageSection() {
             font-weight: 600;
             letter-spacing: 0.09em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.38);
+            color: #74777f;
             margin-bottom: 2px;
           }
           .cps-info-card-value {
             font-size: 0.9rem;
             font-weight: 500;
-            color: rgba(255,255,255,0.82);
+            color: #002046;
           }
 
           /* Socials */
@@ -167,9 +151,9 @@ export default function ContactPageSection() {
           .cps-social-btn {
             width: 40px; height: 40px;
             display: flex; align-items: center; justify-content: center;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.04);
-            color: rgba(255,255,255,0.55);
+            border: 1px solid rgba(0,32,70,0.12);
+            background: #faf9fd;
+            color: #44474e;
             text-decoration: none;
             transition: all 0.3s ease;
           }
@@ -181,21 +165,21 @@ export default function ContactPageSection() {
 
           /* RIGHT: FORM */
           .cps-right {
-            border-left: 1px solid rgba(255,255,255,0.08);
+            border-left: 1px solid rgba(0,32,70,0.08);
             padding-left: 5rem;
           }
 
           .cps-form-heading {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 1.55rem;
             font-weight: 800;
-            color: #ffffff;
+            color: #002046;
             margin: 0 0 0.4rem 0;
             letter-spacing: -0.02em;
           }
           .cps-form-sub {
             font-size: 0.88rem;
-            color: rgba(255,255,255,0.42);
+            color: #74777f;
             margin: 0 0 2.5rem 0;
           }
 
@@ -213,16 +197,16 @@ export default function ContactPageSection() {
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.35);
+            color: #74777f;
           }
 
           .cps-input, .cps-select, .cps-textarea {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: #faf9fd;
+            border: 1px solid rgba(0,32,70,0.12);
             border-radius: 0;
             padding: 12px 14px;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
+            color: #002046;
+            font-family: inherit;
             font-size: 0.9rem;
             outline: none;
             transition: border-color 0.3s ease, background 0.3s ease;
@@ -230,21 +214,21 @@ export default function ContactPageSection() {
             box-sizing: border-box;
           }
           .cps-input::placeholder, .cps-textarea::placeholder {
-            color: rgba(255,255,255,0.18);
+            color: rgba(0,32,70,0.3);
           }
           .cps-input:focus, .cps-select:focus, .cps-textarea:focus {
             border-color: rgba(46,204,64,0.55);
-            background: rgba(255,255,255,0.08);
+            background: #ffffff;
           }
           .cps-select {
             appearance: none;
             cursor: pointer;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.35)' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(0,32,70,0.4)' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 14px center;
             padding-right: 36px;
           }
-          .cps-select option { background: #002046; color: #ffffff; }
+          .cps-select option { background: #ffffff; color: #002046; }
           .cps-textarea { resize: vertical; min-height: 110px; }
 
           .cps-submit {
@@ -254,7 +238,7 @@ export default function ContactPageSection() {
             gap: 10px;
             background: #2ECC40;
             color: #002046;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 0.88rem;
             font-weight: 700;
             padding: 14px 32px;
@@ -290,96 +274,13 @@ export default function ContactPageSection() {
           @media (max-width: 768px) {
             #cps-main { padding: 3.5rem 20px; }
             .cps-inner { grid-template-columns: 1fr; gap: 3rem; }
-            .cps-right { border-left: none; border-top: 1px solid rgba(255,255,255,0.08); padding-left: 0; padding-top: 3rem; }
+            .cps-right { border-left: none; border-top: 1px solid rgba(0,32,70,0.08); padding-left: 0; padding-top: 3rem; }
           }
           @media (max-width: 560px) {
             .cps-form { grid-template-columns: 1fr; }
           }
 
 
-          /* === NEXT STEPS === */
-          #cps-next {
-            padding: 5rem 40px;
-            background: #faf9fd;
-            font-family: 'Inter', sans-serif;
-          }
-
-          .cn-inner { max-width: 1280px; margin: 0 auto; }
-
-          .cn-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            color: #2ECC40;
-            margin-bottom: 0.75rem;
-          }
-          .cn-heading {
-            font-family: 'Manrope', sans-serif;
-            font-size: clamp(1.8rem, 3vw, 2.4rem);
-            font-weight: 800;
-            color: #002046;
-            letter-spacing: -0.03em;
-            margin: 0 0 3rem 0;
-          }
-
-          .cn-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-          }
-
-          .cn-card {
-            padding: 2rem 1.75rem;
-            border: 1px solid rgba(0,32,70,0.1);
-            background: #ffffff;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-          }
-          .cn-card:hover {
-            border-color: rgba(46,204,64,0.5);
-            box-shadow: 0 8px 30px rgba(0,32,70,0.08);
-            transform: translateY(-3px);
-          }
-
-          .cn-card-num {
-            font-family: 'Manrope', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: rgba(0,32,70,0.07);
-            line-height: 1;
-            margin-bottom: 1.25rem;
-          }
-          .cn-card-title {
-            font-family: 'Manrope', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 800;
-            color: #002046;
-            margin-bottom: 0.5rem;
-          }
-          .cn-card-desc {
-            font-size: 0.87rem;
-            color: rgba(0,32,70,0.52);
-            line-height: 1.65;
-          }
-
-          .cn-card-bar {
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 0; height: 3px;
-            background: #2ECC40;
-            transition: width 0.4s ease;
-          }
-          .cn-card:hover .cn-card-bar { width: 100%; }
-
-          @media (max-width: 960px) {
-            .cn-grid { grid-template-columns: repeat(2, 1fr); }
-          }
-          @media (max-width: 560px) {
-            #cps-next { padding: 3.5rem 20px; }
-            .cn-grid { grid-template-columns: 1fr; }
-          }
         `}</style>
 
         <div className="cps-inner">
@@ -412,13 +313,14 @@ export default function ContactPageSection() {
               <p className="cps-section-label">Follow us</p>
               <div className="cps-socials">
                 <a href="https://linkedin.com/company/octabitlogics" target="_blank" rel="noopener noreferrer" className="cps-social-btn" aria-label="LinkedIn">
-                  <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.04em" }}>in</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
                 </a>
-                <a href="https://twitter.com/octabitlogics" target="_blank" rel="noopener noreferrer" className="cps-social-btn" aria-label="Twitter / X">
-                  <span style={{ fontSize: "0.72rem", fontWeight: 700 }}>𝕏</span>
-                </a>
-                <a href="https://github.com/octabitlogics" target="_blank" rel="noopener noreferrer" className="cps-social-btn" aria-label="GitHub">
-                  <ExternalLink size={14} />
+                <a href="https://www.instagram.com/octabitlogics" target="_blank" rel="noopener noreferrer" className="cps-social-btn" aria-label="Instagram">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                  </svg>
                 </a>
               </div>
             </div>
@@ -526,30 +428,6 @@ export default function ContactPageSection() {
         </div>
       </section>
 
-      {/* ── What Happens Next ── */}
-      <section id="cps-next">
-        <div className="cn-inner">
-          <p className="cn-label">Our Process</p>
-          <h2 className="cn-heading">What happens next?</h2>
-          <div className="cn-grid">
-            {NEXT_STEPS.map(({ num, title, desc }, i) => (
-              <motion.div
-                key={num}
-                className="cn-card"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-              >
-                <div className="cn-card-num">{num}</div>
-                <div className="cn-card-title">{title}</div>
-                <div className="cn-card-desc">{desc}</div>
-                <div className="cn-card-bar" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
     </>
   );
 }

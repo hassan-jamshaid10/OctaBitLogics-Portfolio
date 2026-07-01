@@ -71,7 +71,7 @@ export default function CompanyDelivery() {
         #company-delivery {
           background: #faf9fd;
           padding: 8rem 40px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           width: 100%;
           overflow: hidden;
           box-sizing: border-box;
@@ -92,7 +92,7 @@ export default function CompanyDelivery() {
         }
 
         .cd-h2 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(1.5rem, 4vw, 3rem);
           font-weight: 800;
           color: #002046;
@@ -173,7 +173,7 @@ export default function CompanyDelivery() {
         }
 
         .cd-card-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.25rem;
           font-weight: 800;
           color: #002046;

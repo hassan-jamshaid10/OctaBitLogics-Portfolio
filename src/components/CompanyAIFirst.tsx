@@ -13,7 +13,7 @@ export default function CompanyAIFirst() {
           background: #faf9fd;
           padding: 8rem 40px;
           overflow: hidden;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           width: 100%;
           box-sizing: border-box;
         }
@@ -49,7 +49,7 @@ export default function CompanyAIFirst() {
         }
 
         .ai-h2 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(2.2rem, 4.5vw, 3.5rem);
           font-weight: 800;
           color: #002046;
@@ -81,7 +81,7 @@ export default function CompanyAIFirst() {
           padding: 14px 28px;
           background: #002046;
           color: #ffffff;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.9rem;
           font-weight: 700;
           text-decoration: none;

@@ -6,7 +6,7 @@ export default function TactEvacPage() {
     <ProjectDetailPage
       category="Defence Technology / AI Systems"
       name="TACT EVAC"
-      tagline="Tactical Airbase Evacuation System — autonomous AI-driven aircraft rescue under active threat conditions."
+      tagline="Tactical Airbase Evacuation System autonomous AI-driven aircraft rescue under active threat conditions."
       heroImage="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=90&auto=format&fit=crop"
       description="TACT EVAC is a fully integrated intelligent evacuation management system designed for high-value military airbase environments. The system automates detection, prioritisation, and physical relocation of strategic aircraft assets during red alert conditions — a process that historically depended on manual coordination under extreme time pressure."
       metrics={[
@@ -31,11 +31,11 @@ export default function TactEvacPage() {
         { icon: "🗺️", title: "Dynamic Pathfinding",            detail: "A* and Dijkstra algorithms compute and continuously recalculate safe evacuation routes as the threat landscape evolves in real time." },
         { icon: "🤖", title: "Autonomous Robot Fleet",         detail: "22 NavMesh-based tow robots operate as fully independent agents executing dispatch, attachment, tow transit, gate queue, and bunker delivery cycles." },
         { icon: "📡", title: "Live Command Dashboard",         detail: "React frontend receives real-time WebSocket updates displaying mission progress, robot fleet status, asset priority queue, and on-demand CCTV feeds." },
-        { icon: "🔒", title: "LAN-Bound Security",             detail: "Fully self-contained authentication operates over local area network only — no external internet dependency, immune to remote network attacks." },
+        { icon: "🔒", title: "LAN-Bound Security",             detail: "Fully self-contained authentication operates over local area network only no external internet dependency, immune to remote network attacks." },
       ]}
       challenge="Manual aircraft evacuation relies on human crews who cannot monitor a large airbase simultaneously, make prioritisation errors under stress, and cannot replan blocked routes fast enough."
       solution="A unified AI platform combining computer vision threat detection, rule-based asset prioritisation, autonomous tow robots, and a real-time WebSocket command dashboard."
-      outcome="Eliminated the human bottleneck in airbase evacuation — continuous perception, instant prioritisation, and dynamic route recalculation with no manual intervention required."
+      outcome="Eliminated the human bottleneck in airbase evacuation continuous perception, instant prioritisation, and dynamic route recalculation with no manual intervention required."
     />
   );
 }

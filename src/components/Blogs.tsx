@@ -22,7 +22,7 @@ export default function Blogs() {
         #blogs {
           padding: 5rem 40px;
           background: #faf9fd;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
         }
 
         .blg-inner {
@@ -40,7 +40,7 @@ export default function Blogs() {
         }
 
         .blg-h2 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(1.8rem, 3.5vw, 2.4rem);
           font-weight: 800;
           letter-spacing: -0.03em;
@@ -58,7 +58,7 @@ export default function Blogs() {
         }
 
         .blg-all-btn {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.85rem;
           font-weight: 600;
           color: #002046;
@@ -144,7 +144,7 @@ export default function Blogs() {
           width: fit-content;
           margin-top: 1rem;
           margin-bottom: 0.6rem;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.68rem;
           font-weight: 700;
           letter-spacing: 0.1em;
@@ -169,7 +169,7 @@ export default function Blogs() {
 
         /* Title */
         .blg-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.05rem;
           font-weight: 700;
           color: #002046;

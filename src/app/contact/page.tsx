@@ -6,6 +6,7 @@ import Navbar from "../../components/Header";
 import Footer from "../../components/Footer";
 import ContactHero from "../../components/ContactHero";
 import ContactPageSection from "../../components/ContactPageSection";
+import WhatHappensNext from "../../components/WhatHappensNext";
 
 export default function ContactPage() {
   const router = useRouter();
@@ -24,6 +25,7 @@ export default function ContactPage() {
       <Navbar activeSection="contact" onNavClick={handleNavClick} />
       <main style={{ overflowX: "hidden", width: "100%" }}>
         <ContactHero />
+        <WhatHappensNext />
         <ContactPageSection />
       </main>
       <Footer />

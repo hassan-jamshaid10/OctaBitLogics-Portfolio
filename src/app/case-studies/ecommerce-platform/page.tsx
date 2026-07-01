@@ -17,31 +17,31 @@ export default function EcommercePlatformCaseStudy() {
           .cs-hero { position: relative; background: linear-gradient(135deg, #0f1c3f 0%, #080d1e 45%, #03060e 100%); padding: 12rem 2rem 6rem; color: #ffffff; }
           .cs-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top, rgba(59,173,176,0.15) 0%, transparent 70%); pointer-events: none; z-index: 0; }
           .cs-hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
-          .cs-back-link { position: absolute; top: -4rem; left: 0; display: inline-flex; align-items: center; gap: 0.5rem; color: #a7fff9; font-family: 'Oxanium', monospace; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s, transform 0.2s; background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(167,255,249,0.3); backdrop-filter: blur(10px); }
+          .cs-back-link { position: absolute; top: -4rem; left: 0; display: inline-flex; align-items: center; gap: 0.5rem; color: #a7fff9; font-family: inherit; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s, transform 0.2s; background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(167,255,249,0.3); backdrop-filter: blur(10px); }
           .cs-back-link:hover { color: #ffffff; border-color: #ffffff; transform: translateX(-4px); background: rgba(255,255,255,0.1); }
-          .cs-category { font-family: 'Oxanium', monospace; font-size: 0.8rem; color: #a7fff9; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; display: inline-block; }
-          .cs-title { font-family: 'Oxanium', monospace; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; color: #ffffff; line-height: 1.1; margin-bottom: 1rem; }
+          .cs-category { font-family: inherit; font-size: 0.8rem; color: #a7fff9; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; display: inline-block; }
+          .cs-title { font-family: inherit; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; color: #ffffff; line-height: 1.1; margin-bottom: 1rem; }
           .cs-subtitle { font-size: 1.4rem; color: rgba(255,255,255,0.7); font-weight: 300; }
           .cs-meta-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 4rem; background: rgba(255,255,255,0.03); padding: 2.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); text-align: left; backdrop-filter: blur(10px); }
-          .meta-item h4 { font-family: 'Oxanium', monospace; font-size: 0.8rem; color: #a7fff9; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+          .meta-item h4 { font-family: inherit; font-size: 0.8rem; color: #a7fff9; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
           .meta-item p { font-size: 1rem; color: #ffffff; font-weight: 600; }
           .cs-body { position: relative; background: #ffffff; padding: 6rem 2rem 8rem; color: #4e6070; }
           .cs-body::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(59,173,176,0.12) 1px, transparent 1px); background-size: 32px 32px; pointer-events: none; z-index: 0; }
           .cs-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
           .cs-section { display: block; margin-bottom: 5rem; padding-left: 2rem; border-left: 3px solid rgba(59,173,176,0.25); }
-          .cs-content h2 { font-family: 'Oxanium', monospace; font-size: 2.2rem; color: #1B2E5E; margin-bottom: 1.5rem; font-weight: 800; line-height: 1.2; }
-          .cs-content h3 { font-family: 'Oxanium', monospace; font-size: 1.4rem; color: #3BADB0; margin-bottom: 1.2rem; font-weight: 700; margin-top: 3rem; }
+          .cs-content h2 { font-family: inherit; font-size: 2.2rem; color: #1B2E5E; margin-bottom: 1.5rem; font-weight: 800; line-height: 1.2; }
+          .cs-content h3 { font-family: inherit; font-size: 1.4rem; color: #3BADB0; margin-bottom: 1.2rem; font-weight: 700; margin-top: 3rem; }
           .cs-content p { font-size: 1.15rem; line-height: 1.9; margin-bottom: 1.5rem; color: #4e6070; }
           .cs-content strong { color: #1B2E5E; font-weight: 700; }
           .cs-content ul { list-style-type: none; padding-left: 0; margin-bottom: 2.5rem; }
           .cs-content li { position: relative; padding-left: 1.8rem; margin-bottom: 1.2rem; font-size: 1.15rem; line-height: 1.8; color: #4e6070; }
-          .cs-content li::before { content: '>'; position: absolute; left: 0; color: #3BADB0; font-weight: 900; font-family: 'Oxanium', monospace; font-size: 1.2rem; top: 2px; }
+          .cs-content li::before { content: '>'; position: absolute; left: 0; color: #3BADB0; font-weight: 900; font-family: inherit; font-size: 1.2rem; top: 2px; }
           .cs-table { width: 100%; border-collapse: collapse; margin: 3rem 0; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 40px rgba(27,46,94,0.08); border: 1px solid rgba(59,173,176,0.2); }
           .cs-table th, .cs-table td { padding: 1.2rem; border-bottom: 1px solid rgba(59,173,176,0.15); text-align: left; }
           .cs-table tr:last-child td { border-bottom: none; }
-          .cs-table th { background: rgba(59,173,176,0.06); font-family: 'Oxanium', monospace; color: #1B2E5E; font-weight: 800; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em; }
+          .cs-table th { background: rgba(59,173,176,0.06); font-family: inherit; color: #1B2E5E; font-weight: 800; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em; }
           .cs-table td { font-size: 0.95rem; line-height: 1.6; color: #4e6070; }
-          .cs-table td:first-child { font-family: 'Oxanium', monospace; font-weight: 700; color: #3BADB0; }
+          .cs-table td:first-child { font-family: inherit; font-weight: 700; color: #3BADB0; }
           @media (max-width: 768px) { .cs-hero { padding: 10rem 1.5rem 4rem; } .cs-meta-grid { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; } .cs-body { padding: 4rem 1.5rem 6rem; } .cs-section { padding-left: 1rem; border-left-width: 2px; } .cs-back-link { top: -3rem; } }
         `}</style>
 

@@ -162,7 +162,7 @@ export default function Testimonials() {
           padding: 5rem 0 6rem;
           position: relative;
           overflow: hidden;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
         }
         
         /* dot grid overlay */
@@ -191,7 +191,7 @@ export default function Testimonials() {
           display: inline-flex;
           align-items: center;
           gap: 0.45rem;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.68rem;
           font-weight: 700;
           letter-spacing: 0.12em;
@@ -204,7 +204,7 @@ export default function Testimonials() {
           margin-bottom: 1.5rem;
         }
         .tm-heading {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(2rem, 4vw, 2.8rem);
           font-weight: 800;
           color: #002046;
@@ -302,7 +302,7 @@ export default function Testimonials() {
           flex-direction: column;
         }
         .tm-name {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1rem;
           font-weight: 700;
           color: #002046;

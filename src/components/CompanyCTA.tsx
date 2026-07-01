@@ -36,7 +36,7 @@ export default function CompanyCTA() {
             linear-gradient(135deg, #002046 0%, #013a6b 45%, #0a5c50 100%);
           padding: 8rem 40px;
           overflow: hidden;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
         }
 
         .cta-bg-glow1 {
@@ -69,7 +69,7 @@ export default function CompanyCTA() {
         }
 
         .cta-h2 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(1.5rem, 4vw, 3rem);
           font-weight: 800;
           color: #ffffff;
@@ -100,7 +100,7 @@ export default function CompanyCTA() {
         }
 
         .cta-card-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.15rem;
           font-weight: 700;
           color: #ffffff;

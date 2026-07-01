@@ -6,9 +6,9 @@ export default function SportTekPage() {
     <ProjectDetailPage
       category="Mobile Platform"
       name="SportTek"
-      tagline="Dual-sided sports venue booking platform — eliminating WhatsApp chaos for players and owners."
+      tagline="Dual-sided sports venue booking platform eliminating WhatsApp chaos for players and owners."
       heroImage="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&q=90&auto=format&fit=crop"
-      description="SportTek is a mobile-first booking platform designed specifically for the Pakistani market, bridging the gap between sports enthusiasts and venue owners in real time. It replaces chaotic WhatsApp-based bookings with a seamless two-sided marketplace — instant slot discovery for players and a full management dashboard for owners."
+      description="SportTek is a mobile-first booking platform designed specifically for the Pakistani market, bridging the gap between sports enthusiasts and venue owners in real time. It replaces chaotic WhatsApp-based bookings with a seamless two-sided marketplace instant slot discovery for players and a full management dashboard for owners."
       metrics={[
         { value: "2-sided", label: "Marketplace model" },
         { value: "<60s",    label: "Booking to payment" },
@@ -26,10 +26,10 @@ export default function SportTekPage() {
         { name: "Google Maps",  icon: "devicon-google-plain",     color: "#4285F4" },
       ]}
       features={[
-        { icon: "🏟️", title: "Instant Slot Discovery",      detail: "Players browse nearby courts filtered by location, sport type, date, and price — seeing real-time availability across all registered venues." },
+        { icon: "🏟️", title: "Instant Slot Discovery",      detail: "Players browse nearby courts filtered by location, sport type, date, and price seeing real-time availability across all registered venues." },
         { icon: "💳", title: "In-App Payments",             detail: "Integrated fintech payment flow allows players to book and pay in under 60 seconds. Slots lock globally on payment confirmation." },
         { icon: "📅", title: "Owner Command Dashboard",     detail: "Color-coded timeline separates app bookings from manual walk-ins with live countdown timers for active sessions and automated reminders." },
-        { icon: "🔔", title: "Real-Time Sync",              detail: "WebSocket-backed architecture ensures owner alerts fire within milliseconds of a booking — zero polling, zero refresh required." },
+        { icon: "🔔", title: "Real-Time Sync",              detail: "WebSocket-backed architecture ensures owner alerts fire within milliseconds of a booking zero polling, zero refresh required." },
         { icon: "🗺️", title: "Location-Based Matching",     detail: "Geo-queries surface the closest available venues first. Players can filter by radius, sport type, surface type, and price per hour." },
         { icon: "🎟️", title: "Promo & Loyalty Engine",      detail: "Venue owners create promo codes and loyalty rewards directly in the dashboard. Players apply codes at checkout with instant discount validation." },
       ]}

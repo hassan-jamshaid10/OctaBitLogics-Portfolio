@@ -12,7 +12,7 @@ export default function ProjectsCTA() {
         #projects-cta {
           padding: 4rem 40px 5rem;
           background: #ffffff;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           overflow: hidden;
           box-sizing: border-box;
           width: 100%;
@@ -60,7 +60,7 @@ export default function ProjectsCTA() {
         }
 
         .cta-h2 {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(1.5rem, 3vw, 2.8rem);
           font-weight: 800;
           letter-spacing: -0.02em;
@@ -91,7 +91,7 @@ export default function ProjectsCTA() {
           border: 1.5px solid rgba(255,255,255,0.6);
           cursor: pointer;
           transition: all 0.25s ease;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
         }
         .cta-btn:hover { background: rgba(255,255,255,0.1); border-color: #fff; transform: translateX(3px); }
         .cta-btn svg { transition: transform 0.25s ease; }

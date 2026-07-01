@@ -128,7 +128,7 @@ export default function TechStack() {
           overflow: hidden;
           padding: 5rem 40px !important;
           margin: 0 !important;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
         }
 
         .tech-container {
@@ -154,7 +154,7 @@ export default function TechStack() {
         }
 
         .tech-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(1.9rem, 3.5vw, 2.7rem);
           font-weight: 800;
           color: #002046;
@@ -180,7 +180,7 @@ export default function TechStack() {
         }
 
         .tech-tab {
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           background: none;
           border: none;
           font-size: 0.9rem;

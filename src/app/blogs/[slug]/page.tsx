@@ -38,9 +38,9 @@ export default function BlogDetailPage() {
       <>
         <Navbar activeSection="" onNavClick={handleNavClick} />
         <main style={{ minHeight: "60vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#faf9fd" }}>
-          <div style={{ textAlign: "center", fontFamily: "'Inter', sans-serif" }}>
+          <div style={{ textAlign: "center" }}>
             <p style={{ fontSize: "0.85rem", color: "#74777f", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "1rem" }}>404</p>
-            <h1 style={{ fontFamily: "'Manrope', sans-serif", fontSize: "2rem", fontWeight: 800, color: "#002046", marginBottom: "1rem" }}>Article not found</h1>
+            <h1 style={{ fontSize: "2rem", fontWeight: 800, color: "#002046", marginBottom: "1rem" }}>Article not found</h1>
             <Link href="/blogs" style={{ color: "#3BADB0", fontWeight: 600, fontSize: "0.9rem" }}>← Back to all articles</Link>
           </div>
         </main>
@@ -58,7 +58,7 @@ export default function BlogDetailPage() {
           .bd-hero {
             position: relative;
             padding: 9rem 40px 5rem;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             overflow: hidden;
             background: #ffffff;
           }
@@ -113,7 +113,7 @@ export default function BlogDetailPage() {
           .bd-badge--article { background: #7c3aed; color: #ffffff; }
 
           .bd-hero-title {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(2rem, 4.5vw, 3.2rem);
             font-weight: 800;
             color: #ffffff;
@@ -158,7 +158,7 @@ export default function BlogDetailPage() {
           .bd-body-inner {
             max-width: 760px;
             margin: 0 auto;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 1.05rem;
             line-height: 1.85;
             color: #44474e;
@@ -175,7 +175,7 @@ export default function BlogDetailPage() {
 
           /* Rich typography */
           .bd-body-inner h2 {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(1.5rem, 3vw, 2rem);
             font-weight: 800;
             color: #002046;
@@ -184,7 +184,7 @@ export default function BlogDetailPage() {
             margin: 3rem 0 1.25rem 0;
           }
           .bd-body-inner h3 {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 1.25rem;
             font-weight: 700;
             color: #002046;
@@ -253,14 +253,14 @@ export default function BlogDetailPage() {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 1rem;
             font-weight: 800;
             color: #ffffff;
             flex-shrink: 0;
           }
           .bd-author-name {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 0.9rem;
             font-weight: 700;
             color: #002046;
@@ -342,7 +342,7 @@ export default function BlogDetailPage() {
           .bd-badge--webinar { background: #e74c6f; color: #ffffff; }
           .bd-badge--article { background: #7c3aed; color: #ffffff; }
           .bd-rel-title {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 0.95rem;
             font-weight: 700;
             color: #002046;
@@ -381,7 +381,7 @@ export default function BlogDetailPage() {
             margin-bottom: 1.25rem;
           }
           .bd-cta-h2 {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(1.8rem, 3.5vw, 2.6rem);
             font-weight: 800;
             color: #ffffff;
@@ -409,7 +409,7 @@ export default function BlogDetailPage() {
             padding: 14px 28px;
             background: #2ECC40;
             color: #002046;
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 0.88rem;
             font-weight: 800;
             text-decoration: none;
@@ -427,7 +427,7 @@ export default function BlogDetailPage() {
             padding: 13px 24px;
             border: 1px solid rgba(255,255,255,0.2);
             color: rgba(255,255,255,0.85);
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 0.88rem;
             font-weight: 600;
             text-decoration: none;

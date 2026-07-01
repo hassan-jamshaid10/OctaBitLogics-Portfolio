@@ -43,11 +43,10 @@ export default function ProjectDetailPage(p: ProjectDetailProps) {
 
       <main className="pd-page">
         <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
           @import url('https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css');
 
           .pd-page {
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             background: #ffffff;
             overflow-x: hidden;
           }
@@ -73,16 +72,10 @@ export default function ProjectDetailPage(p: ProjectDetailProps) {
             content: ''; position: absolute; inset: 0;
             background: linear-gradient(
               to bottom,
-              rgba(0, 32, 70, 0.5) 0%,
-              rgba(0, 32, 70, 0.7) 40%,
+              rgba(0, 32, 70, 0.45) 0%,
+              rgba(0, 32, 70, 0.65) 40%,
               rgba(0, 32, 70, 0.97) 100%
             );
-          }
-          .pd-hero-blob {
-            position: absolute; inset: 0; z-index: 1; pointer-events: none;
-            background:
-              radial-gradient(ellipse 60% 50% at 80% 10%, rgba(26, 138, 96, 0.15) 0%, transparent 60%),
-              radial-gradient(ellipse 50% 40% at 10% 80%, rgba(10, 92, 80, 0.15) 0%, transparent 55%);
           }
           .pd-hero-content {
             position: relative; z-index: 2;
@@ -92,7 +85,7 @@ export default function ProjectDetailPage(p: ProjectDetailProps) {
           .pd-back {
             display: inline-flex; align-items: center; gap: 0.5rem;
             color: rgba(255,255,255,0.6);
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 0.75rem; font-weight: 600;
             letter-spacing: 0.1em; text-transform: uppercase;
             text-decoration: none; margin-bottom: 2.5rem;
@@ -103,27 +96,21 @@ export default function ProjectDetailPage(p: ProjectDetailProps) {
           .pd-back:hover svg { transform: translateX(-4px); }
 
           .pd-cat {
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 0.7rem; font-weight: 700;
             letter-spacing: 0.2em; text-transform: uppercase;
-            color: #1a8a60; margin-bottom: 1.25rem;
-            display: flex; align-items: center; gap: 0.75rem;
-          }
-          .pd-cat::before {
-            content: ''; display: inline-block;
-            width: 28px; height: 2px;
-            background: #1a8a60;
+            color: #3BADB0; margin-bottom: 1.25rem;
           }
 
           .pd-hero-title {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(3rem, 7vw, 6rem);
             font-weight: 800; color: #ffffff;
             line-height: 0.95; letter-spacing: -0.03em;
             margin: 0 0 1.25rem;
           }
           .pd-hero-tagline {
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: clamp(1rem, 1.8vw, 1.2rem);
             font-weight: 400; color: rgba(255,255,255,0.65);
             max-width: 580px; line-height: 1.7;
@@ -131,25 +118,25 @@ export default function ProjectDetailPage(p: ProjectDetailProps) {
 
           /* ══ METRICS ══ */
           .pd-metrics {
-            position: relative; overflow: hidden;
-            background: linear-gradient(125deg, #002046 0%, #013a6b 40%, #0a5c50 75%, #1a8a60 112%);
+            background: #faf9fd;
+            border-bottom: 1px solid rgba(0,32,70,0.06);
             padding: 3.5rem 2.5rem;
           }
           .pd-metrics-inner {
             max-width: 1200px; margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 2rem; position: relative; z-index: 1;
+            gap: 2rem;
           }
-          .pd-metric { border-left: 2px solid rgba(255,255,255,0.3); padding-left: 1.5rem; }
+          .pd-metric { border-left: 2px solid rgba(0,32,70,0.12); padding-left: 1.5rem; }
           .pd-metric-val {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: 2.5rem; font-weight: 800; line-height: 1; margin-bottom: 0.4rem;
-            color: #ffffff;
+            color: #002046;
           }
           .pd-metric-lbl {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.78rem; color: rgba(255,255,255,0.7);
+            font-family: inherit;
+            font-size: 0.78rem; color: #74777f;
             font-weight: 500; text-transform: uppercase; letter-spacing: 0.09em;
           }
 
@@ -159,86 +146,85 @@ export default function ProjectDetailPage(p: ProjectDetailProps) {
             padding: 6rem 2.5rem 5rem;
           }
           .pd-overview {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 3rem 5rem; padding-bottom: 5rem;
-            border-bottom: 1px solid rgba(0,32,70,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
           }
 
           .pd-section-label {
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 0.67rem; font-weight: 700;
             letter-spacing: 0.22em; text-transform: uppercase;
-            color: #1a8a60; margin-bottom: 1.25rem;
-            display: flex; align-items: center; gap: 0.75rem;
-          }
-          .pd-section-label::before {
-            content: ''; width: 20px; height: 2px; background: #1a8a60;
+            color: #3BADB0; margin-bottom: 1.25rem;
           }
 
           .pd-section-title {
-            font-family: 'Manrope', sans-serif;
+            font-family: inherit;
             font-size: clamp(1.6rem, 2.8vw, 2.2rem); font-weight: 800;
             line-height: 1.2; margin: 0 0 1.4rem;
             color: #002046;
           }
 
           .pd-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.03rem; line-height: 1.9; color: #4e6070;
+            font-family: inherit;
+            font-size: 1.03rem; line-height: 1.9; color: #44474e;
             margin-bottom: 1.25rem;
           }
 
-          /* C → S → O */
+          /* ══ CHALLENGE / SOLUTION / OUTCOME ══ */
+          .pd-cso-outer {
+            background: #faf9fd;
+            border-top: 1px solid rgba(0,32,70,0.06);
+            border-bottom: 1px solid rgba(0,32,70,0.06);
+            padding: 5rem 2.5rem;
+          }
+          .pd-cso-inner { max-width: 1200px; margin: 0 auto; }
           .pd-cso {
             display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 0.85rem; margin-top: 0;
+            gap: 1.25rem; margin-top: 2.5rem;
           }
-          .pd-cso-card { padding: 1.4rem; border-top: 3px solid #002046; background: rgba(0,32,70,0.03); }
+          .pd-cso-card { padding: 2rem 1.75rem; border-top: 3px solid #3BADB0; background: #ffffff; }
           .pd-cso-label {
-            font-family: 'Inter', sans-serif;
+            font-family: inherit;
             font-size: 0.63rem; font-weight: 700;
             letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.8rem;
-            color: #002046;
+            color: #3BADB0;
           }
-          .pd-cso-text { font-family: 'Inter', sans-serif; font-size: 0.86rem; line-height: 1.75; color: #4e6070; }
+          .pd-cso-text { font-family: inherit; font-size: 0.9rem; line-height: 1.8; color: #44474e; }
 
           /* ══ TECH STACK ══ */
           .pd-tech-outer {
-            background: linear-gradient(125deg, #002046 0%, #013a6b 40%, #0a5c50 75%, #1a8a60 112%);
+            background: #ffffff;
+            border-top: 1px solid rgba(0,32,70,0.06);
+            border-bottom: 1px solid rgba(0,32,70,0.06);
             padding: 5rem 2.5rem;
-            position: relative; overflow: hidden;
           }
-          .pd-tech-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-
-          .pd-tech-outer .pd-section-title { color: #ffffff; }
-          .pd-tech-outer .pd-section-label { color: rgba(255,255,255,0.7); }
-          .pd-tech-outer .pd-section-label::before { background: rgba(255,255,255,0.5); }
+          .pd-tech-inner { max-width: 1200px; margin: 0 auto; }
 
           .pd-tech-grid { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
           .pd-tech-card {
             display: flex; align-items: center; gap: 0.85rem;
             padding: 0.85rem 1.4rem;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(8px);
-            transition: background 0.2s, transform 0.2s;
+            border: 1px solid rgba(0,32,70,0.1);
+            background: #faf9fd;
+            transition: border-color 0.2s, transform 0.2s;
             cursor: default;
           }
           .pd-tech-card:hover {
-            background: rgba(255,255,255,0.12);
+            border-color: rgba(59,173,176,0.4);
             transform: translateY(-2px);
           }
           .pd-tech-icon { font-size: 1.9rem; line-height: 1; width: 34px; text-align: center; }
           .pd-tech-name {
-            font-family: 'Inter', sans-serif; font-size: 0.88rem;
-            font-weight: 600; color: #ffffff; white-space: nowrap;
+            font-family: inherit; font-size: 0.88rem;
+            font-weight: 600; color: #002046; white-space: nowrap;
           }
 
           /* ══ FEATURES ══ */
           .pd-features-outer {
-            position: relative; padding: 5rem 2.5rem 6rem; background: #fafbff; overflow: hidden;
+            position: relative; padding: 5rem 2.5rem 6rem; background: #faf9fd;
           }
-          .pd-features-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+          .pd-features-inner { max-width: 1200px; margin: 0 auto; }
 
           .pd-features-grid {
             display: grid;
@@ -253,7 +239,7 @@ export default function ProjectDetailPage(p: ProjectDetailProps) {
           }
           .pd-feature-card::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-            background: linear-gradient(90deg, #002046, #1a8a60);
+            background: #3BADB0;
             transform: scaleX(0); transform-origin: left;
             transition: transform 0.3s ease;
           }
@@ -264,30 +250,29 @@ export default function ProjectDetailPage(p: ProjectDetailProps) {
           }
           .pd-feature-card:hover::before { transform: scaleX(1); }
 
-          /* Feature indicator */
           .pd-feature-indicator {
             width: 32px; height: 32px; margin-bottom: 1.25rem;
-            background: linear-gradient(135deg, #002046 0%, #1a8a60 100%);
+            background: #3BADB0;
             display: flex; align-items: center; justify-content: center;
           }
           .pd-feature-indicator svg { width: 14px; height: 14px; }
 
           .pd-feature-title {
-            font-family: 'Manrope', sans-serif; font-size: 1.05rem;
+            font-family: inherit; font-size: 1.05rem;
             font-weight: 700; color: #002046; margin-bottom: 0.75rem;
           }
           .pd-feature-detail {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.88rem; line-height: 1.78; color: #4e6070;
+            font-family: inherit;
+            font-size: 0.88rem; line-height: 1.78; color: #44474e;
           }
 
           /* Responsive */
           @media (max-width: 900px) {
-            .pd-overview { grid-template-columns: 1fr; gap: 2rem; }
-            .pd-cso { grid-template-columns: 1fr; }
             .pd-hero-content { padding: 0 1.5rem 4rem; }
             .pd-body { padding: 4rem 1.5rem 4rem; }
             .pd-metrics { padding: 2.5rem 1.5rem; }
+            .pd-cso-outer { padding: 4rem 1.5rem; }
+            .pd-cso { grid-template-columns: 1fr; }
             .pd-tech-outer { padding: 4rem 1.5rem; }
             .pd-features-outer { padding: 4rem 1.5rem 5rem; }
           }
@@ -297,6 +282,7 @@ export default function ProjectDetailPage(p: ProjectDetailProps) {
             .pd-metrics { padding: 2rem 1rem; }
             .pd-metrics-inner { gap: 1.25rem; }
             .pd-metric-val { font-size: 2rem; }
+            .pd-cso-outer { padding: 3rem 1rem; }
             .pd-tech-outer { padding: 3rem 1rem; }
             .pd-features-outer { padding: 3rem 1rem 4rem; }
             .pd-features-grid { grid-template-columns: 1fr; }
@@ -309,7 +295,6 @@ export default function ProjectDetailPage(p: ProjectDetailProps) {
           <div className="pd-hero-bg">
             <img src={p.heroImage} alt={p.name} />
           </div>
-          <div className="pd-hero-blob" />
           <div className="pd-hero-content">
             <Link href="/projects" className="pd-back">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -340,27 +325,29 @@ export default function ProjectDetailPage(p: ProjectDetailProps) {
         {/* ── OVERVIEW ── */}
         <div className="pd-body">
           <div className="pd-overview">
-            <div>
-              <p className="pd-section-label">About the Project</p>
-              <h2 className="pd-section-title">What We Built</h2>
-              <p className="pd-text">{p.description}</p>
-            </div>
-            <div>
-              <p className="pd-section-label">The Problem We Solved</p>
-              <h2 className="pd-section-title">Challenge → Outcome</h2>
-              <div className="pd-cso" style={{ marginTop: 0 }}>
-                <div className="pd-cso-card">
-                  <div className="pd-cso-label">Challenge</div>
-                  <p className="pd-cso-text">{p.challenge}</p>
-                </div>
-                <div className="pd-cso-card">
-                  <div className="pd-cso-label">Solution</div>
-                  <p className="pd-cso-text">{p.solution}</p>
-                </div>
-                <div className="pd-cso-card">
-                  <div className="pd-cso-label">Outcome</div>
-                  <p className="pd-cso-text">{p.outcome}</p>
-                </div>
+            <p className="pd-section-label">About the Project</p>
+            <h2 className="pd-section-title">What We Built</h2>
+            <p className="pd-text">{p.description}</p>
+          </div>
+        </div>
+
+        {/* ── CHALLENGE / SOLUTION / OUTCOME ── */}
+        <div className="pd-cso-outer">
+          <div className="pd-cso-inner">
+            <p className="pd-section-label">The Problem We Solved</p>
+            <h2 className="pd-section-title">Challenge, Solution & Outcome</h2>
+            <div className="pd-cso">
+              <div className="pd-cso-card">
+                <div className="pd-cso-label">Challenge</div>
+                <p className="pd-cso-text">{p.challenge}</p>
+              </div>
+              <div className="pd-cso-card">
+                <div className="pd-cso-label">Solution</div>
+                <p className="pd-cso-text">{p.solution}</p>
+              </div>
+              <div className="pd-cso-card">
+                <div className="pd-cso-label">Outcome</div>
+                <p className="pd-cso-text">{p.outcome}</p>
               </div>
             </div>
           </div>

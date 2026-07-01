@@ -1,5 +1,14 @@
 import type { Metadata, Viewport } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import CookieBanner from "../components/CookieBanner";
+import "./globals.css";
+
+const font = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 const BASE_URL = "https://octabitlogics.com";
 
@@ -13,7 +22,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
 
   title: {
-    default: "OctaBitLogics — AI-Powered Software Engineering",
+    default: "OctaBitLogics",
     template: "%s | OctaBitLogics",
   },
 
@@ -21,6 +30,7 @@ export const metadata: Metadata = {
     "OctaBitLogics builds precision-engineered AI solutions, enterprise web apps, mobile platforms, and cloud infrastructure for ambitious businesses across North America, Europe, and Asia.",
 
   keywords: [
+    "OctaBitLogics",
     "AI software development",
     "machine learning solutions",
     "enterprise web development",
@@ -29,9 +39,7 @@ export const metadata: Metadata = {
     "Next.js development",
     "React development",
     "software engineering company",
-    "OctaBitLogics",
     "Pakistan software company",
-    "US tech company",
     "digital transformation",
     "custom software",
     "SaaS development",
@@ -59,15 +67,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: BASE_URL,
     siteName: "OctaBitLogics",
-    title: "OctaBitLogics — AI-Powered Software Engineering",
+    title: "OctaBitLogics",
     description:
       "Precision-engineered AI solutions, enterprise apps, and cloud infrastructure. Built to scale for ambitious businesses globally.",
     images: [
       {
-        url: "/octabit-logo-transparent.png",
+        url: "/octabit final.png",
         width: 1200,
         height: 630,
-        alt: "OctaBitLogics — AI-Powered Software Engineering",
+        alt: "OctaBitLogics",
         type: "image/png",
       },
     ],
@@ -77,21 +85,20 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@octabitlogics",
     creator: "@octabitlogics",
-    title: "OctaBitLogics — AI-Powered Software Engineering",
+    title: "OctaBitLogics",
     description:
       "Precision-engineered AI solutions, enterprise apps, and cloud infrastructure. Built to scale for ambitious businesses globally.",
-    images: ["/octabit-logo-transparent.png"],
+    images: ["/octabit final.png"],
   },
 
   icons: {
     icon: [
-      { url: "/octabit-logo-transparent.png", type: "image/png" },
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/sitelogo-transparent.png", type: "image/png" },
     ],
     apple: [
-      { url: "/octabit-logo-transparent.png", sizes: "180x180", type: "image/png" },
+      { url: "/sitelogo-transparent.png", sizes: "180x180", type: "image/png" },
     ],
-    shortcut: "/octabit-logo-transparent.png",
+    shortcut: "/sitelogo-transparent.png",
   },
 
   manifest: "/site.webmanifest",
@@ -108,8 +115,8 @@ const JSON_LD = {
   "@type": "Organization",
   name: "OctaBitLogics",
   url: BASE_URL,
-  logo: `${BASE_URL}/octabit-logo-transparent.png`,
-  image: `${BASE_URL}/octabit-logo-transparent.png`,
+  logo: `${BASE_URL}/octabit%20final.png`,
+  image: `${BASE_URL}/octabit%20final.png`,
   description:
     "OctaBitLogics builds precision-engineered AI solutions, enterprise web apps, mobile platforms, and cloud infrastructure for ambitious businesses worldwide.",
   email: "info@octabitlogics.com",
@@ -152,7 +159,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ overflowX: "hidden" }}>
+    <html lang="en" className={font.variable} style={{ overflowX: "hidden" }}>
       <head>
         <script
           type="application/ld+json"

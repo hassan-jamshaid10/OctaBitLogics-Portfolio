@@ -10,7 +10,7 @@ export default function OurServices() {
         #our-services {
           background: #ffffff;
           padding: 6rem 40px;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           position: relative;
         }
 
@@ -27,7 +27,7 @@ export default function OurServices() {
         }
 
         .os-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: clamp(2rem, 4vw, 2.5rem);
           font-weight: 800;
           color: #002046;
@@ -90,7 +90,7 @@ export default function OurServices() {
         }
 
         .os-card-title {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.25rem;
           font-weight: 800;
           color: #002046;

@@ -20,13 +20,13 @@ export default function EngineeringApproach() {
           .ea-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 20%, rgba(59,173,176,0.18) 0%, transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(167,255,249,0.08) 0%, transparent 50%); pointer-events: none; z-index: 0; }
           .ea-hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
 
-          .ea-back-link { position: absolute; top: -4rem; left: 0; display: inline-flex; align-items: center; gap: 0.5rem; color: #a7fff9; font-family: 'Oxanium', monospace; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s, transform 0.2s; background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(167,255,249,0.3); backdrop-filter: blur(10px); }
+          .ea-back-link { position: absolute; top: -4rem; left: 0; display: inline-flex; align-items: center; gap: 0.5rem; color: #a7fff9; font-family: inherit; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s, transform 0.2s; background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(167,255,249,0.3); backdrop-filter: blur(10px); }
           .ea-back-link:hover { color: #ffffff; border-color: #ffffff; transform: translateX(-4px); background: rgba(255,255,255,0.1); }
 
-          .ea-badge { display: inline-flex; align-items: center; font-family: 'Oxanium', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.25); padding: 6px 16px; border-radius: 100px; margin-bottom: 1.5rem; backdrop-filter: blur(10px); }
+          .ea-badge { display: inline-flex; align-items: center; font-family: inherit; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.25); padding: 6px 16px; border-radius: 100px; margin-bottom: 1.5rem; backdrop-filter: blur(10px); }
           .ea-badge::before { content: ''; display: inline-block; width: 12px; height: 1px; background: rgba(255,255,255,0.5); margin-right: 8px; }
 
-          .ea-title { font-family: 'Oxanium', monospace; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: #ffffff; line-height: 1.1; margin-bottom: 1.5rem; }
+          .ea-title { font-family: inherit; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: #ffffff; line-height: 1.1; margin-bottom: 1.5rem; }
           .ea-title span { color: rgba(255,255,255,0.5); }
           .ea-subtitle { font-size: 1.2rem; color: rgba(255,255,255,0.6); max-width: 650px; margin: 0 auto; line-height: 1.8; }
 
@@ -34,15 +34,15 @@ export default function EngineeringApproach() {
           .ea-principles { position: relative; background: #ffffff; padding: 6rem 2rem; }
           .ea-principles::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(59,173,176,0.08) 1px, transparent 1px); background-size: 32px 32px; pointer-events: none; z-index: 0; }
           .ea-principles-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-          .ea-section-label { font-family: 'Oxanium', monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #3BADB0; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+          .ea-section-label { font-family: inherit; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #3BADB0; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
           .ea-section-label::before { content: ''; width: 18px; height: 1px; background: #3BADB0; }
-          .ea-section-title { font-family: 'Oxanium', monospace; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; color: #1B2E5E; margin-bottom: 3.5rem; line-height: 1.2; }
+          .ea-section-title { font-family: inherit; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; color: #1B2E5E; margin-bottom: 3.5rem; line-height: 1.2; }
 
           .ea-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
           .ea-card { background: #ffffff; border: 1px solid rgba(59,173,176,0.15); border-radius: 16px; padding: 2.5rem 2rem; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
           .ea-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(27,46,94,0.1); border-color: rgba(59,173,176,0.4); }
-          .ea-card-num { font-family: 'Oxanium', monospace; font-size: 3rem; font-weight: 900; color: rgba(59,173,176,0.12); line-height: 1; margin-bottom: 1rem; }
-          .ea-card h3 { font-family: 'Oxanium', monospace; font-size: 1.15rem; font-weight: 800; color: #1B2E5E; margin-bottom: 1rem; }
+          .ea-card-num { font-family: inherit; font-size: 3rem; font-weight: 900; color: rgba(59,173,176,0.12); line-height: 1; margin-bottom: 1rem; }
+          .ea-card h3 { font-family: inherit; font-size: 1.15rem; font-weight: 800; color: #1B2E5E; margin-bottom: 1rem; }
           .ea-card p { font-size: 0.95rem; line-height: 1.8; color: #4e6070; }
 
           /* ── PROCESS SECTION ── */
@@ -56,8 +56,8 @@ export default function EngineeringApproach() {
           .ea-steps { display: flex; flex-direction: column; gap: 0; }
           .ea-step { display: grid; grid-template-columns: 80px 1fr; gap: 2rem; padding: 2.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
           .ea-step:last-child { border-bottom: none; }
-          .ea-step-num { font-family: 'Oxanium', monospace; font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, #a7fff9, #3BADB0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; padding-top: 0.3rem; }
-          .ea-step h3 { font-family: 'Oxanium', monospace; font-size: 1.2rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem; }
+          .ea-step-num { font-family: inherit; font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, #a7fff9, #3BADB0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; padding-top: 0.3rem; }
+          .ea-step h3 { font-family: inherit; font-size: 1.2rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem; }
           .ea-step p { font-size: 1rem; line-height: 1.85; color: rgba(255,255,255,0.65); }
 
           /* ── TECH PHILOSOPHY ── */
@@ -66,21 +66,21 @@ export default function EngineeringApproach() {
           .ea-philosophy-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
 
           .ea-phil-block { margin-bottom: 4rem; padding-left: 2rem; border-left: 3px solid rgba(59,173,176,0.25); }
-          .ea-phil-block h3 { font-family: 'Oxanium', monospace; font-size: 1.5rem; font-weight: 800; color: #1B2E5E; margin-bottom: 1rem; }
+          .ea-phil-block h3 { font-family: inherit; font-size: 1.5rem; font-weight: 800; color: #1B2E5E; margin-bottom: 1rem; }
           .ea-phil-block p { font-size: 1.1rem; line-height: 1.9; color: #4e6070; margin-bottom: 1rem; }
           .ea-phil-block strong { color: #1B2E5E; }
 
           .ea-tech-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
-          .ea-tech-tag { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'Oxanium', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3BADB0; border: 1px solid rgba(59,173,176,0.25); background: rgba(59,173,176,0.04); padding: 6px 14px; border-radius: 100px; }
+          .ea-tech-tag { display: inline-flex; align-items: center; gap: 0.4rem; font-family: inherit; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3BADB0; border: 1px solid rgba(59,173,176,0.25); background: rgba(59,173,176,0.04); padding: 6px 14px; border-radius: 100px; }
           .ea-tech-tag::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: #3BADB0; }
 
           /* ── CTA ── */
           .ea-cta { position: relative; background: linear-gradient(135deg, #3BADB0 0%, #1f4080 45%, #1B2E5E 100%); padding: 5rem 2rem; text-align: center; overflow: hidden; }
           .ea-cta::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 30px 30px; pointer-events: none; }
           .ea-cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
-          .ea-cta h2 { font-family: 'Oxanium', monospace; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: #ffffff; margin-bottom: 1rem; }
+          .ea-cta h2 { font-family: inherit; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: #ffffff; margin-bottom: 1rem; }
           .ea-cta p { font-size: 1rem; color: rgba(255,255,255,0.7); margin-bottom: 2rem; line-height: 1.7; }
-          .ea-cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Oxanium', monospace; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: #1B2E5E; background: #ffffff; border: none; padding: 14px 28px; border-radius: 100px; text-decoration: none; cursor: pointer; transition: background 0.25s, transform 0.2s, box-shadow 0.2s; }
+          .ea-cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: inherit; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: #1B2E5E; background: #ffffff; border: none; padding: 14px 28px; border-radius: 100px; text-decoration: none; cursor: pointer; transition: background 0.25s, transform 0.2s, box-shadow 0.2s; }
           .ea-cta-btn:hover { background: #e8f8f8; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
 
           /* ── RESPONSIVE ── */

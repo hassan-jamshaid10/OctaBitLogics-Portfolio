@@ -42,7 +42,7 @@ export default function TaglineBar() {
 
         .trusted-label {
           text-align: center;
-          font-family: 'Inter', sans-serif;
+          font-family: inherit;
           font-size: 0.75rem;
           font-weight: 700;
           letter-spacing: 0.2em;
@@ -105,7 +105,7 @@ export default function TaglineBar() {
           transition: filter 0.35s ease, transform 0.35s ease;
         }
         .tech-logo span {
-          font-family: 'Manrope', sans-serif;
+          font-family: inherit;
           font-size: 1.15rem;
           font-weight: 700;
           color: #002046;

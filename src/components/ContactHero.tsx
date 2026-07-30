@@ -1,13 +1,12 @@
 "use client";
-
 import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const STATS = [
-  { num: 24,  suffix: "h",  label: "Response Time",      sub: "guaranteed reply"     },
-  { num: 100, suffix: "%",  label: "Client Satisfaction", sub: "across all projects"  },
-  { num: 6,   suffix: "+",  label: "Projects Delivered",  sub: "and counting"         },
-  { num: 10,  suffix: "+",  label: "Countries Served",    sub: "globally deployed"    },
+  { num: 24, suffix: "h", label: "Response Time", sub: "guaranteed reply" },
+  { num: 100, suffix: "%", label: "Client Satisfaction", sub: "across all projects" },
+  { num: 6, suffix: "+", label: "Projects Delivered", sub: "and counting" },
+  { num: 10, suffix: "+", label: "Countries Served", sub: "globally deployed" },
 ];
 
 function CountUp({ target, suffix, active }: { target: number; suffix: string; active: boolean }) {
@@ -30,7 +29,7 @@ function CountUp({ target, suffix, active }: { target: number; suffix: string; a
   return <>{count}{suffix}</>;
 }
 
-export default function ContactHero() {
+const ContactHero = React.memo(function ContactHero() {
   const [textIndex, setTextIndex] = useState(0);
   const fullText = "remarkable together.";
   const statsRef = useRef<HTMLDivElement>(null);
@@ -251,7 +250,7 @@ export default function ContactHero() {
             className="ch-stat"
             variants={{
               hidden: { opacity: 0, y: 24 },
-              show:   { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+              show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
             }}
           >
             <div className="ch-stat-val">
@@ -264,4 +263,6 @@ export default function ContactHero() {
       </motion.div>
     </section>
   );
-}
+});
+
+export default ContactHero;

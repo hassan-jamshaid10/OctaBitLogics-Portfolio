@@ -1,9 +1,10 @@
 "use client";
+import React from "react";
 
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-export default function OurServices() {
+const OurServices = React.memo(function OurServices() {
   return (
     <section id="our-services">
       <style>{`
@@ -236,4 +237,6 @@ export default function OurServices() {
       </div>
     </section>
   );
-}
+});
+
+export default OurServices;

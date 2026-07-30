@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import Navbar from "./Header";
 import Footer from "./Footer";
@@ -36,7 +35,7 @@ export type ProjectDetailProps = {
   outcome: string;
 };
 
-export default function ProjectDetailPage(p: ProjectDetailProps) {
+const ProjectDetailPage = React.memo(function ProjectDetailPage(p: ProjectDetailProps) {
   return (
     <>
       <Navbar activeSection="projects" />
@@ -397,4 +396,6 @@ export default function ProjectDetailPage(p: ProjectDetailProps) {
       <Footer />
     </>
   );
-}
+});
+
+export default ProjectDetailPage;

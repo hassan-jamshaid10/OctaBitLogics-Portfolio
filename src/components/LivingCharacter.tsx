@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useRef, useState, useEffect, useCallback } from "react";
 
 /*
@@ -10,7 +9,7 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
   bleed into the left column.
 */
 
-export default function LivingCharacter() {
+const LivingCharacter = React.memo(function LivingCharacter() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [animKey, setAnimKey] = useState(0);
 
@@ -310,4 +309,6 @@ export default function LivingCharacter() {
       </div>
     </div>
   );
-}
+});
+
+export default LivingCharacter;

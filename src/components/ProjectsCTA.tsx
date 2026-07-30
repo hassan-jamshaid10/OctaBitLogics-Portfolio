@@ -1,9 +1,10 @@
 "use client";
+import React from "react";
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-export default function ProjectsCTA() {
+const ProjectsCTA = React.memo(function ProjectsCTA() {
   const router = useRouter();
 
   return (
@@ -250,4 +251,6 @@ export default function ProjectsCTA() {
       </motion.div>
     </section>
   );
-}
+});
+
+export default ProjectsCTA;

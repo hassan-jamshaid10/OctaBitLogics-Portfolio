@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -25,7 +24,7 @@ const CARDS = [
   }
 ];
 
-export default function CompanyCTA() {
+const CompanyCTA = React.memo(function CompanyCTA() {
   return (
     <section id="company-cta">
       <style>{`
@@ -191,4 +190,6 @@ export default function CompanyCTA() {
       </div>
     </section>
   );
-}
+});
+
+export default CompanyCTA;

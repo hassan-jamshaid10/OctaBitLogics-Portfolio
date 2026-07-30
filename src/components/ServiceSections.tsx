@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 import { motion } from "framer-motion";
 
@@ -69,7 +70,7 @@ const SERVICES = [
   }
 ];
 
-export default function ServiceSections() {
+const ServiceSections = React.memo(function ServiceSections() {
   return (
     <section id="service-sections">
       <style>{`
@@ -248,4 +249,6 @@ export default function ServiceSections() {
       </div>
     </section>
   );
-}
+});
+
+export default ServiceSections;

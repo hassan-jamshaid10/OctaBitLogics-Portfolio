@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 import { motion } from "framer-motion";
 
@@ -26,7 +27,7 @@ const fadeUp = {
   show:   { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
-export default function AboutSplit() {
+const AboutSplit = React.memo(function AboutSplit() {
   return (
     <section id="about-split">
       <style>{`
@@ -280,4 +281,6 @@ export default function AboutSplit() {
       </div>
     </section>
   );
-}
+});
+
+export default AboutSplit;

@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
@@ -97,7 +96,7 @@ const TECH_CATEGORIES = [
   }
 ];
 
-export default function TechStack() {
+const TechStack = React.memo(function TechStack() {
   const [activeIdx, setActiveIdx] = useState(0);
 
   const prevTab = useCallback(() => {
@@ -383,4 +382,6 @@ export default function TechStack() {
       </ScrollReveal>
     </section>
   );
-}
+});
+
+export default TechStack;

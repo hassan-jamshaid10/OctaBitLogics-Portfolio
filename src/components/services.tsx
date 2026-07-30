@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -67,7 +68,7 @@ const ArrowRight = () => (
   </svg>
 );
 
-export default function Services() {
+const Services = React.memo(function Services() {
   return (
     <section id="services">
       <style>{`
@@ -443,4 +444,6 @@ export default function Services() {
       </div>
     </section>
   );
-}
+});
+
+export default Services;

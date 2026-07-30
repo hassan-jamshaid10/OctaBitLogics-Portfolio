@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
@@ -30,7 +30,7 @@ function CountUp({ target, suffix, active }: { target: number; suffix: string; a
   return <>{count}{suffix}</>;
 }
 
-export default function ProjectsHero() {
+const ProjectsHero = React.memo(function ProjectsHero() {
   const [textIndex, setTextIndex] = useState(0);
   const fullText = "outcomes that scale.";
   const statsRef = useRef<HTMLDivElement>(null);
@@ -266,4 +266,6 @@ export default function ProjectsHero() {
       </motion.div>
     </section>
   );
-}
+});
+
+export default ProjectsHero;

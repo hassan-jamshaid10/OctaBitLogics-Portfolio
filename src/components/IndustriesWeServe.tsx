@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
@@ -94,7 +94,7 @@ const INDUSTRIES = [
   },
 ];
 
-export default function IndustriesWeServe() {
+const IndustriesWeServe = React.memo(function IndustriesWeServe() {
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
@@ -576,4 +576,6 @@ export default function IndustriesWeServe() {
       </div>
     </section>
   );
-}
+});
+
+export default IndustriesWeServe;

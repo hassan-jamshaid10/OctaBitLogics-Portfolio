@@ -2,7 +2,7 @@
 import React from "react";
 import ScrollReveal from "./ScrollReveal";
 
-export default function TechPartnersBar() {
+const TechPartnersBar = React.memo(function TechPartnersBar() {
   return (
     <ScrollReveal style={{
       background: "#fff",
@@ -35,4 +35,6 @@ export default function TechPartnersBar() {
       </span>
     </ScrollReveal>
   );
-}
+});
+
+export default TechPartnersBar;

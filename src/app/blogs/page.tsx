@@ -23,7 +23,7 @@ const TRENDING = [
 ];
 
 const SLIDER_IMAGES = [
-  "https://images.unsplash.com/photo-1677756119517-756a188d2d94?q=80&w=600&auto=format&fit=crop",
+  "/blogs/claude_fable_ai.png",
   "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop",

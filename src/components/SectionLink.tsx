@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import Link from "next/link";
 import { useScrollToHome } from "../lib/useScrollToHome";
@@ -15,7 +14,7 @@ interface SectionLinkProps {
  * A link component that navigates to a section on the home page without hash fragments.
  * Uses sessionStorage to pass the scroll target and navigates to "/" cleanly.
  */
-export default function SectionLink({ section, className, children }: SectionLinkProps) {
+const SectionLink = React.memo(function SectionLink({ section, className, children }: SectionLinkProps) {
     const navigateToSection = useScrollToHome();
 
     return (
@@ -30,4 +29,6 @@ export default function SectionLink({ section, className, children }: SectionLin
             {children}
         </a>
     );
-}
+});
+
+export default SectionLink;

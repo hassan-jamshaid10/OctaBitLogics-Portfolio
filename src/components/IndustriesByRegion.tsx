@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -99,7 +98,7 @@ const COUNTRIES = [
 const PER_PAGE = 3;
 const MAX_INDEX = COUNTRIES.length - PER_PAGE;
 
-export default function IndustriesByRegion() {
+const IndustriesByRegion = React.memo(function IndustriesByRegion() {
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState<1 | -1>(1);
 
@@ -431,4 +430,6 @@ export default function IndustriesByRegion() {
       </div>
     </section>
   );
-}
+});
+
+export default IndustriesByRegion;

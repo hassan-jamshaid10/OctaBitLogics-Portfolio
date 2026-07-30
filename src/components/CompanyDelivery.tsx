@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -64,7 +63,7 @@ const MODELS = [
   }
 ];
 
-export default function CompanyDelivery() {
+const CompanyDelivery = React.memo(function CompanyDelivery() {
   return (
     <section id="company-delivery">
       <style>{`
@@ -269,4 +268,6 @@ export default function CompanyDelivery() {
       </div>
     </section>
   );
-}
+});
+
+export default CompanyDelivery;

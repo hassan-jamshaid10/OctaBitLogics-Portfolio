@@ -1,10 +1,9 @@
 "use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-export default function CompanyAIFirst() {
+const CompanyAIFirst = React.memo(function CompanyAIFirst() {
   return (
     <section id="company-aifirst">
       <style>{`
@@ -178,4 +177,6 @@ export default function CompanyAIFirst() {
       </div>
     </section>
   );
-}
+});
+
+export default CompanyAIFirst;

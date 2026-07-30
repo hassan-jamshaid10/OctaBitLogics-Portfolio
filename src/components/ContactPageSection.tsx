@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { useState, useCallback } from "react";
 import {
   Send, CheckCircle2, AlertCircle, Loader2,
@@ -26,7 +26,7 @@ const SERVICES = [
 ];
 
 
-export default function ContactPageSection() {
+const ContactPageSection = React.memo(function ContactPageSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus]             = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -430,4 +430,6 @@ export default function ContactPageSection() {
 
     </>
   );
-}
+});
+
+export default ContactPageSection;

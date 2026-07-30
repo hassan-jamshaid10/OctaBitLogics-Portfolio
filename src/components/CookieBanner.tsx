@@ -1,6 +1,5 @@
 "use client";
-
-import { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 const STORAGE_KEY = "obl_cookie_consent";
 
@@ -25,9 +24,9 @@ function savePrefs(prefs: CookiePrefs) {
   } catch { /* no-op */ }
 }
 
-export default function CookieBanner() {
-  const [show, setShow]       = useState(false);
-  const [modal, setModal]     = useState(false);
+const CookieBanner = React.memo(function CookieBanner() {
+  const [show, setShow] = useState(false);
+  const [modal, setModal] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
 
@@ -425,4 +424,6 @@ export default function CookieBanner() {
       )}
     </>
   );
-}
+});
+
+export default CookieBanner;

@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -12,7 +12,7 @@ const IMAGES = [
   "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop",
 ];
 
-export default function IndustriesHero() {
+const IndustriesHero = React.memo(function IndustriesHero() {
   const [textIndex, setTextIndex] = useState(0);
   const fullText = "across every market.";
 
@@ -203,4 +203,6 @@ export default function IndustriesHero() {
       </div>
     </section>
   );
-}
+});
+
+export default IndustriesHero;

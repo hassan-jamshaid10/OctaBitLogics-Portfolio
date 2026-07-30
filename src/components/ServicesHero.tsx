@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -12,7 +12,7 @@ const IMAGES = [
   "https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?q=80&w=600&auto=format&fit=crop", // Clean code on screen close-up
 ];
 
-export default function ServicesHero() {
+const ServicesHero = React.memo(function ServicesHero() {
   const [textIndex, setTextIndex] = useState(0);
   const fullText = "engineered for massive scale";
 
@@ -163,4 +163,6 @@ export default function ServicesHero() {
       </div>
     </section>
   );
-}
+});
+
+export default ServicesHero;

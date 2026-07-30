@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 import { motion } from "framer-motion";
 
@@ -9,7 +10,7 @@ const NEXT_STEPS = [
   { num: "04", title: "Kick-off",       desc: "Project begins with dedicated engineers assigned to your team." },
 ];
 
-export default function WhatHappensNext() {
+const WhatHappensNext = React.memo(function WhatHappensNext() {
   return (
     <section id="what-happens-next">
       <style>{`
@@ -120,4 +121,6 @@ export default function WhatHappensNext() {
       </div>
     </section>
   );
-}
+});
+
+export default WhatHappensNext;

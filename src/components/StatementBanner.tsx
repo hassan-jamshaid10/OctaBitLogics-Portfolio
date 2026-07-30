@@ -1,6 +1,5 @@
 "use client";
-
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 
 // ── Animated counter hook ─────────────────────────────────────────────────────
@@ -27,9 +26,9 @@ function useCountUp(target: number, duration = 1800, started = false) {
 }
 
 const STATS = [
-  { value: 5,  suffix: "",   label: "Core Service Areas" },
-  { value: 20, suffix: "+",  label: "Technologies We Ship With" },
-  { value: 6,  suffix: "",   label: "Industries Served" },
+  { value: 5, suffix: "", label: "Core Service Areas" },
+  { value: 20, suffix: "+", label: "Technologies We Ship With" },
+  { value: 6, suffix: "", label: "Industries Served" },
   { value: 48, suffix: "hr", label: "Response Commitment" },
 ];
 
@@ -47,7 +46,7 @@ const LOGOS = [
   { slug: "docker", name: "Docker" },
 ];
 
-export default function StatementBanner() {
+const StatementBanner = React.memo(function StatementBanner() {
   const ref = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
 
@@ -279,4 +278,6 @@ export default function StatementBanner() {
       </div>
     </section>
   );
-}
+});
+
+export default StatementBanner;

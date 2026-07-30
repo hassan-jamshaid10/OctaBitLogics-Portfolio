@@ -1,10 +1,9 @@
 "use client";
-
-import { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { subscribeNewsletter } from "../app/actions/subscribeNewsletter";
 
-export default function Newsletter() {
-  const [email, setEmail]   = useState("");
+const Newsletter = React.memo(function Newsletter() {
+  const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -428,4 +427,6 @@ export default function Newsletter() {
       </div>
     </section>
   );
-}
+});
+
+export default Newsletter;

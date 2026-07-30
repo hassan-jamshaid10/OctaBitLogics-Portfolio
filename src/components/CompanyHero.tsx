@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -12,7 +12,7 @@ const IMAGES = [
   "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=600&auto=format&fit=crop",
 ];
 
-export default function CompanyHero() {
+const CompanyHero = React.memo(function CompanyHero() {
   const [textIndex, setTextIndex] = useState(0);
   const fullText = "for lasting business value";
 
@@ -164,4 +164,6 @@ export default function CompanyHero() {
       </div>
     </section>
   );
-}
+});
+
+export default CompanyHero;

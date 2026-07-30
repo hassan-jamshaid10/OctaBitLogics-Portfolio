@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 
@@ -31,7 +30,7 @@ const fadeUp = {
 
 /* onNavClick is kept in the props interface so existing <Hero onNavClick={...} />
    call sites don't break, but the hero no longer renders CTAs of its own. */
-export default function Hero(_props: HeroProps) {
+const Hero = React.memo(function Hero({ onNavClick: _onNavClick }: HeroProps) {
   // Refs to the green "O" glyph and the three arrow paths so we can anchor
   // the growth arrow to the O's *measured* position — keeping it locked through
   // the letter at every viewport width (no more drifting on resize).
@@ -434,4 +433,6 @@ export default function Hero(_props: HeroProps) {
       </div>
     </section>
   );
-}
+});
+
+export default Hero;

@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -110,7 +109,7 @@ const arrowUpRight = (
   </svg>
 );
 
-export default function CaseStudies() {
+const CaseStudies = React.memo(function CaseStudies() {
   const [cur, setCur] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const [translateX, setTranslateX] = useState(0);
@@ -132,16 +131,16 @@ export default function CaseStudies() {
     return () => window.removeEventListener("resize", calcTranslate);
   }, [calcTranslate]);
 
-  const prev = () => setCur((c: number) => Math.max(0, c - 1));
-  const next = () => setCur((c: number) => Math.min(MAX_PAGE, c + 1));
+  const prev = useCallback(() => setCur((c: number) => Math.max(0, c - 1)), []);
+  const next = useCallback(() => setCur((c: number) => Math.min(MAX_PAGE, c + 1)), []);
 
-  const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => { touchStartX.current = e.touches[0].clientX; };
-  const onTouchMove  = (e: React.TouchEvent<HTMLDivElement>) => { touchDelta.current = e.touches[0].clientX - touchStartX.current; };
-  const onTouchEnd = () => {
+  const onTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => { touchStartX.current = e.touches[0].clientX; }, []);
+  const onTouchMove  = useCallback((e: React.TouchEvent<HTMLDivElement>) => { touchDelta.current = e.touches[0].clientX - touchStartX.current; }, []);
+  const onTouchEnd = useCallback(() => {
     if (touchDelta.current < -60) next();
     else if (touchDelta.current > 60) prev();
     touchDelta.current = 0;
-  };
+  }, [next, prev]);
 
   return (
     <section id="case-studies">
@@ -472,4 +471,6 @@ export default function CaseStudies() {
       </div>
     </section>
   );
-}
+});
+
+export default CaseStudies;

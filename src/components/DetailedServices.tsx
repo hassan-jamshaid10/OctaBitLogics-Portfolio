@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 import { motion } from "framer-motion";
 
@@ -425,7 +426,7 @@ export function UiUxComponent() {
   );
 }
 
-export default function DetailedServices() {
+const DetailedServices = React.memo(function DetailedServices() {
   return (
     <div id="detailed-services">
       <SvgDefs />
@@ -635,4 +636,6 @@ export default function DetailedServices() {
       <UiUxComponent />
     </div>
   );
-}
+});
+
+export default DetailedServices;

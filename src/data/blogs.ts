@@ -24,8 +24,7 @@ export const BLOGS: BlogPost[] = [
     featured: true,
     author: "OctaBitLogics Research Team",
     tags: ["AI", "LLM", "Enterprise", "Claude"],
-    imgUrl:
-      "https://images.unsplash.com/photo-1677756119517-756a188d2d94?q=80&w=1200&auto=format&fit=crop",
+    imgUrl: "/blogs/claude_fable_ai.png",
     content: `
 <p><strong>When Anthropic released Claude Fable 5, the model arrived not as an incremental update but as a category-defining shift in what large language models can do inside real enterprise systems.</strong> Fable 5 sits at the top of the Claude 4.x family and introduces a fundamentally different approach to reasoning, context, and long-form generation — one that has immediate, practical implications for the products OctaBitLogics and its clients are building today.</p>
 

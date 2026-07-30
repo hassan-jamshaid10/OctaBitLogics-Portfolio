@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 
 /*
@@ -26,7 +25,7 @@ const TECH = [
   { name: "Firebase",     slug: "firebase" },
 ];
 
-export default function TaglineBar() {
+const TaglineBar = React.memo(function TaglineBar() {
   const items = [...TECH, ...TECH]; // doubled for seamless loop
 
   return (
@@ -158,4 +157,6 @@ export default function TaglineBar() {
       </div>
     </section>
   );
-}
+});
+
+export default TaglineBar;

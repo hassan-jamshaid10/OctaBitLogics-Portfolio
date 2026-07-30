@@ -1,6 +1,5 @@
 "use client";
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const DOMAINS = [
@@ -60,7 +59,7 @@ const DOMAINS = [
   },
 ];
 
-export default function ExpertiseDomains() {
+const ExpertiseDomains = React.memo(function ExpertiseDomains() {
   const [active, setActive] = useState<string | null>(null);
 
   return (
@@ -398,8 +397,8 @@ export default function ExpertiseDomains() {
                   <span className="exp-row-title">{d.title}</span>
                   <div className="exp-indicator">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" strokeWidth="2" strokeLinecap="square"/>
-                      <line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" strokeWidth="2" strokeLinecap="square"/>
+                      <line x1="7" y1="1" x2="7" y2="13" stroke="currentColor" strokeWidth="2" strokeLinecap="square" />
+                      <line x1="1" y1="7" x2="13" y2="7" stroke="currentColor" strokeWidth="2" strokeLinecap="square" />
                     </svg>
                   </div>
                 </div>
@@ -420,7 +419,7 @@ export default function ExpertiseDomains() {
                           <a href="/contact" className="exp-link">
                             Start a project
                             <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                              <path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="round"/>
+                              <path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="round" />
                             </svg>
                           </a>
                         </div>
@@ -450,4 +449,6 @@ export default function ExpertiseDomains() {
       </div>
     </section>
   );
-}
+});
+
+export default ExpertiseDomains;

@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 import Link from "next/link";
 
@@ -40,7 +41,7 @@ const SOCIALS = [
 
 const YEAR = new Date().getFullYear();
 
-export default function Footer() {
+const Footer = React.memo(function Footer() {
   return (
     <footer id="ftr">
       <style>{`
@@ -371,4 +372,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+});
+
+export default Footer;

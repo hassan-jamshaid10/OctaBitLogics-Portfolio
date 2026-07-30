@@ -30,7 +30,7 @@ export default function ServicesPage() {
         <ServiceSections />
         <DetailedServices />
         <ProjectsCTA />
-      </main>
+      </main> 
 
       <Footer />
     </>

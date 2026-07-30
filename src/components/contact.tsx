@@ -1,11 +1,10 @@
 "use client";
-
-import { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { Send, CheckCircle2, AlertCircle, Loader2, Mail, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { sendEmail } from "../app/actions/sendEmail";
 
-export default function Contact() {
+const Contact = React.memo(function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -256,86 +255,88 @@ export default function Contact() {
 
       <div className="ct-inner">
 
-          {/* ── Left: Info ── */}
-          <div className="ct-left">
-            <h2 className="ct-heading">
-              Ready to get<br /><span className="green-accent">Started?</span>
-            </h2>
-            <p className="ct-sub">
-              Let&rsquo;s discuss how we can help bring your next project to life
-              with precision engineering.
-            </p>
+        {/* ── Left: Info ── */}
+        <div className="ct-left">
+          <h2 className="ct-heading">
+            Ready to get<br /><span className="green-accent">Started?</span>
+          </h2>
+          <p className="ct-sub">
+            Let&rsquo;s discuss how we can help bring your next project to life
+            with precision engineering.
+          </p>
 
-            <p className="ct-info-label">Sales &amp; general inquiries</p>
-            <div className="ct-info-list">
-              <a href="tel:+923215353105" className="ct-info-row">
-                <Phone size={16} /> +92 321 5353105
-              </a>
-              <a href="mailto:info@octabitlogics.com" className="ct-info-row">
-                <Mail size={16} /> info@octabitlogics.com
-              </a>
+          <p className="ct-info-label">Sales &amp; general inquiries</p>
+          <div className="ct-info-list">
+            <a href="tel:+923215353105" className="ct-info-row">
+              <Phone size={16} /> +92 321 5353105
+            </a>
+            <a href="mailto:info@octabitlogics.com" className="ct-info-row">
+              <Mail size={16} /> info@octabitlogics.com
+            </a>
+          </div>
+        </div>
+
+        {/* ── Right: Form ── */}
+        <div className="ct-right">
+          <form className="ct-form" onSubmit={handleSubmit}>
+            <div className="ct-group">
+              <label className="ct-label">Full Name *</label>
+              <input name="name" className="ct-input" type="text" required disabled={isSubmitting} />
             </div>
-          </div>
 
-          {/* ── Right: Form ── */}
-          <div className="ct-right">
-            <form className="ct-form" onSubmit={handleSubmit}>
-              <div className="ct-group">
-                <label className="ct-label">Full Name *</label>
-                <input name="name" className="ct-input" type="text" required disabled={isSubmitting} />
-              </div>
+            <div className="ct-group">
+              <label className="ct-label">Work Email *</label>
+              <input name="email" className="ct-input" type="email" required disabled={isSubmitting} />
+            </div>
 
-              <div className="ct-group">
-                <label className="ct-label">Work Email *</label>
-                <input name="email" className="ct-input" type="email" required disabled={isSubmitting} />
-              </div>
+            <div className="ct-group">
+              <label className="ct-label">Phone Number</label>
+              <input name="subject" className="ct-input" type="text" disabled={isSubmitting} />
+            </div>
 
-              <div className="ct-group">
-                <label className="ct-label">Phone Number</label>
-                <input name="subject" className="ct-input" type="text" disabled={isSubmitting} />
-              </div>
+            <div className="ct-group">
+              <label className="ct-label">Organization</label>
+              <input className="ct-input" type="text" disabled={isSubmitting} />
+            </div>
 
-              <div className="ct-group">
-                <label className="ct-label">Organization</label>
-                <input className="ct-input" type="text" disabled={isSubmitting} />
-              </div>
+            <div className="ct-group ct-span">
+              <label className="ct-label">Project Description</label>
+              <textarea name="message" className="ct-input ct-textarea" required disabled={isSubmitting} />
+            </div>
 
-              <div className="ct-group ct-span">
-                <label className="ct-label">Project Description</label>
-                <textarea name="message" className="ct-input ct-textarea" required disabled={isSubmitting} />
-              </div>
+            <div className="ct-span ct-btn-wrap">
+              <button
+                type="submit"
+                className="ct-submit"
+                disabled={isSubmitting || status === "success"}
+              >
+                {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : (
+                  <>
+                    Send Message
+                    <Send size={15} />
+                  </>
+                )}
+              </button>
 
-              <div className="ct-span ct-btn-wrap">
-                <button
-                  type="submit"
-                  className="ct-submit"
-                  disabled={isSubmitting || status === "success"}
-                >
-                  {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : (
-                    <>
-                      Send Message
-                      <Send size={15} />
-                    </>
-                  )}
-                </button>
-
-                <AnimatePresence>
-                  {status === "success" && (
-                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="ct-status" style={{ color: '#2ECC40' }}>
-                      <CheckCircle2 size={18} /> Message Sent Successfully!
-                    </motion.div>
-                  )}
-                  {status === "error" && (
-                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="ct-status" style={{ color: '#ef4444' }}>
-                      <AlertCircle size={18} /> {errorMessage}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </form>
-          </div>
+              <AnimatePresence>
+                {status === "success" && (
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="ct-status" style={{ color: '#2ECC40' }}>
+                    <CheckCircle2 size={18} /> Message Sent Successfully!
+                  </motion.div>
+                )}
+                {status === "error" && (
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="ct-status" style={{ color: '#ef4444' }}>
+                    <AlertCircle size={18} /> {errorMessage}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </form>
+        </div>
 
       </div>
     </section>
   );
-}
+});
+
+export default Contact;

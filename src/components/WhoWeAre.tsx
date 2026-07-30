@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -45,7 +44,7 @@ const ScaleIcon = () => (
   </svg>
 );
 
-export default function WhoWeAre() {
+const WhoWeAre = React.memo(function WhoWeAre() {
   return (
     <section id="who-we-are">
       <style>{`
@@ -223,4 +222,6 @@ export default function WhoWeAre() {
       </div>
     </section>
   );
-}
+});
+
+export default WhoWeAre;

@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -144,7 +145,7 @@ const PROJECTS = [
   },
 ];
 
-export default function ProjectsGrid() {
+const ProjectsGrid = React.memo(function ProjectsGrid() {
   return (
     <div id="detailed-projects">
       <style>{`
@@ -386,4 +387,6 @@ export default function ProjectsGrid() {
       ))}
     </div>
   );
-}
+});
+
+export default ProjectsGrid;

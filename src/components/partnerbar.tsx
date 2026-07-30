@@ -1,8 +1,9 @@
 "use client";
+import React from "react";
 
 import ScrollReveal from "./ScrollReveal";
 
-export default function PartnersBar() {
+const PartnersBar = React.memo(function PartnersBar() {
   return (
     <div className="partners-bar">
       <style>{`
@@ -177,4 +178,6 @@ export default function PartnersBar() {
       </ScrollReveal>
     </div>
   );
-}
+});
+
+export default PartnersBar;

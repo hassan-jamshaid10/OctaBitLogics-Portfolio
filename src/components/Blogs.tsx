@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef } from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
 import { BLOGS } from "../data/blogs";
 export { BLOGS };
 
-export default function Blogs() {
+const Blogs = React.memo(function Blogs() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: "left" | "right") => {
@@ -232,8 +232,8 @@ export default function Blogs() {
               blog.category === "Webinar"
                 ? "blg-badge--webinar"
                 : blog.category === "Article"
-                ? "blg-badge--article"
-                : "blg-badge--whitepaper";
+                  ? "blg-badge--article"
+                  : "blg-badge--whitepaper";
 
             return (
               <Link href={`/blogs/${blog.slug}`} className="blg-card" key={blog.slug}>
@@ -250,4 +250,6 @@ export default function Blogs() {
       </div>
     </section>
   );
-}
+});
+
+export default Blogs;

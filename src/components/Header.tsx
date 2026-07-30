@@ -1,6 +1,5 @@
 "use client";
-
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, memo } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 const NAV_LINKS = [
@@ -16,7 +15,7 @@ interface NavbarProps {
   onNavClick?: (href: string) => void;
 }
 
-export default function Navbar({ activeSection = "home", onNavClick }: NavbarProps) {
+const Navbar = memo(function Navbar({ activeSection = "home", onNavClick }: NavbarProps) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -69,10 +68,10 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
     router.push("/contact");
   }, [router]);
 
-  const isActive = (href: string) =>
+  const isActive = useCallback((href: string) =>
     href.startsWith("/")
       ? pathname === href
-      : pathname === "/" && activeSection === href.slice(1);
+      : pathname === "/" && activeSection === href.slice(1), [pathname, activeSection]);
 
   // Force white nav text when hero background is dark (project detail pages, blog detail pages)
   const isHeroDark = (pathname.startsWith("/projects/") || pathname.startsWith("/blogs/")) && !scrolled;
@@ -440,4 +439,6 @@ export default function Navbar({ activeSection = "home", onNavClick }: NavbarPro
       </div>
     </>
   );
-}
+});
+
+export default Navbar;

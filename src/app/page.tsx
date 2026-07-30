@@ -1,10 +1,10 @@
-"use client";   //hello 
+"use client";
 
 import { useEffect, useState, useCallback, lazy, Suspense } from "react";
 import Navbar from "../components/Header";
+import Hero from "../components/hero";
 
-// ─── Lazy‑load all below‑the‑fold sections ─────────────────────────────────
-const Hero = lazy(() => import("../components/hero"));
+// ─── Lazy‑load below‑the‑fold sections only (Hero is above the fold) ─────
 const TaglineBar = lazy(() => import("../components/TaglineBar"));
 const CaseStudies = lazy(() => import("../components/CaseStudies"));
 const About = lazy(() => import("../components/about"));
@@ -88,21 +88,15 @@ export default function Home() {
       <Navbar activeSection={activeSection} onNavClick={scrollTo} />
 
       <main style={{ overflowX: "hidden", width: "100%" }}>
-        <Suspense fallback={<div style={{ minHeight: '100vh', width: '100%' }}></div>}>
-          <Hero onNavClick={scrollTo} />
+        <Hero onNavClick={scrollTo} />
+
+        <Suspense fallback={null}>
           <TaglineBar />
           <CaseStudies />
           <StatementBanner />
-          {/* <About /> */}
-
           <ExpertiseDomains />
           <OurServices />
           <Newsletter />
-          {/* <Services /> */}
-          {/* <TechStack /> */}
-        
-
-          {/* <Testimonials /> */}
           <Contact />
           <Blogs />
         </Suspense>

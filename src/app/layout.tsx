@@ -153,6 +153,26 @@ const JSON_LD = {
   ],
 };
 
+// export default function RootLayout({
+//   children,
+// }: Readonly<{
+//   children: React.ReactNode;
+// }>) {
+//   return (
+//     <html lang="en" className={font.variable} style={{ overflowX: "hidden" }}>
+//       <head>
+//         <script
+//           type="application/ld+json"
+//           dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+//         />
+//       </head>
+//       <body style={{ margin: 0, padding: 0, overflowX: "hidden" }}>
+//         {children}
+//         <CookieBanner />
+//       </body>
+//     </html>
+//   );
+// }
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -161,11 +181,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={font.variable} style={{ overflowX: "hidden" }}>
       <head>
+        <meta
+          name="facebook-domain-verification"
+          content="8kq13zdnqhd0j53p1cy0euulbox9ml"
+        />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
         />
       </head>
+
       <body style={{ margin: 0, padding: 0, overflowX: "hidden" }}>
         {children}
         <CookieBanner />

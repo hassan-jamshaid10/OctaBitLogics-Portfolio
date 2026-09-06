@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState, useCallback } from "react";
+import { usePathname } from "next/navigation";
 
 const STORAGE_KEY = "obl_cookie_consent";
 
@@ -25,6 +26,7 @@ function savePrefs(prefs: CookiePrefs) {
 }
 
 const CookieBanner = React.memo(function CookieBanner() {
+  const pathname = usePathname();
   const [show, setShow] = useState(false);
   const [modal, setModal] = useState(false);
   const [analytics, setAnalytics] = useState(false);
@@ -66,6 +68,7 @@ const CookieBanner = React.memo(function CookieBanner() {
     setModal(false);
   }, [analytics, marketing]);
 
+  if (pathname === "/projects/sporttek/privacy") return null;
   if (!show && !modal) return null;
 
   return (

@@ -29,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         { url: `${BASE}/projects/resume-parser`, lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
         { url: `${BASE}/projects/launchpulse`, lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
         { url: `${BASE}/projects/sporttek`, lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
+        { url: `${BASE}/projects/sporttek/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.2 },
         { url: `${BASE}/projects/tact-evac`, lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
         { url: `${BASE}/projects/pulseai`, lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
         { url: `${BASE}/projects/dataflow`, lastModified: now, changeFrequency: 'monthly', priority: 0.75 },

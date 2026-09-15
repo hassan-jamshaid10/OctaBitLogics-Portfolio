@@ -11,7 +11,7 @@ interface ChatMessage {
 import { sendEmail } from "./sendEmail";
 
 export async function askChatbotAction(userMessage: string, history: { sender: string; text: string }[]) {
-  const apiKey = process.env.GROQ_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   const lowerMsg = userMessage.toLowerCase();
 
   // 1. Agent Navigation Intent Detection
@@ -62,8 +62,8 @@ export async function askChatbotAction(userMessage: string, history: { sender: s
   }
 
   // Fallback to local rule engine if API key is not configured yet
-  if (!apiKey || apiKey.includes("your_groq_api_key_here")) {
-    console.warn("[OctaBot] GROQ_API_KEY not configured in .env.local. Using local knowledge engine fallback.");
+  if (!apiKey) {
+    console.warn("[OctaBot] GEMINI_API_KEY not configured in .env.local. Using local knowledge engine fallback.");
     const fallbackResponse = generateBotResponse(userMessage);
     return {
       text: fallbackResponse.text,
@@ -109,38 +109,39 @@ ${COMPANY_DATA.techStack.map(t => `• ${t.category}: ${t.items.join(", ")}`).jo
 5. Keep answers directly relevant to OctaBitLogics capabilities and services.
 6. Do not make up facts outside OctaBitLogics capabilities.`;
 
-    const messagesPayload: ChatMessage[] = [
-      { role: "system", content: systemPrompt }
-    ];
+    const contents: any[] = [];
 
     // Append last 4 messages for context
     const recentHistory = history.slice(-4);
     recentHistory.forEach(msg => {
-      messagesPayload.push({
-        role: msg.sender === "user" ? "user" : "assistant",
-        content: msg.text
+      contents.push({
+        role: msg.sender === "user" ? "user" : "model",
+        parts: [{ text: msg.text }]
       });
     });
 
-    messagesPayload.push({ role: "user", content: userMessage });
+    contents.push({ role: "user", parts: [{ text: userMessage }] });
 
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${apiKey}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "groq/compound",
-        messages: messagesPayload,
-        temperature: 0.6,
-        max_tokens: 450
+        systemInstruction: {
+          parts: [{ text: systemPrompt }]
+        },
+        contents: contents,
+        generationConfig: {
+          temperature: 0.6,
+          maxOutputTokens: 450
+        }
       })
     });
 
     if (!response.ok) {
       const errText = await response.text();
-      console.error("[Groq API Error]", response.status, errText);
+      console.error("[Gemini API Error]", response.status, errText);
       const fallback = generateBotResponse(userMessage);
       return {
         text: fallback.text,
@@ -150,7 +151,7 @@ ${COMPANY_DATA.techStack.map(t => `• ${t.category}: ${t.items.join(", ")}`).jo
     }
 
     const data = await response.json();
-    let aiText = data.choices[0]?.message?.content || "";
+    let aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
     // Remove any thinking/reasoning tags
     aiText = aiText.replace(/<Think>[\s\S]*?<\/Think>/gi, "").trim();

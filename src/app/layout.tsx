@@ -180,7 +180,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={font.variable} style={{ overflowX: "hidden" }}>
+    <html lang="en" className={font.variable} style={{ overflowX: "hidden" }} suppressHydrationWarning>
       <head>
         <meta
           name="facebook-domain-verification"
@@ -193,7 +193,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body style={{ margin: 0, padding: 0, overflowX: "hidden" }}>
+      <body style={{ margin: 0, padding: 0, overflowX: "hidden" }} suppressHydrationWarning>
         {children}
         <CookieBanner />
         <Chatbot />

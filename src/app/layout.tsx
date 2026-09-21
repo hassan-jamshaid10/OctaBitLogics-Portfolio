@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import CookieBanner from "../components/CookieBanner";
+import Chatbot from "../components/Chatbot";
 import "./globals.css";
 
 const font = Plus_Jakarta_Sans({
@@ -179,7 +180,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={font.variable} style={{ overflowX: "hidden" }}>
+    <html lang="en" className={font.variable} style={{ overflowX: "hidden" }} suppressHydrationWarning>
       <head>
         <meta
           name="facebook-domain-verification"
@@ -192,9 +193,10 @@ export default function RootLayout({
         />
       </head>
 
-      <body style={{ margin: 0, padding: 0, overflowX: "hidden" }}>
+      <body style={{ margin: 0, padding: 0, overflowX: "hidden" }} suppressHydrationWarning>
         {children}
         <CookieBanner />
+        <Chatbot />
       </body>
     </html>
   );
